@@ -12,6 +12,8 @@
 namespace Isotope\Migration\Service;
 
 
+use Doctrine\DBAL\Schema\TableDiff;
+
 class TranslationMigrationService extends AbstractConfigfreeMigrationService
 {
     /**
@@ -45,7 +47,14 @@ class TranslationMigrationService extends AbstractConfigfreeMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
-        // TODO: finish implementation
+        if ($this->dbcheck->tableExists('tl_iso_labels')) {
+            $tableDiff = new TableDiff('tl_iso_labels');
+            $tableDiff->newName = 'tl_iso_label';
+
+            return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+        }
+
+        return array();
     }
 
     /**
@@ -55,6 +64,8 @@ class TranslationMigrationService extends AbstractConfigfreeMigrationService
      */
     protected function verifyDatabase()
     {
-        // TODO: finish implementation
+        if ($this->dbcheck->tableExists('tl_iso_labels')) {
+            $this->dbcheck->tableMustNotExist('tl_iso_label');
+        }
     }
 }
