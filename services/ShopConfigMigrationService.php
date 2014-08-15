@@ -12,6 +12,10 @@
 namespace Isotope\Migration\Service;
 
 
+use Doctrine\DBAL\Schema\Column;
+use Doctrine\DBAL\Schema\TableDiff;
+use Doctrine\DBAL\Types\Type;
+
 class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
 {
 
@@ -46,7 +50,18 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
+        $tableDiff = new TableDiff('tl_iso_configs');
+        $tableDiff->newName = 'tl_iso_config';
+
+        $column = new Column('address_fields', Type::getType(Type::BLOB));
+        $column->setLength(65535);
+        $tableDiff->addedColumns['address_fields'] = $column;
+
         // TODO: finish implementation
+
+        $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+
+        return $sql;
     }
 
     /**
