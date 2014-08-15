@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class ContaoServiceProvider implements ServiceProviderInterface
 {
 
-    function register(Application $app)
+    public function register(Application $app)
     {
         $app['contao.root'] = '';
 
@@ -31,7 +31,7 @@ class ContaoServiceProvider implements ServiceProviderInterface
         });
     }
 
-    function boot(Application $app)
+    public function boot(Application $app)
     {
         $contaoFiles = array(
             'system/config/localconfig.php',
