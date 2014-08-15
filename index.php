@@ -9,8 +9,7 @@
  * @license    http://opensource.org/licenses/lgpl-3.0.html
  */
 
-// web/index.php
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 $app = new Silex\Application();
 
