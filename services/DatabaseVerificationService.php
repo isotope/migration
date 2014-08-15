@@ -32,6 +32,18 @@ class DatabaseVerificationService
     }
 
     /**
+     * Check if a table exists in the database
+     *
+     * @param string $tableName
+     *
+     * @return bool
+     */
+    public function tableExists($tableName)
+    {
+        return $this->schemaManager()->tablesExist(array($tableName));
+    }
+
+    /**
      * Make sure a database table exists
      *
      * @param string $tableName
