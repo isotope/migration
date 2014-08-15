@@ -1,0 +1,26 @@
+{% extends "base.twig" %}
+
+{% block main %}
+    <form action="" method="post">
+
+        {% block headline %}
+            <div class="row headline">
+                <h2>{{ title }}</h2>
+                <p>{{ description }}</p>
+            </div>
+        {% endblock %}
+
+        {% block content %}{% endblock %}
+
+        <div class="row">
+            <p class="mt">
+                {% if can_continue|default(false) %}
+                    <button class="button main" name="continue" value="1">{% trans %}Continue{% endtrans %}</button>
+                {% elseif can_save|default(false) %}
+                    <button class="button" name="save" value="1">{% trans %}Save{% endtrans %}</button>
+                    <button class="button main" name="continue" value="1">{% trans %}Save &amp; Continue{% endtrans %}</button>
+                {% endif %}
+            </p>
+        </div>
+    </form>
+{% endblock %}

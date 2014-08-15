@@ -1,0 +1,14 @@
+{% extends "base.twig" %}
+
+{% block main %}
+    {% block headline %}
+        <div class="row headline">
+            <h2>{{ title }}</h2>
+            <p>{{ description }}</p>
+        </div>
+    {% endblock %}
+
+    <div class="row error">
+        <p>{{ error|default('No error message given') }}</p>
+    </div>
+{% endblock %}
