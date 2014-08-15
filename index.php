@@ -15,9 +15,15 @@ $app = new Silex\Application();
 
 //ini_set('error_reporting', E_ALL & ~E_NOTICE);
 $app['debug'] = true;
+$app['kernel.root_dir'] = __DIR__;
+
+// Support PHAR
+if (\Phar::running()) {
+    $app['kernel.root_dir'] = \Phar::running(false);
+}
 
 $app->register(new \Isotope\Migration\Provider\ContaoServiceProvider(), array(
-    'contao.root' => dirname(__DIR__)
+    'contao.root' => dirname($app['kernel.root_dir'])
 ));
 $app->register(new \Isotope\Migration\Provider\MigrationServiceProvider());
 

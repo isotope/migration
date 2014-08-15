@@ -1,0 +1,52 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+$directories = array(
+    'assets',
+    'controllers',
+    'locales',
+    'providers',
+    'providers',
+    'services',
+    'vendor',
+    'views'
+);
+
+$banner = <<<BANNER
+This is the Isotope eCommerce migration tool.
+
+Copyright (c) 2014 terminal42 gmbh
+BANNER
+;
+
+/**
+ * Do not change from here
+ */
+
+// Redirect everything to index.php except for asset paths
+$rewrite_function = "function rewrite_function(\$path) {
+    if (substr(\$path, 0, 7) === '/assets') {
+        return \$path;
+    }
+
+    return 'index.php';
+}";
+
+$finder = new Symfony\Component\Finder\Finder();
+$finder->files()->ignoreVCS(true)->in($directories);
+$stub = Phine\Phar\Stub::create()
+    ->interceptFileFuncs()
+    ->setShebang(null)
+    ->setBanner($banner)
+    ->selfExtracting()
+    ->webPhar(null, 'index.php', null, array(), 'rewrite_function')
+    ->getStub();
+
+$stub = preg_replace('/(\*\/)/', '$1' . "\n\n" . $rewrite_function, $stub, 1);
+
+$builder = Phine\Phar\Builder::create('isotope-migration.phar.php');
+$builder->addFile('index.php');
+$builder->setStub($stub);
+$builder->buildFromIterator($finder->getIterator(), '.');
