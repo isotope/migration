@@ -136,8 +136,8 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
         $tableDiff->renamedColumns['product_quantity'] = $column;
 
         // TODO: should use "configuration" once the prices feature branch is merged
-        // TODO: will create LONGBLOB instead of BLOB
         $column = new Column('options', Type::getType(Type::BLOB));
+        $column->setLength(65535);
         $tableDiff->renamedColumns['product_options'] = $column;
 
         // TODO: finish implementation
