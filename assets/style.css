@@ -368,3 +368,16 @@ form {
 #left .level_2 > li {
     margin-left: 18px;
 }
+
+/* Error page */
+body.error_page #main {
+    width: 100%;
+}
+
+body.error_page #main .error {
+    margin-top: 18px;
+    margin-left: 18px;
+    margin-right: 18px;
+    font-size: 14px;
+    color: #c00;
+}

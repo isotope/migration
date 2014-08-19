@@ -18,6 +18,16 @@ $app['debug'] = true;
 
 $app->register(new \Isotope\Migration\Provider\MigrationServiceProvider());
 
+// Display a nice error page in production mode
+if (!$app['debug']) {
+    $app->error(function (\Exception $e, $code) use ($app) {
+        return new Symfony\Component\HttpFoundation\Response($app['twig']->render('error.twig', array(
+            'base_path' => $app['request']->getBasePath(),
+            'error' => $e->getMessage()
+        )));
+    });
+}
+
 $app->get('/', 'migration.controller:indexAction');
 $app->get('/config/', 'migration.controller:configAction');
 $app->match('/config/{slug}', 'migration.controller:configAction');

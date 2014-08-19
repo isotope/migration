@@ -34,9 +34,6 @@ class MigrationServiceProvider implements ServiceProviderInterface
 
     function register(Application $app)
     {
-        $app->register(new ContaoServiceProvider(), array(
-            'contao.root' => dirname(dirname(__DIR__))
-        ));
 
         $app->register(new TranslationServiceProvider());
         $app['translator'] = $app->share($app->extend('translator', function(Translator $translator) {
@@ -53,6 +50,10 @@ class MigrationServiceProvider implements ServiceProviderInterface
         $app->register(new DoctrineServiceProvider());
         $app->register(new ServiceControllerServiceProvider());
         $app->register(new SessionServiceProvider());
+
+        $app->register(new ContaoServiceProvider(), array(
+            'contao.root' => dirname(dirname(__DIR__))
+        ));
 
         $app['migration.dbcheck'] = $app->share(function() use ($app) {
             return new DatabaseVerificationService($app['db'], $app['translator']);
@@ -89,4 +90,4 @@ class MigrationServiceProvider implements ServiceProviderInterface
             $app['migration.services'][$class::getSlug()] = $app['class_factory']->share($class);
         }
     }
-} 
+}
