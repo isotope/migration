@@ -70,6 +70,14 @@ class AddressBookMigrationService extends AbstractConfigfreeMigrationService
     }
 
     /**
+     * Execute manual data migration after all the database fields are up-to-date
+     */
+    public function postMigration()
+    {
+        // nothing to do here
+    }
+
+    /**
      * Make sure database structure is correct before migration
      *
      * @throws \RuntimeException

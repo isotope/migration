@@ -83,12 +83,20 @@ class MigrationController
         }*/
 
         $sql = array();
+        $services = $this->getServices();
 
-        foreach ($this->getServices() as $service) {
+        foreach ($services as $service) {
             $sql = array_merge($sql, $service->getMigrationSQL());
         }
 
         var_dump($sql);
+
+        // TODO: execute SQL commands
+
+        foreach ($services as $service) {
+            // TODO: execute post-database migration
+            //$service->postMigration();
+        }
 
         return $this->twig->render('execute.twig');
     }
