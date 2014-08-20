@@ -50,8 +50,7 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
-        $tableDiff = new TableDiff('tl_iso_configs');
-        $tableDiff->newName = 'tl_iso_config';
+        $tableDiff = new TableDiff('tl_iso_config');
 
         $column = new Column('address_fields', Type::getType(Type::BLOB));
         $column->setLength(65535);
@@ -67,13 +66,12 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
     /**
      * Make sure database structure is correct before migration
      *
-     * @return bool
+     * @throws \RuntimeException
      */
     protected function verifyDatabase()
     {
         $this->dbcheck
-            ->tableMustExist('tl_iso_configs')
-            ->tableMustNotExist('tl_iso_config');
+            ->columnMustNotExist('tl_iso_config', 'address_fields');
 
         // TODO: finish implementation
     }
