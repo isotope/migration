@@ -12,6 +12,7 @@
 namespace Isotope\Migration\Service;
 
 
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
@@ -50,8 +51,6 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
-        // TODO: move non-advanced prices and tax class to the subtable (according to script in update.md)
-
         return array_merge(
             $this->getGroupSQL(),
             $this->getCategoriesSQL(),
@@ -65,7 +64,7 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
-        // TODO: finish implementation
+        $this->migrateNonAdvancedPrices();
     }
 
     /**
@@ -89,17 +88,30 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
             ->columnMustExist('tl_iso_products', 'description_meta')
             ->columnMustNotExist('tl_iso_products', 'meta_description')
             ->columnMustExist('tl_iso_products', 'keywords_meta')
-            ->columnMustNotExist('tl_iso_products', 'meta_keywords');
+            ->columnMustNotExist('tl_iso_products', 'meta_keywords')
+            ->columnMustExist('tl_iso_products', 'id')
+            ->columnMustExist('tl_iso_products', 'price')
+            ->columnMustExist('tl_iso_products', 'tax_class');
+
+        $this->dbcheck
+            ->tableMustExist('tl_iso_producttypes')
+            ->columnMustExist('tl_iso_producttypes', 'id')
+            ->columnMustExist('tl_iso_producttypes', 'prices');
 
         $this->dbcheck
             ->tableMustExist('tl_iso_prices')
-            ->tableMustNotExist('tl_iso_product_price');
+            ->tableMustNotExist('tl_iso_product_price')
+            ->columnMustExist('tl_iso_prices', 'pid')
+            ->columnMustExist('tl_iso_prices', 'tstamp')
+            ->columnMustExist('tl_iso_prices', 'tax_class');
 
         $this->dbcheck
             ->tableMustExist('tl_iso_price_tiers')
-            ->tableMustNotExist('tl_iso_product_pricetier');
-
-        // TODO: finish implementation
+            ->tableMustNotExist('tl_iso_product_pricetier')
+            ->columnMustExist('tl_iso_price_tiers', 'pid')
+            ->columnMustExist('tl_iso_price_tiers', 'tstamp')
+            ->columnMustExist('tl_iso_price_tiers', 'min')
+            ->columnMustExist('tl_iso_price_tiers', 'price');
     }
 
     /**
@@ -109,8 +121,6 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
     {
         $tableDiff = new TableDiff('tl_iso_groups');
         $tableDiff->newName = 'tl_iso_group';
-
-        // TODO: finish implementation
 
         return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
     }
@@ -165,5 +175,42 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
         // TODO: finish implementation
 
         return array_merge($priceSql, $tiersSql);
+    }
+
+
+    private function migrateNonAdvancedPrices()
+    {
+        $time = time();
+        $nonAdvancedTypes = $this->db->fetchColumn("SELECT id FROM tl_iso_producttype WHERE prices=''");
+
+        $allProducts = $this->db->fetchAll(
+            "SELECT id, tax_class, price FROM tl_iso_product WHERE id IN (?)",
+            array($nonAdvancedTypes),
+            array(Connection::PARAM_INT_ARRAY)
+        );
+
+        foreach ($allProducts as $product) {
+
+            $this->db->insert(
+                'tl_iso_product_price',
+                array(
+                    'pid'       => $product['id'],
+                    'tstamp'    => $time,
+                    'tax_class' => $product['tax_class']
+                )
+            );
+
+            $priceId = $this->db->lastInsertId();
+
+            $this->db->insert(
+                'tl_iso_product_pricetier',
+                array(
+                    'pid'    => $priceId,
+                    'tstamp' => $time,
+                    'min'    => '1',
+                    'price'  => $product['price']
+                )
+            );
+        }
     }
 }
