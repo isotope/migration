@@ -33,23 +33,14 @@ class ContaoServiceProvider implements ServiceProviderInterface
 
     public function boot(Application $app)
     {
-        $contaoFiles = array(
-            'system/config/localconfig.php',
-            'system/modules/core/library/Contao/Config.php',
-        );
-
-        foreach ($contaoFiles as $file) {
-            if (!is_file($app['contao.root'] . '/' . $file)) {
-                $app['contao.ready'] = false;
-                return;
-            }
+        if (!is_file($app['contao.root'] . '/system/config/localconfig.php')) {
+            $app['contao.ready'] = false;
+            return;
         }
 
         define('TL_ROOT', $app['contao.root']);
 
-        require_once TL_ROOT . '/system/modules/core/library/Contao/Config.php';
-
-        \Contao\Config::preload();
+        require_once TL_ROOT . '/system/config/localconfig.php';
 
         $app['contao.ready'] = true;
         $app['contao.config'] = $GLOBALS['TL_CONFIG'];
