@@ -3,7 +3,8 @@
         "psr-4": {
             "Isotope\\Migration\\Controller\\": "controllers/",
             "Isotope\\Migration\\Provider\\": "providers/",
-            "Isotope\\Migration\\Service\\": "services/"
+            "Isotope\\Migration\\Service\\": "services/",
+            "Isotope\\Migration\\Test\\": "tests/src"
         }
     },
     "require": {
@@ -13,5 +14,8 @@
         "symfony/config": "~2.3",
         "symfony/twig-bridge": "~2.3",
         "doctrine/dbal": "2.4.*"
+    },
+    "require-dev": {
+        "phpunit/dbunit": "1.3.*"
     }
 }
