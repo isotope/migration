@@ -100,21 +100,22 @@ class DatabaseVerificationService
     public function columnMustExist($tableName, $columnName)
     {
         $columns = $this->schemaManager()->listTableColumns($tableName);
-        $columnNames = array_keys($columns);
 
-        if (!in_array($columnName, $columnNames)) {
-            throw new \RuntimeException(
-                $this->translator->trans(
-                    'error.columnNotFound',
-                    array(
-                        '%table%' => $tableName,
-                        '%column%' => $columnName
-                    )
-                )
-            );
+        foreach ($columns as $column) {
+            if ($column->getName() == $columnName) {
+                return $this;
+            }
         }
 
-        return $this;
+        throw new \RuntimeException(
+            $this->translator->trans(
+                'error.columnNotFound',
+                array(
+                    '%table%' => $tableName,
+                    '%column%' => $columnName
+                )
+            )
+        );
     }
 
     /**
@@ -128,18 +129,19 @@ class DatabaseVerificationService
     public function columnMustNotExist($tableName, $columnName)
     {
         $columns = $this->schemaManager()->listTableColumns($tableName);
-        $columnNames = array_keys($columns);
 
-        if (in_array($columnName, $columnNames)) {
-            throw new \RuntimeException(
-                $this->translator->trans(
-                    'error.columnFound',
-                    array(
-                        '%table%' => $tableName,
-                        '%column%' => $columnName
+        foreach ($columns as $column) {
+            if ($column->getName() == $columnName) {
+                throw new \RuntimeException(
+                    $this->translator->trans(
+                        'error.columnFound',
+                        array(
+                            '%table%'  => $tableName,
+                            '%column%' => $columnName
+                        )
                     )
-                )
-            );
+                );
+            }
         }
 
         return $this;
