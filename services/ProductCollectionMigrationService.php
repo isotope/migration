@@ -60,7 +60,11 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
      */
     public function postMigration()
     {
-        // TODO: finish implementation
+        $this->createPrivateAddresses();
+
+        // TODO: recreate tl_iso_product_collection_item.jumpTo
+        // TODO: check if we need to convert product_options
+        // TODO: convert surcharges from serialized array to subtable
     }
 
     /**
@@ -75,8 +79,13 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
         $this->dbcheck
             ->tableMustExist('tl_iso_orders')
             ->tableMustNotExist('tl_iso_product_collection')
+            ->columnMustExist('tl_iso_orders', 'id')
             ->columnMustExist('tl_iso_orders', 'pid')
             ->columnMustNotExist('tl_iso_orders', 'member')
+            ->columnMustExist('tl_iso_orders', 'billing_address')
+            ->columnMustNotExist('tl_iso_orders', 'billing_address_id')
+            ->columnMustExist('tl_iso_orders', 'shipping_address')
+            ->columnMustNotExist('tl_iso_orders', 'shipping_address_id')
             ->columnMustExist('tl_iso_orders', 'subTotal')
             ->columnMustNotExist('tl_iso_orders', 'type');
 
@@ -91,11 +100,6 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
             ->columnMustNotExist('tl_iso_order_items', 'quantity')
             ->columnMustExist('tl_iso_order_items', 'product_options')
             ->columnMustNotExist('tl_iso_order_items', 'options'); // TODO: rename to "configuration"
-
-        // TODO: recreate tl_iso_product_collection_item.jumpTo
-        // TODO: check if we need to convert product_options
-        // TODO: convert surcharges from serialized array to subtable
-        // TODO: move addresses from serialized array to address table
     }
 
     /**
@@ -118,10 +122,16 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
         $column->setLength(32)->setNotnull(true)->setDefault('');
         $tableDiff->addedColumns['type'] = $column;
 
+        $column = new Column('billing_address_id', Type::getType(Type::INTEGER));
+        $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
+        $tableDiff->addedColumns['billing_address_id'] = $column;
+
+        $column = new Column('shipping_address_id', Type::getType(Type::INTEGER));
+        $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
+        $tableDiff->addedColumns['shipping_address_id'] = $column;
+
         $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
         $sql[] = "UPDATE tl_iso_product_collection SET type='order'";
-
-        // TODO: finish implementation
 
         return $sql;
     }
@@ -151,8 +161,57 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
         $column->setLength(65535);
         $tableDiff->renamedColumns['product_options'] = $column;
 
-        // TODO: finish implementation
-
         return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+    }
+
+
+    private function createPrivateAddresses()
+    {
+        $allCollections = $this->db->fetchAll("SELECT id, billing_address, shipping_address FROM tl_iso_product_collection");
+
+        foreach ($allCollections as $collection) {
+            $billingAddress = @unserialize($collection['billing_address']);
+            $shippingAddress = @unserialize($collection['shipping_address']);
+
+            $billingAddressId = 0;
+            $shippingAddressId = 0;
+
+            if (is_array($billingAddress)) {
+                $billingAddressId = $this->addAddress($billingAddress, $collection['id']);
+            }
+
+            if (is_array($shippingAddress)) {
+                if ($shippingAddress['id'] == '-1' && $billingAddressId > 0) {
+                    $shippingAddressId = $billingAddressId;
+                } else {
+                    $shippingAddressId = $this->addAddress($shippingAddress, $collection['id']);
+                }
+            }
+
+            $this->db->update(
+                'tl_iso_product_collection',
+                array(
+                    'billing_address_id' => $billingAddressId,
+                    'shipping_address_id' => $shippingAddressId
+                ),
+                array('id'=>$collection['id'])
+            );
+        }
+    }
+
+
+    private function addAddress(array $data, $collectionId)
+    {
+        // TODO: what do we do if the serialized data contains fields that are not in the table?
+
+        unset($data['id']);
+
+        $data['tstamp'] = time();
+        $data['ptable'] = 'tl_iso_product_collection';
+        $data['pid'] = $collectionId;
+
+        $this->db->insert('tl_iso_address', $data);
+
+        return $this->db->lastInsertId();
     }
 }
