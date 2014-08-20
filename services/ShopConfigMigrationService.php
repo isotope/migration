@@ -56,7 +56,6 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
         $column->setLength(65535);
         $tableDiff->addedColumns['address_fields'] = $column;
 
-        // TODO: migrate data from tl_iso_config.billing_fields and tl_iso_config.shipping_fields to tl_iso_config.address
         // TODO: new tl_iso_gallery instead of tl_iso_config.gallery
         // TODO: convert tl_iso_config.imageSizes to galleries
         // TODO: tl_iso_config.missing_image_placeholder is now in the gallery
@@ -72,7 +71,7 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
-        // TODO: finish implementation
+        $this->convertAddressFields();
     }
 
     /**
@@ -83,8 +82,74 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
     protected function verifyDatabase()
     {
         $this->dbcheck
+            ->columnMustExist('tl_iso_config', 'billing_fields')
+            ->columnMustExist('tl_iso_config', 'shipping_fields')
             ->columnMustNotExist('tl_iso_config', 'address_fields');
 
         // TODO: finish implementation
+    }
+
+    /**
+     * Field tl_iso_config.billing_fields and tl_iso_config.shipping_fields have been
+     * combined in to one field tl_iso_config.address_fields
+     */
+    private function convertAddressFields()
+    {
+        $allConfigs = $this->db->fetchAll("SELECT id, billing_fields, shipping_fields FROM tl_iso_config");
+
+        foreach ($allConfigs as $configData) {
+
+            $addressFields = array();
+            $billingFields = @unserialize($configData['billing_fields']);
+            $shippingFields = @unserialize($configData['shipping_fields']);
+
+            if (is_array($billingFields)) {
+                foreach ($billingFields as $position => $field) {
+                    $name = $field['value'];
+
+                    if (!$field['enabled']) {
+                        $state = 'disabled';
+                    } elseif ($field['mandatory']) {
+                        $state = 'mandatory';
+                    } else {
+                        $state = 'enabled';
+                    }
+
+                    $addressFields[$name] = array(
+                        'name' => $name,
+                        'billing' => $state,
+                        'shipping' => 'disabled',
+                        'position' => ($position * 10)
+                    );
+                }
+            }
+
+            if (is_array($shippingFields)) {
+                foreach ($shippingFields as $position => $field) {
+                    $name = $field['value'];
+
+                    if (!$field['enabled']) {
+                        $state = 'disabled';
+                    } elseif ($field['mandatory']) {
+                        $state = 'mandatory';
+                    } else {
+                        $state = 'enabled';
+                    }
+
+                    if (isset($addressFields[$name])) {
+                        $addressFields[$name]['shipping'] = $state;
+                    } else {
+                        $addressFields[$name] = array(
+                            'name' => $name,
+                            'billing' => 'disabled',
+                            'shipping' => $state,
+                            'position' => ($position * 10 + 5)
+                        );
+                    }
+                }
+            }
+
+            $this->db->update('tl_iso_config', array('address_fields' => serialize($addressFields)), array('id' => $configData['id']));
+        }
     }
 }
