@@ -23,6 +23,7 @@ use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\ServiceProviderInterface;
 use Silex\Translator;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
 class MigrationServiceProvider implements ServiceProviderInterface
 {
@@ -90,7 +91,18 @@ class MigrationServiceProvider implements ServiceProviderInterface
         );
 
         foreach ($services as $class) {
-            $app['migration.services'][$class::getSlug()] = $app['class_factory']->share($class);
+            $slug = $class::getSlug();
+
+            $sessionBag = new AttributeBag($slug);
+            $sessionBag->setName($slug);
+            $app['session']->registerBag($sessionBag);
+
+            $app['migration.services'][$slug] = $app->share(
+                function() use ($app, $slug, $class) {
+                    $config = $app['session']->getBag($slug);
+                    return $app['class_factory']->create($class, array('config' => $config));
+                }
+            );
         }
     }
 }
