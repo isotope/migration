@@ -1,0 +1,11 @@
+language: php
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+
+before_script:
+  - mysql -e 'create database isotope_migration_testsuite;'
+  - composer install --prefer-source --dev
+
+script: phpunit --configuration phpunit.travis.xml
