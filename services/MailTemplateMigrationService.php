@@ -45,7 +45,10 @@ class MailTemplateMigrationService extends AbstractConfigfreeMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
-        // TODO: finish implementation
+        // TODO: migrate tl_iso_orderstatus.mail_admin & .mail_customer & .sales_email to notification center
+        // TODO: convert checkout mails to tl_module.nc_notification
+
+        // TODO: tl_module.iso_mail_admin & .iso_mail_customer should be one notification
     }
 
     /**

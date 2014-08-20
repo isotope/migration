@@ -51,7 +51,8 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
         $tableDiff->newName = 'tl_iso_producttype';
         $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
 
-        // TODO: finish implementation
+        // TODO: convert tl_iso_produttype.attributes to the new format
+        // TODO: convert tl_iso_producttype.variant_attributes to the new format
 
         return $sql;
     }

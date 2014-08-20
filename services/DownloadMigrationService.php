@@ -49,6 +49,9 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
+        // TODO: migrate tl_iso_download.singleSRC from path to UUID
+        // TODO: title and description fields are now in the file manager
+
         return array_merge(
             $this->getProductSQL(),
             $this->getCollectionSQL()

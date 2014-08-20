@@ -51,7 +51,8 @@ class ShippingMethodMigrationService extends AbstractConfigfreeMigrationService
         $tableDiff->newName = 'tl_iso_shipping';
         $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
 
-        // TODO: finish implementation
+        // TODO: migrate tl_iso_shipping_options subtable to new group shipping functionality
+        // TODO: weight_unit is now in the serialized weight field
 
         return $sql;
     }

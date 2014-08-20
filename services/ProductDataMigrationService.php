@@ -50,6 +50,8 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
+        // TODO: move non-advanced prices and tax class to the subtable (according to script in update.md)
+
         return array_merge(
             $this->getGroupSQL(),
             $this->getCategoriesSQL(),

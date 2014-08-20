@@ -82,9 +82,12 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
             ->columnMustExist('tl_iso_order_items', 'product_quantity')
             ->columnMustNotExist('tl_iso_order_items', 'quantity')
             ->columnMustExist('tl_iso_order_items', 'product_options')
-            ->columnMustNotExist('tl_iso_order_items', 'options'); // TODO: rename to "coniguration"
+            ->columnMustNotExist('tl_iso_order_items', 'options'); // TODO: rename to "configuration"
 
-        // TODO: finish implementation
+        // TODO: recreate tl_iso_product_collection_item.jumpTo
+        // TODO: check if we need to convert product_options
+        // TODO: convert surcharges from serialized array to subtable
+        // TODO: move addresses from serialized array to address table
     }
 
     /**

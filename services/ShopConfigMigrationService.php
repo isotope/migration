@@ -56,7 +56,11 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
         $column->setLength(65535);
         $tableDiff->addedColumns['address_fields'] = $column;
 
-        // TODO: finish implementation
+        // TODO: migrate data from tl_iso_config.billing_fields and tl_iso_config.shipping_fields to tl_iso_config.address
+        // TODO: new tl_iso_gallery instead of tl_iso_config.gallery
+        // TODO: convert tl_iso_config.imageSizes to galleries
+        // TODO: tl_iso_config.missing_image_placeholder is now in the gallery
+        // TODO: store_id is now a root page setting
 
         $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
 

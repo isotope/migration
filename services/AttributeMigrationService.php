@@ -50,7 +50,7 @@ class AttributeMigrationService extends AbstractConfigfreeMigrationService
         $tableDiff = new TableDiff('tl_iso_attributes');
         $tableDiff->newName = 'tl_iso_attribute';
 
-        // TODO: finish implementation
+        // TODO: gallery type for custom MediaManager attributes is no longer possible
 
         $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
 
