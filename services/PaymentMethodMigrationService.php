@@ -57,6 +57,14 @@ class PaymentMethodMigrationService extends AbstractConfigfreeMigrationService
     }
 
     /**
+     * Execute manual data migration after all the database fields are up-to-date
+     */
+    public function postMigration()
+    {
+        // TODO: finish implementation
+    }
+
+    /**
      * Make sure database structure is correct before migration
      *
      * @throws \RuntimeException

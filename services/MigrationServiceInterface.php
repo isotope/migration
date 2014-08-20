@@ -64,4 +64,9 @@ interface MigrationServiceInterface
      * @return array
      */
     public function getMigrationSQL();
+
+    /**
+     * Execute manual data migration after all the database fields are up-to-date
+     */
+    public function postMigration();
 }
