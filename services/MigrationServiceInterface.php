@@ -12,6 +12,7 @@
 namespace Isotope\Migration\Service;
 
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 interface MigrationServiceInterface
@@ -54,9 +55,11 @@ interface MigrationServiceInterface
     /**
      * Returns the view for step configuration or information
      *
+     * @param Request $request
+     *
      * @return string|Response
      */
-    public function renderConfigView();
+    public function renderConfigView(Request $request);
 
     /**
      * Get SQL commands to migration the database

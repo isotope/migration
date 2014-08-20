@@ -56,7 +56,7 @@ class MigrationController
             } elseif ($slug == $service->getSlug()) {
                 $this->twig->addGlobal('current_service', $service);
 
-                $view = $service->renderConfigView();
+                $view = $service->renderConfigView($this->request);
 
                 if ($this->request->isMethod('POST') && $this->request->request->get('continue') && $service->getStatus() == MigrationServiceInterface::STATUS_READY) {
                     $forwardToNext = true;

@@ -12,6 +12,7 @@
 namespace Isotope\Migration\Service;
 
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractConfigfreeMigrationService extends AbstractMigrationService
@@ -31,9 +32,11 @@ abstract class AbstractConfigfreeMigrationService extends AbstractMigrationServi
     /**
      * Returns the view for error or config message
      *
+     * @param Request $request
+     *
      * @return string|Response
      */
-    public function renderConfigView()
+    public function renderConfigView(Request $request)
     {
         if ($this->getStatus() == MigrationServiceInterface::STATUS_ERROR) {
             return $this->twig->render('configfree_error.twig', array(
