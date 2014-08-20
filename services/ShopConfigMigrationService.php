@@ -71,6 +71,10 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
+        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
+            throw new \BadMethodCallException('Migration service is not ready');
+        }
+
         $this->convertAddressFields();
     }
 
