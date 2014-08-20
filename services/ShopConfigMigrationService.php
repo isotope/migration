@@ -82,6 +82,7 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
     protected function verifyDatabase()
     {
         $this->dbcheck
+            ->columnMustExist('tl_iso_config', 'id')
             ->columnMustExist('tl_iso_config', 'billing_fields')
             ->columnMustExist('tl_iso_config', 'shipping_fields')
             ->columnMustNotExist('tl_iso_config', 'address_fields');

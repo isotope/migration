@@ -90,6 +90,7 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
         $this->dbcheck
             ->tableMustExist('tl_iso_producttypes')
             ->tableMustNotExist('tl_iso_producttype')
+            ->columnMustExist('tl_iso_producttypes', 'id')
             ->columnMustExist('tl_iso_producttypes', 'attributes')
             ->columnMustExist('tl_iso_producttypes', 'variant_attributes');
     }
