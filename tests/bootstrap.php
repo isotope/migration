@@ -9,6 +9,8 @@
  * @license    http://opensource.org/licenses/lgpl-3.0.html
  */
 
+include __DIR__ .'/../vendor/autoload.php';
+
 try {
     $pdo = new \PDO(
         sprintf('mysql:host=%s;port=%s;dbname=%s;',
