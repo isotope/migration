@@ -58,7 +58,7 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
     /**
      * Make sure database structure is correct before migration
      *
-     * @return bool
+     * @throws \RuntimeException
      */
     protected function verifyDatabase()
     {

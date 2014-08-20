@@ -51,7 +51,7 @@ class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
     /**
      * Make sure database structure is correct before migration
      *
-     * @return bool
+     * @throws \RuntimeException
      */
     protected function verifyDatabase()
     {

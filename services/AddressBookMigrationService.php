@@ -72,7 +72,7 @@ class AddressBookMigrationService extends AbstractConfigfreeMigrationService
     /**
      * Make sure database structure is correct before migration
      *
-     * @return bool
+     * @throws \RuntimeException
      */
     protected function verifyDatabase()
     {
@@ -80,7 +80,5 @@ class AddressBookMigrationService extends AbstractConfigfreeMigrationService
             ->tableMustExist('tl_iso_addresses')
             ->tableMustNotExist('tl_iso_address')
             ->columnMustNotExist('tl_iso_addresses', 'ptable');
-
-        return true;
     }
 }
