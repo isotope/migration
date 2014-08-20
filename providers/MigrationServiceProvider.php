@@ -71,19 +71,22 @@ class MigrationServiceProvider implements ServiceProviderInterface
 
         /** @type MigrationServiceInterface[] $services */
         $services = array(
-            '\\Isotope\\Migration\\Service\\AddressBookMigrationService',
+            // this order DOES MATTER!!
             '\\Isotope\\Migration\\Service\\AttributeMigrationService',
+            '\\Isotope\\Migration\\Service\\ProductTypeMigrationService',
+            '\\Isotope\\Migration\\Service\\ProductDataMigrationService',
+
+            // here we don't know (yet) ;-)
             '\\Isotope\\Migration\\Service\\FrontendModuleMigrationService',
             '\\Isotope\\Migration\\Service\\MailTemplateMigrationService',
             '\\Isotope\\Migration\\Service\\ProductCollectionMigrationService',
-            '\\Isotope\\Migration\\Service\\ProductDataMigrationService',
             '\\Isotope\\Migration\\Service\\ShopConfigMigrationService',
-            '\\Isotope\\Migration\\Service\\ProductTypeMigrationService',
             '\\Isotope\\Migration\\Service\\RelatedProductMigrationService',
             '\\Isotope\\Migration\\Service\\TranslationMigrationService',
             '\\Isotope\\Migration\\Service\\PaymentMethodMigrationService',
             '\\Isotope\\Migration\\Service\\ShippingMethodMigrationService',
-            '\\Isotope\\Migration\\Service\\DownloadMigrationService'
+            '\\Isotope\\Migration\\Service\\DownloadMigrationService',
+            '\\Isotope\\Migration\\Service\\AddressBookMigrationService',
         );
 
         foreach ($services as $class) {
