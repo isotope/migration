@@ -51,9 +51,6 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
         $tableDiff->newName = 'tl_iso_producttype';
         $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
 
-        // TODO: convert tl_iso_produttype.attributes to the new format
-        // TODO: convert tl_iso_producttype.variant_attributes to the new format
-
         return $sql;
     }
 
@@ -62,7 +59,25 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
-        // TODO: finish implementation
+        $productTypes = $this->db->fetchAll("SELECT id, attributes, variant_attributes FROM tl_iso_attribute");
+
+        foreach ($productTypes as $type) {
+            $attributes = @unserialize($type['attributes']);
+            $variantAttributes = @unserialize($type['variant_attributes']);
+
+            $attributes = is_array($attributes) ? serialize($this->convertAttributes($attributes)) : '';
+            $variantAttributes = is_array($variantAttributes) ? serialize($this->convertAttributes($variantAttributes)) : '';
+
+            $this->db->update(
+                'tl_iso_attribute',
+                array(
+                    'attributes'         => $attributes,
+                    'variant_attributes' => $variantAttributes),
+                array(
+                    'id' => $type['id']
+                )
+            );
+        }
     }
 
     /**
@@ -74,8 +89,27 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
     {
         $this->dbcheck
             ->tableMustExist('tl_iso_producttypes')
-            ->tableMustNotExist('tl_iso_producttype');
+            ->tableMustNotExist('tl_iso_producttype')
+            ->columnMustExist('tl_iso_producttypes', 'attributes')
+            ->columnMustExist('tl_iso_producttypes', 'variant_attributes');
+    }
 
-        // TODO: finish implementation
+
+    private function convertAttributes(array $oldData)
+    {
+        $newData = array();
+
+        foreach ($oldData as $name => $config) {
+            $newData[$name] = array(
+                'enabled'   => $config['enabled'],
+                'name'      => $name,
+                'legend'    => '', // TODO: load legend from DCA/attributes table
+                'tl_class'  => '', // TODO: load tl_class from DCA/attributes table
+                'mandatory' => '', // TODO: load mandatory-ness from DCA/attributes table
+                'position'  => $config['position']
+            );
+        }
+
+        return $newData;
     }
 }
