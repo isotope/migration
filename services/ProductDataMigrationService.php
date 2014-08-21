@@ -152,10 +152,12 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
 
         $column = new Column('meta_description', Type::getType(Type::TEXT));
         $column->setLength(65532);
+        $column->setNotnull(false);
         $tableDiff->renamedColumns['description_meta'] = $column;
 
         $column = new Column('meta_keywords', Type::getType(Type::TEXT));
         $column->setLength(65532);
+        $column->setNotnull(false);
         $tableDiff->renamedColumns['keywords_meta'] = $column;
 
         // TODO: finish implementation
