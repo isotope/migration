@@ -27,7 +27,7 @@
 		<key Table="tl_iso_address" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_address" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_address" Non_unique="1" Key_name="pid" Seq_in_index="2" Column_name="store_id" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_address" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="2" Create_time="2014-08-20 17:53:06" Update_time="2014-08-20 17:53:06" Check_time="2014-08-20 17:53:06" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_address" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:13" Update_time="2014-08-21 14:48:13" Check_time="2014-08-21 14:48:13" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_address">
 	</table_data>
@@ -70,7 +70,7 @@
 		<field Field="path" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<field Field="datepicker" Type="char(1)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<key Table="tl_iso_attribute" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_attribute" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="2" Avg_row_length="680" Data_length="1360" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="20" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_attribute" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="2" Avg_row_length="680" Data_length="1360" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="14" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_attribute">
 	<row>
@@ -159,7 +159,7 @@
 		<field Field="amount" Type="varchar(32)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<field Field="label" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<key Table="tl_iso_baseprice" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_baseprice" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_baseprice" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_baseprice">
 	</table_data>
@@ -176,7 +176,7 @@
 		<key Table="tl_iso_cart" Non_unique="1" Key_name="session" Seq_in_index="2" Column_name="store_id" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_cart" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_cart" Non_unique="1" Key_name="pid" Seq_in_index="2" Column_name="store_id" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_cart" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Check_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_cart" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Check_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_cart">
 	</table_data>
@@ -195,7 +195,7 @@
 		<field Field="tax_free_price" Type="decimal(12,2)" Null="NO" Key="" Default="0.00" Extra="" Comment="" />
 		<key Table="tl_iso_cart_items" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_cart_items" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_cart_items" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Check_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_cart_items" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Check_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_cart_items">
 	</table_data>
@@ -250,7 +250,7 @@
 		<field Field="vat_no" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<field Field="address_fields" Type="blob" Null="NO" Key="" Extra="" Comment="" />
 		<key Table="tl_iso_config" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="1" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_config" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="6036" Data_length="6036" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="2" Create_time="2014-08-20 17:53:06" Update_time="2014-08-20 17:53:06" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_config" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="6036" Data_length="6036" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="2" Create_time="2014-08-21 14:48:13" Update_time="2014-08-21 14:48:13" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_config">
 	<row>
@@ -319,7 +319,7 @@
 		<field Field="published" Type="char(1)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<key Table="tl_iso_download" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_download" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_download" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-20 17:53:06" Update_time="2014-08-20 17:53:06" Check_time="2014-08-20 17:53:06" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_download" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:13" Update_time="2014-08-21 14:48:13" Check_time="2014-08-21 14:48:13" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_download">
 	</table_data>
@@ -332,7 +332,7 @@
 		<field Field="product_type" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
 		<key Table="tl_iso_group" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="4" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_group" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Cardinality="1" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_group" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="4" Avg_row_length="24" Data_length="96" Max_data_length="281474976710655" Index_length="3072" Data_free="0" Auto_increment="5" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Check_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_group" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="4" Avg_row_length="24" Data_length="96" Max_data_length="281474976710655" Index_length="3072" Data_free="0" Auto_increment="5" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Check_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_group">
 	<row>
@@ -376,7 +376,7 @@
 		<field Field="replacement" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<key Table="tl_iso_label" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_label" Non_unique="1" Key_name="language" Seq_in_index="1" Column_name="language" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_label" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Check_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_label" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Check_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_label">
 	</table_data>
@@ -394,7 +394,7 @@
 		<field Field="documentTitle" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<field Field="priority" Type="int(1) unsigned" Null="NO" Key="" Default="3" Extra="" Comment="" />
 		<key Table="tl_iso_mail" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_mail" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="2" Avg_row_length="96" Data_length="192" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="3" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_mail" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="2" Avg_row_length="96" Data_length="192" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="3" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_mail">
 	<row>
@@ -439,7 +439,7 @@
 		<field Field="attachments" Type="blob" Null="YES" Key="" Extra="" Comment="" />
 		<key Table="tl_iso_mail_content" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_mail_content" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_mail_content" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="2" Avg_row_length="1656" Data_length="3312" Max_data_length="281474976710655" Index_length="3072" Data_free="0" Auto_increment="3" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Check_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_mail_content" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="2" Avg_row_length="1656" Data_length="3312" Max_data_length="281474976710655" Index_length="3072" Data_free="0" Auto_increment="3" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Check_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_mail_content">
 	<row>
@@ -608,9 +608,10 @@ Grand Total:	##grandTotal##</field>
 		<field Field="mail_customer" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
 		<field Field="mail_admin" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
 		<field Field="sales_email" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<field Field="notification" Type="int(11)" Null="NO" Key="" Default="0" Extra="" Comment="" />
 		<key Table="tl_iso_orderstatus" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="5" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<key Table="tl_iso_orderstatus" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Cardinality="1" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_orderstatus" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="5" Avg_row_length="32" Data_length="164" Max_data_length="281474976710655" Index_length="3072" Data_free="0" Auto_increment="6" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Check_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<key Table="tl_iso_orderstatus" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+		<options Name="tl_iso_orderstatus" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="5" Avg_row_length="32" Data_length="164" Max_data_length="281474976710655" Index_length="3072" Data_free="0" Auto_increment="6" Create_time="2014-08-21 14:48:13" Update_time="2014-08-21 14:48:13" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_orderstatus">
 	<row>
@@ -624,6 +625,7 @@ Grand Total:	##grandTotal##</field>
 		<field name="mail_customer">0</field>
 		<field name="mail_admin">0</field>
 		<field name="sales_email"></field>
+		<field name="notification">0</field>
 	</row>
 	<row>
 		<field name="id">2</field>
@@ -636,6 +638,7 @@ Grand Total:	##grandTotal##</field>
 		<field name="mail_customer">0</field>
 		<field name="mail_admin">0</field>
 		<field name="sales_email"></field>
+		<field name="notification">0</field>
 	</row>
 	<row>
 		<field name="id">3</field>
@@ -648,6 +651,7 @@ Grand Total:	##grandTotal##</field>
 		<field name="mail_customer">0</field>
 		<field name="mail_admin">0</field>
 		<field name="sales_email"></field>
+		<field name="notification">0</field>
 	</row>
 	<row>
 		<field name="id">4</field>
@@ -660,6 +664,7 @@ Grand Total:	##grandTotal##</field>
 		<field name="mail_customer">0</field>
 		<field name="mail_admin">0</field>
 		<field name="sales_email"></field>
+		<field name="notification">0</field>
 	</row>
 	<row>
 		<field name="id">5</field>
@@ -672,6 +677,7 @@ Grand Total:	##grandTotal##</field>
 		<field name="mail_customer">0</field>
 		<field name="mail_admin">0</field>
 		<field name="sales_email"></field>
+		<field name="notification">0</field>
 	</row>
 	</table_data>
 	<table_structure name="tl_iso_payment">
@@ -709,7 +715,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="guests" Type="char(1)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<field Field="protected" Type="char(1)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<key Table="tl_iso_payment" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_payment" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="2" Avg_row_length="3774" Data_length="7548" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="5" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_payment" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="2" Avg_row_length="3774" Data_length="7548" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="4" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_payment">
 	<row>
@@ -805,8 +811,8 @@ Grand Total:	##grandTotal##</field>
 		<field Field="color" Type="blob" Null="YES" Key="" Extra="" Comment="" />
 		<field Field="size" Type="blob" Null="YES" Key="" Extra="" Comment="" />
 		<field Field="inherit" Type="blob" Null="YES" Key="" Extra="" Comment="" />
-		<field Field="meta_keywords" Type="text" Null="NO" Key="" Extra="" Comment="" />
-		<field Field="meta_description" Type="text" Null="NO" Key="" Extra="" Comment="" />
+		<field Field="meta_keywords" Type="text" Null="YES" Key="" Extra="" Comment="" />
+		<field Field="meta_description" Type="text" Null="YES" Key="" Extra="" Comment="" />
 		<field Field="shipping_weight" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<field Field="dateAdded" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
 		<field Field="gid" Type="int(10) unsigned" Null="NO" Key="MUL" Default="0" Extra="" Comment="" />
@@ -820,7 +826,7 @@ Grand Total:	##grandTotal##</field>
 		<key Table="tl_iso_product" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Cardinality="9" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_product" Non_unique="1" Key_name="pid" Seq_in_index="2" Column_name="language" Collation="A" Cardinality="9" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_product" Non_unique="1" Key_name="pid" Seq_in_index="3" Column_name="published" Collation="A" Cardinality="9" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_product" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="118" Avg_row_length="277" Data_length="32712" Max_data_length="281474976710655" Index_length="10240" Data_free="0" Auto_increment="162" Create_time="2014-08-20 17:53:06" Update_time="2014-08-20 17:53:06" Check_time="2014-08-20 17:53:06" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_product" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="118" Avg_row_length="277" Data_length="32752" Max_data_length="281474976710655" Index_length="10240" Data_free="0" Auto_increment="152" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Check_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_product">
 	<row>
@@ -845,8 +851,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">a:5:{s:5:&quot;Black&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;Blue&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Brown&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Green&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;Red&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="size">a:15:{i:7;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;7.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:8;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;8.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:9;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;9.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:10;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;10.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:11;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;11.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:12;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;12.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:13;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:14;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:15;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="inherit" xsi:nil="true" />
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274642006</field>
 		<field name="gid">4</field>
@@ -878,8 +884,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">7</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274316218</field>
 		<field name="gid">0</field>
@@ -911,8 +917,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">7.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274316218</field>
 		<field name="gid">0</field>
@@ -944,8 +950,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">8</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274316218</field>
 		<field name="gid">0</field>
@@ -977,8 +983,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">8.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274316218</field>
 		<field name="gid">0</field>
@@ -1010,8 +1016,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">9</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274316218</field>
 		<field name="gid">0</field>
@@ -1043,8 +1049,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">9.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274316218</field>
 		<field name="gid">0</field>
@@ -1076,8 +1082,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">10</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274316218</field>
 		<field name="gid">0</field>
@@ -1109,8 +1115,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">10.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274316218</field>
 		<field name="gid">0</field>
@@ -1142,8 +1148,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">11</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274316218</field>
 		<field name="gid">0</field>
@@ -1175,8 +1181,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">11.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274316218</field>
 		<field name="gid">0</field>
@@ -1208,8 +1214,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">a:5:{s:5:&quot;Black&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;Blue&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Brown&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Green&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;Red&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="size">a:15:{i:7;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;7.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:8;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;8.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:9;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;9.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:10;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;10.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:11;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;11.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:12;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;12.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:13;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:14;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:15;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="inherit" xsi:nil="true" />
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274641996</field>
 		<field name="gid">3</field>
@@ -1241,8 +1247,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">10</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1274,8 +1280,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">10</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1307,8 +1313,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">10.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1340,8 +1346,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">10.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1373,8 +1379,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">11</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1406,8 +1412,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">11</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1439,8 +1445,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">11.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1472,8 +1478,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">11.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1505,8 +1511,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">12</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1538,8 +1544,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">12</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1571,8 +1577,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">12.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1604,8 +1610,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">12.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1637,8 +1643,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">13</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1670,8 +1676,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">13</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1703,8 +1709,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">14</field>
 		<field name="inherit">a:4:{i:0;s:4:&quot;name&quot;;i:1;s:6:&quot;images&quot;;i:2;s:5:&quot;start&quot;;i:3;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274629267</field>
 		<field name="gid">0</field>
@@ -1736,8 +1742,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">14</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1769,8 +1775,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">15</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1802,8 +1808,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">15</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402053</field>
 		<field name="gid">0</field>
@@ -1835,8 +1841,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">a:5:{s:5:&quot;Black&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;Blue&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Brown&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Green&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;Red&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="size">a:15:{i:7;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;7.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:8;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;8.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:9;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;9.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:10;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;10.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:11;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;11.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:12;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;12.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:13;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:14;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:15;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="inherit" xsi:nil="true" />
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274642074</field>
 		<field name="gid">3</field>
@@ -1868,8 +1874,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">9.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402596</field>
 		<field name="gid">0</field>
@@ -1901,8 +1907,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">10</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402596</field>
 		<field name="gid">0</field>
@@ -1934,8 +1940,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">10.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402596</field>
 		<field name="gid">0</field>
@@ -1967,8 +1973,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">11</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402596</field>
 		<field name="gid">0</field>
@@ -2000,8 +2006,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">11.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402596</field>
 		<field name="gid">0</field>
@@ -2033,8 +2039,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">12</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402596</field>
 		<field name="gid">0</field>
@@ -2066,8 +2072,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">12.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402596</field>
 		<field name="gid">0</field>
@@ -2099,8 +2105,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">13</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402596</field>
 		<field name="gid">0</field>
@@ -2132,8 +2138,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">14</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402596</field>
 		<field name="gid">0</field>
@@ -2165,8 +2171,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">15</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274402596</field>
 		<field name="gid">0</field>
@@ -2198,8 +2204,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">a:5:{s:5:&quot;Black&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;Blue&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Brown&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Green&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;Red&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="size">a:15:{i:7;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;7.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:8;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;8.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:9;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;9.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:10;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;10.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:11;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;11.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:12;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;12.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:13;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:14;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:15;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="inherit" xsi:nil="true" />
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1275442771</field>
 		<field name="gid">3</field>
@@ -2231,8 +2237,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">12</field>
 		<field name="inherit">a:3:{i:0;s:4:&quot;name&quot;;i:1;s:5:&quot;start&quot;;i:2;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1275443325</field>
 		<field name="gid">0</field>
@@ -2264,8 +2270,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">12</field>
 		<field name="inherit">a:4:{i:0;s:4:&quot;name&quot;;i:1;s:14:&quot;price_override&quot;;i:2;s:5:&quot;start&quot;;i:3;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1275443297</field>
 		<field name="gid">0</field>
@@ -2297,8 +2303,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">13</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274403178</field>
 		<field name="gid">0</field>
@@ -2330,8 +2336,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">13</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274403178</field>
 		<field name="gid">0</field>
@@ -2363,8 +2369,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">14</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274403178</field>
 		<field name="gid">0</field>
@@ -2396,8 +2402,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">14</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274403178</field>
 		<field name="gid">0</field>
@@ -2429,8 +2435,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">15</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274403178</field>
 		<field name="gid">0</field>
@@ -2462,8 +2468,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">15</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274403178</field>
 		<field name="gid">0</field>
@@ -2495,8 +2501,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">a:5:{s:5:&quot;Black&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;Blue&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Brown&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Green&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;Red&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="size">a:15:{i:7;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;7.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:8;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;8.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:9;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;9.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:10;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;10.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:11;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;11.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:12;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;12.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:13;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:14;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:15;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="inherit" xsi:nil="true" />
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274641962</field>
 		<field name="gid">2</field>
@@ -2528,8 +2534,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Red</field>
 		<field name="size">7</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626435</field>
 		<field name="gid">0</field>
@@ -2561,8 +2567,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">7</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626435</field>
 		<field name="gid">0</field>
@@ -2594,8 +2600,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Red</field>
 		<field name="size">7.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626435</field>
 		<field name="gid">0</field>
@@ -2627,8 +2633,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">7.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626435</field>
 		<field name="gid">0</field>
@@ -2660,8 +2666,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Red</field>
 		<field name="size">8</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626435</field>
 		<field name="gid">0</field>
@@ -2693,8 +2699,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">8</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626435</field>
 		<field name="gid">0</field>
@@ -2726,8 +2732,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Red</field>
 		<field name="size">8.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626435</field>
 		<field name="gid">0</field>
@@ -2759,8 +2765,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">8.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626435</field>
 		<field name="gid">0</field>
@@ -2792,8 +2798,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">a:5:{s:5:&quot;Black&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;Blue&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Brown&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Green&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;Red&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="size">a:15:{i:7;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;7.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:8;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;8.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:9;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;9.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:10;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;10.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:11;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;11.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:12;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;12.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:13;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:14;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:15;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="inherit" xsi:nil="true" />
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274642014</field>
 		<field name="gid">1</field>
@@ -2825,8 +2831,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">7</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626729</field>
 		<field name="gid">0</field>
@@ -2858,8 +2864,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">7</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626729</field>
 		<field name="gid">0</field>
@@ -2891,8 +2897,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">7.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626729</field>
 		<field name="gid">0</field>
@@ -2924,8 +2930,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">7.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626729</field>
 		<field name="gid">0</field>
@@ -2957,8 +2963,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">8</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626729</field>
 		<field name="gid">0</field>
@@ -2990,8 +2996,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">8</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626729</field>
 		<field name="gid">0</field>
@@ -3023,8 +3029,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">8.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626729</field>
 		<field name="gid">0</field>
@@ -3056,8 +3062,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">8.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626729</field>
 		<field name="gid">0</field>
@@ -3089,8 +3095,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">9</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626729</field>
 		<field name="gid">0</field>
@@ -3122,8 +3128,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">9</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626729</field>
 		<field name="gid">0</field>
@@ -3155,8 +3161,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">9.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626729</field>
 		<field name="gid">0</field>
@@ -3188,8 +3194,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">9.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626729</field>
 		<field name="gid">0</field>
@@ -3221,8 +3227,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">10</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626729</field>
 		<field name="gid">0</field>
@@ -3254,8 +3260,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">10</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274626729</field>
 		<field name="gid">0</field>
@@ -3287,8 +3293,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">a:5:{s:5:&quot;Black&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;Blue&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Brown&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Green&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;Red&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="size">a:15:{i:7;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;7.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:8;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;8.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:9;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;9.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:10;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;10.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:11;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;11.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:12;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;12.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:13;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:14;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:15;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="inherit" xsi:nil="true" />
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1288252488</field>
 		<field name="gid">1</field>
@@ -3320,8 +3326,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">10</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3353,8 +3359,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">10</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3386,8 +3392,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">10</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3419,8 +3425,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">10.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3452,8 +3458,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">10.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3485,8 +3491,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">10.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3518,8 +3524,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">11</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3551,8 +3557,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">11</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3584,8 +3590,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">11</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3617,8 +3623,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">11.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3650,8 +3656,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">11.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3683,8 +3689,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">11.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3716,8 +3722,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">12</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3749,8 +3755,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">12</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3782,8 +3788,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">12</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3815,8 +3821,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">12.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3848,8 +3854,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">12.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3881,8 +3887,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">12.5</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3914,8 +3920,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">13</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3947,8 +3953,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">13</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -3980,8 +3986,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Brown</field>
 		<field name="size">13</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274627296</field>
 		<field name="gid">0</field>
@@ -4013,8 +4019,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">a:5:{s:5:&quot;Black&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;Blue&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Brown&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Green&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;Red&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="size">a:15:{i:7;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;7.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:8;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;8.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:9;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;9.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:10;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;10.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:11;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;11.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:12;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;12.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:13;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:14;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:15;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="inherit" xsi:nil="true" />
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274642024</field>
 		<field name="gid">3</field>
@@ -4046,8 +4052,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">10</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274631744</field>
 		<field name="gid">0</field>
@@ -4079,8 +4085,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">11</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274631744</field>
 		<field name="gid">0</field>
@@ -4112,8 +4118,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">12</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274631744</field>
 		<field name="gid">0</field>
@@ -4145,8 +4151,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">13</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274631744</field>
 		<field name="gid">0</field>
@@ -4178,8 +4184,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">14</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274631744</field>
 		<field name="gid">0</field>
@@ -4211,8 +4217,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Black</field>
 		<field name="size">15</field>
 		<field name="inherit">a:5:{i:1;s:4:&quot;name&quot;;i:3;s:6:&quot;weight&quot;;i:5;s:9:&quot;published&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274631744</field>
 		<field name="gid">0</field>
@@ -4244,8 +4250,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">a:5:{s:5:&quot;Black&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;Blue&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Brown&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:5:&quot;Green&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;Red&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="size">a:15:{i:7;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;7.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:8;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;8.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:9;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:3:&quot;9.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:10;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;10.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:11;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;11.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:12;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}s:4:&quot;12.5&quot;;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:13;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:14;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}i:15;a:2:{s:7:&quot;inherit&quot;;s:1:&quot;1&quot;;s:5:&quot;label&quot;;s:0:&quot;&quot;;}}</field>
 		<field name="inherit" xsi:nil="true" />
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274641987</field>
 		<field name="gid">4</field>
@@ -4277,8 +4283,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">7</field>
 		<field name="inherit">a:4:{i:1;s:4:&quot;name&quot;;i:4;s:6:&quot;images&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274632405</field>
 		<field name="gid">0</field>
@@ -4310,8 +4316,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">7</field>
 		<field name="inherit">a:4:{i:1;s:4:&quot;name&quot;;i:4;s:6:&quot;images&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274632405</field>
 		<field name="gid">0</field>
@@ -4343,8 +4349,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">7.5</field>
 		<field name="inherit">a:4:{i:1;s:4:&quot;name&quot;;i:4;s:6:&quot;images&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274632405</field>
 		<field name="gid">0</field>
@@ -4376,8 +4382,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">7.5</field>
 		<field name="inherit">a:4:{i:1;s:4:&quot;name&quot;;i:4;s:6:&quot;images&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274632405</field>
 		<field name="gid">0</field>
@@ -4409,8 +4415,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">8</field>
 		<field name="inherit">a:4:{i:1;s:4:&quot;name&quot;;i:4;s:6:&quot;images&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274632405</field>
 		<field name="gid">0</field>
@@ -4442,8 +4448,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">8</field>
 		<field name="inherit">a:4:{i:1;s:4:&quot;name&quot;;i:4;s:6:&quot;images&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274632405</field>
 		<field name="gid">0</field>
@@ -4475,8 +4481,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">8.5</field>
 		<field name="inherit">a:4:{i:1;s:4:&quot;name&quot;;i:4;s:6:&quot;images&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274632405</field>
 		<field name="gid">0</field>
@@ -4508,8 +4514,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">8.5</field>
 		<field name="inherit">a:4:{i:1;s:4:&quot;name&quot;;i:4;s:6:&quot;images&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274632405</field>
 		<field name="gid">0</field>
@@ -4541,8 +4547,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">9</field>
 		<field name="inherit">a:4:{i:1;s:4:&quot;name&quot;;i:4;s:6:&quot;images&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274632405</field>
 		<field name="gid">0</field>
@@ -4574,8 +4580,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">9</field>
 		<field name="inherit">a:4:{i:1;s:4:&quot;name&quot;;i:4;s:6:&quot;images&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274632405</field>
 		<field name="gid">0</field>
@@ -4607,8 +4613,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">9.5</field>
 		<field name="inherit">a:4:{i:1;s:4:&quot;name&quot;;i:4;s:6:&quot;images&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274632405</field>
 		<field name="gid">0</field>
@@ -4640,8 +4646,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">9.5</field>
 		<field name="inherit">a:4:{i:1;s:4:&quot;name&quot;;i:4;s:6:&quot;images&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274632405</field>
 		<field name="gid">0</field>
@@ -4673,8 +4679,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Blue</field>
 		<field name="size">10</field>
 		<field name="inherit">a:4:{i:1;s:4:&quot;name&quot;;i:4;s:6:&quot;images&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274632405</field>
 		<field name="gid">0</field>
@@ -4706,8 +4712,8 @@ Grand Total:	##grandTotal##</field>
 		<field name="color">Green</field>
 		<field name="size">10</field>
 		<field name="inherit">a:4:{i:1;s:4:&quot;name&quot;;i:4;s:6:&quot;images&quot;;i:6;s:5:&quot;start&quot;;i:7;s:4:&quot;stop&quot;;}</field>
-		<field name="meta_keywords"></field>
-		<field name="meta_description"></field>
+		<field name="meta_keywords" xsi:nil="true" />
+		<field name="meta_description" xsi:nil="true" />
 		<field name="shipping_weight"></field>
 		<field name="dateAdded">1274632405</field>
 		<field name="gid">0</field>
@@ -4726,7 +4732,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="page_id" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
 		<key Table="tl_iso_product_category" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="14" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_product_category" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Cardinality="7" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_product_category" Engine="MyISAM" Version="10" Row_format="Fixed" Rows="14" Avg_row_length="21" Data_length="294" Max_data_length="5910974510923775" Index_length="3072" Data_free="0" Auto_increment="28" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Check_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_product_category" Engine="MyISAM" Version="10" Row_format="Fixed" Rows="14" Avg_row_length="21" Data_length="294" Max_data_length="5910974510923775" Index_length="3072" Data_free="0" Auto_increment="27" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Check_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_product_category">
 	<row>
@@ -4860,9 +4866,11 @@ Grand Total:	##grandTotal##</field>
 		<field Field="notes" Type="text" Null="YES" Key="" Extra="" Comment="" />
 		<field Field="settings" Type="blob" Null="YES" Key="" Extra="" Comment="" />
 		<field Field="type" Type="varchar(32)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<field Field="billing_address_id" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
+		<field Field="shipping_address_id" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
 		<key Table="tl_iso_product_collection" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_product_collection" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="member" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_product_collection" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-20 17:53:06" Update_time="2014-08-20 17:53:06" Check_time="2014-08-20 17:53:06" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_product_collection" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:13" Update_time="2014-08-21 14:48:13" Check_time="2014-08-21 14:48:13" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_product_collection">
 	</table_data>
@@ -4875,7 +4883,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="expires" Type="varchar(10)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<key Table="tl_iso_product_collection_download" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_product_collection_download" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_product_collection_download" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Check_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_product_collection_download" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Check_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_product_collection_download">
 	</table_data>
@@ -4893,7 +4901,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="tax_free_price" Type="decimal(12,2)" Null="NO" Key="" Default="0.00" Extra="" Comment="" />
 		<key Table="tl_iso_product_collection_item" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_product_collection_item" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_product_collection_item" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="29" Create_time="2014-08-20 17:53:06" Update_time="2014-08-20 17:53:06" Check_time="2014-08-20 17:53:06" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_product_collection_item" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:13" Update_time="2014-08-21 14:48:13" Check_time="2014-08-21 14:48:13" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_product_collection_item">
 	</table_data>
@@ -4908,7 +4916,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="stop" Type="varchar(10)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<key Table="tl_iso_product_price" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_product_price" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_product_price" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Check_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_product_price" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Check_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_product_price">
 	</table_data>
@@ -4920,7 +4928,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="price" Type="decimal(12,2)" Null="NO" Key="" Default="0.00" Extra="" Comment="" />
 		<key Table="tl_iso_product_pricetier" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_product_pricetier" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_product_pricetier" Engine="MyISAM" Version="10" Row_format="Fixed" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="6473924464345087" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Check_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_product_pricetier" Engine="MyISAM" Version="10" Row_format="Fixed" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="6473924464345087" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Check_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_product_pricetier">
 	</table_data>
@@ -4939,7 +4947,7 @@ Grand Total:	##grandTotal##</field>
 		<key Table="tl_iso_productcache" Non_unique="1" Key_name="page_id" Seq_in_index="3" Column_name="requestcache_id" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_productcache" Non_unique="1" Key_name="page_id" Seq_in_index="4" Column_name="keywords" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_productcache" Non_unique="1" Key_name="page_id" Seq_in_index="5" Column_name="expires" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_productcache" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="2" Avg_row_length="30" Data_length="60" Max_data_length="281474976710655" Index_length="9216" Data_free="0" Auto_increment="3" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Check_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_productcache" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="2" Avg_row_length="30" Data_length="60" Max_data_length="281474976710655" Index_length="9216" Data_free="0" Auto_increment="3" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Check_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_productcache">
 	<row>
@@ -4981,7 +4989,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="show_price_tiers" Type="char(1)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<field Field="shipping_exempt" Type="char(1)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<key Table="tl_iso_producttype" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="1" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_producttype" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="1708" Data_length="1708" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="8" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_producttype" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="1708" Data_length="1708" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="2" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_producttype">
 	<row>
@@ -5009,7 +5017,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="name" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<field Field="jumpTo" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
 		<key Table="tl_iso_related_category" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="1" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_related_category" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="24" Data_length="24" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="2" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_related_category" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="24" Data_length="24" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="2" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_related_category">
 	<row>
@@ -5028,7 +5036,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="products" Type="blob" Null="YES" Key="" Extra="" Comment="" />
 		<key Table="tl_iso_related_product" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="1" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_related_product" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Cardinality="1" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_related_product" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="76" Data_length="76" Max_data_length="281474976710655" Index_length="3072" Data_free="0" Auto_increment="5" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Check_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_related_product" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="76" Data_length="76" Max_data_length="281474976710655" Index_length="3072" Data_free="0" Auto_increment="5" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Check_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_related_product">
 	<row>
@@ -5048,7 +5056,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="sorting" Type="blob" Null="YES" Key="" Extra="" Comment="" />
 		<field Field="limits" Type="blob" Null="YES" Key="" Extra="" Comment="" />
 		<key Table="tl_iso_requestcache" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_requestcache" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_requestcache" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_requestcache">
 	</table_data>
@@ -5064,7 +5072,7 @@ Grand Total:	##grandTotal##</field>
 		<key Table="tl_iso_rule_restrictions" Non_unique="1" Key_name="type" Seq_in_index="3" Column_name="pid" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_rule_restrictions" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_rule_restrictions" Non_unique="1" Key_name="pid" Seq_in_index="2" Column_name="type" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_rule_restrictions" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Check_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_rule_restrictions" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Check_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_rule_restrictions">
 	</table_data>
@@ -5077,7 +5085,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="member_id" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
 		<key Table="tl_iso_rule_usage" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_rule_usage" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_rule_usage" Engine="MyISAM" Version="10" Row_format="Fixed" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="7036874417766399" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Check_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_rule_usage" Engine="MyISAM" Version="10" Row_format="Fixed" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="7036874417766399" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Check_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_rule_usage">
 	</table_data>
@@ -5117,7 +5125,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="maxSubtotal" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
 		<key Table="tl_iso_rules" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
 		<key Table="tl_iso_rules" Non_unique="1" Key_name="pid" Seq_in_index="1" Column_name="pid" Collation="A" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_rules" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="3" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Check_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_rules" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Check_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_rules">
 	</table_data>
@@ -5150,7 +5158,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="product_types" Type="blob" Null="YES" Key="" Extra="" Comment="" />
 		<field Field="postalCodes" Type="text" Null="YES" Key="" Extra="" Comment="" />
 		<key Table="tl_iso_shipping" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="1" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_shipping" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="9980" Data_length="9980" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="4" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_shipping" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="9980" Data_length="9980" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="2" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_shipping">
 	<row>
@@ -5196,7 +5204,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="weight_to" Type="varchar(32)" Null="NO" Key="" Default="0" Extra="" Comment="" />
 		<field Field="enabled" Type="char(1)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<key Table="tl_iso_shipping_options" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="4" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_shipping_options" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="4" Avg_row_length="56" Data_length="224" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="5" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_shipping_options" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="4" Avg_row_length="56" Data_length="224" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="5" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_shipping_options">
 	<row>
@@ -5263,7 +5271,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="applyRoundingIncrement" Type="char(1)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<field Field="notNegative" Type="char(1)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<key Table="tl_iso_tax_class" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="1" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_tax_class" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="64" Data_length="64" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="2" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_tax_class" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="64" Data_length="64" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="2" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_tax_class">
 	<row>
@@ -5295,7 +5303,7 @@ Grand Total:	##grandTotal##</field>
 		<field Field="protected" Type="char(1)" Null="NO" Key="" Default="" Extra="" Comment="" />
 		<field Field="groups" Type="blob" Null="YES" Key="" Extra="" Comment="" />
 		<key Table="tl_iso_tax_rate" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="1" Null="" Index_type="BTREE" Comment="" Index_comment="" />
-		<options Name="tl_iso_tax_rate" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="176" Data_length="176" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="4" Create_time="2014-08-20 17:53:05" Update_time="2014-08-20 17:53:05" Collation="utf8_general_ci" Create_options="" Comment="" />
+		<options Name="tl_iso_tax_rate" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="176" Data_length="176" Max_data_length="281474976710655" Index_length="2048" Data_free="0" Auto_increment="3" Create_time="2014-08-21 14:48:12" Update_time="2014-08-21 14:48:12" Collation="utf8_general_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="tl_iso_tax_rate">
 	<row>
@@ -5315,6 +5323,62 @@ Grand Total:	##grandTotal##</field>
 		<field name="protected"></field>
 		<field name="groups" xsi:nil="true" />
 	</row>
+	</table_data>
+	<table_structure name="tl_nc_gateway">
+		<field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+		<field Field="tstamp" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
+		<field Field="type" Type="varchar(32)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<field Field="title" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<key Table="tl_nc_gateway" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+		<options Name="tl_nc_gateway" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:13" Update_time="2014-08-21 14:48:13" Collation="utf8_unicode_ci" Create_options="" Comment="" />
+	</table_structure>
+	<table_data name="tl_nc_gateway">
+	</table_data>
+	<table_structure name="tl_nc_language">
+		<field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+		<field Field="pid" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
+		<field Field="tstamp" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
+		<field Field="gateway_type" Type="varchar(32)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<field Field="language" Type="varchar(5)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<field Field="fallback" Type="char(1)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<field Field="recipients" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<field Field="email_sender_name" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<field Field="email_sender_address" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<field Field="email_recipient_cc" Type="text" Null="NO" Key="" Extra="" Comment="" />
+		<field Field="email_recipient_bcc" Type="text" Null="NO" Key="" Extra="" Comment="" />
+		<field Field="email_subject" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<field Field="email_text" Type="text" Null="NO" Key="" Extra="" Comment="" />
+		<field Field="email_html" Type="text" Null="NO" Key="" Extra="" Comment="" />
+		<field Field="email_mode" Type="varchar(16)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<key Table="tl_nc_language" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+		<options Name="tl_nc_language" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:13" Update_time="2014-08-21 14:48:13" Collation="utf8_unicode_ci" Create_options="" Comment="" />
+	</table_structure>
+	<table_data name="tl_nc_language">
+	</table_data>
+	<table_structure name="tl_nc_message">
+		<field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+		<field Field="pid" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
+		<field Field="tstamp" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
+		<field Field="title" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<field Field="gateway" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
+		<field Field="gateway_type" Type="varchar(32)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<field Field="email_priority" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
+		<field Field="email_template" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<field Field="published" Type="char(1)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<key Table="tl_nc_message" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+		<options Name="tl_nc_message" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:13" Update_time="2014-08-21 14:48:13" Collation="utf8_unicode_ci" Create_options="" Comment="" />
+	</table_structure>
+	<table_data name="tl_nc_message">
+	</table_data>
+	<table_structure name="tl_nc_notification">
+		<field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+		<field Field="tstamp" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
+		<field Field="type" Type="varchar(32)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<field Field="title" Type="varchar(255)" Null="NO" Key="" Default="" Extra="" Comment="" />
+		<key Table="tl_nc_notification" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+		<options Name="tl_nc_notification" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2014-08-21 14:48:13" Update_time="2014-08-21 14:48:13" Collation="utf8_unicode_ci" Create_options="" Comment="" />
+	</table_structure>
+	<table_data name="tl_nc_notification">
 	</table_data>
 </database>
 </mysqldump>

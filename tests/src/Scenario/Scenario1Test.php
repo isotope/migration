@@ -13,10 +13,20 @@ namespace Isotope\Migration\Test\Scenario;
 
 use Isotope\Migration\Test\ScenarioTestCase;
 
+/**
+ * Class Scenario1Test
+ *
+ * This scenario tests the whole database with default configurations
+ *
+ */
 class Scenario1Test extends ScenarioTestCase
 {
     protected function getConfiguration()
     {
-        return array();
+        return array(
+            'mail-template' => array(
+                'mailGateway'   => 0
+            )
+        );
     }
 } 
