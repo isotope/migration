@@ -9,7 +9,12 @@
  * @license    http://opensource.org/licenses/lgpl-3.0.html
  */
 
-include __DIR__ .'/../vendor/autoload.php';
+$autoload = __DIR__ . '/../vendor/autoload.php';
+if (!file_exists($autoload)) {
+    throw new RuntimeException('Install dependencies to run test suite.');
+}
+
+include $autoload;
 
 try {
     $pdo = new \PDO(
