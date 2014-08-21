@@ -63,12 +63,8 @@ class MigrationServiceProvider implements ServiceProviderInterface
         $app['class_factory'] = $app->share(function() use ($app) {
             return new ConstructorInjectionService($app);
         });
-    }
 
-    function boot(Application $app)
-    {
-        $app['migration.controller'] = $app['class_factory']->share('\\Isotope\\Migration\\Controller\\MigrationController');
-        $app['migration.services'] = new \Pimple();
+        $app['migration.service.classes'] = new \Pimple();
 
         /** @type MigrationServiceInterface[] $services */
         $services = array(
@@ -94,6 +90,17 @@ class MigrationServiceProvider implements ServiceProviderInterface
 
         foreach ($services as $class) {
             $slug = $class::getSlug();
+            $app['migration.service.classes'][$slug] = $class;
+        }
+    }
+
+    function boot(Application $app)
+    {
+        $app['migration.controller'] = $app['class_factory']->share('\\Isotope\\Migration\\Controller\\MigrationController');
+        $app['migration.services'] = new \Pimple();
+
+        foreach ($app['migration.service.classes']->keys() as $slug) {
+            $class = $app['migration.service.classes'][$slug];
 
             $sessionBag = new AttributeBag($slug);
             $sessionBag->setName($slug);
