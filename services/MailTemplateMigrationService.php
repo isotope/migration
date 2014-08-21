@@ -12,7 +12,12 @@
 namespace Isotope\Migration\Service;
 
 
-class MailTemplateMigrationService extends AbstractConfigfreeMigrationService
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\DBAL\Types\Type;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+class MailTemplateMigrationService extends AbstractMigrationService
 {
     /**
      * Return a name for the migration step
@@ -35,6 +40,57 @@ class MailTemplateMigrationService extends AbstractConfigfreeMigrationService
     }
 
     /**
+     * Returns status code of the migration step
+     *
+     * @return int
+     */
+    public function getStatus()
+    {
+        try {
+            $this->verifyDatabase();
+        } catch (\RuntimeException $e) {
+            return MigrationServiceInterface::STATUS_ERROR;
+        }
+
+        if (!$this->verifyGatewayConfig()) {
+            return MigrationServiceInterface::STATUS_CONFIG;
+        }
+
+        return MigrationServiceInterface::STATUS_READY;
+    }
+
+    /**
+     * Returns the view for step configuration or information
+     *
+     * @param Request $request
+     *
+     * @return string|Response
+     */
+    public function renderConfigView(Request $request)
+    {
+        if ($request->isMethod('POST') && $request->get('mailGateway') !== null) {
+            $this->config->set('mailGateway', (int) $request->get('mailGateway'));
+        }
+
+        $mailGateways = array();
+
+        if ($this->dbcheck->tableExists('tl_nc_gateway')) {
+            $mailGateways = $this->db->fetchAll("SELECT * FROM tl_nc_gateway");
+        }
+
+        return $this->twig->render(
+            'config_mailtemplate.twig',
+            array(
+                'title' => $this->getName(),
+                'description' => $this->getDescription(),
+                'can_save' => true,
+                'mailGateways' => $mailGateways,
+                'mailGateway' => $this->config->get('mailGateway')
+            )
+        );
+    }
+
+    /**
      * Get SQL commands to migration the database
      *
      * @return array
@@ -45,10 +101,9 @@ class MailTemplateMigrationService extends AbstractConfigfreeMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
-        // TODO: migrate tl_iso_orderstatus.mail_admin & .mail_customer & .sales_email to notification center
-        // TODO: convert checkout mails to tl_module.nc_notification
+        $gatewaySql = $this->getGatewayTableSql();
 
-        // TODO: tl_module.iso_mail_admin & .iso_mail_customer should be one notification
+        return $gatewaySql;
     }
 
     /**
@@ -60,16 +115,84 @@ class MailTemplateMigrationService extends AbstractConfigfreeMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
-        // TODO: finish implementation
+        $mailGateway = $this->config->get('mailGateway');
+
+        if ($mailGateway === 0) {
+            $this->db->insert(
+                'tl_nc_gateway',
+                array(
+                    'tstamp' => time(),
+                    'type'   => 'email',
+                    'title'  => 'E-Mail Gateway (from Isotope Migration)' // TODO: do we need translation?
+                )
+            );
+
+            $mailGateway = $this->db->lastInsertId();
+        }
+
+        // TODO: migrate mail templates to notification center
+    }
+
+
+    private function verifyDatabase()
+    {
+        // If notification center is installed, validate it's table structure. Otherwise we'll create it.
+        if ($this->dbcheck->tableExists('tl_nc_gateway')) {
+            $this->dbcheck
+                ->columnMustExist('tl_nc_gateway', 'id')
+                ->columnMustExist('tl_nc_gateway', 'tstamp')
+                ->columnMustExist('tl_nc_gateway', 'title')
+                ->columnMustExist('tl_nc_gateway', 'type');
+        }
     }
 
     /**
-     * Make sure database structure is correct before migration
-     *
-     * @throws \RuntimeException
+     * @return bool
      */
-    protected function verifyDatabase()
+    private function verifyGatewayConfig()
     {
-        // TODO: finish implementation
+        if (!$this->config->has('mailGateway')) {
+            return false;
+        }
+
+        $mailGateway = (int) $this->config->get('mailGateway');
+
+        if ($mailGateway > 0) {
+            if (!$this->dbcheck->tableExists('tl_nc_gateway')) {
+                return false;
+            }
+
+
+            if (!$this->db->executeQuery(
+                    "SELECT id FROM tl_nc_gateway WHERE id=?",
+                    array($mailGateway)
+                )->fetchColumn()
+            ) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Create notification center gateway table if it does not exist
+     */
+    private function getGatewayTableSql()
+    {
+        if ($this->dbcheck->tableExists('tl_nc_gateway')) {
+            return array();
+        }
+
+        $schema = new Schema();
+
+        $table = $schema->createTable('tl_nc_gateway');
+        $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0, 'autoincrement'=>true));
+        $table->addColumn('tstamp', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
+        $table->addColumn('type', Type::STRING, array('notnull'=>true, 'default'=>'', 'lenght'=>32));
+        $table->addColumn('title', Type::STRING, array('notnull'=>true, 'default'=>''));
+        $table->setPrimaryKey(array('id'));
+
+        return $schema->toSql($this->db->getDatabasePlatform());
     }
 }
