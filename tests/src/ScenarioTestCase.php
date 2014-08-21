@@ -12,6 +12,7 @@
 namespace Isotope\Migration\Test;
 
 use Isotope\Migration\Service\MigrationServiceInterface;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
 abstract class ScenarioTestCase extends DbTestCase
 {
@@ -19,23 +20,40 @@ abstract class ScenarioTestCase extends DbTestCase
 
     public function testScenario()
     {
-        // @todo implement configuraiton
         $config = $this->getConfiguration();
-
         $queries = array();
+        $migrationServices = array();
 
-        // Loop over all services
         $app = $this->getApp();
-        foreach ($app['migration.services']->keys() as $key) {
 
-            /** @var $service \Isotope\Migration\Service\MigrationServiceInterface*/
-            $service = $app['migration.services'][$key];
+        // Register config and then boot app
+        foreach ($app['migration.service.classes']->keys() as $key) {
+            $class = $app['migration.service.classes'][$key];
+            $slug = $class::getSlug();
+
+            // register config
+            $configBag = new AttributeBag($slug);
+            $configBag->setName($slug);
+
+            if (isset($config[$slug])) {
+                $configBag->initialize($config[$slug]);
+            }
+
+            $migrationServices[$slug] = $app['class_factory']->create($class, array('config' => $configBag));
+        }
+
+        // Boot app
+        $app->boot();
+
+        // Collect SQL queries
+        /** @var $service \Isotope\Migration\Service\MigrationServiceInterface*/
+        foreach ($migrationServices as $service) {
 
             if ($service->getStatus() !== MigrationServiceInterface::STATUS_READY) {
                 $this->fail('Migration service "' . $key . '" is not ready. Scenario cannot be completed!');
             }
 
-            // @todo getMigrationSQL() should always return an array
+            // @todo getMigrationSQL() should always return an array and not throw any exception?
             $queries = array_merge($queries, $service->getMigrationSQL() ?: array());
         }
 
@@ -43,7 +61,7 @@ abstract class ScenarioTestCase extends DbTestCase
             try {
                 $this->getConnection()->getConnection()->query($query);
             } catch (\PDOException $e) {
-                $this->fail('Query could not be executed! Error message: ' . $e->getMessage());
+                $this->fail('Query could not be executed! Error message: ' . $e->getMessage() . '. Query: ' . $query);
             }
         }
 
