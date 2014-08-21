@@ -1,0 +1,8 @@
+#!/usr/bin/env php
+<?php
+$db = $_SERVER['argv'][1];
+$user = $_SERVER['argv'][2];
+$pass = $_SERVER['argv'][3];
+$target = $_SERVER['argv'][4];
+
+exec("mysql $db -u $user -p$pass -N -e 'show tables like \"tl\_iso\_%\"' | xargs mysqldump $db --xml --order-by-primary -u $user -p$pass > $target");
