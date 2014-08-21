@@ -17,7 +17,7 @@ abstract class DbTestCase extends SilexAwareTestCase
 
     private $conn = null;
 
-    final public function getConnection()
+    final protected function getConnection()
     {
         if ($this->conn === null) {
             if (self::$pdo == null) {
@@ -37,9 +37,9 @@ abstract class DbTestCase extends SilexAwareTestCase
         return $this->conn;
     }
 
-    public function getDataSet()
+    protected function getDataSet()
     {
-        return new \PHPUnit_Extensions_Database_DataSet_DefaultDataSet();
+        throw new \RuntimeException('getDataSet() has to be implemented by child class!');
     }
 
     public function getPathToFixture($fixtureFileName)

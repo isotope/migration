@@ -29,18 +29,3 @@ try {
     echo 'Could not connect to your configured database settings! Error: ' . $e->getMessage();
     exit;
 }
-
-// Delete all tables if there are any (because there could be new ones not being touched
-// by initial.sql
-$stmt = $pdo->prepare('SELECT table_name FROM information_schema.tables WHERE table_schema=:db');
-$stmt->bindParam(':db', $GLOBALS['DB_DBNAME']);
-
-$stmt->execute();
-$tables = $stmt->fetchAll(\PDO::FETCH_COLUMN);
-
-foreach ((array) $tables as $table) {
-    $pdo->query('DROP TABLE IF EXISTS ' . $table);
-}
-
-// Create database
-$pdo->query(file_get_contents(__DIR__ . '/fixtures/initial.sql'));

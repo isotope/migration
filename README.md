@@ -19,35 +19,38 @@ Then call
 	./vendor/bin/phpunit
 
 
-## Adding new tests
-
-There is one sql file in `tests/fixtures` which defines how the initial state
-of the database should look before each test is executed. This file is called
-`initial.sql` If you want to adjust the initial state you will have to adjust
-that file. The easiest way to do this is to use `mysqldump`. For the sake of your
-nerves there's a helper script. Simply run
-
-	./tests/dump_iso_tables [database] [username] [password] ./tests/fixtures/initial.sql
-
-
 ### Scenarios
 
 The tests work with scenarios whereas a scenario stands for a certain
 configuration. The following happens for every scenario:
 
-1. Database is reset to the initial state (`initial.sql`)
+1. Database is reset to the initial state. (`initial.sql`)
 * The Scenario sets up its configuration
 * The configuration is executed on the database
-* The result is compared to a fixture with the same name (e.g. (`scenario1.xml`))
+* The result is compared to a fixture (`expected.xml`)
 
-### Result fixtures
 
-To compare the database to a desired state you need to add result fixtures.
-E.g. `Scenario1Test` is executed and afterwards compared to the file `scenario1.xml`
-which must contain the correct/expected result of the test.
-To create such an xml file the easiest way is to bring the database to the desired
-state and then run the command line script that is shipped within the `tests`
-directory:
+## Adding new tests
 
-	./tests/dump_iso_tables_xml [database] [username] [password] ./tests/fixtures/scenario1.xml
+For every scenario there is a directory within `tests/fixtures` which must contain
+two xml files that define the initial and expected state of the database.
+To make it easier for you, there's a helper script. Simply run either
 
+	./tests/dump_iso_tables --initial [database] [username] [password] [scenario_name]
+
+for the initial or
+
+	./tests/dump_iso_tables --expected [database] [username] [password] [scenario_name]
+
+for the expected file.
+
+Assuming you named your scenario "42", you should thus end up having the following
+structure:
+
+* fixtures
+    * scenario42
+        * initial.sql
+        * expected.xml
+* src
+    * Scenario
+        * Scenario42Test.php

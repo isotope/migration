@@ -18,6 +18,26 @@ abstract class ScenarioTestCase extends DbTestCase
 {
     abstract protected function getConfiguration();
 
+    protected function setUp()
+    {
+        // Empty table
+        $pdo = $this->getConnection()->getConnection();
+        $stmt = $pdo->prepare('SELECT table_name FROM information_schema.tables WHERE table_schema=:db');
+        $stmt->bindParam(':db', $GLOBALS['DB_DBNAME']);
+
+        $stmt->execute();
+        $tables = $stmt->fetchAll(\PDO::FETCH_COLUMN);
+
+        foreach ((array) $tables as $table) {
+            $pdo->query('DROP TABLE IF EXISTS ' . $table);
+        }
+
+        // Insert scenario setup
+        return $pdo->query(
+            file_get_contents($this->getScenarioPath() . '/initial.sql')
+        );
+    }
+
     public function testScenario()
     {
         $config = $this->getConfiguration();
@@ -71,12 +91,25 @@ abstract class ScenarioTestCase extends DbTestCase
         $this->assertDataSetsEqual($expectedDataset, $currentDataset);
     }
 
+    protected function getDataSet()
+    {
+        return new \PHPUnit_Extensions_Database_DataSet_DefaultDataSet();
+        /*return $this->createMySQLXMLDataSet(
+            $this->getScenarioPath() . '/initial.xml'
+        );*/
+    }
+
     protected function getExpectedMySQLXMLDataSet()
     {
-        $ref = new \ReflectionClass($this);
-        $scenario = (int) preg_replace('/Scenario(\\d)Test/', '$1', $ref->getShortName());
         return $this->createMySQLXMLDataSet(
-            $this->getPathToFixture('scenario' . $scenario . '.xml')
+            $this->getScenarioPath() . '/expected.xml'
         );
+    }
+
+    protected function getScenarioPath()
+    {
+        $ref = new \ReflectionClass($this);
+        $scenario = preg_replace('/Scenario(.+)Test/', '$1', $ref->getShortName());
+        return $this->getPathToFixture('scenario' . $scenario);
     }
 }
