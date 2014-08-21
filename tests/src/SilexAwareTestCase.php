@@ -13,18 +13,17 @@ namespace Isotope\Migration\Test;
 
 
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
-use Symfony\Component\Yaml\Exception\RuntimeException;
 
 class SilexAwareTestCase extends \PHPUnit_Extensions_Database_TestCase
 {
     protected function getConnection()
     {
-        throw new RuntimeException('getConnection() has to be implemented by child class!');
+        throw new \RuntimeException('getConnection() has to be implemented by child class!');
     }
 
     protected function getDataSet()
     {
-        throw new RuntimeException('getDataSet() has to be implemented by child class!');
+        throw new \RuntimeException('getDataSet() has to be implemented by child class!');
     }
 
     public function getApp()
