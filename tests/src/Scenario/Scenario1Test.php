@@ -16,7 +16,7 @@ use Isotope\Migration\Test\ScenarioTestCase;
 /**
  * Class Scenario1Test
  *
- * This scenario tests the whole database with default configurations
+ * This scenario tests some default settings
  *
  */
 class Scenario1Test extends ScenarioTestCase
