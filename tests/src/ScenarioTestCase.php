@@ -33,9 +33,11 @@ abstract class ScenarioTestCase extends DbTestCase
         }
 
         // Insert scenario setup
-        return $pdo->query(
+        $pdo->query(
             file_get_contents($this->getScenarioPath() . '/initial.sql')
         );
+
+        parent::setUp();
     }
 
     public function testScenario()
