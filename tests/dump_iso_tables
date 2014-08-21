@@ -5,4 +5,41 @@ $user = $_SERVER['argv'][2];
 $pass = $_SERVER['argv'][3];
 $target = $_SERVER['argv'][4];
 
-exec("mysql $db -u $user -p$pass -N -e 'show tables like \"tl\_iso\_%\"' | xargs mysqldump --order-by-primary $db -u $user -p$pass > $target");
+$test_relevant_tables = array(
+    'tl_iso_addresses',
+    'tl_iso_attributes',
+    'tl_iso_baseprice',
+    'tl_iso_cart',
+    'tl_iso_cart_items',
+    'tl_iso_config',
+    'tl_iso_downloads',
+    'tl_iso_groups',
+    'tl_iso_labels',
+    'tl_iso_mail',
+    'tl_iso_mail_content',
+    'tl_iso_order_downloads',
+    'tl_iso_order_items',
+    'tl_iso_orders',
+    'tl_iso_orderstatus',
+    'tl_iso_payment_modules',
+    'tl_iso_price_tiers',
+    'tl_iso_prices',
+    'tl_iso_product_categories',
+    'tl_iso_productcache',
+    'tl_iso_products',
+    'tl_iso_producttypes',
+    'tl_iso_related_categories',
+    'tl_iso_related_products',
+    'tl_iso_requestcache',
+    'tl_iso_rule_restrictions',
+    'tl_iso_rule_usage',
+    'tl_iso_rules',
+    'tl_iso_shipping_modules',
+    'tl_iso_shipping_options',
+    'tl_iso_tax_class',
+    'tl_iso_tax_rate'
+);
+
+$tables = implode(' ', $test_relevant_tables);
+
+exec("mysqldump --order-by-primary $db -u $user -p$pass $tables > $target");
