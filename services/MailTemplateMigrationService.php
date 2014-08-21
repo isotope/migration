@@ -308,7 +308,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
 
         if (!$this->dbcheck->tableExists('tl_nc_gateway')) {
             $table = $schema->createTable('tl_nc_gateway');
-            $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0, 'autoincrement'=>true));
+            $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'autoincrement'=>true));
             $table->addColumn('tstamp', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
             $table->addColumn('type', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>32));
             $table->addColumn('title', Type::STRING, array('notnull'=>true, 'default'=>''));
@@ -317,7 +317,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
 
         if (!$this->dbcheck->tableExists('tl_nc_notification')) {
             $table = $schema->createTable('tl_nc_notification');
-            $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0, 'autoincrement'=>true));
+            $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'autoincrement'=>true));
             $table->addColumn('tstamp', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
             $table->addColumn('type', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>32));
             $table->addColumn('title', Type::STRING, array('notnull'=>true, 'default'=>''));
@@ -326,7 +326,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
 
         if (!$this->dbcheck->tableExists('tl_nc_message')) {
             $table = $schema->createTable('tl_nc_message');
-            $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0, 'autoincrement'=>true));
+            $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'autoincrement'=>true));
             $table->addColumn('pid', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
             $table->addColumn('tstamp', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
             $table->addColumn('title', Type::STRING, array('notnull'=>true, 'default'=>''));
@@ -340,7 +340,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
 
         if (!$this->dbcheck->tableExists('tl_nc_language')) {
             $table = $schema->createTable('tl_nc_language');
-            $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0, 'autoincrement'=>true));
+            $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'autoincrement'=>true));
             $table->addColumn('pid', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
             $table->addColumn('tstamp', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
             $table->addColumn('gateway_type', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>32));
