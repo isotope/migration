@@ -39,14 +39,14 @@ abstract class AbstractConfigfreeMigrationService extends AbstractMigrationServi
     public function renderConfigView(Request $request)
     {
         if ($this->getStatus() == MigrationServiceInterface::STATUS_ERROR) {
-            return $this->twig->render('configfree_error.twig', array(
+            return $this->twig->render('config_error.twig', array(
                 'title'       => $this->getName(),
                 'description' => $this->getDescription(),
                 'error'       => $this->errorMessage
             ));
 
         } else {
-            return $this->twig->render('configfree_ready.twig', array(
+            return $this->twig->render('configfree.twig', array(
                 'title'       => $this->getName(),
                 'description' => $this->getDescription(),
                 'no_save'     => true
