@@ -9,5 +9,11 @@ return array(
     ),
     'confirm' => array(
         'configfree' => 'There is no configuration necessary for this migration step.',
+    ),
+    'mailtemplate' => array(
+        'gateway_legend' => 'E-Mail Gateway',
+        'gateway_intro' => 'Please select one of the available email gateways from notification center or select to create a new one for mail template migration.',
+        'gateway_new' => 'Create a new e-mail gateway',
+        'gateway_db' => 'Gateways from your database',
     )
 );
