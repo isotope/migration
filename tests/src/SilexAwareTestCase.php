@@ -17,8 +17,6 @@ use Symfony\Component\Yaml\Exception\RuntimeException;
 
 class SilexAwareTestCase extends \PHPUnit_Extensions_Database_TestCase
 {
-    private $app = null;
-
     protected function getConnection()
     {
         throw new RuntimeException('getConnection() has to be implemented by child class!');
@@ -29,7 +27,7 @@ class SilexAwareTestCase extends \PHPUnit_Extensions_Database_TestCase
         throw new RuntimeException('getDataSet() has to be implemented by child class!');
     }
 
-    public function setUp()
+    public function getApp()
     {
         $app = new \Silex\Application();
         $app['debug'] = true;
@@ -50,15 +48,13 @@ class SilexAwareTestCase extends \PHPUnit_Extensions_Database_TestCase
             return new MockArraySessionStorage();
         });
 
-        $app->boot();
-
-        $this->app = $app;
-
-        parent::setUp();
+        return $app;
     }
 
-    public function getApp()
+    public function getBootedApp()
     {
-        return $this->app;
+        $app = $this->getApp();
+        $app->boot();
+        return $app;
     }
 } 
