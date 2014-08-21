@@ -12,6 +12,7 @@
 namespace Isotope\Migration\Test;
 
 
+use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\Yaml\Exception\RuntimeException;
 
 class SilexAwareTestCase extends \PHPUnit_Extensions_Database_TestCase
@@ -42,6 +43,12 @@ class SilexAwareTestCase extends \PHPUnit_Extensions_Database_TestCase
         );
 
         $app->register(new \Isotope\Migration\Provider\MigrationServiceProvider());
+
+        // enable testing the session
+        $app['session.test'] = true;
+        $app['session.storage.test'] = $app->share(function () {
+            return new MockArraySessionStorage();
+        });
 
         $app->boot();
 
