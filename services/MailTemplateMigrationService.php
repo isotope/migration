@@ -68,6 +68,19 @@ class MailTemplateMigrationService extends AbstractMigrationService
      */
     public function renderConfigView(Request $request)
     {
+        try {
+            $this->verifyDatabase();
+        } catch (\RuntimeException $e) {
+            return $this->twig->render(
+                'config_error.twig',
+                array(
+                    'title' => $this->getName(),
+                    'description' => $this->getDescription(),
+                    'error' => $e->getMessage(),
+                )
+            );
+        }
+
         if ($request->isMethod('POST') && $request->get('mailGateway') !== null) {
             $this->config->set('mailGateway', (int) $request->get('mailGateway'));
         }
