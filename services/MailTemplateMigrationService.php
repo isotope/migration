@@ -15,6 +15,7 @@ namespace Isotope\Migration\Service;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\DBAL\Schema\SchemaConfig;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
 use Symfony\Component\HttpFoundation\Request;
@@ -300,7 +301,10 @@ class MailTemplateMigrationService extends AbstractMigrationService
      */
     private function getNotificationTablesSql()
     {
-        $schema = new Schema();
+        $schemaConfig = new SchemaConfig();
+        $schemaConfig->setDefaultTableOptions(array('engine'=>'MyISAM'));
+
+        $schema = new Schema(array(), array(), $schemaConfig);
 
         if (!$this->dbcheck->tableExists('tl_nc_gateway')) {
             $table = $schema->createTable('tl_nc_gateway');
