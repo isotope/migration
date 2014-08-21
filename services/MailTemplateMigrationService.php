@@ -46,6 +46,11 @@ class MailTemplateMigrationService extends AbstractMigrationService
      */
     public function getStatus()
     {
+        // Nothing to do
+        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") === '0') {
+            return MigrationServiceInterface::STATUS_READY;
+        }
+
         try {
             $this->verifyDatabase();
         } catch (\RuntimeException $e) {
@@ -68,6 +73,17 @@ class MailTemplateMigrationService extends AbstractMigrationService
      */
     public function renderConfigView(Request $request)
     {
+        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") === '0') {
+            return $this->twig->render(
+                'config_ready.twig',
+                array(
+                    'title' => $this->getName(),
+                    'description' => $this->getDescription(),
+                    'message' => $this->trans('mailtemplate.empty'),
+                )
+            );
+        }
+
         try {
             $this->verifyDatabase();
         } catch (\RuntimeException $e) {
@@ -114,6 +130,11 @@ class MailTemplateMigrationService extends AbstractMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
+        // Nothing to do if there are no mail templates
+        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") === '0') {
+            return array();
+        }
+
         $gatewaySql = $this->getGatewayTableSql();
 
         return $gatewaySql;
@@ -129,6 +150,12 @@ class MailTemplateMigrationService extends AbstractMigrationService
         }
 
         $mailGateway = $this->config->get('mailGateway');
+        $mailTemplates = $this->db->fetchAll("SELECT * FROM tl_iso_mail");
+
+        // Nothing to migrate
+        if (empty($mailTemplates)) {
+            return;
+        }
 
         if ($mailGateway === 0) {
             $this->db->insert(
@@ -164,6 +191,11 @@ class MailTemplateMigrationService extends AbstractMigrationService
      */
     private function verifyGatewayConfig()
     {
+        // Nothing to do if there are no mails
+        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") === '0') {
+            return true;
+        }
+
         if (!$this->config->has('mailGateway')) {
             return false;
         }
