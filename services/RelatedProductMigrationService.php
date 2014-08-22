@@ -55,8 +55,6 @@ class RelatedProductMigrationService extends AbstractConfigfreeMigrationService
         $tableDiff->newName = 'tl_iso_related_product';
         $productSql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
 
-        // TODO: finish implementation
-
         return array_merge($categorySql, $productSql);
     }
 
@@ -69,7 +67,22 @@ class RelatedProductMigrationService extends AbstractConfigfreeMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
-        // TODO: finish implementation
+        // List of product IDs is now comma-separated instead of serialized
+        $relations = $this->db->fetchAll("SELECT id, products FROM tl_iso_related_product WHERE products!=''");
+
+        foreach ($relations as $row) {
+            $ids = deserialize($row['products']);
+
+            if (!empty($ids) && is_array($ids)) {
+                $this->db->update(
+                    'tl_iso_related_product',
+                    array(
+                        'products' => implode(',', $ids)
+                    ),
+                    array('id' => $row['id'])
+                );
+            }
+        }
     }
 
     /**
@@ -85,8 +98,8 @@ class RelatedProductMigrationService extends AbstractConfigfreeMigrationService
 
         $this->dbcheck
             ->tableMustExist('tl_iso_related_products')
-            ->tableMustNotExist('tl_iso_related_product');
-
-        // TODO: finish implementation
+            ->tableMustNotExist('tl_iso_related_product')
+            ->columnMustExist('tl_iso_related_products', 'id')
+            ->columnMustExist('tl_iso_related_products', 'products');
     }
 }
