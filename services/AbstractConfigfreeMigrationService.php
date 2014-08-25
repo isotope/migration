@@ -47,10 +47,10 @@ abstract class AbstractConfigfreeMigrationService extends AbstractMigrationServi
 
         } else {
             return $this->twig->render('config_ready.twig', array(
-                'title'       => $this->getName(),
-                'description' => $this->getDescription(),
-                'message'     => $this->trans('confirm.configfree'),
-                'no_save'     => true
+                'title'        => $this->getName(),
+                'description'  => $this->getDescription(),
+                'message'      => $this->trans('confirm.configfree'),
+                'can_continue' => true
             ));
         }
     }
