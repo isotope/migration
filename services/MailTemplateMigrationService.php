@@ -50,15 +50,15 @@ class MailTemplateMigrationService extends AbstractMigrationService
      */
     public function getStatus()
     {
-        // Nothing to do
-        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") === '0') {
-            return MigrationServiceInterface::STATUS_READY;
-        }
-
         try {
             $this->verifyDatabase();
         } catch (\RuntimeException $e) {
             return MigrationServiceInterface::STATUS_ERROR;
+        }
+
+        // Nothing to do
+        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") === '0') {
+            return MigrationServiceInterface::STATUS_READY;
         }
 
         if (!$this->verifyGatewayConfig()) {
@@ -77,17 +77,6 @@ class MailTemplateMigrationService extends AbstractMigrationService
      */
     public function renderConfigView(Request $request)
     {
-        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") === '0') {
-            return $this->twig->render(
-                'config_ready.twig',
-                array(
-                    'title' => $this->getName(),
-                    'description' => $this->getDescription(),
-                    'message' => $this->trans('mailtemplate.empty'),
-                )
-            );
-        }
-
         try {
             $this->verifyDatabase();
         } catch (\RuntimeException $e) {
@@ -97,6 +86,17 @@ class MailTemplateMigrationService extends AbstractMigrationService
                     'title' => $this->getName(),
                     'description' => $this->getDescription(),
                     'error' => $e->getMessage(),
+                )
+            );
+        }
+
+        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") === '0') {
+            return $this->twig->render(
+                'config_ready.twig',
+                array(
+                    'title' => $this->getName(),
+                    'description' => $this->getDescription(),
+                    'message' => $this->trans('mailtemplate.empty'),
                 )
             );
         }
