@@ -5,8 +5,7 @@ $db = $_SERVER['argv'][2];
 $user = $_SERVER['argv'][3];
 $pass = $_SERVER['argv'][4];
 
-
-$target = './tests/fixtures/scenario' . $_SERVER['argv'][5] . '/' . (($mode == '--initial') ? 'initial.sql' : 'expected.xml');
+$target = './tests/fixtures/' . $_SERVER['argv'][5] . '/' . (($mode == '--initial') ? 'initial.sql' : 'expected.xml');
 
 if ($mode == '--initial') {
     $test_relevant_tables = array(
@@ -82,6 +81,12 @@ if ($mode == '--initial') {
         'tl_nc_message',
         'tl_nc_notification'
     );
+}
+
+
+// allow custom tables
+if (count($_SERVER['argv']) >= 6) {
+   $test_relevant_tables = array_slice($_SERVER['argv'], 6);
 }
 
 $tables = implode(' ', $test_relevant_tables);

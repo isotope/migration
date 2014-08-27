@@ -21,7 +21,7 @@ Then call
 
 ### Scenarios
 
-The tests work with scenarios whereas a scenario stands for a certain
+The tests can work with scenarios whereas a scenario stands for a certain
 configuration. The following happens for every scenario:
 
 1. Database is reset to the initial state. (`initial.sql`)
@@ -36,11 +36,11 @@ For every scenario there is a directory within `tests/fixtures` which must conta
 two xml files that define the initial and expected state of the database.
 To make it easier for you, there's a helper script. Simply run either
 
-	./tests/dump_iso_tables --initial [database] [username] [password] [scenario_name]
+	./tests/dump_iso_tables --initial [database] [username] [password] [scenario_fixture_path]
 
 for the initial or
 
-	./tests/dump_iso_tables --expected [database] [username] [password] [scenario_name]
+	./tests/dump_iso_tables --expected [database] [username] [password] [scenario_fixture_path]
 
 for the expected file.
 
@@ -48,9 +48,10 @@ Assuming you named your scenario "42", you should thus end up having the followi
 structure:
 
 * fixtures
-    * scenario42
-        * initial.sql
-        * expected.xml
+    * scenarios/
+        *scenario42
+            * initial.sql
+            * expected.xml
 * src
     * Scenario
         * Scenario42Test.php
