@@ -85,9 +85,6 @@ abstract class ScenarioTestCase extends DbTestCase
     protected function getDataSet()
     {
         return new \PHPUnit_Extensions_Database_DataSet_DefaultDataSet();
-        /*return $this->createMySQLXMLDataSet(
-            $this->getScenarioPath() . '/initial.xml'
-        );*/
     }
 
     protected function getExpectedMySQLXMLDataSet()
@@ -101,6 +98,6 @@ abstract class ScenarioTestCase extends DbTestCase
     {
         $ref = new \ReflectionClass($this);
         $scenario = preg_replace('/Scenario(.+)Test/', '$1', $ref->getShortName());
-        return $this->getPathToFixture('scenario' . $scenario);
+        return $this->getPathToFixture('scenarios/scenario' . $scenario);
     }
 }
