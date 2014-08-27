@@ -45,7 +45,11 @@ abstract class DbTestCase extends SilexAwareTestCase
                         $GLOBALS['DB_DBNAME']
                     ),
                     $GLOBALS['DB_USER'],
-                    $GLOBALS['DB_PASSWD']);
+                    $GLOBALS['DB_PASSWD'],
+                    array(
+                         \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
+                    )
+                );
             }
 
             $this->conn = $this->createDefaultDBConnection(self::$pdo, $GLOBALS['DB_DBNAME']);

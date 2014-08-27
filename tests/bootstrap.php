@@ -19,17 +19,3 @@ if (!file_exists($autoload)) {
 }
 
 include $autoload;
-
-try {
-    $pdo = new \PDO(
-        sprintf('mysql:host=%s;port=%s;dbname=%s;',
-            $GLOBALS['DB_HOST'],
-            $GLOBALS['DB_PORT'],
-            $GLOBALS['DB_DBNAME']
-        ),
-        $GLOBALS['DB_USER'],
-        $GLOBALS['DB_PASSWD']);
-} catch (\PDOException $e) {
-    echo 'Could not connect to your configured database settings! Error: ' . $e->getMessage();
-    exit;
-}
