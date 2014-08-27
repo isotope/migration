@@ -20,24 +20,13 @@ abstract class ScenarioTestCase extends DbTestCase
 
     protected function setUp()
     {
-        // Empty table
-        $pdo = $this->getConnection()->getConnection();
-        $stmt = $pdo->prepare('SELECT table_name FROM information_schema.tables WHERE table_schema=:db');
-        $stmt->bindParam(':db', $GLOBALS['DB_DBNAME']);
-
-        $stmt->execute();
-        $tables = $stmt->fetchAll(\PDO::FETCH_COLUMN);
-
-        foreach ((array) $tables as $table) {
-            $pdo->query('DROP TABLE IF EXISTS ' . $table);
-        }
+        parent::setUp();
 
         // Insert scenario setup
+        $pdo = $this->getConnection()->getConnection();
         $pdo->query(
             file_get_contents($this->getScenarioPath() . '/initial.sql')
         );
-
-        parent::setUp();
     }
 
     public function testScenario()
