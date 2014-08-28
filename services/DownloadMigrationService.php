@@ -12,12 +12,43 @@
 namespace Isotope\Migration\Service;
 
 
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
+use Symfony\Component\Translation\Translator;
 
 class DownloadMigrationService extends AbstractConfigfreeMigrationService
 {
+
+    /**
+     * @type DatabaseVerificationService
+     */
+    protected $dbcheck;
+
+    /**
+     * @type DbafsService
+     */
+    protected $dbafs;
+
+
+    public function __construct(
+        AttributeBagInterface $config,
+        \Twig_Environment $twig,
+        Translator $translator,
+        Connection $db,
+        DatabaseVerificationService $migration_dbcheck,
+        DbafsService $migration_dbafs
+    ) {
+        $this->config = $config;
+        $this->twig = $twig;
+        $this->translator = $translator;
+        $this->db = $db;
+        $this->dbcheck = $migration_dbcheck;
+        $this->dbafs = $migration_dbafs;
+    }
+
     /**
      * Return a name for the migration step
      *
@@ -49,12 +80,18 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
-        // TODO: migrate tl_iso_download.singleSRC from path to UUID
+        $arrSql = array();
+        $arrSql = array_merge(
+            $arrSql,
+            $this->dbafs->getMigratePathToUuidSQL('tl_iso_downloads', 'singleSRC')
+        );
+
         // TODO: title and description fields are now in the file manager
 
         return array_merge(
             $this->getProductSQL(),
-            $this->getCollectionSQL()
+            $this->getCollectionSQL(),
+            $arrSql
         );
     }
 

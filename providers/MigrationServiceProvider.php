@@ -14,6 +14,7 @@ namespace Isotope\Migration\Provider;
 
 use Isotope\Migration\Service\ConstructorInjectionService;
 use Isotope\Migration\Service\DatabaseVerificationService;
+use Isotope\Migration\Service\DbafsService;
 use Isotope\Migration\Service\MigrationServiceInterface;
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
@@ -58,6 +59,10 @@ class MigrationServiceProvider implements ServiceProviderInterface
 
         $app['migration.dbcheck'] = $app->share(function() use ($app) {
             return new DatabaseVerificationService($app['db'], $app['translator']);
+        });
+
+        $app['migration.dbafs'] = $app->share(function() use ($app) {
+            return new DbafsService($app['db']);
         });
 
         $app['class_factory'] = $app->share(function() use ($app) {
