@@ -104,18 +104,22 @@ class MigrationController
 
     public function summaryAction()
     {
-        $serviceMsgs = array();
+        $allMessages = array();
         $services = $this->getServices();
 
         foreach ($services as $service) {
-            $serviceMsgs[] = array(
-                'title'     => $service->getName(),
-                'messages'  => $service->getSummaryMessages()
-            );
+            $serviceMessages = $service->getSummaryMessages();
+
+            if (!empty($messages)) {
+                $allMessages[] = array(
+                    'title'    => $service->getName(),
+                    'messages' => $serviceMessages
+                );
+            }
         }
 
         return $this->twig->render('summary.twig', array(
-            'serviceMsgs' => $serviceMsgs
+            'messages' => $allMessages
         ));
     }
 

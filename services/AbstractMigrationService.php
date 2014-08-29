@@ -80,7 +80,7 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
      */
     public function getSummaryMessages()
     {
-        return array($this->trans('summary.nothingSpecialToDo'));
+        return array();
     }
 
     /**

@@ -6,10 +6,10 @@
     </div>
     <div class="row">
         <ul>
-        {% for serviceMsg in serviceMsgs %}
-            <li>{{ serviceMsg.title }}</li>
+        {% for service in messages %}
+            <li>{{ service.title }}</li>
             <ul>
-                {% for message in serviceMsg.messages %}
+                {% for message in service.messages %}
                     <li>{{ message }}</li>
                 {% endfor %}
             </ul>

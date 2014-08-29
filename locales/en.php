@@ -16,9 +16,6 @@ return array(
     'index' => array(
         'start'         => 'Start configuration'
     ),
-    'summary' => array(
-        'nothingSpecialToDo'         => 'You don\'t need to take any further action for this step.'
-    ),
     'error' => array(
         'tableFound'  => 'Table "%table%" must NOT exist in the database.',
         'tableNotFound' => 'Table "%table%" not found in the database.',
