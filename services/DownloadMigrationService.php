@@ -80,18 +80,11 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
-        $arrSql = array();
-        $arrSql = array_merge(
-            $arrSql,
-            $this->dbafs->getMigratePathToUuidSQL('tl_iso_downloads', 'singleSRC')
-        );
-
         // TODO: title and description fields are now in the file manager
 
         return array_merge(
             $this->getProductSQL(),
-            $this->getCollectionSQL(),
-            $arrSql
+            $this->getCollectionSQL()
         );
     }
 
@@ -103,6 +96,9 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
         if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
             throw new \BadMethodCallException('Migration service is not ready');
         }
+
+        // @todo: execute
+        $this->dbafs->getMigratePathToUuidSQL('tl_iso_downloads', 'singleSRC');
 
         // TODO: finish implementation
     }
