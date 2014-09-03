@@ -83,6 +83,7 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
         // TODO: title and description fields are now in the file manager
 
         return array_merge(
+            $this->dbafs->getMigrateFilePathForUuidSQL('tl_iso_downloads', 'singleSRC'),
             $this->getProductSQL(),
             $this->getCollectionSQL()
         );
