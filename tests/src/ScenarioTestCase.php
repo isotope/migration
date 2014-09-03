@@ -42,14 +42,21 @@ abstract class ScenarioTestCase extends DbTestCase
             $slug = $class::getSlug();
 
             // register config
-            $configBag = new AttributeBag($slug);
-            $configBag->setName($slug);
+            $configBag = new AttributeBag('config_' . $slug);
+            $configBag->setName('config_' . $slug);
 
             if (isset($config[$slug])) {
                 $configBag->initialize($config[$slug]);
             }
 
-            $migrationServices[$slug] = $app['class_factory']->create($class, array('config' => $configBag));
+            // summary
+            $summaryBag = new AttributeBag('summary_' . $slug);
+            $summaryBag->setName('summary_' . $slug);
+
+            $migrationServices[$slug] = $app['class_factory']->create($class, array(
+                'summary'   => $summaryBag,
+                'config'    => $configBag,
+            ));
         }
 
         // Boot app

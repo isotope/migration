@@ -32,5 +32,6 @@ $app->get('/', 'migration.controller:indexAction');
 $app->get('/config/', 'migration.controller:configAction');
 $app->match('/config/{slug}', 'migration.controller:configAction');
 $app->get('/execute', 'migration.controller:executeAction');
+$app->get('/summary', 'migration.controller:summaryAction');
 
 $app->run();

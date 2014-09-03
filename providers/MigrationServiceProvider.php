@@ -107,14 +107,22 @@ class MigrationServiceProvider implements ServiceProviderInterface
         foreach ($app['migration.service.classes']->keys() as $slug) {
             $class = $app['migration.service.classes'][$slug];
 
-            $sessionBag = new AttributeBag($slug);
-            $sessionBag->setName($slug);
-            $app['session']->registerBag($sessionBag);
+            $configBag = new AttributeBag('config_' . $slug);
+            $configBag->setName('config_' . $slug);
+            $app['session']->registerBag($configBag);
+
+            $summaryBag = new AttributeBag('summary_' . $slug);
+            $summaryBag->setName('summary_' . $slug);
+            $app['session']->registerBag($summaryBag);
 
             $app['migration.services'][$slug] = $app->share(
                 function() use ($app, $slug, $class) {
-                    $config = $app['session']->getBag($slug);
-                    return $app['class_factory']->create($class, array('config' => $config));
+                    $config = $app['session']->getBag('config_' . $slug);
+                    $summary = $app['session']->getBag('summary_' . $slug);
+                    return $app['class_factory']->create($class, array(
+                        'summary'   => $summary,
+                        'config'    => $config
+                    ));
                 }
             );
         }

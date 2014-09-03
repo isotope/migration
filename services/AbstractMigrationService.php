@@ -25,6 +25,11 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
     protected $config;
 
     /**
+     * @type AttributeBagInterface
+     */
+    protected $summary;
+
+    /**
      * @type \Twig_Environment
      */
     protected $twig;
@@ -45,9 +50,10 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
     protected $dbcheck;
 
 
-    public function __construct(AttributeBagInterface $config, \Twig_Environment $twig, Translator $translator, Connection $db, DatabaseVerificationService $migration_dbcheck)
+    public function __construct(AttributeBagInterface $config, AttributeBagInterface $summary, \Twig_Environment $twig, Translator $translator, Connection $db, DatabaseVerificationService $migration_dbcheck)
     {
         $this->config = $config;
+        $this->summary = $summary;
         $this->twig = $twig;
         $this->translator = $translator;
         $this->db = $db;
@@ -65,6 +71,16 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
     protected function trans($string, array $parameters = array())
     {
         return $this->translator->trans($string, $parameters);
+    }
+
+    /**
+     * Return a list of to do's or messages for the summary page
+     *
+     * @return array
+     */
+    public function getSummaryMessages()
+    {
+        return array($this->trans('summary.nothingSpecialToDo'));
     }
 
     /**

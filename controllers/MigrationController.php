@@ -38,6 +38,7 @@ class MigrationController
         $twig->addGlobal('navigation_index', ($request->getPathInfo() == '/'));
         $twig->addGlobal('navigation_config', (strpos($request->getPathInfo(), '/config') === 0));
         $twig->addGlobal('navigation_execute', ($request->getPathInfo() == '/execute'));
+        $twig->addGlobal('navigation_summary', ($request->getPathInfo() == '/summary'));
     }
 
     public function indexAction()
@@ -99,6 +100,23 @@ class MigrationController
         }
 
         return $this->twig->render('execute.twig');
+    }
+
+    public function summaryAction()
+    {
+        $serviceMsgs = array();
+        $services = $this->getServices();
+
+        foreach ($services as $service) {
+            $serviceMsgs[] = array(
+                'title'     => $service->getName(),
+                'messages'  => $service->getSummaryMessages()
+            );
+        }
+
+        return $this->twig->render('summary.twig', array(
+            'serviceMsgs' => $serviceMsgs
+        ));
     }
 
     /**
