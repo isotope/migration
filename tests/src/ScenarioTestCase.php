@@ -63,9 +63,7 @@ abstract class ScenarioTestCase extends DbTestCase
             if ($service->getStatus() !== MigrationServiceInterface::STATUS_READY) {
                 $this->fail('Migration service "' . $key . '" is not ready. Scenario cannot be completed!');
             }
-
-            // @todo getMigrationSQL() should always return an array and not throw any exception?
-            $queries = array_merge($queries, $service->getMigrationSQL() ?: array());
+            $queries = array_merge($queries, $service->getMigrationSQL());
         }
 
         foreach ($queries as $query) {

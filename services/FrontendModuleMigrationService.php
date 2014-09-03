@@ -47,6 +47,8 @@ class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
 
         // TODO: tl_module.iso_collectionTpl = tl_module.iso_cart_layout
         // TODO: tl_module.iso_filterTpl = tl_module.iso_filter_layout
+
+        return array();
     }
 
     /**
