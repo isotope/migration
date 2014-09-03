@@ -59,7 +59,7 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
-        $productTypes = $this->db->fetchAll("SELECT id, attributes, variant_attributes FROM tl_iso_attribute");
+        $productTypes = $this->db->fetchAll("SELECT id, attributes, variant_attributes FROM tl_iso_producttype");
 
         foreach ($productTypes as $type) {
             $attributes = @unserialize($type['attributes']);
@@ -69,7 +69,7 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
             $variantAttributes = is_array($variantAttributes) ? serialize($this->convertAttributes($variantAttributes)) : '';
 
             $this->db->update(
-                'tl_iso_attribute',
+                'tl_iso_producttype',
                 array(
                     'attributes'         => $attributes,
                     'variant_attributes' => $variantAttributes),

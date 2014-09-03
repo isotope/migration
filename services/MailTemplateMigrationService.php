@@ -360,12 +360,12 @@ class MailTemplateMigrationService extends AbstractMigrationService
 
     private function migrateOrderStatusMails($gatewayId)
     {
-        $orderStatus = $this->db->fetchAll("
-            SELECT GROUP_CONCAT(id) AS ids, GROUP_CONCAT(name SEPARATOR '", "') AS name, mail_customer, mail_admin, sales_email
+        $orderStatus = $this->db->query("
+            SELECT GROUP_CONCAT(id) AS ids, GROUP_CONCAT(name SEPARATOR '\", \"') AS name, mail_customer, mail_admin, sales_email
             FROM tl_iso_orderstatus
             WHERE mail_customer!=0 OR mail_admin!=0
             GROUP BY mail_customer, mail_admin, sales_email
-        ");
+        ")->fetchAll(\PDO::FETCH_COLUMN);
 
         foreach ($orderStatus as $row) {
             $mailConfig = array(

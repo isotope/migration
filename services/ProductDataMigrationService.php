@@ -183,7 +183,7 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
     private function migrateNonAdvancedPrices()
     {
         $time = time();
-        $nonAdvancedTypes = $this->db->fetchColumn("SELECT id FROM tl_iso_producttype WHERE prices=''");
+        $nonAdvancedTypes = $this->db->query("SELECT id FROM tl_iso_producttype WHERE prices=''")->fetchAll(\PDO::FETCH_COLUMN);
 
         $allProducts = $this->db->fetchAll(
             "SELECT id, tax_class, price FROM tl_iso_product WHERE id IN (?)",
