@@ -10,6 +10,7 @@ $target = './tests/fixtures/' . $_SERVER['argv'][5] . '/' . (($mode == '--initia
 if ($mode == '--initial') {
     $test_relevant_tables = array(
         'tl_page',
+        'tl_files',
         'tl_iso_addresses',
         'tl_iso_attributes',
         'tl_iso_baseprice',
@@ -46,6 +47,7 @@ if ($mode == '--initial') {
 } else {
     $test_relevant_tables = array(
         'tl_page',
+        'tl_files',
         'tl_iso_address',
         'tl_iso_attribute',
         'tl_iso_baseprice',

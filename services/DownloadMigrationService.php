@@ -94,8 +94,7 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
-        // @todo: execute
-        $this->dbafs->getMigratePathToUuidSQL('tl_iso_downloads', 'singleSRC');
+        $this->dbafs->migratePathToUuid('tl_iso_download', 'singleSRC');
 
         // TODO: finish implementation
     }
