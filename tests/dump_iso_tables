@@ -85,7 +85,7 @@ if ($mode == '--initial') {
 
 
 // allow custom tables
-if (count($_SERVER['argv']) >= 6) {
+if (count($_SERVER['argv']) > 6) {
    $test_relevant_tables = array_slice($_SERVER['argv'], 6);
 }
 
