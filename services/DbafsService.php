@@ -53,7 +53,7 @@ class DbafsService
             $qb->update($tableName, 'd')
                 ->set('d.' . $columnName, ':uuid')
                 ->where('d.' . $columnName .'=:path');
-            $qb->setParameter(':uuid', $path);
+            $qb->setParameter(':uuid', $uuid);
             $qb->setParameter(':path', $path);
             $qb->execute();
         }
