@@ -13,6 +13,10 @@ namespace Isotope\Migration\Service;
 
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Schema\Column;
+use Doctrine\DBAL\Schema\ColumnDiff;
+use Doctrine\DBAL\Schema\TableDiff;
+use Doctrine\DBAL\Types\Type;
 
 class DbafsService
 {
@@ -53,9 +57,35 @@ class DbafsService
             $qb->setParameter(':path', $path);
             $qb->execute();
         }
-        }
+    }
 
-        return $sql;
+    /**
+     * Get SQL query for migrating a file path column to a column type
+     * holding a binary UUID. We're using BLOB here because Doctrine does not
+     * support BINARY(16), however Contao itself will automatically alter the
+     * column to BINARY(16) when updating the database.
+     *
+     * @param string $tableName
+     * @param string $columnName
+     *
+     * @return array
+     */
+    public function getMigrateFilePathForUuidSQL($tableName, $columnName)
+    {
+
+        // Add tl_iso_config.address_fields
+        $tableDiff = new TableDiff($tableName);
+
+        $oldColumn = $this->db->getSchemaManager()->listTableDetails($tableName)->getColumn($columnName);
+
+        $newColumn = new Column($columnName, Type::getType(Type::BLOB));
+        $newColumn->setLength(65535);
+
+        $columnDiff = new ColumnDiff($columnName, $newColumn, array(), $oldColumn);
+
+        $tableDiff->changedColumns[$columnName] = $columnDiff;
+
+        return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
     }
 
     /**
