@@ -44,6 +44,9 @@ for the initial or
 
 for the expected file.
 
+**Note:** Make sure you do not simply use an Isotope 1.4 installation but an 1.4 installation
+**after** regular Contao migration to version 3.3!
+
 Assuming you named your scenario "42", you should thus end up having the following
 structure:
 
