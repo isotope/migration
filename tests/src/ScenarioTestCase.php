@@ -32,7 +32,6 @@ abstract class ScenarioTestCase extends DbTestCase
     public function testScenario()
     {
         $config = $this->getConfiguration();
-        $queries = array();
         $migrationServices = array();
 
         $app = $this->getApp();
@@ -56,12 +55,25 @@ abstract class ScenarioTestCase extends DbTestCase
         // Boot app
         $app->boot();
 
-        // Collect SQL queries
+        // Run migration queries
+        $this->runMigrationQueries($migrationServices);
+
+        // Run post migration queries
+        $this->runPostMigrationQueries($migrationServices);
+
+        // Assert data sets
+        $this->assertDataSets();
+    }
+
+    private function runMigrationQueries($migrationServices)
+    {
+        $queries = array();
+
         /** @var $service \Isotope\Migration\Service\MigrationServiceInterface*/
-        foreach ($migrationServices as $service) {
+        foreach ($migrationServices as $key => $service) {
 
             if ($service->getStatus() !== MigrationServiceInterface::STATUS_READY) {
-                $this->fail('Migration service "' . $key . '" is not ready. Scenario cannot be completed!');
+                $this->fail('Migration service "' . $key . '" is not ready (migration). Scenario cannot be completed!');
             }
             $queries = array_merge($queries, $service->getMigrationSQL());
         }
@@ -73,11 +85,39 @@ abstract class ScenarioTestCase extends DbTestCase
                 $this->fail('Query could not be executed! Error message: ' . $e->getMessage() . '. Query: ' . $query);
             }
         }
+    }
 
+    private function runPostMigrationQueries($migrationServices)
+    {
+        $queries = array();
+
+        /** @var $service \Isotope\Migration\Service\MigrationServiceInterface*/
+        foreach ($migrationServices as $key => $service) {
+            try {
+                $service->postMigration();
+            } catch (\PException $e) {
+                $this->fail('Post migration could not be executed! Error message: ' . $e->getMessage() . '. Service: ' . $key);
+            }
+        }
+    }
+
+    private function assertDataSets()
+    {
         $expectedDataset = $this->getExpectedMySQLXMLDataSet();
         $currentDataset = $this->getConnection()->createDataSet();
 
+        // Filter out data that should be compared such as timestamps etc.
+        $expectedDataset = $this->filterDataset($expectedDataset);
+        $currentDataset = $this->filterDataset($currentDataset);
+
         $this->assertDataSetsEqual($expectedDataset, $currentDataset);
+    }
+
+    private function filterDataset($dataSet)
+    {
+        $filteredDataSet = new \PHPUnit_Extensions_Database_DataSet_DataSetFilter($dataSet);
+        $filteredDataSet->setExcludeColumnsForTable('tl_nc_gateway', array('tstamp'));
+        return $filteredDataSet;
     }
 
     protected function getDataSet()
