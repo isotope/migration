@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>{% trans %}Isotope 2 – Migration Tool{% endtrans %}</title>
+    <title>{% trans %}base.title{% endtrans %}</title>
     <link rel="stylesheet" href="{{ base_path }}/assets/style.min.css">
     <script src="{{ base_path }}/assets/scripts.min.js"></script>
     {% block head %}{% endblock %}
@@ -12,22 +12,23 @@
     <div id="left">
         <div class="inside">
             <ol class="level_1">
-                <li><a href="{{ base_url }}/"{% if navigation_index %} class="active"{% endif %}>{% trans %}Welcome{% endtrans %}</a></li>
+                <li><a href="{{ base_url }}/"{% if navigation_index %} class="active"{% endif %}>{% trans %}base.welcome{% endtrans %}</a></li>
                 <li>
-                    <a href="{{ base_url }}/config"{% if navigation_config %} class="active"{% endif %}>{% trans %}Configuration{% endtrans %}</a>
+                    <a href="{{ base_url }}/config"{% if navigation_config %} class="active"{% endif %}>{% trans %}base.configuration{% endtrans %}</a>
                     <ul class="level_2">
                         {% for service in services %}
                             <li><a href="{{ base_url }}/config/{{ service.getSlug() }}" class="{% if service.getStatus() == 2 %}confirm{% elseif service.getStatus() == 3 %}error{% endif %} {% if current_service == service %}active{% endif %}">{{ service.getName() }}</a></li>
                         {% endfor %}
                     </ul>
                 </li>
-                <li><a href="{{ base_url }}/execute"{% if navigation_execute %} class="active"{% endif %}>{% trans %}Execution{% endtrans %}</a></li>
+                <li><a href="{{ base_url }}/execute"{% if navigation_execute %} class="active"{% endif %}>{% trans %}base.execution{% endtrans %}</a></li>
+                <li><a href="{{ base_url }}/summary"{% if navigation_summary %} class="active"{% endif %}>{% trans %}base.summary{% endtrans %}</a></li>
             </ol>
         </div>
     </div>
     <div id="main">
         <div class="inside">
-            <h1>{% trans %}Isotope 2 – Migration Tool{% endtrans %}</h1>
+            <h1>{% trans %}base.title{% endtrans %}</h1>
             {% block main %}{% endblock %}
             <div class="clear"></div>
         </div>

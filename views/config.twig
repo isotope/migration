@@ -15,10 +15,10 @@
         <div class="row">
             <p class="mt">
                 {% if can_continue|default(false) %}
-                    <button class="button main" name="continue" value="1">{% trans %}Continue{% endtrans %}</button>
+                    <button class="button main" name="continue" value="1">{% trans %}config.continue{% endtrans %}</button>
                 {% elseif can_save|default(false) %}
-                    <button class="button" name="save" value="1">{% trans %}Save{% endtrans %}</button>
-                    <button class="button main" name="continue" value="1">{% trans %}Save &amp; Continue{% endtrans %}</button>
+                    <button class="button" name="save" value="1">{% trans %}config.save{% endtrans %}</button>
+                    <button class="button main" name="continue" value="1">{% trans %}config.saveContinue{% endtrans %}</button>
                 {% endif %}
             </p>
         </div>

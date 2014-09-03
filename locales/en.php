@@ -1,6 +1,24 @@
 <?php
 
 return array(
+    'base' => array(
+        'title'             => 'Isotope 2 – Migration Tool',
+        'welcome'           => 'Welcome',
+        'configuration'     => 'Configuration',
+        'execution'         => 'Execution',
+        'summary'           => 'Summary',
+    ),
+    'config' => array(
+        'continue'      => 'Continue',
+        'save'          => 'Save',
+        'saveContinue'  => 'Save & continue',
+    ),
+    'index' => array(
+        'start'         => 'Start configuration'
+    ),
+    'summary' => array(
+        'nothingSpecialToDo'         => 'You don\'t need to take any further action for this step.'
+    ),
     'error' => array(
         'tableFound'  => 'Table "%table%" must NOT exist in the database.',
         'tableNotFound' => 'Table "%table%" not found in the database.',
