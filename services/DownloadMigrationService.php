@@ -96,6 +96,9 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
     {
         $this->dbafs->migratePathToUuid('tl_iso_download', 'singleSRC');
 
+
+        // TODO: According to Andy there's a download type field now?
+
         // TODO: finish implementation
     }
 
