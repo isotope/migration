@@ -50,18 +50,32 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
+        $sql = array();
+
+        // Add tl_iso_config.address_fields
         $tableDiff = new TableDiff('tl_iso_config');
 
         $column = new Column('address_fields', Type::getType(Type::BLOB));
         $column->setLength(65535);
         $tableDiff->addedColumns['address_fields'] = $column;
 
+        $sql = array_merge($sql,
+            $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff)
+        );
+
+        // Add tl_page.store_id
+        $tableDiff = new TableDiff('tl_page');
+
+        $column = new Column('store_id', Type::getType(Type::INTEGER), array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
+        $tableDiff->addedColumns['store_id'] = $column;
+
         // TODO: new tl_iso_gallery instead of tl_iso_config.gallery
         // TODO: convert tl_iso_config.imageSizes to galleries
         // TODO: tl_iso_config.missing_image_placeholder is now in the gallery
-        // TODO: store_id is now a root page setting
 
-        $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+        $sql = array_merge($sql,
+            $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff)
+        );
 
         return $sql;
     }
@@ -76,6 +90,8 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
         }
 
         $this->convertAddressFields();
+
+        // TODO: Merge store_id as it is now a root page setting
     }
 
     /**
