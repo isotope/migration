@@ -60,10 +60,6 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
      */
     public function postMigration()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
-
         $this->createPrivateAddresses();
 
         // TODO: recreate tl_iso_product_collection_item.jumpTo

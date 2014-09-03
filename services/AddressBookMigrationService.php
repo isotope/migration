@@ -52,10 +52,6 @@ class AddressBookMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getMigrationSQL()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
-
         $tableDiff = new TableDiff('tl_iso_addresses');
         $tableDiff->newName = 'tl_iso_address';
 

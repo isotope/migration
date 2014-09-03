@@ -93,10 +93,6 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
-
         // @todo: execute
         $this->dbafs->getMigratePathToUuidSQL('tl_iso_downloads', 'singleSRC');
 

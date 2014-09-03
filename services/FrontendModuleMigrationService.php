@@ -41,10 +41,6 @@ class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getMigrationSQL()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
-
         // TODO: tl_module.iso_collectionTpl = tl_module.iso_cart_layout
         // TODO: tl_module.iso_filterTpl = tl_module.iso_filter_layout
 

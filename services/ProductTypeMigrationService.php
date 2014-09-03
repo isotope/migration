@@ -59,10 +59,6 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
-
         $productTypes = $this->db->fetchAll("SELECT id, attributes, variant_attributes FROM tl_iso_attribute");
 
         foreach ($productTypes as $type) {

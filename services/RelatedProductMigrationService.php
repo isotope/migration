@@ -63,10 +63,6 @@ class RelatedProductMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
-
         // List of product IDs is now comma-separated instead of serialized
         $relations = $this->db->fetchAll("SELECT id, products FROM tl_iso_related_product WHERE products!=''");
 
