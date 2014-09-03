@@ -80,8 +80,6 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
-        // TODO: title and description fields are now in the file manager
-
         return array_merge(
             $this->dbafs->getMigrateFilePathForUuidSQL('tl_iso_downloads', 'singleSRC'),
             $this->getProductSQL(),
@@ -112,6 +110,8 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
         $this->dbcheck
             ->tableMustExist('tl_iso_downloads')
             ->tableMustNotExist('tl_iso_download')
+            ->columnMustExist('tl_iso_downloads', 'title')
+            ->columnMustExist('tl_iso_downloads', 'description')
             ->columnMustNotExist('tl_iso_downloads', 'published');
 
         $this->dbcheck
@@ -152,5 +152,17 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
         // TODO: finish implementation
 
         return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+    }
+
+    /**
+     * Return a list of to do's or messages for the summary page
+     *
+     * @return array
+     */
+    public function getSummaryMessages()
+    {
+        return array(
+            $this->trans('download.titleAndDescription')
+        );
     }
 }

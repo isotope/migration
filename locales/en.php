@@ -35,5 +35,8 @@ return array(
         'gateway_new' => 'Create a new e-mail gateway',
         'gateway_db' => 'Gateways from your database',
         'orderstatus' => 'Order status "%name%"'
+    ),
+    'download' => array(
+        'titleAndDescription'   => 'The database columns tl_iso_download.title as well as tl_iso_download.description cannot be converted automatically. They contain the title as well as the description of a download (provided you entered them). In Contao 3+ you can manage meta data for files in the file system directly so there is no need for Isotope eCommerce to have yet another tilte or description field. Because the migration tool cannot automatically detect in what language you entered the data in Isotope 1.4 (and possibly how you translated them), it does not touch the data in any way at all! Make sure you do not (!!) delete tl_iso_download.description and tl_iso_download.title before you migrated the data manually!'
     )
 );
