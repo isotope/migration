@@ -9,7 +9,7 @@
  * @license    http://opensource.org/licenses/lgpl-3.0.html
  */
 
-namespace Isotope\Migration\Test\Dbafs;
+namespace Isotope\Migration\Test\DownloadMigration;
 
 
 use Isotope\Migration\Test\DbTestCase;
@@ -51,6 +51,12 @@ class DownloadMigrationTest extends DbTestCase
             $sql[2]
         );
     }
+
+    public function testPostMigration()
+    {
+        // @todo implement and assert to data set
+    }
+
 
     protected function getDataSet()
     {
