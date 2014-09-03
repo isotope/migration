@@ -13,6 +13,7 @@ namespace Isotope\Migration\Test\DownloadMigration;
 
 
 use Isotope\Migration\Test\DbTestCase;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
 class DownloadMigrationTest extends DbTestCase
 {
@@ -30,8 +31,14 @@ class DownloadMigrationTest extends DbTestCase
     public function testMigration()
     {
         $app = $this->getBootedApp();
+        $class = '\Isotope\Migration\Service\DownloadMigrationService';
+
+        // Empty config
+        $configBag = new AttributeBag($class::getSlug());
+        $configBag->setName($class::getSlug());
+
         /** @var $service \Isotope\Migration\Service\DownloadMigrationService */
-        $service = $app['migration.services']['download'];
+        $service = $app['class_factory']->create($class, array('config' => $configBag));
 
         $sql = $service->getMigrationSQL();
 
