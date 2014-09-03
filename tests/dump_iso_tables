@@ -93,4 +93,4 @@ $tables = implode(' ', $test_relevant_tables);
 
 $xml = ($mode == '--expected') ? ' --xml' : '';
 
-exec("mysqldump$xml --order-by-primary $db -u $user -p$pass $tables > $target");
+exec("mysqldump$xml --skip-add-locks --order-by-primary $db -u $user -p$pass $tables > $target");
