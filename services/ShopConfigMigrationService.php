@@ -105,7 +105,7 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
             ->columnMustExist('tl_iso_config', 'id')
             ->columnMustExist('tl_iso_config', 'billing_fields')
             ->columnMustExist('tl_iso_config', 'shipping_fields')
-            ->columnMustNotExist('tl_iso_config', 'address_fields');
+            ->columnMustNotExist('tl_iso_config', 'address_fields')
             ->columnMustNotExist('tl_page', 'store_id');
 
         // TODO: finish implementation
