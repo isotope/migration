@@ -33,12 +33,10 @@ class DbafsService
      * @param string $tableName
      * @param string $columnName
      *
-     * @return array
+     * @throws \PDOException
      */
-    public function getMigratePathToUuidSQL($tableName, $columnName)
+    public function migratePathToUuid($tableName, $columnName)
     {
-        $sql = array();
-
         $values = $this->db->createQueryBuilder()
             ->add('select', 'd.' . $columnName)
             ->from($tableName, 'd')
@@ -49,10 +47,12 @@ class DbafsService
             $uuid = $this->findByPath($path);
             $qb = $this->db->createQueryBuilder();
             $qb->update($tableName, 'd')
-                ->set('d.' . $columnName, $uuid)
+                ->set('d.' . $columnName, ':uuid')
                 ->where('d.' . $columnName .'=:path');
+            $qb->setParameter(':uuid', $path);
             $qb->setParameter(':path', $path);
-            $sql[] = $qb->getSQL();
+            $qb->execute();
+        }
         }
 
         return $sql;
