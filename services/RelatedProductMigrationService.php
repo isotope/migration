@@ -67,7 +67,7 @@ class RelatedProductMigrationService extends AbstractConfigfreeMigrationService
         $relations = $this->db->fetchAll("SELECT id, products FROM tl_iso_related_product WHERE products!=''");
 
         foreach ($relations as $row) {
-            $ids = deserialize($row['products']);
+            $ids = unserialize($row['products']);
 
             if (!empty($ids) && is_array($ids)) {
                 $this->db->update(
