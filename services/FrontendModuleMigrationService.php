@@ -12,6 +12,10 @@
 namespace Isotope\Migration\Service;
 
 
+use Doctrine\DBAL\Schema\Column;
+use Doctrine\DBAL\Schema\TableDiff;
+use Doctrine\DBAL\Types\Type;
+
 class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
 {
     /**
@@ -41,10 +45,16 @@ class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getMigrationSQL()
     {
-        // TODO: tl_module.iso_collectionTpl = tl_module.iso_cart_layout
-        // TODO: tl_module.iso_filterTpl = tl_module.iso_filter_layout
+        $tableDiff = new TableDiff('tl_module');
 
-        return array();
+        $column = new Column('iso_collectionTpl', Type::getType(Type::STRING));
+        $column->setLength(64)->setNotnull(true)->setDefault('');
+        $tableDiff->addedColumns['iso_collectionTpl'] = $column;
+
+        $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+
+
+        return $sql;
     }
 
     /**
@@ -56,7 +66,27 @@ class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
             throw new \BadMethodCallException('Migration service is not ready');
         }
 
-        // TODO: finish implementation
+        // Migrate default templates
+
+        // iso_cart_full --> iso_collection_default
+        $qb = $this->db->createQueryBuilder();
+        $qb->update('tl_module', 'm')
+            ->set('m.iso_collectionTpl', ':collectionTpl')
+            ->where('m.iso_cart_layout = :cartLayout');
+        $qb->setParameter(':collectionTpl', 'iso_collection_default');
+        $qb->setParameter(':cartLayout', 'iso_cart_full');
+        $qb->execute();
+
+        // iso_cart_mini --> iso_collection_mini
+        $qb = $this->db->createQueryBuilder();
+        $qb->update('tl_module', 'm')
+            ->set('m.iso_collectionTpl', ':collectionTpl')
+            ->where('m.iso_cart_layout = :cartLayout');
+        $qb->setParameter(':collectionTpl', 'iso_collection_mini');
+        $qb->setParameter(':cartLayout', 'iso_cart_mini');
+        $qb->execute();
+
+        // iso_filter_default is already correct!
     }
 
     /**
@@ -66,6 +96,20 @@ class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
      */
     protected function verifyDatabase()
     {
-        // TODO: finish implementation
+        $this->dbcheck
+            ->columnMustExist('tl_module', 'iso_cart_layout')
+            ->columnMustExist('tl_module', 'iso_filterTpl');
+    }
+
+    /**
+     * Return a list of to do's or messages for the summary page
+     *
+     * @return array
+     */
+    public function getSummaryMessages()
+    {
+        return array(
+            $this->trans('service.frontend_module.templates')
+        );
     }
 }

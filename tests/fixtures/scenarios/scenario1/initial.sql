@@ -16,6 +16,227 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `tl_files`
+--
+
+DROP TABLE IF EXISTS `tl_files`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tl_files` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pid` binary(16) DEFAULT NULL,
+  `tstamp` int(10) unsigned NOT NULL DEFAULT '0',
+  `uuid` binary(16) DEFAULT NULL,
+  `type` varchar(16) NOT NULL DEFAULT '',
+  `path` varchar(1022) NOT NULL DEFAULT '',
+  `extension` varchar(16) NOT NULL DEFAULT '',
+  `hash` varchar(32) NOT NULL DEFAULT '',
+  `found` char(1) NOT NULL DEFAULT '1',
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `meta` blob,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uuid` (`uuid`),
+  KEY `pid` (`pid`),
+  KEY `extension` (`extension`)
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tl_files`
+--
+-- ORDER BY:  `id`
+
+/*!40000 ALTER TABLE `tl_files` DISABLE KEYS */;
+INSERT INTO `tl_files` VALUES (1,NULL,1409761720,0x5D38502E338711E4A7AE4C5DEF982D15,'folder','tl_files/2010_demo','','fe181e4520aa1a0aab669861f41eef41','1','2010_demo',NULL),(2,0x5D38502E338711E4A7AE4C5DEF982D15,1409761720,0x5D385024338711E4A7AE4C5DEF982D15,'folder','tl_files/2010_demo/layout','','941fdef2922a64ac6faa0cc39f32017d','1','layout',NULL),(3,0x5D385024338711E4A7AE4C5DEF982D15,1409761720,0x5D38501A338711E4A7AE4C5DEF982D15,'file','tl_files/2010_demo/layout/gradient.jpg','jpg','01a3688861fafeb8753808f9e6b9bd07','1','gradient.jpg',NULL),(4,0x5D385024338711E4A7AE4C5DEF982D15,1409761720,0x5D385011338711E4A7AE4C5DEF982D15,'file','tl_files/2010_demo/layout/logo.png','png','f67b4b8959c67c8345ccf534f1ca080f','1','logo.png',NULL),(5,0x5D385024338711E4A7AE4C5DEF982D15,1409761720,0x5D385010338711E4A7AE4C5DEF982D15,'file','tl_files/2010_demo/layout/searchButton.png','png','b7a9bee7c62fb5e7a060623d3222ad0a','1','searchButton.png',NULL),(6,0x5D385024338711E4A7AE4C5DEF982D15,1409761720,0x5D385006338711E4A7AE4C5DEF982D15,'file','tl_files/2010_demo/layout/shoes30.png','png','46a51c739a1aaf99a8e617c3c607a0c2','1','shoes30.png',NULL),(7,0x5D385024338711E4A7AE4C5DEF982D15,1409761720,0x5D384FFC338711E4A7AE4C5DEF982D15,'file','tl_files/2010_demo/layout/temp.jpg','jpg','b0ce80d28d5e632c826b16ae96636cc9','1','temp.jpg',NULL),(8,0x5D385024338711E4A7AE4C5DEF982D15,1409761720,0x5D384FF2338711E4A7AE4C5DEF982D15,'file','tl_files/2010_demo/layout/tiger.jpg','jpg','0ba1594b329e6a90f2c96d61b9eda669','1','tiger.jpg',NULL),(9,NULL,1409761720,0x5D384FE8338711E4A7AE4C5DEF982D15,'folder','tl_files/music_academy','','1679e5d338aaf4167826a1dcd4f8cad6','1','music_academy',NULL),(10,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D384FCA338711E4A7AE4C5DEF982D15,'folder','tl_files/music_academy/campus','','1c445bd0cf48754706802f57d2d103f2','1','campus',NULL),(11,0x5D384FCA338711E4A7AE4C5DEF982D15,1409761720,0x5D397C74338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/campus/campus_building.jpg','jpg','a0ac423df6265537c7b1783ed9cbb698','1','campus_building.jpg',0x613A313A7B733A323A22656E223B613A333A7B733A353A227469746C65223B733A34333A22486973746F726963616C206275696C64696E67206F6E204D757369632041636164656D792063616D707573223B733A343A226C696E6B223B733A303A22223B733A373A2263617074696F6E223B733A31393A22486973746F726963616C206275696C64696E67223B7D7D),(12,0x5D384FCA338711E4A7AE4C5DEF982D15,1409761720,0x5D397C6B338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/campus/campus_hall.jpg','jpg','16074d6c3e3dfeb23d580715f486bff2','1','campus_hall.jpg',0x613A313A7B733A323A22656E223B613A333A7B733A353A227469746C65223B733A32363A224D757369632041636164656D79204C696E636F6C6E2048616C6C223B733A343A226C696E6B223B733A303A22223B733A373A2263617074696F6E223B733A31323A224C696E636F6C6E2048616C6C223B7D7D),(13,0x5D384FCA338711E4A7AE4C5DEF982D15,1409761720,0x5D397C6A338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/campus/campus_library.jpg','jpg','1795dc0db4a1efcd2c390e3969ac3d3b','1','campus_library.jpg',0x613A313A7B733A323A22656E223B613A333A7B733A353A227469746C65223B733A32383A224D757369632041636164656D792063616D707573206C696272617279223B733A343A226C696E6B223B733A303A22223B733A373A2263617074696F6E223B733A31343A2243616D707573206C696272617279223B7D7D),(14,0x5D384FCA338711E4A7AE4C5DEF982D15,1409761720,0x5D397C60338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/campus/campus_overview.jpg','jpg','12360a385a87413fa9914d9f4b0f3113','1','campus_overview.jpg',0x613A313A7B733A323A22656E223B613A333A7B733A353A227469746C65223B733A33353A224D757369632041636164656D792063616D70757320286D61696E2062756C64696E6729223B733A343A226C696E6B223B733A303A22223B733A373A2263617074696F6E223B733A31353A2243616D707573206F76657276696577223B7D7D),(15,0x5D384FCA338711E4A7AE4C5DEF982D15,1409761720,0x5D397C57338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/campus/meta.txt','txt','3b24408a9333e7fa54d13f8e058b5c5b','1','meta.txt',NULL),(16,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D397C56338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/admin.gif','gif','37173d258871c781db2c025060e4f8ab','1','admin.gif',NULL),(17,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D397C4C338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/background.gif','gif','b2a05c65803733133c981a2d4e386968','1','background.gif',NULL),(18,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D397C42338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/frontendmodules.gif','gif','4f697b474f6d1e66f442c1c67d574a99','1','frontendmodules.gif',NULL),(19,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D397C38338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/image.png','png','cb636d32a257f7b6337b7392afeab02d','1','image.png',NULL),(20,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D397C1A338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/james-wilson.jpg','jpg','fd894d798786066577c9de8cbe9c1e38','1','james-wilson.jpg',NULL),(21,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D3A388B338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/layout.gif','gif','ec5793c27e75e0426a69202d876733e2','1','layout.gif',NULL),(22,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D3A388A338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/modules.gif','gif','cefbcdcc5facb958977376f2c46367dc','1','modules.gif',NULL),(23,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D3A3880338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/news.gif','gif','ee4c7b3e72fb750033036036176feace','1','news.gif',NULL),(24,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D3A3876338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/pagemounts.gif','gif','1317e91c34333dfd9bad071dd43e9f39','1','pagemounts.gif',NULL),(25,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D3A386D338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/permissions.gif','gif','edc93c562d750ea9e0b20052298f4aa5','1','permissions.gif',NULL),(26,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D3A386C338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/protect.gif','gif','7d8c259b52dc2fe5ccd8b8ea7e8090fb','1','protect.gif',NULL),(27,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D3A3862338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/screenshot.jpg','jpg','bc787a96a23265d4de60c9d1c8e21580','1','screenshot.jpg',NULL),(28,NULL,1409761720,0x5D3A3858338711E4A7AE4C5DEF982D15,'folder','tl_files/tiny_templates','','3cb25412587bbaedd9901598abd93284','1','tiny_templates',NULL),(29,0x5D3A3858338711E4A7AE4C5DEF982D15,1409761720,0x5D3A384E338711E4A7AE4C5DEF982D15,'file','tl_files/tiny_templates/index.html','html','aeebec42dc0335ea1e0853f4393259b4','1','index.html',NULL),(30,NULL,1409761720,0x5D3A3830338711E4A7AE4C5DEF982D15,'file','tl_files/tinymce.css','css','b46cb41513d60d36b3f747d0e144ac22','1','tinymce.css',NULL);
+/*!40000 ALTER TABLE `tl_files` ENABLE KEYS */;
+
+--
+-- Table structure for table `tl_module`
+--
+
+DROP TABLE IF EXISTS `tl_module`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tl_module` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tstamp` int(10) unsigned NOT NULL DEFAULT '0',
+  `type` varchar(64) NOT NULL DEFAULT '',
+  `headline` varchar(255) NOT NULL DEFAULT '',
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `singleSRC` binary(16) DEFAULT NULL,
+  `multiSRC` blob,
+  `imgSize` varchar(64) NOT NULL DEFAULT '',
+  `rootPage` int(10) unsigned NOT NULL DEFAULT '0',
+  `pages` blob,
+  `showLevel` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `levelOffset` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `hardLimit` char(1) NOT NULL DEFAULT '',
+  `showHidden` char(1) NOT NULL DEFAULT '',
+  `showProtected` char(1) NOT NULL DEFAULT '',
+  `navigationTpl` varchar(64) NOT NULL DEFAULT '',
+  `defineRoot` char(1) NOT NULL DEFAULT '',
+  `customLabel` varchar(64) NOT NULL DEFAULT '',
+  `queryType` varchar(32) NOT NULL DEFAULT '',
+  `searchType` varchar(32) NOT NULL DEFAULT '',
+  `searchTpl` varchar(64) NOT NULL DEFAULT '',
+  `perPage` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `contextLength` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `totalLength` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `editable` blob,
+  `cols` varchar(32) NOT NULL DEFAULT '',
+  `memberTpl` varchar(64) NOT NULL DEFAULT '',
+  `jumpTo` int(10) unsigned NOT NULL DEFAULT '0',
+  `form` int(10) unsigned NOT NULL DEFAULT '0',
+  `html` text,
+  `size` varchar(64) NOT NULL DEFAULT '',
+  `url` varchar(255) NOT NULL DEFAULT '',
+  `source` varchar(32) NOT NULL DEFAULT '',
+  `flashvars` varchar(255) NOT NULL DEFAULT '',
+  `altContent` text,
+  `useCaption` char(1) NOT NULL DEFAULT '',
+  `transparent` char(1) NOT NULL DEFAULT '',
+  `interactive` char(1) NOT NULL DEFAULT '',
+  `flashID` varchar(64) NOT NULL DEFAULT '',
+  `flashJS` text,
+  `inColumn` varchar(32) NOT NULL DEFAULT '',
+  `skipFirst` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `disableCaptcha` char(1) NOT NULL DEFAULT '',
+  `newsletters` blob,
+  `space` varchar(64) NOT NULL DEFAULT '',
+  `cssID` varchar(255) NOT NULL DEFAULT '',
+  `cal_calendar` blob,
+  `cal_template` varchar(32) NOT NULL DEFAULT '',
+  `cal_startDay` smallint(5) unsigned NOT NULL DEFAULT '1',
+  `cal_format` varchar(32) NOT NULL DEFAULT '',
+  `cal_limit` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `cal_noSpan` char(1) NOT NULL DEFAULT '',
+  `faq_categories` blob,
+  `list_table` varchar(64) NOT NULL DEFAULT '',
+  `list_fields` varchar(255) NOT NULL DEFAULT '',
+  `list_where` varchar(255) NOT NULL DEFAULT '',
+  `list_sort` varchar(255) NOT NULL DEFAULT '',
+  `list_search` varchar(255) NOT NULL DEFAULT '',
+  `list_info` varchar(255) NOT NULL DEFAULT '',
+  `list_layout` varchar(32) NOT NULL DEFAULT '',
+  `list_info_layout` varchar(32) NOT NULL DEFAULT '',
+  `news_archives` blob,
+  `news_showQuantity` char(1) NOT NULL DEFAULT '',
+  `news_template` varchar(32) NOT NULL DEFAULT '',
+  `news_metaFields` varchar(255) NOT NULL DEFAULT '',
+  `news_jumpToCurrent` varchar(16) NOT NULL DEFAULT '',
+  `nl_template` varchar(32) NOT NULL DEFAULT '',
+  `nl_subscribe` text,
+  `nl_unsubscribe` text,
+  `reg_groups` blob,
+  `reg_assignDir` char(1) NOT NULL DEFAULT '',
+  `reg_homeDir` binary(16) DEFAULT NULL,
+  `reg_allowLogin` char(1) NOT NULL DEFAULT '',
+  `reg_activate` char(1) NOT NULL DEFAULT '',
+  `reg_jumpTo` int(10) unsigned NOT NULL DEFAULT '0',
+  `reg_skipName` char(1) NOT NULL DEFAULT '',
+  `reg_text` text,
+  `reg_password` text,
+  `rss_feed` text,
+  `rss_template` varchar(32) NOT NULL DEFAULT '',
+  `rss_cache` int(10) unsigned NOT NULL DEFAULT '0',
+  `protected` char(1) NOT NULL DEFAULT '',
+  `guests` char(1) NOT NULL DEFAULT '',
+  `groups` blob,
+  `nl_channels` blob,
+  `news_format` varchar(32) NOT NULL DEFAULT '',
+  `redirectBack` char(1) NOT NULL DEFAULT '',
+  `loadFirst` char(1) NOT NULL DEFAULT '',
+  `cal_ctemplate` varchar(32) NOT NULL DEFAULT '',
+  `news_featured` varchar(16) NOT NULL DEFAULT '',
+  `list_info_where` varchar(255) NOT NULL DEFAULT '',
+  `nl_hideChannels` char(1) NOT NULL DEFAULT '',
+  `tableless` char(1) NOT NULL DEFAULT '',
+  `fuzzy` char(1) NOT NULL DEFAULT '',
+  `fullsize` char(1) NOT NULL DEFAULT '',
+  `com_order` varchar(32) NOT NULL DEFAULT '',
+  `com_moderate` char(1) NOT NULL DEFAULT '',
+  `com_bbcode` char(1) NOT NULL DEFAULT '',
+  `com_requireLogin` char(1) NOT NULL DEFAULT '',
+  `com_disableCaptcha` char(1) NOT NULL DEFAULT '',
+  `com_template` varchar(32) NOT NULL DEFAULT '',
+  `news_startDay` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `reg_close` varchar(32) NOT NULL DEFAULT '',
+  `cal_order` varchar(32) NOT NULL DEFAULT '',
+  `iso_list_layout` varchar(64) NOT NULL DEFAULT '',
+  `iso_reader_layout` varchar(64) NOT NULL DEFAULT '',
+  `iso_reader_jumpTo` int(10) unsigned NOT NULL DEFAULT '0',
+  `iso_cart_layout` varchar(64) NOT NULL DEFAULT '',
+  `iso_checkout_method` varchar(10) NOT NULL DEFAULT '',
+  `iso_login_jumpTo` int(10) unsigned NOT NULL DEFAULT '0',
+  `iso_payment_modules` blob,
+  `iso_shipping_modules` blob,
+  `filter_module` text,
+  `iso_config_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `iso_config_ids` blob,
+  `iso_jump_first` char(1) NOT NULL DEFAULT '',
+  `iso_forward_review` char(1) NOT NULL DEFAULT '',
+  `iso_mail_customer` int(10) unsigned NOT NULL DEFAULT '0',
+  `iso_mail_admin` int(10) unsigned NOT NULL DEFAULT '0',
+  `iso_sales_email` varchar(255) NOT NULL DEFAULT '',
+  `iso_order_conditions` int(10) unsigned NOT NULL DEFAULT '0',
+  `iso_category_scope` varchar(64) NOT NULL DEFAULT '',
+  `iso_use_quantity` char(1) NOT NULL DEFAULT '',
+  `iso_filterFields` blob,
+  `iso_sortingFields` blob,
+  `iso_searchFields` blob,
+  `iso_enableLimit` char(1) NOT NULL DEFAULT '',
+  `iso_cart_jumpTo` int(10) unsigned NOT NULL DEFAULT '0',
+  `iso_checkout_jumpTo` int(10) unsigned NOT NULL DEFAULT '0',
+  `orderCompleteJumpTo` int(10) unsigned NOT NULL DEFAULT '0',
+  `iso_listingSortField` varchar(255) NOT NULL DEFAULT '',
+  `iso_listingSortDirection` varchar(8) NOT NULL DEFAULT '',
+  `iso_buttons` blob,
+  `iso_related_categories` blob,
+  `pid` int(10) unsigned NOT NULL DEFAULT '0',
+  `autologin` char(1) NOT NULL DEFAULT '',
+  `cal_showQuantity` char(1) NOT NULL DEFAULT '',
+  `news_order` varchar(255) NOT NULL DEFAULT '',
+  `iso_cols` int(1) unsigned NOT NULL DEFAULT '1',
+  `iso_addToAddressbook` char(1) NOT NULL DEFAULT '',
+  `iso_addProductJumpTo` int(10) unsigned NOT NULL DEFAULT '0',
+  `iso_noProducts` varchar(255) NOT NULL DEFAULT '',
+  `iso_emptyMessage` char(1) NOT NULL DEFAULT '',
+  `iso_enableCoupons` char(1) NOT NULL DEFAULT '',
+  `cal_ignoreDynamic` char(1) NOT NULL DEFAULT '',
+  `cal_readerModule` int(10) unsigned NOT NULL DEFAULT '0',
+  `faq_readerModule` int(10) unsigned NOT NULL DEFAULT '0',
+  `news_readerModule` int(10) unsigned NOT NULL DEFAULT '0',
+  `iso_perPage` varchar(64) NOT NULL DEFAULT '',
+  `iso_filterModules` blob,
+  `iso_list_where` varchar(255) NOT NULL DEFAULT '',
+  `iso_hide_list` char(1) NOT NULL DEFAULT '',
+  `iso_filterTpl` varchar(64) NOT NULL DEFAULT '',
+  `iso_includeMessages` char(1) NOT NULL DEFAULT '',
+  `iso_productcache` blob,
+  `iso_continueShopping` char(1) NOT NULL DEFAULT '',
+  `iso_order_conditions_position` varchar(6) NOT NULL DEFAULT 'after',
+  `iso_filterHideSingle` char(1) NOT NULL DEFAULT '',
+  `iso_searchAutocomplete` varchar(255) NOT NULL DEFAULT '',
+  `iso_emptyFilter` char(1) NOT NULL DEFAULT '',
+  `iso_noFilter` varchar(255) NOT NULL DEFAULT '',
+  `numberOfItems` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `orderSRC` blob,
+  `orderPages` blob,
+  `customTpl` varchar(64) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=153 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tl_module`
+--
+-- ORDER BY:  `id`
+
+/*!40000 ALTER TABLE `tl_module` DISABLE KEYS */;
+INSERT INTO `tl_module` VALUES (118,1272548391,'html','a:2:{s:4:\"unit\";s:2:\"h1\";s:5:\"value\";s:0:\"\";}','HTML - Header',NULL,NULL,'',0,NULL,0,0,'','','','','','','and','simple','',0,48,1000,NULL,'2cl','',0,0,'<div id=\"logo\"><a href=\"/\" title=\"Isotope eCommerce Demo Store\"><img src=\"tl_files/2010_demo/layout/logo.png\" alt=\"Isotope Integrated eCommerce\" /></a></div>','','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'','',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_single','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','','','','','','','','',0,'','','','',0,'','',0,NULL,NULL,NULL,0,NULL,'','',0,0,'',0,'','',NULL,0x30,NULL,'',0,0,0,'','',NULL,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,''),(119,1274099666,'navigation','a:2:{s:4:\"unit\";s:2:\"h1\";s:5:\"value\";s:0:\"\";}','NAV - Dropdown',NULL,NULL,'',243,NULL,0,0,'','','','nav_default','1','','and','simple','',0,48,1000,NULL,'2cl','',0,0,NULL,'','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:3:\"nav\";i:1;s:0:\"\";}',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_single','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','','','ascending','','','','','com_default',0,'','ascending','iso_list_productlist','iso_reader_default',0,'iso_reader_product_single','member',0,NULL,NULL,NULL,0,NULL,'','',0,0,'',0,'parent_and_children','',NULL,0x30,NULL,'',0,0,0,'','',NULL,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,''),(120,1274099056,'navigation','a:2:{s:4:\"unit\";s:2:\"h1\";s:5:\"value\";s:0:\"\";}','NAV - Top Nav',NULL,NULL,'',265,NULL,1,1,'1','','','nav_default','1','','and','simple','',0,48,1000,NULL,'2cl','',0,0,NULL,'','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:6:\"topnav\";i:1;s:0:\"\";}',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_single','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','','','ascending','','','','','com_default',0,'','ascending','iso_list_productlist','iso_reader_default',0,'iso_reader_product_single','member',0,NULL,NULL,NULL,0,NULL,'','',0,0,'',0,'parent_and_children','',NULL,0x30,NULL,'',0,0,0,'','',NULL,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,''),(125,1274622850,'iso_productlist','a:2:{s:4:\"unit\";s:2:\"h1\";s:5:\"value\";s:0:\"\";}','SHOP - Lister - Featured Products',NULL,NULL,'',0,NULL,0,0,'','','','','','','and','simple','',4,48,1000,NULL,'2cl','',0,0,NULL,'','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_single','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','','','ascending','','','','','com_default',0,'','ascending','iso_list_default','iso_reader_default',278,'iso_reader_product_single','member',0,NULL,NULL,NULL,0,NULL,'','',0,0,'',0,'current_category','',NULL,0x30,NULL,'',0,0,0,'','ASC',NULL,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,''),(126,1272210744,'form','a:2:{s:4:\"unit\";s:2:\"h1\";s:5:\"value\";s:0:\"\";}','SEARCH - Simple Search',NULL,NULL,'',0,NULL,0,0,'','','','','','','or','simple','search_default',10,44,400,NULL,'2cl','',0,14,NULL,'','','','',NULL,'','','','',NULL,'',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:6:\"search\";i:1;s:0:\"\";}',NULL,'',0,'',0,'',NULL,'','','','','','','','',NULL,'','news_single','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'',0,'','',NULL,NULL,'','','','','','','','','','','','','','','','',0,'','','','',0,'','',0,NULL,NULL,NULL,0,NULL,'','',0,0,'',0,'','',NULL,0x30,NULL,'',0,0,0,'','',NULL,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,''),(128,1274039169,'iso_productreader','a:2:{s:4:\"unit\";s:2:\"h1\";s:5:\"value\";s:0:\"\";}','SHOP - Product Reader',NULL,NULL,'',0,NULL,0,0,'','','','','','','and','simple','',3,48,1000,NULL,'2cl','',0,0,NULL,'','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_single','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','','','ascending','','','','','com_default',0,'','ascending','iso_list_featured_product','iso_reader_default',278,'iso_reader_product_single','member',0,NULL,NULL,NULL,0,NULL,'','',0,0,'',0,'global','1',NULL,0x30,NULL,'',0,0,0,'','DESC',0x613A313A7B693A303B733A31313A226164645F746F5F63617274223B7D,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,''),(129,1274099243,'iso_cart','a:2:{s:4:\"unit\";s:2:\"h2\";s:5:\"value\";s:0:\"\";}','SHOP - Cart - Mini',NULL,NULL,'',0,NULL,0,0,'','','','','','','and','simple','',3,48,1000,NULL,'2cl','',0,0,NULL,'','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_single','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','','','ascending','','','','','com_default',0,'','ascending','iso_list_featured_product','iso_reader_default',278,'iso_cart_mini','member',0,NULL,NULL,NULL,0,NULL,'','',0,0,'',0,'global','1',NULL,0x30,NULL,'',269,270,0,'','DESC',NULL,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,''),(130,1272210744,'iso_cart','a:2:{s:4:\"unit\";s:2:\"h1\";s:5:\"value\";s:0:\"\";}','SHOP - Cart - Full',NULL,NULL,'',0,NULL,0,0,'','','','','','','and','simple','',3,48,1000,NULL,'2cl','',0,0,NULL,'','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:0:\"\";i:1;s:19:\"mod_isoShoppingCart\";}',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_single','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','','','ascending','','','','','com_default',0,'','ascending','iso_list_featured_product','iso_reader_default',278,'iso_cart_full','member',0,NULL,NULL,NULL,0,NULL,'','',0,0,'',0,'global','1',NULL,0x30,NULL,'',269,270,0,'','DESC',NULL,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,''),(142,1349639090,'iso_productlist','a:2:{s:4:\"unit\";s:2:\"h1\";s:5:\"value\";s:0:\"\";}','SHOP - Lister - Basic',NULL,NULL,'',0,NULL,0,0,'','','','','','','and','simple','',18,48,1000,NULL,'2cl','',0,0,NULL,'','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:0:\"\";i:1;s:4:\"grid\";}',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_single','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','','','ascending','','','','','com_default',0,'','ascending','iso_list_default','iso_reader_default',278,'iso_reader_product_single','member',0,NULL,NULL,NULL,0,NULL,'','',0,0,'',0,'','',NULL,0x30,NULL,'',0,0,0,'name','DESC',NULL,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,''),(143,1337096515,'iso_productfilter','a:2:{s:4:\"unit\";s:2:\"h1\";s:5:\"value\";s:0:\"\";}','SHOP - Product Filter',NULL,NULL,'',0,NULL,0,0,'','','','','','','and','simple','',3,48,1000,NULL,'2cl','',0,0,NULL,'','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_single','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','','','ascending','','','','','com_default',0,'','ascending','iso_list_default','iso_reader_default',278,'iso_reader_product_single','member',0,NULL,NULL,NULL,0,NULL,'','',0,0,'',0,'current_category','',NULL,NULL,0x613A323A7B693A303B733A343A226E616D65223B693A313B733A31313A226465736372697074696F6E223B7D,'1',0,0,0,'','DESC',NULL,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','iso_filter_default','',NULL,'','after','','','','',3,NULL,NULL,''),(144,1287955398,'iso_checkout','a:2:{s:4:\"unit\";s:2:\"h1\";s:5:\"value\";s:0:\"\";}','SHOP - Checkout',NULL,NULL,'',0,NULL,0,0,'','','','','','','and','simple','',3,48,1000,NULL,'2cl','',0,0,NULL,'','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_single','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','','','ascending','','','','','com_default',0,'','ascending','iso_list_featured_product','iso_reader_default',278,'iso_cart_full','both',268,0x613A323A7B693A303B733A313A2231223B693A313B733A313A2233223B7D,0x613A313A7B693A303B733A313A2231223B7D,NULL,0,NULL,'','',2,1,'sales@isotopeecommerce.com',0,'global','1',NULL,0x30,NULL,'',269,270,271,'','DESC',NULL,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,''),(145,1272210744,'login','a:2:{s:4:\"unit\";s:2:\"h1\";s:5:\"value\";s:0:\"\";}','SHOP - Login',NULL,NULL,'',0,NULL,0,0,'','','','','','','and','simple','',0,48,1000,NULL,'2cl','',0,0,NULL,'','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_latest','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','','','ascending','','','','','com_default',0,'','ascending','iso_list_productlist','iso_reader_default',0,'iso_reader_product_single','member',0,NULL,NULL,NULL,0,NULL,'','',0,0,'',0,'parent_and_children','',NULL,0x30,NULL,'',0,0,0,'','DESC',0x613A313A7B693A303B733A31313A226164645F746F5F63617274223B7D,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,''),(146,1272210744,'iso_orderhistory','a:2:{s:4:\"unit\";s:2:\"h1\";s:5:\"value\";s:0:\"\";}','SHOP - Order History',NULL,NULL,'',0,NULL,0,0,'','','','','','','and','simple','',0,48,1000,NULL,'2cl','',301,0,NULL,'','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_latest','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','','','ascending','','','','','com_default',0,'','ascending','iso_list_productlist','iso_reader_default',0,'iso_reader_product_single','member',0,NULL,NULL,NULL,0,0x613A313A7B693A303B733A313A2231223B7D,'','',0,0,'',0,'parent_and_children','',NULL,0x30,NULL,'',0,0,0,'','DESC',0x613A313A7B693A303B733A31313A226164645F746F5F63617274223B7D,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,''),(147,1272210744,'iso_orderdetails','a:2:{s:4:\"unit\";s:2:\"h1\";s:5:\"value\";s:0:\"\";}','SHOP - Order Details',NULL,NULL,'',0,NULL,0,0,'','','','','','','and','simple','',0,48,1000,NULL,'2cl','',0,0,NULL,'','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_latest','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','','','ascending','','','','','com_default',0,'','ascending','iso_list_productlist','iso_reader_default',0,'iso_reader_product_single','member',0,NULL,NULL,NULL,0,0x613A313A7B693A303B733A313A2231223B7D,'','',0,0,'',0,'parent_and_children','',NULL,0x30,NULL,'',0,0,0,'','DESC',0x613A313A7B693A303B733A31313A226164645F746F5F63617274223B7D,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,''),(148,1274635007,'search','a:2:{s:4:\"unit\";s:2:\"h1\";s:5:\"value\";s:0:\"\";}','SEARCH - Search Engine',NULL,NULL,'',0,NULL,0,0,'','','','','','','or','simple','search_default',0,48,250,NULL,'2cl','',0,0,NULL,'','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_latest','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','1','','ascending','','','','','com_default',0,'','ascending','iso_list_productlist','iso_reader_default',0,'iso_reader_product_single','member',0,NULL,NULL,NULL,0,NULL,'','',0,0,'',0,'parent_and_children','',NULL,0x30,NULL,'',0,0,0,'','DESC',0x613A313A7B693A303B733A31313A226164645F746F5F63617274223B7D,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,''),(150,1272414988,'iso_relatedproducts','a:2:{s:4:\"unit\";s:2:\"h3\";s:5:\"value\";s:16:\"Similar Products\";}','SHOP - Related Products',NULL,NULL,'',0,NULL,0,0,'','','','','','','and','simple','',3,48,1000,NULL,'2cl','',0,0,NULL,'','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_single','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','','','ascending','','','','','com_default',0,'','ascending','iso_list_default','iso_reader_default',278,'iso_reader_product_single','member',0,NULL,NULL,NULL,0,NULL,'','',0,0,'',0,'global','1',NULL,0x30,NULL,'',0,0,0,'','DESC',NULL,0x613A313A7B693A303B733A313A2231223B7D,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,''),(152,1274635157,'navigation','a:2:{s:4:\"unit\";s:2:\"h1\";s:5:\"value\";s:0:\"\";}','NAV - Bottom Nav',NULL,NULL,'',280,NULL,1,1,'1','','','nav_default','1','','and','simple','',0,48,1000,NULL,'2cl','',0,0,NULL,'','','internal','',NULL,'','','','',NULL,'main',0,'',NULL,'a:2:{i:0;s:0:\"\";i:1;s:0:\"\";}','a:2:{i:0;s:9:\"footernav\";i:1;s:0:\"\";}',NULL,'event_full',0,'cal_month',0,'',NULL,'','','','','','','list_default','info_default',NULL,'','news_single','a:2:{i:0;s:4:\"date\";i:1;s:6:\"author\";}','','nl_simple',NULL,NULL,NULL,'',NULL,'','',0,'',NULL,NULL,NULL,'rss_default',3600,'','',NULL,NULL,'news_month','','','cal_default','','','','','','','ascending','','','','','com_default',0,'','ascending','iso_list_productlist','iso_reader_default',0,'iso_reader_product_single','member',0,NULL,NULL,NULL,0,NULL,'','',0,0,'',0,'parent_and_children','',NULL,0x30,NULL,'',0,0,0,'','',NULL,NULL,1,'','','',1,'',0,'','','','',0,0,0,'8,12,32,64',NULL,'','','','',NULL,'','after','','','','',3,NULL,NULL,'');
+/*!40000 ALTER TABLE `tl_module` ENABLE KEYS */;
+
+--
 -- Table structure for table `tl_page`
 --
 
@@ -89,41 +310,6 @@ CREATE TABLE `tl_page` (
 /*!40000 ALTER TABLE `tl_page` DISABLE KEYS */;
 INSERT INTO `tl_page` VALUES (241,0,576,1291733689,'Demo Store','demo-store','','root','en','',NULL,'','','permanent','','','1',0,'',NULL,'1',38,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','','',1,'','','','',0,0),(242,241,128,1263753108,'Home Page','index','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'1',38,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(243,241,256,1270476394,'Main Navigation','main-navigation','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'1',45,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','1','','','',0,'','','','','','','','index,follow','map_default',0,'','','','',0,0),(265,241,384,1263753522,'Top Navigation','top-navigation','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','1','','','',0,'','','','','','','','index,follow','map_default',0,'','','','',0,0),(266,241,512,1263754894,'Module/Reader Pages','modulereader-pages','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','1','','','',0,'','','','','','','','index,follow','map_default',0,'','','','',0,0),(267,266,128,1263754909,'Search Results','search-results','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(268,265,128,1263754923,'My Account','my-account','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(269,265,256,1263754936,'My Cart','my-cart','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(270,265,384,1263754944,'Checkout','checkout','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(271,270,128,1263754964,'Order Summary','order-summary','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(273,243,128,1274619700,'Womens','womens','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(274,243,256,1274619718,'Mens','mens','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(275,243,384,1274634922,'Childrens','childrens','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(276,243,704,1274619783,'Specials','specials','','regular','en','',NULL,'','','permanent','','','',0,'1',0x613A313A7B693A303B733A313A2235223B7D,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(277,243,640,1274619755,'Sandals','sandals','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(278,243,768,1272200891,'Product Details','details','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'1',46,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','1','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(280,241,448,1274635811,'Footer Navigation','footer-navigation','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'1',46,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','1','','','',0,'','','','','','','','index,follow','map_default',0,'','','','',0,0),(281,280,128,1268695039,'About Us','about-us','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(282,280,256,1268695049,'Customer Service','customer-service','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(283,280,384,1268695109,'Shipping & Policies','shipping-policies','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(300,268,128,1272113502,'Order History','order-history','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0),(301,300,128,1272113565,'Order Details','order-details','','regular','en','',NULL,'','','permanent','','','',0,'',NULL,'',0,'',0,'','a:6:{i:0;s:2:\"u1\";i:1;s:2:\"u2\";i:2;s:2:\"u3\";i:3;s:2:\"u4\";i:4;s:2:\"u5\";i:5;s:2:\"u6\";}',0,0,'','','1','','','',0,'','1','','','','','','index,follow','map_default',0,'','','','',0,0);
 /*!40000 ALTER TABLE `tl_page` ENABLE KEYS */;
-
---
--- Table structure for table `tl_files`
---
-
-DROP TABLE IF EXISTS `tl_files`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tl_files` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `pid` binary(16) DEFAULT NULL,
-  `tstamp` int(10) unsigned NOT NULL DEFAULT '0',
-  `uuid` binary(16) DEFAULT NULL,
-  `type` varchar(16) NOT NULL DEFAULT '',
-  `path` varchar(1022) NOT NULL DEFAULT '',
-  `extension` varchar(16) NOT NULL DEFAULT '',
-  `hash` varchar(32) NOT NULL DEFAULT '',
-  `found` char(1) NOT NULL DEFAULT '1',
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `meta` blob,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uuid` (`uuid`),
-  KEY `pid` (`pid`),
-  KEY `extension` (`extension`)
-) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tl_files`
---
--- ORDER BY:  `id`
-
-/*!40000 ALTER TABLE `tl_files` DISABLE KEYS */;
-INSERT INTO `tl_files` VALUES (1,NULL,1409761720,0x5D38502E338711E4A7AE4C5DEF982D15,'folder','tl_files/2010_demo','','fe181e4520aa1a0aab669861f41eef41','1','2010_demo',NULL),(2,0x5D38502E338711E4A7AE4C5DEF982D15,1409761720,0x5D385024338711E4A7AE4C5DEF982D15,'folder','tl_files/2010_demo/layout','','941fdef2922a64ac6faa0cc39f32017d','1','layout',NULL),(3,0x5D385024338711E4A7AE4C5DEF982D15,1409761720,0x5D38501A338711E4A7AE4C5DEF982D15,'file','tl_files/2010_demo/layout/gradient.jpg','jpg','01a3688861fafeb8753808f9e6b9bd07','1','gradient.jpg',NULL),(4,0x5D385024338711E4A7AE4C5DEF982D15,1409761720,0x5D385011338711E4A7AE4C5DEF982D15,'file','tl_files/2010_demo/layout/logo.png','png','f67b4b8959c67c8345ccf534f1ca080f','1','logo.png',NULL),(5,0x5D385024338711E4A7AE4C5DEF982D15,1409761720,0x5D385010338711E4A7AE4C5DEF982D15,'file','tl_files/2010_demo/layout/searchButton.png','png','b7a9bee7c62fb5e7a060623d3222ad0a','1','searchButton.png',NULL),(6,0x5D385024338711E4A7AE4C5DEF982D15,1409761720,0x5D385006338711E4A7AE4C5DEF982D15,'file','tl_files/2010_demo/layout/shoes30.png','png','46a51c739a1aaf99a8e617c3c607a0c2','1','shoes30.png',NULL),(7,0x5D385024338711E4A7AE4C5DEF982D15,1409761720,0x5D384FFC338711E4A7AE4C5DEF982D15,'file','tl_files/2010_demo/layout/temp.jpg','jpg','b0ce80d28d5e632c826b16ae96636cc9','1','temp.jpg',NULL),(8,0x5D385024338711E4A7AE4C5DEF982D15,1409761720,0x5D384FF2338711E4A7AE4C5DEF982D15,'file','tl_files/2010_demo/layout/tiger.jpg','jpg','0ba1594b329e6a90f2c96d61b9eda669','1','tiger.jpg',NULL),(9,NULL,1409761720,0x5D384FE8338711E4A7AE4C5DEF982D15,'folder','tl_files/music_academy','','1679e5d338aaf4167826a1dcd4f8cad6','1','music_academy',NULL),(10,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D384FCA338711E4A7AE4C5DEF982D15,'folder','tl_files/music_academy/campus','','1c445bd0cf48754706802f57d2d103f2','1','campus',NULL),(11,0x5D384FCA338711E4A7AE4C5DEF982D15,1409761720,0x5D397C74338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/campus/campus_building.jpg','jpg','a0ac423df6265537c7b1783ed9cbb698','1','campus_building.jpg',0x613A313A7B733A323A22656E223B613A333A7B733A353A227469746C65223B733A34333A22486973746F726963616C206275696C64696E67206F6E204D757369632041636164656D792063616D707573223B733A343A226C696E6B223B733A303A22223B733A373A2263617074696F6E223B733A31393A22486973746F726963616C206275696C64696E67223B7D7D),(12,0x5D384FCA338711E4A7AE4C5DEF982D15,1409761720,0x5D397C6B338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/campus/campus_hall.jpg','jpg','16074d6c3e3dfeb23d580715f486bff2','1','campus_hall.jpg',0x613A313A7B733A323A22656E223B613A333A7B733A353A227469746C65223B733A32363A224D757369632041636164656D79204C696E636F6C6E2048616C6C223B733A343A226C696E6B223B733A303A22223B733A373A2263617074696F6E223B733A31323A224C696E636F6C6E2048616C6C223B7D7D),(13,0x5D384FCA338711E4A7AE4C5DEF982D15,1409761720,0x5D397C6A338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/campus/campus_library.jpg','jpg','1795dc0db4a1efcd2c390e3969ac3d3b','1','campus_library.jpg',0x613A313A7B733A323A22656E223B613A333A7B733A353A227469746C65223B733A32383A224D757369632041636164656D792063616D707573206C696272617279223B733A343A226C696E6B223B733A303A22223B733A373A2263617074696F6E223B733A31343A2243616D707573206C696272617279223B7D7D),(14,0x5D384FCA338711E4A7AE4C5DEF982D15,1409761720,0x5D397C60338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/campus/campus_overview.jpg','jpg','12360a385a87413fa9914d9f4b0f3113','1','campus_overview.jpg',0x613A313A7B733A323A22656E223B613A333A7B733A353A227469746C65223B733A33353A224D757369632041636164656D792063616D70757320286D61696E2062756C64696E6729223B733A343A226C696E6B223B733A303A22223B733A373A2263617074696F6E223B733A31353A2243616D707573206F76657276696577223B7D7D),(15,0x5D384FCA338711E4A7AE4C5DEF982D15,1409761720,0x5D397C57338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/campus/meta.txt','txt','3b24408a9333e7fa54d13f8e058b5c5b','1','meta.txt',NULL),(16,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D397C56338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/admin.gif','gif','37173d258871c781db2c025060e4f8ab','1','admin.gif',NULL),(17,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D397C4C338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/background.gif','gif','b2a05c65803733133c981a2d4e386968','1','background.gif',NULL),(18,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D397C42338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/frontendmodules.gif','gif','4f697b474f6d1e66f442c1c67d574a99','1','frontendmodules.gif',NULL),(19,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D397C38338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/image.png','png','cb636d32a257f7b6337b7392afeab02d','1','image.png',NULL),(20,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D397C1A338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/james-wilson.jpg','jpg','fd894d798786066577c9de8cbe9c1e38','1','james-wilson.jpg',NULL),(21,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D3A388B338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/layout.gif','gif','ec5793c27e75e0426a69202d876733e2','1','layout.gif',NULL),(22,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D3A388A338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/modules.gif','gif','cefbcdcc5facb958977376f2c46367dc','1','modules.gif',NULL),(23,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D3A3880338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/news.gif','gif','ee4c7b3e72fb750033036036176feace','1','news.gif',NULL),(24,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D3A3876338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/pagemounts.gif','gif','1317e91c34333dfd9bad071dd43e9f39','1','pagemounts.gif',NULL),(25,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D3A386D338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/permissions.gif','gif','edc93c562d750ea9e0b20052298f4aa5','1','permissions.gif',NULL),(26,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D3A386C338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/protect.gif','gif','7d8c259b52dc2fe5ccd8b8ea7e8090fb','1','protect.gif',NULL),(27,0x5D384FE8338711E4A7AE4C5DEF982D15,1409761720,0x5D3A3862338711E4A7AE4C5DEF982D15,'file','tl_files/music_academy/screenshot.jpg','jpg','bc787a96a23265d4de60c9d1c8e21580','1','screenshot.jpg',NULL),(28,NULL,1409761720,0x5D3A3858338711E4A7AE4C5DEF982D15,'folder','tl_files/tiny_templates','','3cb25412587bbaedd9901598abd93284','1','tiny_templates',NULL),(29,0x5D3A3858338711E4A7AE4C5DEF982D15,1409761720,0x5D3A384E338711E4A7AE4C5DEF982D15,'file','tl_files/tiny_templates/index.html','html','aeebec42dc0335ea1e0853f4393259b4','1','index.html',NULL),(30,NULL,1409761720,0x5D3A3830338711E4A7AE4C5DEF982D15,'file','tl_files/tinymce.css','css','b46cb41513d60d36b3f747d0e144ac22','1','tinymce.css',NULL);
-/*!40000 ALTER TABLE `tl_files` ENABLE KEYS */;
 
 --
 -- Table structure for table `tl_iso_addresses`
@@ -1272,4 +1458,4 @@ INSERT INTO `tl_iso_tax_rate` VALUES (2,1274642905,'MA State Sales Tax','MA Stat
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-09-03 19:15:06
+-- Dump completed on 2014-09-04 11:05:49
