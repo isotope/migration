@@ -24,7 +24,7 @@ class Scenario1Test extends ScenarioTestCase
     protected function getConfiguration()
     {
         return array(
-            'mail-template' => array(
+            'mail_template' => array(
                 'mailGateway'   => 0
             )
         );
