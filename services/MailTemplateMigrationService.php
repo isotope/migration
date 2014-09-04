@@ -96,7 +96,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
                 array(
                     'title' => $this->getName(),
                     'description' => $this->getDescription(),
-                    'message' => $this->trans('mailtemplate.empty'),
+                    'message' => $this->trans('service.mail_template.empty'),
                 )
             );
         }
@@ -377,7 +377,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
                 ),
             );
 
-            $notificationTitle = $this->trans('mailtemplate.orderstatus', $orderStatus['name']);
+            $notificationTitle = $this->trans('service.mail_template.orderstatus', $orderStatus['name']);
             $notificationId = $this->convertMailsToNotification($mailConfig, $gatewayId, $notificationTitle);
 
             $this->db->executeUpdate(

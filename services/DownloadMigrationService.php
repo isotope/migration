@@ -162,7 +162,7 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
     public function getSummaryMessages()
     {
         return array(
-            $this->trans('download.titleAndDescription')
+            $this->trans('service.download.titleAndDescription')
         );
     }
 }

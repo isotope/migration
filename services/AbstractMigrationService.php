@@ -94,6 +94,6 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
         $className = substr($className, strrpos($className, '\\')+1);
         $className = str_replace('MigrationService', '', $className);
 
-        return strtolower(ltrim(preg_replace('/([A-Z])/', '-$1', $className), '-'));
+        return strtolower(ltrim(preg_replace('/([A-Z])/', '_$1', $className), '_'));
     }
 } 
