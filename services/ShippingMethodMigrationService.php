@@ -122,7 +122,7 @@ class ShippingMethodMigrationService extends AbstractMigrationService
         }
 
         return $this->twig->render(
-            'shippingmethod.twig',
+            'shipping_method.twig',
             array(
                 'title'           => $this->getName(),
                 'description'     => $this->getDescription(),

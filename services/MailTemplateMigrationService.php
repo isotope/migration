@@ -108,7 +108,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
         $mailGateways = ($this->dbcheck->tableExists('tl_nc_gateway')) ? $this->db->fetchAll("SELECT * FROM tl_nc_gateway") : array();
 
         return $this->twig->render(
-            'config_mailtemplate.twig',
+            'mail_template.twig',
             array(
                 'title' => $this->getName(),
                 'description' => $this->getDescription(),
