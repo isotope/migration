@@ -11,7 +11,7 @@ return array(
     'config' => array(
         'continue'      => 'Continue',
         'save'          => 'Save',
-        'saveContinue'  => 'Save & continue',
+        'saveContinue'  => 'Save & Continue',
     ),
     'index' => array(
         'start'         => 'Start configuration'
