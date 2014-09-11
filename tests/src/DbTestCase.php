@@ -58,11 +58,6 @@ abstract class DbTestCase extends SilexAwareTestCase
         return $this->conn;
     }
 
-    protected function getDataSet()
-    {
-        throw new \RuntimeException('getDataSet() has to be implemented by child class!');
-    }
-
     public function getPathToFixture($fixtureFileName)
     {
         return __DIR__ . '/../fixtures/' . $fixtureFileName;
