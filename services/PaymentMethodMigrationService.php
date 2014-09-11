@@ -52,7 +52,7 @@ class PaymentMethodMigrationService extends AbstractMigrationService
         }
 
         // Nothing to do
-        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_shipping_modules") === '0') {
+        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_payment_modules") === '0') {
             return MigrationServiceInterface::STATUS_READY;
         }
 
