@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<dataset>
+    <tl_iso_shipping id="1" name="Basic Shipping" type="group" label="Basic Shipping" minimum_total="0.00" maximum_total="0.00" price="10.00" enabled="1" group_methods="a:4:{i:0;s:1:&quot;2&quot;;i:1;s:1:&quot;3&quot;;i:2;s:1:&quot;4&quot;;i:3;s:1:&quot;5&quot;;}" group_calculation="first" />
+    <tl_iso_shipping id="2" name="Basic Shipping (0-50)" type="flat" label="" minimum_total="0.00" maximum_total="50.00" price="" enabled="1" group_methods="" group_calculation="" />
+    <tl_iso_shipping id="3" name="Basic Shipping (50.01 - 100)" type="flat" label="" minimum_total="50.00" maximum_total="100.00" price="" enabled="1" group_methods="" group_calculation="" />
+    <tl_iso_shipping id="4" name="Basic Shipping (100.01-200)" type="flat" label="" minimum_total="100.00" maximum_total="200.00" price="" enabled="1" group_methods="" group_calculation="" />
+    <tl_iso_shipping id="5" name="Basic Shipping (200.01-99999999999)" type="flat" label="" minimum_total="200.00" maximum_total="2147483647.00" price="" enabled="1" group_methods="" group_calculation="" />
+</dataset>

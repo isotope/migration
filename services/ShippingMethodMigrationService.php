@@ -185,7 +185,7 @@ class ShippingMethodMigrationService extends AbstractMigrationService
 
                 $this->convertShippingOptions(
                     $options,
-                    $shipping['id'],
+                    $shipping,
                     function ($data, $option) use ($shipping) {
                         $data['minimum_total'] = $option['minimum_total'];
                         $data['maximum_total'] = $option['maximum_total'];
@@ -202,7 +202,7 @@ class ShippingMethodMigrationService extends AbstractMigrationService
 
                 $this->convertShippingOptions(
                     $options,
-                    $shipping['id'],
+                    $shipping,
                     function($data, $option) use ($shipping) {
                         $data['minimum_weight'] = serialize(array('unit'=>$shipping['weight_unit'], 'value'=>$option['weight_from']));
                         $data['maximum_weight'] = serialize(array('unit'=>$shipping['weight_unit'], 'value'=>$option['weight_to']));
@@ -245,17 +245,17 @@ class ShippingMethodMigrationService extends AbstractMigrationService
      * Create shipping methods for options and merge as a shipping group module
      *
      * @param array    $options
-     * @param int      $shippingId
+     * @param array    $shipping
      * @param callable $callback
      */
-    private function convertShippingOptions(array $options, $shippingId, \Closure $callback)
+    private function convertShippingOptions(array $options, array $shipping, \Closure $callback)
     {
         $groupIds = array();
 
         foreach ($options as $row) {
             $data = array(
                 'tstamp' => $row['tstamp'],
-                'name' => $row['name'],
+                'name' => ($shipping['name'] . ' (' . $row['name'] . ')'),
                 'note' => $row['description'],
                 'type' => 'flat',
                 'enabled' => $row['enabled'],
@@ -279,7 +279,7 @@ class ShippingMethodMigrationService extends AbstractMigrationService
                 'group_calculation' => 'first'
             ),
             array(
-                'id' => $shippingId
+                'id' => $shipping['id']
             )
         );
     }
