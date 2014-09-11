@@ -70,7 +70,7 @@ abstract class ScenarioTestCase extends DbTestCase
         $this->runMigrationQueries($migrationServices);
 
         // Run post migration queries
-        $this->runPostMigrationQueries($migrationServices);
+        $this->runPostMigration($migrationServices);
     }
 
     private function runMigrationQueries($migrationServices)
@@ -95,7 +95,7 @@ abstract class ScenarioTestCase extends DbTestCase
         }
     }
 
-    private function runPostMigrationQueries($migrationServices)
+    private function runPostMigration($migrationServices)
     {
         $queries = array();
 
