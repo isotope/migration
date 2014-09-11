@@ -18,11 +18,7 @@ class ShippingMethodTest extends ScenarioTestCase
 
     public function testFlatShipping()
     {
-        $this->prepareScenario('scenario1.sql', array(
-            'mail_template' => array(
-                'mailGateway' => 0
-            )
-        ));
+        $this->prepareScenario('scenario1.sql', $this->getDefaultServiceConfigs());
 
         $this->assertEquals(1, $this->getConnection()->getRowCount('tl_iso_shipping'));
     }
@@ -30,11 +26,7 @@ class ShippingMethodTest extends ScenarioTestCase
 
     public function testOrderTotalShipping()
     {
-        $this->prepareScenario('scenario2.sql', array(
-            'mail_template' => array(
-                'mailGateway' => 0
-            )
-        ));
+        $this->prepareScenario('scenario2.sql', $this->getDefaultServiceConfigs());
 
         $queryTable = $this->getConnection()->createQueryTable(
             'tl_iso_shipping',

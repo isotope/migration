@@ -60,6 +60,41 @@ abstract class ScenarioTestCase extends DbTestCase
         $this->runPostMigration($migrationServices);
     }
 
+    /**
+     * Tell the unit test to use our actual DB for testing
+     * Data is imported in the setUp() method
+     *
+     * @return \PHPUnit_Extensions_Database_DataSet_DefaultDataSet|void
+     */
+    protected function getDataSet()
+    {
+        return new \PHPUnit_Extensions_Database_DataSet_DefaultDataSet();
+    }
+
+    protected function getDataPath()
+    {
+        $className = get_called_class();
+        $className = substr($className, strrpos($className, '\\')+1);
+        $testName = preg_replace('/(.+)Test$/', '$1', $className);
+
+        return $this->getPathToFixture(strtolower(ltrim(preg_replace('/([A-Z])/', '_$1', $testName), '_')));
+    }
+
+    protected function getDefaultServiceConfigs()
+    {
+        return array(
+            'mail_template' => array(
+                'mailGateway' => 0
+            ),
+            'payment_method' => array(
+                'confirmed' => 1
+            ),
+            'shipping_method' => array(
+                'confirmed' => 1
+            )
+        );
+    }
+
     private function runMigrationQueries($migrationServices)
     {
         $queries = array();
@@ -92,25 +127,5 @@ abstract class ScenarioTestCase extends DbTestCase
                 $this->fail('Post migration could not be executed! Error message: ' . $e->getMessage() . '. Service: ' . $key);
             }
         }
-    }
-
-    /**
-     * Tell the unit test to use our actual DB for testing
-     * Data is imported in the setUp() method
-     *
-     * @return \PHPUnit_Extensions_Database_DataSet_DefaultDataSet|void
-     */
-    protected function getDataSet()
-    {
-        return new \PHPUnit_Extensions_Database_DataSet_DefaultDataSet();
-    }
-
-    protected function getDataPath()
-    {
-        $className = get_called_class();
-        $className = substr($className, strrpos($className, '\\')+1);
-        $testName = preg_replace('/(.+)Test$/', '$1', $className);
-
-        return $this->getPathToFixture(strtolower(ltrim(preg_replace('/([A-Z])/', '_$1', $testName), '_')));
     }
 }
