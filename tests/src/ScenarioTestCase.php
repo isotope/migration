@@ -63,9 +63,6 @@ abstract class ScenarioTestCase extends DbTestCase
             ));
         }
 
-        // Boot app
-        $app->boot();
-
         // Run migration queries
         $this->runMigrationQueries($migrationServices);
 
