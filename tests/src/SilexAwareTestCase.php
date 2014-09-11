@@ -49,11 +49,4 @@ class SilexAwareTestCase extends \PHPUnit_Extensions_Database_TestCase
 
         return $app;
     }
-
-    public function getBootedApp()
-    {
-        $app = $this->getApp();
-        $app->boot();
-        return $app;
-    }
 } 
