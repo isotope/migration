@@ -149,8 +149,10 @@ abstract class ScenarioTestCase extends DbTestCase
 
     protected function getScenarioPath()
     {
-        $ref = new \ReflectionClass($this);
-        $scenario = preg_replace('/Scenario(.+)Test/', '$1', $ref->getShortName());
-        return $this->getPathToFixture('scenarios/scenario' . $scenario);
+        $className = get_called_class();
+        $className = substr($className, strrpos($className, '\\')+1);
+        $className = preg_replace('/Scenario(.+)Test/', '$1', $className);
+
+        return $this->getPathToFixture('scenarios/scenario' . strtolower(preg_replace('/([A-Z])/', '_$1', $className)));
     }
 }
