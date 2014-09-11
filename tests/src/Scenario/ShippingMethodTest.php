@@ -36,9 +36,6 @@ class ShippingMethodTest extends ScenarioTestCase
             )
         ));
 
-        $this->assertEquals(5, $this->getConnection()->getRowCount('tl_iso_shipping'));
-
-
         $queryTable = $this->getConnection()->createQueryTable(
             'tl_iso_shipping',
             "SELECT id, name, type, label, minimum_total, maximum_total, price, enabled, group_methods, group_calculation FROM tl_iso_shipping"
