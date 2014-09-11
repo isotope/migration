@@ -133,6 +133,6 @@ abstract class ScenarioTestCase extends DbTestCase
         $className = substr($className, strrpos($className, '\\')+1);
         $className = preg_replace('/(.+)Test$/', '$1', $className);
 
-        return $this->getPathToFixture('scenarios/' . strtolower(ltrim(preg_replace('/([A-Z])/', '_$1', $className), '_')));
+        return $this->getPathToFixture(strtolower(ltrim(preg_replace('/([A-Z])/', '_$1', $className), '_')));
     }
 }

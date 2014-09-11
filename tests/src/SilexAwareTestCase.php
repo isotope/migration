@@ -39,4 +39,4 @@ abstract class SilexAwareTestCase extends \PHPUnit_Extensions_Database_TestCase
 
         return $app;
     }
-} 
+}
