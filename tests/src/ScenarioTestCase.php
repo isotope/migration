@@ -17,11 +17,11 @@ use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 abstract class ScenarioTestCase extends DbTestCase
 {
 
-    protected function prepareScenario(array $serviceConfigs)
+    protected function prepareScenario($scenarioFile, array $serviceConfigs)
     {
         // Insert scenario setup
         $pdo = $this->getConnection()->getConnection();
-        $query = file_get_contents($this->getScenarioFile());
+        $query = file_get_contents($this->getDataPath() . '/' . $scenarioFile);
         $pdo->exec($query);
 
         $migrationServices = array();
@@ -105,20 +105,11 @@ abstract class ScenarioTestCase extends DbTestCase
         return new \PHPUnit_Extensions_Database_DataSet_DefaultDataSet();
     }
 
-    protected function getScenarioFile()
+    protected function getDataPath()
     {
         $className = get_called_class();
         $className = substr($className, strrpos($className, '\\')+1);
-        $scenarioId = preg_replace('/(.+)Scenario(\d+)Test$/', '$2', $className);
-
-        return $this->getPathToFixture('scenario'.$scenarioId.'.sql');
-    }
-
-    protected function getDataSetPath()
-    {
-        $className = get_called_class();
-        $className = substr($className, strrpos($className, '\\')+1);
-        $testName = preg_replace('/(.+)Scenario(\d+)Test$/', '$1', $className);
+        $testName = preg_replace('/(.+)Test$/', '$1', $className);
 
         return $this->getPathToFixture(strtolower(ltrim(preg_replace('/([A-Z])/', '_$1', $testName), '_')));
     }

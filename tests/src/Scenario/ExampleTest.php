@@ -19,11 +19,11 @@ use Isotope\Migration\Test\ScenarioTestCase;
  * This scenario tests some default settings
  *
  */
-class ExampleScenario1Test extends ScenarioTestCase
+class ExampleTest extends ScenarioTestCase
 {
     public function testScenario()
     {
-        $this->prepareScenario(array(
+        $this->prepareScenario('scenario1.sql', array(
             'mail_template' => array(
                 'mailGateway' => 0
             )
@@ -49,7 +49,7 @@ class ExampleScenario1Test extends ScenarioTestCase
     protected function getExpectedMySQLXMLDataSet()
     {
         return $this->createMySQLXMLDataSet(
-            $this->getDataSetPath() . '/expected.xml'
+            $this->getDataPath() . '/expected.xml'
         );
     }
 }
