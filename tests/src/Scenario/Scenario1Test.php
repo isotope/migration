@@ -25,8 +25,27 @@ class Scenario1Test extends ScenarioTestCase
     {
         return array(
             'mail_template' => array(
-                'mailGateway'   => 0
+                'mailGateway' => 0
             )
         );
     }
-} 
+
+    public function testScenario()
+    {
+        $expectedDataset = $this->getExpectedMySQLXMLDataSet();
+        $currentDataset = $this->getConnection()->createDataSet();
+
+        // Filter out data that should be compared such as timestamps etc.
+        $expectedDataset = $this->filterDataset($expectedDataset);
+        $currentDataset = $this->filterDataset($currentDataset);
+
+        $this->assertDataSetsEqual($expectedDataset, $currentDataset);
+    }
+
+    private function filterDataset($dataSet)
+    {
+        $filteredDataSet = new \PHPUnit_Extensions_Database_DataSet_DataSetFilter($dataSet);
+        $filteredDataSet->setExcludeColumnsForTable('tl_nc_gateway', array('tstamp'));
+        return $filteredDataSet;
+    }
+}

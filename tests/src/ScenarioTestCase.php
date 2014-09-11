@@ -32,10 +32,7 @@ abstract class ScenarioTestCase extends DbTestCase
         $pdo->query(
             file_get_contents($this->getScenarioPath() . '/initial.sql')
         );
-    }
 
-    public function testScenario()
-    {
         $serviceConfigs = $this->getServiceConfigs();
         $migrationServices = array();
 
@@ -74,9 +71,6 @@ abstract class ScenarioTestCase extends DbTestCase
 
         // Run post migration queries
         $this->runPostMigrationQueries($migrationServices);
-
-        // Assert data sets
-        $this->assertDataSets();
     }
 
     private function runMigrationQueries($migrationServices)
@@ -113,25 +107,6 @@ abstract class ScenarioTestCase extends DbTestCase
                 $this->fail('Post migration could not be executed! Error message: ' . $e->getMessage() . '. Service: ' . $key);
             }
         }
-    }
-
-    private function assertDataSets()
-    {
-        $expectedDataset = $this->getExpectedMySQLXMLDataSet();
-        $currentDataset = $this->getConnection()->createDataSet();
-
-        // Filter out data that should be compared such as timestamps etc.
-        $expectedDataset = $this->filterDataset($expectedDataset);
-        $currentDataset = $this->filterDataset($currentDataset);
-
-        $this->assertDataSetsEqual($expectedDataset, $currentDataset);
-    }
-
-    private function filterDataset($dataSet)
-    {
-        $filteredDataSet = new \PHPUnit_Extensions_Database_DataSet_DataSetFilter($dataSet);
-        $filteredDataSet->setExcludeColumnsForTable('tl_nc_gateway', array('tstamp'));
-        return $filteredDataSet;
     }
 
     /**
