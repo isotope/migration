@@ -368,17 +368,8 @@ class MailTemplateMigrationService extends AbstractMigrationService
         ");
 
         foreach ($orderStatus as $row) {
-            $mailConfig = array(
-                $row['mail_customer'] => array(
-                    'recipient' => '##recipient_email##'
-                ),
-                $row['mail_admin'] => array(
-                    'recipient' => $row['sales_email']
-                ),
-            );
-
-            $notificationTitle = $this->trans('service.mail_template.orderstatus', array($row['name']));
-            $notificationId = $this->convertMailsToNotification($mailConfig, $gatewayId, $notificationTitle);
+            $notificationTitle = $this->trans('service.mail_template.orderstatus', array('%name%' => $row['name']));
+            $notificationId = $this->convertMailsToNotification($row, $gatewayId, $notificationTitle);
 
             $this->db->executeUpdate(
                 "UPDATE tl_iso_orderstatus SET notification=? WHERE id IN (?)",
@@ -395,8 +386,19 @@ class MailTemplateMigrationService extends AbstractMigrationService
      *
      * @return int
      */
-    private function convertMailsToNotification(array $mailConfig, $gatewayId, $notificationTitle)
+    private function convertMailsToNotification(array $config, $gatewayId, $notificationTitle)
     {
+        $mailTemplates = $this->db->fetchAll(
+            "SELECT * FROM tl_iso_mail WHERE id IN (?)",
+            array(array($config['mail_customer'], $config['mail_admin'])),
+            array(Connection::PARAM_INT_ARRAY)
+        );
+
+        // Mail templates no longer exist, we won't create notifications
+        if (empty($mailTemplates)) {
+            return 0;
+        }
+
         $this->db->insert(
             'tl_nc_notification',
             array(
@@ -408,54 +410,63 @@ class MailTemplateMigrationService extends AbstractMigrationService
 
         $notificationId = (int) $this->db->lastInsertId();
 
-        $mailTemplates = $this->db->fetchAll(
-            "SELECT * FROM tl_iso_mail WHERE id IN (?)",
-            array(array_keys($mailConfig)),
-            array(Connection::PARAM_INT_ARRAY)
-        );
+        if ($config['mail_customer'] > 0) {
+            $this->createMessage($config['mail_customer'], '%s (Customer)', '##recipient_email##', $notificationId, $gatewayId);
+        }
 
-        foreach ($mailTemplates as $mail) {
-            $this->db->insert(
-                'tl_nc_message',
-                array(
-                    'pid'            => $notificationId,
-                    'tstamp'         => $mail['tstamp'],
-                    'title'          => $mail['name'],
-                    'gateway'        => $gatewayId,
-                    'gateway_type'   => 'email',
-                    'email_priority' => $mail['priority'],
-                    'email_template' => $mail['template'],
-                    'published'      => '1',
-                )
-            );
-
-            $messageId = $this->db->lastInsertId();
-            $mailContents = $this->db->fetchAll("SELECT * FROM tl_iso_mail_content WHERE pid=?", array($mail['id']));
-
-            foreach ($mailContents as $content) {
-                $this->db->insert(
-                    'tl_nc_language',
-                    array(
-                        'pid'                  => $messageId,
-                        'tstamp'               => $content['tstamp'],
-                        'gateway_type'         => 'email',
-                        'language'             => $content['language'],
-                        'fallback'             => $content['fallback'],
-                        'recipients'           => $mailConfig[$mail['id']]['recipient'],
-                        'email_sender_name'    => $mail['senderName'],
-                        'email_sender_address' => $mail['sender'],
-                        'email_recipient_cc'   => $mail['cc'],
-                        'email_recipient_bcc'  => $mail['bcc'],
-                        'email_subject'        => $content['subject'],
-                        'email_text'           => $content['text'],
-                        'email_html'           => $content['html'],
-                        'email_mode'           => ($content['textOnly'] ? 'textOnly' : 'textAndHtml'),
-                        // TODO: add attachments from mail content
-                    )
-                );
-            }
+        if ($config['mail_admin'] > 0) {
+            $this->createMessage($config['mail_admin'], '%s (Admin)', $config['sales_email'], $notificationId, $gatewayId);
         }
 
         return $notificationId;
+    }
+
+
+    private function createMessage($mailId, $titleDraft, $recipient, $notificationId, $gatewayId)
+    {
+        $mail = $this->db->fetchAssoc(
+            "SELECT * FROM tl_iso_mail WHERE id=?",
+            array($mailId)
+        );
+
+        $this->db->insert(
+            'tl_nc_message',
+            array(
+                'pid'            => $notificationId,
+                'tstamp'         => $mail['tstamp'],
+                'title'          => sprintf($titleDraft, $mail['name']),
+                'gateway'        => $gatewayId,
+                'gateway_type'   => 'email',
+                'email_priority' => $mail['priority'],
+                'email_template' => $mail['template'],
+                'published'      => '1',
+            )
+        );
+
+        $messageId = $this->db->lastInsertId();
+        $mailContents = $this->db->fetchAll("SELECT * FROM tl_iso_mail_content WHERE pid=?", array($mail['id']));
+
+        foreach ($mailContents as $content) {
+            $this->db->insert(
+                'tl_nc_language',
+                array(
+                    'pid'                  => $messageId,
+                    'tstamp'               => $content['tstamp'],
+                    'gateway_type'         => 'email',
+                    'language'             => $content['language'],
+                    'fallback'             => $content['fallback'],
+                    'recipients'           => ($recipient ?: '##admin_email##'),
+                    'email_sender_name'    => $mail['senderName'],
+                    'email_sender_address' => $mail['sender'],
+                    'email_recipient_cc'   => $mail['cc'],
+                    'email_recipient_bcc'  => $mail['bcc'],
+                    'email_subject'        => $content['subject'],
+                    'email_text'           => $content['text'],
+                    'email_html'           => $content['html'],
+                    'email_mode'           => ($content['textOnly'] ? 'textOnly' : 'textAndHtml'),
+                    // TODO: add attachments from mail content
+                )
+            );
+        }
     }
 }
