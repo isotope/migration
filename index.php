@@ -16,6 +16,9 @@ $app = new Silex\Application();
 //ini_set('error_reporting', E_ALL & ~E_NOTICE);
 $app['debug'] = true;
 
+$app->register(new \Isotope\Migration\Provider\ContaoServiceProvider(), array(
+    'contao.root' => dirname(__DIR__)
+));
 $app->register(new \Isotope\Migration\Provider\MigrationServiceProvider());
 
 // Display a nice error page in production mode

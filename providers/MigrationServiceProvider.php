@@ -53,10 +53,6 @@ class MigrationServiceProvider implements ServiceProviderInterface
         $app->register(new ServiceControllerServiceProvider());
         $app->register(new SessionServiceProvider());
 
-        $app->register(new ContaoServiceProvider(), array(
-            'contao.root' => dirname(dirname(__DIR__))
-        ));
-
         $app['migration.dbcheck'] = $app->share(function() use ($app) {
             return new DatabaseVerificationService($app['db'], $app['translator']);
         });
