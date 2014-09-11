@@ -78,7 +78,7 @@ abstract class ScenarioTestCase extends DbTestCase
         foreach ($migrationServices as $key => $service) {
 
             if ($service->getStatus() !== MigrationServiceInterface::STATUS_READY) {
-                $this->fail('Migration service "' . $key . '" is not ready (migration). Scenario cannot be completed!');
+                $this->fail('Migration service "' . $key . '" is not ready. Scenario cannot be completed!');
             }
             $queries = array_merge($queries, $service->getMigrationSQL());
         }
@@ -94,8 +94,6 @@ abstract class ScenarioTestCase extends DbTestCase
 
     private function runPostMigration($migrationServices)
     {
-        $queries = array();
-
         /** @var $service \Isotope\Migration\Service\MigrationServiceInterface*/
         foreach ($migrationServices as $key => $service) {
             try {

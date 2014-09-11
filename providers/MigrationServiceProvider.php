@@ -31,7 +31,7 @@ class MigrationServiceProvider implements ServiceProviderInterface
     /**
      * Version constant for the migration tool
      */
-    const VERSION = '1.0-0-dev';
+    const VERSION = '1.0.0-dev';
 
 
     function register(Application $app)
