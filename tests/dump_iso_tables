@@ -5,7 +5,7 @@ $db = $_SERVER['argv'][2];
 $user = $_SERVER['argv'][3];
 $pass = $_SERVER['argv'][4];
 
-$target = './tests/fixtures/' . $_SERVER['argv'][5] . '/' . (($mode == '--initial') ? 'initial.sql' : 'expected.xml');
+$target = './tests/fixtures/' . $_SERVER['argv'][5];
 
 if ($mode == '--initial') {
     $test_relevant_tables = array(
