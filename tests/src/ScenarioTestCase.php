@@ -120,13 +120,6 @@ abstract class ScenarioTestCase extends DbTestCase
         return new \PHPUnit_Extensions_Database_DataSet_DefaultDataSet();
     }
 
-    protected function getExpectedMySQLXMLDataSet()
-    {
-        return $this->createMySQLXMLDataSet(
-            $this->getScenarioPath() . '/expected.xml'
-        );
-    }
-
     protected function getScenarioPath()
     {
         $className = get_called_class();

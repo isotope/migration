@@ -48,4 +48,11 @@ class Scenario1Test extends ScenarioTestCase
         $filteredDataSet->setExcludeColumnsForTable('tl_nc_gateway', array('tstamp'));
         return $filteredDataSet;
     }
+
+    protected function getExpectedMySQLXMLDataSet()
+    {
+        return $this->createMySQLXMLDataSet(
+            $this->getScenarioPath() . '/expected.xml'
+        );
+    }
 }
