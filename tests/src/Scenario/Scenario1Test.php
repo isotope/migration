@@ -21,7 +21,7 @@ use Isotope\Migration\Test\ScenarioTestCase;
  */
 class Scenario1Test extends ScenarioTestCase
 {
-    protected function getConfiguration()
+    protected function getServiceConfigs()
     {
         return array(
             'mail_template' => array(

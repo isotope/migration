@@ -16,7 +16,12 @@ use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
 abstract class ScenarioTestCase extends DbTestCase
 {
-    abstract protected function getConfiguration();
+    /**
+     * Return an associative array with the configuration for all migration services
+     *
+     * @return array
+     */
+    abstract protected function getServiceConfigs();
 
     protected function setUp()
     {
@@ -31,7 +36,7 @@ abstract class ScenarioTestCase extends DbTestCase
 
     public function testScenario()
     {
-        $config = $this->getConfiguration();
+        $serviceConfigs = $this->getServiceConfigs();
         $migrationServices = array();
 
         $app = $this->getApp();
@@ -47,8 +52,8 @@ abstract class ScenarioTestCase extends DbTestCase
             $configBag = new AttributeBag('config_' . $slug);
             $configBag->setName('config_' . $slug);
 
-            if (isset($config[$slug])) {
-                $configBag->initialize($config[$slug]);
+            if (isset($serviceConfigs[$slug])) {
+                $configBag->initialize($serviceConfigs[$slug]);
             }
 
             // summary
