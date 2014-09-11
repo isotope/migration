@@ -16,24 +16,14 @@ use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
 abstract class ScenarioTestCase extends DbTestCase
 {
-    /**
-     * Return an associative array with the configuration for all migration services
-     *
-     * @return array
-     */
-    abstract protected function getServiceConfigs();
 
-    protected function setUp()
+    protected function prepareScenario(array $serviceConfigs)
     {
-        parent::setUp();
-
         // Insert scenario setup
         $pdo = $this->getConnection()->getConnection();
-        $pdo->query(
-            file_get_contents($this->getScenarioPath() . '/initial.sql')
-        );
+        $query = file_get_contents($this->getScenarioFile());
+        $pdo->exec($query);
 
-        $serviceConfigs = $this->getServiceConfigs();
         $migrationServices = array();
 
         $app = $this->getApp();
@@ -115,12 +105,21 @@ abstract class ScenarioTestCase extends DbTestCase
         return new \PHPUnit_Extensions_Database_DataSet_DefaultDataSet();
     }
 
-    protected function getScenarioPath()
+    protected function getScenarioFile()
     {
         $className = get_called_class();
         $className = substr($className, strrpos($className, '\\')+1);
-        $className = preg_replace('/(.+)Test$/', '$1', $className);
+        $scenarioId = preg_replace('/(.+)Scenario(\d+)Test$/', '$2', $className);
 
-        return $this->getPathToFixture(strtolower(ltrim(preg_replace('/([A-Z])/', '_$1', $className), '_')));
+        return $this->getPathToFixture('scenario'.$scenarioId.'.sql');
+    }
+
+    protected function getDataSetPath()
+    {
+        $className = get_called_class();
+        $className = substr($className, strrpos($className, '\\')+1);
+        $testName = preg_replace('/(.+)Scenario(\d+)Test$/', '$1', $className);
+
+        return $this->getPathToFixture(strtolower(ltrim(preg_replace('/([A-Z])/', '_$1', $testName), '_')));
     }
 }
