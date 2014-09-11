@@ -38,6 +38,8 @@ abstract class ScenarioTestCase extends DbTestCase
 
         // Register config and then boot app
         foreach ($app['migration.service.classes']->keys() as $key) {
+
+            /** @type MigrationServiceInterface $class */
             $class = $app['migration.service.classes'][$key];
             $slug = $class::getSlug();
 
@@ -102,7 +104,7 @@ abstract class ScenarioTestCase extends DbTestCase
         foreach ($migrationServices as $key => $service) {
             try {
                 $service->postMigration();
-            } catch (\PException $e) {
+            } catch (\PDOException $e) {
                 $this->fail('Post migration could not be executed! Error message: ' . $e->getMessage() . '. Service: ' . $key);
             }
         }
@@ -127,6 +129,12 @@ abstract class ScenarioTestCase extends DbTestCase
         return $filteredDataSet;
     }
 
+    /**
+     * Tell the unit test to use our actual DB for testing
+     * Data is imported in the setUp() method
+     *
+     * @return \PHPUnit_Extensions_Database_DataSet_DefaultDataSet|void
+     */
     protected function getDataSet()
     {
         return new \PHPUnit_Extensions_Database_DataSet_DefaultDataSet();
