@@ -21,6 +21,8 @@ class ContaoServiceProvider implements ServiceProviderInterface
 
     public function register(Application $app)
     {
+        $app['contao.root'] = '';
+
         // Verify Contao installation
         $app->before(function() use ($app) {
             if (!$app['contao.ready']) {
