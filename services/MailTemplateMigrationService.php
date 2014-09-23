@@ -90,13 +90,23 @@ class MailTemplateMigrationService extends AbstractMigrationService
             );
         }
 
-        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") === '0') {
+        $mailCount = $this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail");
+        $gatewayCount = 0;
+
+        if ($this->dbcheck->tableExists('tl_nc_gateway')) {
+            $gatewayCount = $this->db->fetchColumn("SELECT COUNT(*) FROM tl_nc_gateway");
+        }
+
+        if ($mailCount === '0' || $gatewayCount === '0') {
+            $this->config->set('mailGateway', 0);
+
             return $this->twig->render(
                 'config_ready.twig',
                 array(
                     'title' => $this->getName(),
                     'description' => $this->getDescription(),
-                    'message' => $this->trans('service.mail_template.empty'),
+                    'message' => $this->trans('confirm.configfree'),
+                    'can_continue' => true
                 )
             );
         }
