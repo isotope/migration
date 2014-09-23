@@ -179,6 +179,7 @@ class PaymentMethodMigrationService extends AbstractMigrationService
      */
     public function postMigration()
     {
+        // Nothing to do here
     }
 
     /**

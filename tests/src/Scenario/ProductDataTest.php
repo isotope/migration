@@ -12,7 +12,6 @@
 namespace Isotope\Migration\Test\Scenario;
 
 use Isotope\Migration\Test\ScenarioTestCase;
-use PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet;
 
 class ProductDataTest extends ScenarioTestCase
 {
