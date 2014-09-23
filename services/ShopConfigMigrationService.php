@@ -54,7 +54,6 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
 
         // Add tl_iso_config.address_fields
         $tableDiff = new TableDiff('tl_iso_config');
-
         $column = new Column('address_fields', Type::getType(Type::BLOB));
         $column->setLength(65535);
         $tableDiff->addedColumns['address_fields'] = $column;
@@ -63,19 +62,24 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
             $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff)
         );
 
-        // Add tl_page.store_id
+        // Add tl_page.iso_store_id
         $tableDiff = new TableDiff('tl_page');
+        $column = new Column('iso_store_id', Type::getType(Type::INTEGER));
+        $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
+        $tableDiff->addedColumns['iso_store_id'] = $column;
 
-        $column = new Column('store_id', Type::getType(Type::INTEGER), array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
-        $tableDiff->addedColumns['store_id'] = $column;
+        $sql = array_merge(
+            $sql,
+            $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff),
+            array(
+                "UPDATE tl_page SET iso_store_id=(SELECT store_id FROM tl_iso_config WHERE fallback='1') WHERE type='root'",
+                "UPDATE tl_page p SET iso_store_id=(SELECT store_id FROM tl_iso_config c WHERE c.id=p.iso_config) WHERE type='root'"
+            )
+        );
 
         // TODO: new tl_iso_gallery instead of tl_iso_config.gallery
         // TODO: convert tl_iso_config.imageSizes to galleries
         // TODO: tl_iso_config.missing_image_placeholder is now in the gallery
-
-        $sql = array_merge($sql,
-            $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff)
-        );
 
         return $sql;
     }
@@ -86,8 +90,6 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
     public function postMigration()
     {
         $this->convertAddressFields();
-
-        // TODO: Merge store_id as it is now a root page setting
     }
 
     /**
@@ -102,9 +104,8 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
             ->columnMustExist('tl_iso_config', 'billing_fields')
             ->columnMustExist('tl_iso_config', 'shipping_fields')
             ->columnMustNotExist('tl_iso_config', 'address_fields')
-            ->columnMustNotExist('tl_page', 'store_id');
-
-        // TODO: finish implementation
+            ->columnMustExist('tl_iso_config', 'store_id')
+            ->columnMustNotExist('tl_page', 'iso_store_id');
     }
 
     /**
