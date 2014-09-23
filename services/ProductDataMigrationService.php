@@ -177,12 +177,37 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
     private function migrateNonAdvancedPrices()
     {
         $time = time();
-        $nonAdvancedTypes = $this->db->query("SELECT id FROM tl_iso_producttype WHERE prices=''")->fetchAll(\PDO::FETCH_COLUMN);
+        $where = array();
+        $params = array();
+        $nonAdvancedTypes = $this->db->executeQuery("SELECT id, attributes, variants, variant_attributes FROM tl_iso_producttype WHERE prices=''");
+
+        while ($type = $nonAdvancedTypes->fetch()) {
+            $attributes = unserialize($type['attributes']);
+            $variantAttributes = unserialize($type['variant_attributes']);
+
+            if (!empty($attributes)
+                && is_array($attributes)
+                && isset($attributes['price'])
+                && $attributes['price']['enabled']
+            ) {
+                $params[] = $type['id'];
+                $where[] = "(type=? AND pid=0)";
+            }
+
+            if ($type['variants']
+                && !empty($variantAttributes)
+                && is_array($variantAttributes)
+                && isset($variantAttributes['price'])
+                && $variantAttributes['price']['enabled']
+            ) {
+                $params[] = $type['id'];
+                $where[] = "(type=? AND pid>0 AND language='')";
+            }
+        }
 
         $allProducts = $this->db->executeQuery(
-            "SELECT id, tax_class, price FROM tl_iso_product WHERE type IN (?) AND language=''",
-            array($nonAdvancedTypes),
-            array(Connection::PARAM_INT_ARRAY)
+            "SELECT id, tax_class, price FROM tl_iso_product WHERE " . implode(' OR ', $where),
+            $params
         );
 
         while ($product = $allProducts->fetch()) {
