@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<dataset>
+    <tl_iso_product_price pid="34" tax_class="1" config_id="0" member_group="0" start="" stop="" />
+    <tl_iso_product_price pid="45" tax_class="1" config_id="0" member_group="0" start="" stop="" />
+    <tl_iso_product_price pid="64" tax_class="1" config_id="0" member_group="0" start="" stop="" />
+    <tl_iso_product_price pid="75" tax_class="1" config_id="0" member_group="0" start="" stop="" />
+    <tl_iso_product_price pid="84" tax_class="1" config_id="0" member_group="0" start="" stop="" />
+    <tl_iso_product_price pid="93" tax_class="1" config_id="0" member_group="0" start="" stop="" />
+    <tl_iso_product_price pid="108" tax_class="1" config_id="0" member_group="0" start="" stop="" />
+    <tl_iso_product_price pid="130" tax_class="1" config_id="0" member_group="0" start="" stop="" />
+    <tl_iso_product_price pid="137" tax_class="1" config_id="0" member_group="0" start="" stop="" />
+    <tl_iso_product_price pid="152" tax_class="1" config_id="0" member_group="0" start="" stop="" />
+    <tl_iso_product_pricetier pid="1" min="1" price="24.95" />
+    <tl_iso_product_pricetier pid="2" min="1" price="23.99" />
+    <tl_iso_product_pricetier pid="3" min="1" price="49.99" />
+    <tl_iso_product_pricetier pid="4" min="1" price="19.99" />
+    <tl_iso_product_pricetier pid="5" min="1" price="84.99" />
+    <tl_iso_product_pricetier pid="6" min="1" price="29.99" />
+    <tl_iso_product_pricetier pid="7" min="1" price="25.99" />
+    <tl_iso_product_pricetier pid="8" min="1" price="65.99" />
+    <tl_iso_product_pricetier pid="9" min="1" price="35.99" />
+    <tl_iso_product_pricetier pid="10" min="1" price="15.00" />
+</dataset>

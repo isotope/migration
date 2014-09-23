@@ -133,8 +133,6 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
         $tableDiff = new TableDiff('tl_iso_product_categories');
         $tableDiff->newName = 'tl_iso_product_category';
 
-        // TODO: finish implementation
-
         return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
     }
 
@@ -156,8 +154,6 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
         $column->setNotnull(false);
         $tableDiff->renamedColumns['keywords_meta'] = $column;
 
-        // TODO: finish implementation
-
         return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
     }
 
@@ -173,8 +169,6 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
         $tableDiff = new TableDiff('tl_iso_price_tiers');
         $tableDiff->newName = 'tl_iso_product_pricetier';
         $tiersSql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
-
-        // TODO: finish implementation
 
         return array_merge($priceSql, $tiersSql);
     }
