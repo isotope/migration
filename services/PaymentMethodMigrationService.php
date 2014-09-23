@@ -12,7 +12,9 @@
 namespace Isotope\Migration\Service;
 
 
+use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\TableDiff;
+use Doctrine\DBAL\Types\Type;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -145,9 +147,29 @@ class PaymentMethodMigrationService extends AbstractMigrationService
 
         $tableDiff = new TableDiff('tl_iso_payment_modules');
         $tableDiff->newName = 'tl_iso_payment';
-        $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
 
-        // TODO: do we need to adjust fields?
+        $column = new Column('psp_pspid', Type::getType(Type::INTEGER));
+        $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
+        $tableDiff->renamedColumns['postfinance_pspid'] = $column;
+
+        $column = new Column('psp_http_method', Type::getType(Type::STRING));
+        $column->setLength(4)->setNotnull(true)->setDefault('');
+        $tableDiff->renamedColumns['postfinance_method'] = $column;
+
+        $column = new Column('psp_hash_in', Type::getType(Type::STRING));
+        $column->setLength(128)->setNotnull(true)->setDefault('');
+        $tableDiff->renamedColumns['postfinance_secret'] = $column;
+
+        $column = new Column('psp_hash_out', Type::getType(Type::STRING));
+        $column->setLength(128)->setNotnull(true)->setDefault('');
+        $tableDiff->addedColumns['psp_hash_out'] = $column;
+
+        $column = new Column('psp_hash_method', Type::getType(Type::STRING));
+        $column->setLength(6)->setNotnull(true)->setDefault('');
+        $tableDiff->addedColumns['psp_hash_method'] = $column;
+
+        $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+        $sql[] = "UPDATE tl_iso_payment SET psp_hash_out = psp_hash_in, psp_hash_method = 'sha1'";
 
         return $sql;
     }
@@ -157,7 +179,6 @@ class PaymentMethodMigrationService extends AbstractMigrationService
      */
     public function postMigration()
     {
-        // TODO: do we need post migration?
     }
 
     /**
@@ -169,6 +190,14 @@ class PaymentMethodMigrationService extends AbstractMigrationService
     {
         $this->dbcheck
             ->tableMustExist('tl_iso_payment_modules')
-            ->tableMustNotExist('tl_iso_payment');
+            ->tableMustNotExist('tl_iso_payment')
+            ->columnMustExist('tl_iso_payment_modules', 'postfinance_pspid')
+            ->columnMustNotExist('tl_iso_payment_modules', 'psp_pspid')
+            ->columnMustExist('tl_iso_payment_modules', 'postfinance_method')
+            ->columnMustNotExist('tl_iso_payment_modules', 'psp_http_method')
+            ->columnMustExist('tl_iso_payment_modules', 'postfinance_secret')
+            ->columnMustNotExist('tl_iso_payment_modules', 'psp_hash_in')
+            ->columnMustNotExist('tl_iso_payment_modules', 'psp_hash_out')
+            ->columnMustNotExist('tl_iso_payment_modules', 'psp_hash_method');
     }
 }
