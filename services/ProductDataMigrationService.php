@@ -181,6 +181,10 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
         $params = array();
         $nonAdvancedTypes = $this->db->executeQuery("SELECT id, attributes, variants, variant_attributes FROM tl_iso_producttype WHERE prices=''");
 
+        if ($nonAdvancedTypes->rowCount() == 0) {
+            return;
+        }
+
         while ($type = $nonAdvancedTypes->fetch()) {
             $attributes = unserialize($type['attributes']);
             $variantAttributes = unserialize($type['variant_attributes']);
