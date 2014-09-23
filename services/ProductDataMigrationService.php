@@ -185,13 +185,13 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
         $time = time();
         $nonAdvancedTypes = $this->db->query("SELECT id FROM tl_iso_producttype WHERE prices=''")->fetchAll(\PDO::FETCH_COLUMN);
 
-        $allProducts = $this->db->fetchAll(
-            "SELECT id, tax_class, price FROM tl_iso_product WHERE id IN (?)",
+        $allProducts = $this->db->executeQuery(
+            "SELECT id, tax_class, price FROM tl_iso_product WHERE type IN (?) AND language=''",
             array($nonAdvancedTypes),
             array(Connection::PARAM_INT_ARRAY)
         );
 
-        foreach ($allProducts as $product) {
+        while ($product = $allProducts->fetch()) {
 
             $this->db->insert(
                 'tl_iso_product_price',
