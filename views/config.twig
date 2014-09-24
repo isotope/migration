@@ -15,6 +15,7 @@
             <div class="row headline">
                 <h2>{{ title }}</h2>
                 <p>{{ description }}</p>
+                {% if error|default %}<p class="error">Error: {{ error }}</p>{% endif %}
             </div>
         {% endblock %}
 

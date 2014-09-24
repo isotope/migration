@@ -331,6 +331,11 @@ a:hover {
     color: #c00
 }
 
+.headline .error {
+    background-color: #faeeee;
+    padding: 5px 10px;
+}
+
 .confirm {
     color: #8ab858
 }
