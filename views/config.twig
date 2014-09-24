@@ -2,6 +2,14 @@
 
 {% block main %}
     <form action="" method="post">
+        <!-- default button for HTML form, fix issues with the enter key -->
+        <div class="invisible">
+            {% if can_continue|default(false) %}
+                <input type="submit" name="continue" value="1">
+            {% elseif can_save|default(false) %}
+                <input type="submit" name="save" value="1">
+            {% endif %}
+        </div>
 
         {% block headline %}
             <div class="row headline">

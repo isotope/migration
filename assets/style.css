@@ -114,6 +114,16 @@ h1, h2, h3, h4, h5, h6, p, pre, blockquote, table, ol, ul, form, legend {
     margin-bottom: 11px
 }
 
+.invisible {
+    width: 0;
+    height: 0;
+    left: -1000px;
+    top: -1000px;
+    position: absolute;
+    overflow: hidden;
+    display: inline;
+}
+
 /* Contao stylect */
 .styled_select {
     display: inline;
