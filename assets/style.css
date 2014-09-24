@@ -24,7 +24,16 @@ caption, th, td {
     text-align: left;
     /*noinspection CssOverwrittenProperties*/
     text-align: start;
-    vertical-align: top
+    vertical-align: middle;
+}
+
+th, td {
+    padding-right: 8px;
+    padding-bottom: 4px;
+}
+
+td button {
+    margin-bottom: 0;
 }
 
 abbr, acronym {
@@ -72,6 +81,25 @@ input, button, textarea, select {
     font-weight: inherit
 }
 
+button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    line-height: 16px;
+    margin: 0;
+    padding: 0;
+
+}
+
+button:hover {
+    text-decoration: underline;
+}
+
+button img {
+    float: left;
+    margin-right: 5px;
+}
+
 pre, code {
     font: 12px Monaco, monospace
 }
@@ -110,7 +138,7 @@ h1, h2, h3, h4, h5, h6, legend {
     font-weight: bold;
 }
 
-h1, h2, h3, h4, h5, h6, p, pre, blockquote, table, ol, ul, form, legend {
+h1, h2, h3, h4, h5, h6, p, pre, blockquote, table, ol, ul, form, legend, button {
     margin-bottom: 11px
 }
 
@@ -181,7 +209,6 @@ h1, h2, h3, h4, h5, h6, p, pre, blockquote, table, ol, ul, form, legend {
     margin-bottom: 0;
     text-align: center;
     vertical-align: middle;
-    line-height: 16px;
     font-size: 11px;
     color: #444;
     cursor: pointer;
@@ -371,7 +398,14 @@ form {
 }
 
 .select {
-    width: 200px
+    width: 140px;
+    margin-right: 8px;
+}
+
+.text {
+    border: 1px solid #aaa;
+    padding: 3px;
+    border-radius: 3px;
 }
 
 #left ul {

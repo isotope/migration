@@ -61,6 +61,47 @@ return array(
         ),
         'frontend_module' => array(
             'templates'   => 'The migration tool migrated the templates "iso_cart_full" to "iso_collection_default" and "iso_cart_mini" to "iso_collection_mini". However, it cannot migrate logic you built into your templates. You will have to check and adjust every (!) single template!'
+        ),
+        'shop_config' => array(
+            'gallery_empty' => 'Gallery configuration is empty.',
+            'gallery_missing_name' => 'You must enter a name for each gallery.',
+            'gallery_missing_config' => 'Every gallery must have a main and gallery image config.',
+            'gallery_list_name' => 'List',
+            'gallery_reader_name' => 'Reader',
+            'gallery_legend' => 'Configure galleries',
+            'gallery_intro' => 'Please setup your new galleries based on image sizes in shop configs of Isotope 1.x',
+            'gallery_description' => <<<'HTML'
+<p class="explain">In Isotope 2, the image sizes have been moved to gallery configurations. Every gallery configuration contains
+    information about image sizes and link action (e.g. link to product or open lightbox).</p>
+<p class="explain">The default configuration of Isotope 1.x contained four different image sizes: <i>gallery</i>, <i>thumbnail</i>, <i>medium</i> and <i>large</i>.<br>
+If you followed these, you should choose <i>thumbnail</i> for both main and gallery image of the list gallery, and
+setup the reader gallery like this: Main Image Size = <i>medium</i>, Gallery Size = <i>gallery</i>, Lightbox Size = <i>large</i>.</p>
+</p>
+HTML
+,
+            'gallery_row_id' => 'ID',
+            'gallery_row_name' => 'Name',
+            'gallery_row_main' => 'Main Image Size',
+            'gallery_row_gallery' => 'Gallery Size',
+            'gallery_row_lightbox' => 'Lightbox Size',
+            'gallery_default' => 'Gallery #:id',
+            'gallery_lightbox_blank' => 'None (for list galleries)',
+            'gallery_delete_title' => 'Delete gallery',
+            'gallery_add_title' => 'Add one more gallery configuration',
+            'gallery_add_label' => 'Add another gallery',
+            'productType_missing_config' => 'Please assign a list and reader gallery to each product type',
+            'productType_legend' => 'Configure product types',
+            'productType_intro' => 'Every product type must have a gallery configuration assigned.',
+            'productType_description' => <<<'HTML'
+<p class="explain">Here you need to assign your gallery configurations to the product types. Each product type has a gallery
+for the list and one for the reader view. They can be the same, but you probably want one with lightbox in the reader,
+but a link in the list. After migration, you can also override the gallery in each frontend module configuration.</p>
+HTML
+,
+            'productType_row_id' => 'ID',
+            'productType_row_name' => 'Name',
+            'productType_row_list' => 'List Gallery',
+            'productType_row_reader' => 'Reader Gallery',
         )
     )
 );
