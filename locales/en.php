@@ -39,7 +39,7 @@ return array(
             'name' => '%name% (Type "%type%")',
             'old_title' => 'Old shipping methods',
             'old_explain' => 'The following shipping methods are no longer supported in Isotope 2 (core):',
-            'old_description' => 'We won\'t tough the data, so maybe you will find a third-party extension or you can contact a developer to fix this for you.',
+            'old_description' => 'We won\'t touch the data, so maybe you will find a third-party extension or you can contact a developer to fix this for you.',
             'unknown_title' => 'Unknown shipping methods',
             'unknown_explain' => 'The following shipping methods appear to be from third-party extensions:',
             'unknown_description' => 'We can\'t tell if they work in Isotope 2, nor are we able to migrate their data. We won\'t touch them though, so if you\'re lucky a third-party developer might provide an upgrade option.',
@@ -50,12 +50,11 @@ return array(
             'name' => '%name% (Type "%type%")',
             'old_title' => 'Old payment methods',
             'old_explain' => 'The following payment methods are no longer supported in Isotope 2 (core):',
-            'old_description' => 'We won\'t tough the data, so maybe you will find a third-party extension or you can contact a developer to fix this for you.',
+            'old_description' => 'We won\'t touch the data, so maybe you will find a third-party extension or you can contact a developer to fix this for you.',
             'unknown_title' => 'Unknown payment methods',
             'unknown_explain' => 'The following payment methods appear to be from third-party extensions:',
             'unknown_description' => 'We can\'t tell if they work in Isotope 2, nor are we able to migrate their data. We won\'t touch them though, so if you\'re lucky a third-party developer might provide an upgrade option.',
-            'confirmation' => 'Please confirm that you have read the above. It is your responsibility to not delete any data of the
-            old/unsuppported payment methods if you need them in the future.'
+            'confirmation' => 'Please confirm that you have read the above. It is your responsibility to not delete any data of the old/unsuppported payment methods if you need them in the future.'
         ),
         'download' => array(
             'titleAndDescription'   => 'The database columns tl_iso_download.title as well as tl_iso_download.description cannot be converted automatically. They contain the title as well as the description of a download (provided you entered them). In Contao 3+ you can manage meta data for files in the file system directly so there is no need for Isotope eCommerce to have yet another tilte or description field. Because the migration tool cannot automatically detect in what language you entered the data in Isotope 1.4 (and possibly how you translated them), it does not touch the data in any way at all! Make sure you do not (!!) delete tl_iso_download.description and tl_iso_download.title before you migrated the data manually!'

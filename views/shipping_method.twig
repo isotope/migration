@@ -10,7 +10,7 @@
                     <li>{% trans with {'%name%': shipping.name, '%type%':shipping.type} %}service.shipping_method.name{% endtrans %}</li>
                 {% endfor %}
             </ul>
-            <p>{% trans %}service.shipping_method.old_description{% endtrans %}</p>
+            <p class="explain">{% trans %}service.shipping_method.old_description{% endtrans %}</p>
         </div>
     {% endif %}
 
@@ -23,7 +23,7 @@
                     <li>{% trans with {'%name%': shipping.name, '%type%':shipping.type} %}service.shipping_method.name{% endtrans %}</li>
                 {% endfor %}
             </ul>
-            <p>{% trans %}service.shipping_method.unknown_description{% endtrans %}</p>
+            <p class="explain">{% trans %}service.shipping_method.unknown_description{% endtrans %}</p>
         </div>
     {% endif %}
 

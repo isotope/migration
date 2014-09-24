@@ -10,7 +10,7 @@
                     <li>{% trans with {'%name%': payment.name, '%type%':payment.type} %}service.payment_method.name{% endtrans %}</li>
                 {% endfor %}
             </ul>
-            <p>{% trans %}service.payment_method.old_description{% endtrans %}</p>
+            <p class="explain">{% trans %}service.payment_method.old_description{% endtrans %}</p>
         </div>
     {% endif %}
 
@@ -23,7 +23,7 @@
                     <li>{% trans with {'%name%': payment.name, '%type%':payment.type} %}service.payment_method.name{% endtrans %}</li>
                 {% endfor %}
             </ul>
-            <p>{% trans %}service.payment_method.unknown_description{% endtrans %}</p>
+            <p class="explain">{% trans %}service.payment_method.unknown_description{% endtrans %}</p>
         </div>
     {% endif %}
 
