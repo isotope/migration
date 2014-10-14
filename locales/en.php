@@ -14,7 +14,9 @@ return array(
         'saveContinue'  => 'Save & Continue',
     ),
     'index' => array(
-        'start'         => 'Start configuration'
+        'headline'      => 'Isotope 2 Migration Tool',
+        'intro'         => 'This tool will migrate your Isotope 1.4 data to Isotope 2. Please read carefully before continuing.',
+        'start'         => 'Start configuration',
     ),
     'error' => array(
         'tableFound'  => 'Table "%table%" must NOT exist in the database.',
