@@ -46,12 +46,24 @@ class MigrationController
         return $this->twig->render('index.twig');
     }
 
-    public function configAction($slug = '')
+    public function configIntroAction()
+    {
+        $services = $this->getServices();
+
+        return $this->twig->render(
+            'config_intro.twig',
+            array(
+                'continue' => $services[0]->getSlug()
+            )
+        );
+    }
+
+    public function configAction($slug)
     {
         $forwardToNext = false;
 
         foreach ($this->getServices() as $service) {
-            if ($slug == '' || $forwardToNext) {
+            if ($forwardToNext) {
                 return new RedirectResponse($this->request->getBaseUrl() . '/config/'.$service->getSlug());
 
             } elseif ($slug == $service->getSlug()) {

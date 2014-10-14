@@ -1,0 +1,23 @@
+{% extends "base.twig" %}
+
+{% block main %}
+<div class="row headline">
+    <h2>Set up migration</h2>
+    <p>Tell us about your installation so we can migrate the database.</p>
+</div>
+<div class="row">
+    <h3>Step by step</h3>
+    <p>The migration tool is split into multiple steps. Each migration step will take care of a small part of the application.
+        You can see the list of migration steps in the navigation to the left side.</p>
+    <p>Every step has three different states:</p>
+    <ul>
+        <li>Grey if your input is necessary</li>
+        <li class="confirm">Green if everything is ready</li>
+        <li class="error">Red if something is wrong</li>
+    </ul>
+    <p>The migration can only be executed if all steps are green.</p>
+</div>
+<div class="row">
+    <p class="mt"><a href="{{ base_url }}/config/{{ continue }}" class="button main">{% trans %}config.continue{% endtrans %}</a></p>
+</div>
+{% endblock %}
