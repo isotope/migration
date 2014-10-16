@@ -218,7 +218,23 @@ class ShopConfigMigrationService extends AbstractMigrationService
         $table->addColumn('tstamp', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
         $table->addColumn('name', Type::STRING, array('notnull'=>true, 'default'=>''));
         $table->addColumn('type', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>64));
+        $table->addColumn('anchor', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>8));
+        $table->addColumn('placeholder', Type::BLOB, array('length'=>65535));
+        $table->addColumn('main_size', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>64));
+        $table->addColumn('gallery_size', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>64));
+        $table->addColumn('lightbox_size', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>64));
+        $table->addColumn('main_watermark_image', Type::BLOB, array('notnull'=>false, 'length'=>65535));
+        $table->addColumn('main_watermark_position', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>16));
+        $table->addColumn('gallery_watermark_image', Type::BLOB, array('notnull'=>false, 'length'=>65535));
+        $table->addColumn('gallery_watermark_position', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>16));
+        $table->addColumn('lightbox_watermark_image', Type::BLOB, array('notnull'=>false, 'length'=>65535));
+        $table->addColumn('lightbox_watermark_position', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>16));
         $table->setPrimaryKey(array('id'));
+
+        $sql = array_merge(
+            $sql,
+            $schema->toSql($this->db->getDatabasePlatform())
+        );
 
         return $sql;
     }
@@ -322,7 +338,7 @@ class ShopConfigMigrationService extends AbstractMigrationService
 
             if (is_array($imageSizes)) {
                 foreach ($imageSizes as $size) {
-                    $options[$config['name']][$config['id'].'_'.$size['name']] = sprintf(
+                    $options[$config['name']][$config['id'].'-'.$size['name']] = sprintf(
                         '%s (%s x %s)',
                         $size['name'],
                         $size['width'],
@@ -427,12 +443,118 @@ class ShopConfigMigrationService extends AbstractMigrationService
 
     private function convertGalleries()
     {
-        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_config") === '0') {
+        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_config") === '0'
+            || $this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_producttype") === '0'
+        ) {
             return;
         }
 
-        // TODO: new tl_iso_gallery instead of tl_iso_config.gallery
-        // TODO: convert tl_iso_config.imageSizes to galleries
-        // TODO: tl_iso_config.missing_image_placeholder is now in the gallery
+        $time = time();
+
+        $galleryMap = array();
+
+        foreach ($this->config->get('galleries') as $id => $gallery) {
+
+            $data = array(
+                'tstamp' => $time,
+                'name' => $gallery['name'],
+                'anchor' => 'reader'
+            );
+
+            $main_config = $this->getGalleryConfig($gallery['main_config']);
+
+            $data['type'] = $main_config['type'];
+            $data['placeholder'] = $main_config['placeholder'];
+            $data['main_size'] = serialize(array($main_config['width'], $main_config['height'], $main_config['mode']));
+            $data['main_watermark_image'] = ($main_config['watermark'] ?: null); // TODO: convert to UUID
+            $data['main_watermark_position'] = $this->getWatermarkPosition($main_config['position']);
+
+            $gallery_config = $this->getGalleryConfig($gallery['gallery_config']);
+            $data['gallery_size'] = serialize(array($gallery_config['width'], $gallery_config['height'], $gallery_config['mode']));
+            $data['gallery_watermark_image'] = ($gallery_config['watermark'] ?: null); // TODO: convert to UUID
+            $data['gallery_watermark_position'] = $this->getWatermarkPosition($gallery_config['position']);
+
+            if ($gallery['lightbox_config']) {
+                $lightbox_config = $this->getGalleryConfig($gallery['lightbox_config']);
+                $data['lightbox_size'] = serialize(array($lightbox_config['width'], $lightbox_config['height'], $lightbox_config['mode']));
+                $data['lightbox_watermark_image'] = ($lightbox_config['watermark'] ?: null); // TODO: convert to UUID
+                $data['lightbox_watermark_position'] = $this->getWatermarkPosition($lightbox_config['position']);
+                $data['anchor'] = 'lightbox';
+            }
+
+            $this->db->insert(
+                'tl_iso_gallery',
+                $data
+            );
+
+            $galleryMap[$id] = $this->db->lastInsertId();
+        }
+
+        foreach ($this->config->get('productTypes') as $id => $config) {
+            $this->db->update(
+                'tl_iso_producttype',
+                array(
+                    'list_gallery'   => $galleryMap[$config['list_gallery']],
+                    'reader_gallery' => $galleryMap[$config['reader_gallery']],
+                ),
+                array(
+                    'id' => $id
+                )
+            );
+        }
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return array
+     */
+    private function getGalleryConfig($key)
+    {
+        static $configs = array();
+
+        list($id, $name) = explode('-', $key, 2);
+
+        if (!isset($configs[$id])) {
+            $configs[$id]= $this->db->fetchAssoc("SELECT * FROM tl_iso_config WHERE id=? LIMIT 1", array($id));
+            $sizes = unserialize($configs[$id]['imageSizes']);
+            $configs[$id]['imageSizes'] = array();
+            foreach ($sizes as $k => $size) {
+                $size['placeholder'] = $configs[$id]['missing_image_placeholder'];
+                $size['type'] = ($configs[$id]['gallery'] == 'default' ? 'standard' : $configs[$id]['gallery']);
+                $configs[$id]['imageSizes'][$size['name']] = $size;
+            }
+        }
+
+        return $configs[$id]['imageSizes'][$name];
+    }
+
+
+    private function getWatermarkPosition($position)
+    {
+        switch ($position) {
+            case 'tl':
+                return 'left_top';
+
+            case 'tc':
+                return 'center_top';
+
+            case 'tr':
+                return 'right_top';
+
+            case 'bl':
+                return 'left_bottom';
+
+            case 'bc':
+                return 'center_bottom';
+
+            case 'br':
+                return 'right_bottom';
+
+            case 'cc':
+                return 'center_center';
+        }
+
+        return '';
     }
 }
