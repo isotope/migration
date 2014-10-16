@@ -11,7 +11,17 @@
     <div id="main">
         <div class="inside">
             <h1>{% trans %}base.title{% endtrans %}</h1>
-            <p class="error">{{ error }}</p>
+            <div class="row paragraph">
+                <h2>{% trans %}error.headline{% endtrans %}</h2>
+                {% if reason == 'contao' %}
+                    <p class="error">{% trans %}error.contao{% endtrans %}</p>
+                {% elseif reason == 'database' %}
+                    <p class="error">{% trans %}error.database{% endtrans %}</p>
+                    <p><a class="button" href="{{ base_path }}/../contao/install.php" target="_blank">{% trans %}error.installTool{% endtrans %}</a></p>
+                {% else %}
+                    <p class="error">{{ message }}</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>

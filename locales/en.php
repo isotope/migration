@@ -19,6 +19,10 @@ return array(
         'start'         => 'Start configuration',
     ),
     'error' => array(
+        'headline' => 'Application Error',
+        'contao' => 'Your Contao installation was not found. To fix this problem, make sure you placed the migration tool in the root folder of your installation and there is localconfig.php in your system/config directory.',
+        'database' => 'Connecting to your database failed. This means Contao\'s localconfig.php was found, but there were either no credentials available or they were incorrect. Make sure your Contao installation works.',
+        'installTool' => 'Open Contao Install-Tool',
         'tableFound'  => 'Table "%table%" must NOT exist in the database.',
         'tableNotFound' => 'Table "%table%" not found in the database.',
         'columnFound' => 'Column "%column%" must NOT exist in the table "%table%".',

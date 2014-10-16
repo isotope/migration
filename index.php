@@ -29,12 +29,36 @@ $app->register(new \Isotope\Migration\Provider\MigrationServiceProvider());
 
 // Display a nice error page in production mode
 if (!$app['debug']) {
-    $app->error(function (\Exception $e, $code) use ($app) {
-        return new Symfony\Component\HttpFoundation\Response($app['twig']->render('error.twig', array(
-            'base_path' => $app['request']->getBasePath(),
-            'error' => $e->getMessage()
-        )));
-    });
+    $app->error(
+        function (\Exception $e) use ($app) {
+
+            /** @type Twig_Environment $twig */
+            $twig = $app['twig'];
+            $context = array(
+                'base_path' => $app['request']->getBasePath(),
+                'message'   => $e->getMessage(),
+                'reason'    => 'unknown'
+            );
+
+            // Try to handle issues with Contao or database connection
+            if ($e instanceof \Symfony\Component\HttpKernel\Exception\HttpException && $e->getStatusCode() == 501) {
+                switch ($e->getCode()) {
+                    case 403:
+                        $context['reason'] = 'database';
+                        break;
+
+                    case 404:
+                        $context['reason'] = 'contao';
+                        break;
+                }
+            }
+
+            return new Symfony\Component\HttpFoundation\Response(
+                $twig->render('error.twig', $context),
+                500
+            );
+        }
+    );
 }
 
 $app->get('/', 'migration.controller:indexAction');
