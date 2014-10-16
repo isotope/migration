@@ -14,7 +14,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 $app = new Silex\Application();
 
 //ini_set('error_reporting', E_ALL & ~E_NOTICE);
-$app['debug'] = true;
+$app['debug'] = true; // TODO: disable debug mode for stable version
 $app['kernel.root_dir'] = __DIR__;
 
 // Support PHAR

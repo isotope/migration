@@ -12,6 +12,7 @@
 namespace Isotope\Migration\Controller;
 
 
+use Doctrine\DBAL\Connection;
 use Isotope\Migration\Service\MigrationServiceInterface;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -24,12 +25,14 @@ class MigrationController
     protected $twig;
     protected $services;
     protected $request;
+    protected $db;
 
-    public function __construct(\Twig_Environment $twig, \Pimple $migration_services, Request $request)
+    public function __construct(\Twig_Environment $twig, \Pimple $migration_services, Request $request, Connection $db)
     {
         $this->twig = $twig;
         $this->services = $migration_services;
         $this->request = $request;
+        $this->db = $db;
 
         $twig->addGlobal('base_path', $request->getBasePath());
         $twig->addGlobal('base_url', $request->getBaseUrl());
@@ -102,13 +105,12 @@ class MigrationController
             $sql = array_merge($sql, $service->getMigrationSQL());
         }
 
-        var_dump($sql);
-
-        // TODO: execute SQL commands
+        foreach ($sql as $query) {
+            $this->db->exec($query);
+        }
 
         foreach ($services as $service) {
-            // TODO: execute post-database migration
-            //$service->postMigration();
+            $service->postMigration();
         }
 
         return $this->twig->render('execute.twig');
