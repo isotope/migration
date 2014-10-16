@@ -57,7 +57,9 @@ class ShopConfigMigrationService extends AbstractMigrationService
         }
 
         // Nothing to do
-        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_config") === '0') {
+        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_config") === '0'
+            || $this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_producttypes") === '0'
+        ) {
             return MigrationServiceInterface::STATUS_READY;
         }
 
