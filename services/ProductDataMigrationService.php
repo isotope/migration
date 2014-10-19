@@ -211,9 +211,7 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
             }
         }
 
-        $allProducts = $this->db->executeQuery(
-            $queryBuilder->getSQL()
-        );
+        $allProducts = $queryBuilder->execute();
 
         while ($product = $allProducts->fetch()) {
 
