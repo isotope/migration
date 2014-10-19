@@ -91,16 +91,14 @@ class MigrationController
 
     public function executeAction()
     {
-/*        foreach ($this->getServices() as $service) {
-            if ($service->getStatus() != MigrationServiceInterface::STATUS_READY) {
-                return new RedirectResponse($this->request->getBaseUrl() . '/config/'.$service->getSlug(), 303);
-            }
-        }*/
-
         $sql = array();
         $services = $this->getServices();
 
         foreach ($services as $service) {
+            if ($service->getStatus() != MigrationServiceInterface::STATUS_READY) {
+                return new RedirectResponse($this->request->getBaseUrl() . '/config/' . $service->getSlug(), 303);
+            }
+
             $sql = array_merge($sql, $service->getMigrationSQL());
         }
 
