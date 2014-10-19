@@ -82,14 +82,7 @@ class ShippingMethodMigrationService extends AbstractMigrationService
         try {
             $this->verifyDatabase();
         } catch (\RuntimeException $e) {
-            return $this->twig->render(
-                'config_error.twig',
-                array(
-                    'title'       => $this->getName(),
-                    'description' => $this->getDescription(),
-                    'error'       => $e->getMessage(),
-                )
-            );
+            return $this->renderConfigError($e->getMessage());
         }
 
         $oldMethods = $this->db->fetchAll("

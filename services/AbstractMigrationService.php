@@ -103,6 +103,25 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
     }
 
     /**
+     * Render config error twig template
+     *
+     * @param string $errorMessage
+     *
+     * @return string
+     */
+    protected function renderConfigError($errorMessage)
+    {
+        return $this->twig->render(
+            'config_error.twig',
+            array(
+                'title' => $this->getName(),
+                'description' => $this->getDescription(),
+                'error' => $errorMessage,
+            )
+        );
+    }
+
+    /**
      * Translate a string using the translator service
      *
      * @param string $string
