@@ -54,7 +54,7 @@ class PaymentMethodMigrationService extends AbstractMigrationService
         }
 
         // Nothing to do
-        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_payment_modules") === '0') {
+        if ($this->dbcheck->tableIsEmpty('tl_iso_payment_modules')) {
             return MigrationServiceInterface::STATUS_READY;
         }
 

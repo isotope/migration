@@ -57,7 +57,9 @@ class ShopConfigMigrationService extends AbstractMigrationService
         }
 
         // Nothing to do
-        if (!$this->hasConfigsAndProductTypes(true)) {
+        if ($this->dbcheck->tableIsEmpty('tl_iso_config')
+            || $this->dbcheck->tableIsEmpty('tl_iso_producttypes')
+        ) {
             return MigrationServiceInterface::STATUS_READY;
         }
 
@@ -93,7 +95,7 @@ class ShopConfigMigrationService extends AbstractMigrationService
             );
         }
 
-        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_config") === '0') {
+        if ($this->dbcheck->tableIsEmpty('tl_iso_config')) {
             return $this->twig->render(
                 'config_ready.twig',
                 array(
@@ -422,7 +424,8 @@ class ShopConfigMigrationService extends AbstractMigrationService
 
     private function convertGalleries()
     {
-        if (!$this->hasConfigsAndProductTypes()) {
+        if ($this->dbcheck->tableIsEmpty('tl_iso_config')
+            || $this->dbcheck->tableIsEmpty('tl_iso_producttype')) {
             return;
         }
 
@@ -534,17 +537,5 @@ class ShopConfigMigrationService extends AbstractMigrationService
         } else {
             return 'enabled';
         }
-    }
-
-
-    private function hasConfigsAndProductTypes($oldFormat = false)
-    {
-        if ($this->db->fetchColumn('SELECT COUNT(*) FROM tl_iso_config') === '0'
-            || $this->db->fetchColumn('SELECT COUNT(*) FROM tl_iso_producttype' . ($oldFormat ? 's' : '')) === '0'
-        ) {
-            return false;
-        }
-
-        return true;
     }
 }

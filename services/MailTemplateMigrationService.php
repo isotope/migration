@@ -468,6 +468,6 @@ class MailTemplateMigrationService extends AbstractMigrationService
 
     private function hasMails()
     {
-        return $this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") !== '0';
+        return !$this->dbcheck->tableIsEmpty('tl_iso_mail');
     }
 }

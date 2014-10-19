@@ -148,6 +148,18 @@ class DatabaseVerificationService
     }
 
     /**
+     * Check if a table is empty (contains no records)
+     *
+     * @param string $tableName
+     *
+     * @return bool
+     */
+    public function tableIsEmpty($tableName)
+    {
+        return $this->db->fetchColumn("SELECT COUNT(*) FROM $tableName") === '0';
+    }
+
+    /**
      * @return \Doctrine\DBAL\Schema\AbstractSchemaManager
      */
     private function schemaManager()
