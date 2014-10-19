@@ -13,12 +13,8 @@ namespace Isotope\Migration\Service;
 
 
 use Doctrine\DBAL\Schema\Column;
-use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Schema\SchemaConfig;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 
 class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
 {
