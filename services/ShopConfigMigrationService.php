@@ -391,17 +391,9 @@ class ShopConfigMigrationService extends AbstractMigrationService
                 foreach ($billingFields as $position => $field) {
                     $name = $field['value'];
 
-                    if (!$field['enabled']) {
-                        $state = 'disabled';
-                    } elseif ($field['mandatory']) {
-                        $state = 'mandatory';
-                    } else {
-                        $state = 'enabled';
-                    }
-
                     $addressFields[$name] = array(
                         'name' => $name,
-                        'billing' => $state,
+                        'billing' => $this->getFieldState($field),
                         'shipping' => 'disabled',
                         'position' => ($position * 10)
                     );
@@ -412,21 +404,13 @@ class ShopConfigMigrationService extends AbstractMigrationService
                 foreach ($shippingFields as $position => $field) {
                     $name = $field['value'];
 
-                    if (!$field['enabled']) {
-                        $state = 'disabled';
-                    } elseif ($field['mandatory']) {
-                        $state = 'mandatory';
-                    } else {
-                        $state = 'enabled';
-                    }
-
                     if (isset($addressFields[$name])) {
-                        $addressFields[$name]['shipping'] = $state;
+                        $addressFields[$name]['shipping'] = $this->getFieldState($field);
                     } else {
                         $addressFields[$name] = array(
                             'name' => $name,
                             'billing' => 'disabled',
-                            'shipping' => $state,
+                            'shipping' => $this->getFieldState($field),
                             'position' => ($position * 10 + 5)
                         );
                     }
@@ -553,5 +537,17 @@ class ShopConfigMigrationService extends AbstractMigrationService
         }
 
         return '';
+    }
+
+
+    private function getFieldState(array $field)
+    {
+        if (!$field['enabled']) {
+            return 'disabled';
+        } elseif ($field['mandatory']) {
+            return 'mandatory';
+        } else {
+            return 'enabled';
+        }
     }
 }
