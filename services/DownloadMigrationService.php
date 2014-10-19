@@ -23,11 +23,6 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
 {
 
     /**
-     * @type DatabaseVerificationService
-     */
-    protected $dbcheck;
-
-    /**
      * @type DbafsService
      */
     protected $dbafs;
@@ -35,17 +30,15 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
 
     public function __construct(
         AttributeBagInterface $config,
+        AttributeBagInterface $summary,
         \Twig_Environment $twig,
         TranslatorInterface $translator,
         Connection $db,
         DatabaseVerificationService $migration_dbcheck,
         DbafsService $migration_dbafs
     ) {
-        $this->config = $config;
-        $this->twig = $twig;
-        $this->translator = $translator;
-        $this->db = $db;
-        $this->dbcheck = $migration_dbcheck;
+        parent::__construct($config, $summary, $twig, $translator, $db, $migration_dbcheck);
+
         $this->dbafs = $migration_dbafs;
     }
 
