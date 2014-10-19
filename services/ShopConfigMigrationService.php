@@ -57,9 +57,7 @@ class ShopConfigMigrationService extends AbstractMigrationService
         }
 
         // Nothing to do
-        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_config") === '0'
-            || $this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_producttypes") === '0'
-        ) {
+        if (!$this->hasConfigsAndProductTypes()) {
             return MigrationServiceInterface::STATUS_READY;
         }
 
@@ -424,9 +422,7 @@ class ShopConfigMigrationService extends AbstractMigrationService
 
     private function convertGalleries()
     {
-        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_config") === '0'
-            || $this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_producttype") === '0'
-        ) {
+        if (!$this->hasConfigsAndProductTypes()) {
             return;
         }
 
@@ -446,20 +442,14 @@ class ShopConfigMigrationService extends AbstractMigrationService
 
             $data['type'] = $main_config['type'];
             $data['placeholder'] = $main_config['placeholder'];
-            $data['main_size'] = serialize(array($main_config['width'], $main_config['height'], $main_config['mode']));
-            $data['main_watermark_image'] = ($main_config['watermark'] ?: null); // TODO: convert to UUID
-            $data['main_watermark_position'] = $this->getWatermarkPosition($main_config['position']);
+            $this->convertGalleryConfig($main_config, 'main', $data);
 
             $gallery_config = $this->getGalleryConfig($gallery['gallery_config']);
-            $data['gallery_size'] = serialize(array($gallery_config['width'], $gallery_config['height'], $gallery_config['mode']));
-            $data['gallery_watermark_image'] = ($gallery_config['watermark'] ?: null); // TODO: convert to UUID
-            $data['gallery_watermark_position'] = $this->getWatermarkPosition($gallery_config['position']);
+            $this->convertGalleryConfig($gallery_config, 'gallery', $data);
 
             if ($gallery['lightbox_config']) {
                 $lightbox_config = $this->getGalleryConfig($gallery['lightbox_config']);
-                $data['lightbox_size'] = serialize(array($lightbox_config['width'], $lightbox_config['height'], $lightbox_config['mode']));
-                $data['lightbox_watermark_image'] = ($lightbox_config['watermark'] ?: null); // TODO: convert to UUID
-                $data['lightbox_watermark_position'] = $this->getWatermarkPosition($lightbox_config['position']);
+                $this->convertGalleryConfig($lightbox_config, 'lightbox', $data);
                 $data['anchor'] = 'lightbox';
             }
 
@@ -511,6 +501,14 @@ class ShopConfigMigrationService extends AbstractMigrationService
     }
 
 
+    private function convertGalleryConfig(array $config, $name, array &$data)
+    {
+        $data[$name.'_size'] = serialize(array($config['width'], $config['height'], $config['mode']));
+        $data[$name.'_watermark_image'] = ($config['watermark'] ?: null); // TODO: convert to UUID
+        $data[$name.'_watermark_position'] = $this->getWatermarkPosition($config['position']);
+    }
+
+
     private function getWatermarkPosition($position)
     {
         switch ($position) {
@@ -549,5 +547,17 @@ class ShopConfigMigrationService extends AbstractMigrationService
         } else {
             return 'enabled';
         }
+    }
+
+
+    private function hasConfigsAndProductTypes()
+    {
+        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_config") === '0'
+            || $this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_producttype") === '0'
+        ) {
+            return false;
+        }
+
+        return true;
     }
 }
