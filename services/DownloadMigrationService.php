@@ -87,8 +87,6 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
 
 
         // TODO: According to Andy there's a download type field now?
-
-        // TODO: finish implementation
     }
 
     /**
@@ -108,8 +106,6 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
         $this->dbcheck
             ->tableMustExist('tl_iso_order_downloads')
             ->tableMustNotExist('tl_iso_product_collection_download');
-
-        // TODO: finish implementation
     }
 
     /**
@@ -127,8 +123,6 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
         $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
         $sql[] = "UPDATE tl_iso_download SET published='1'";
 
-        // TODO: finish implementation
-
         return $sql;
     }
 
@@ -139,8 +133,6 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
     {
         $tableDiff = new TableDiff('tl_iso_order_downloads');
         $tableDiff->newName = 'tl_iso_product_collection_download';
-
-        // TODO: finish implementation
 
         return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
     }

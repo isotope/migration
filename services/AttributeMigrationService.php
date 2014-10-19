@@ -60,7 +60,6 @@ class AttributeMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
-        // TODO: finish implementation
     }
 
     /**
@@ -73,7 +72,5 @@ class AttributeMigrationService extends AbstractConfigfreeMigrationService
         $this->dbcheck
             ->tableMustExist('tl_iso_attributes')
             ->tableMustNotExist('tl_iso_attribute');
-
-        // TODO: finish implementation
     }
 }

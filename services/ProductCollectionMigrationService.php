@@ -72,8 +72,6 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
      */
     protected function verifyDatabase()
     {
-        // TODO: should we check for cart tables (because they are dropped)?
-
         $this->dbcheck
             ->tableMustExist('tl_iso_orders')
             ->tableMustNotExist('tl_iso_product_collection')
