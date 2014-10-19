@@ -1,4 +1,9 @@
 {
+    "name": "isotope/migration",
+    "description": "Migration tool to update Isotope v1.4 to v2.x",
+    "type": "project",
+    "homepage": "https://isotopeecommerce.org",
+    "license": "LGPL-3.0+",
     "autoload": {
         "psr-4": {
             "Isotope\\Migration\\Controller\\": "controllers/",
