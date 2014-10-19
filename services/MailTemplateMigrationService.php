@@ -313,42 +313,29 @@ class MailTemplateMigrationService extends AbstractMigrationService
         $schema = new Schema(array(), array(), $schemaConfig);
 
         if (!$this->dbcheck->tableExists('tl_nc_gateway')) {
-            $table = $schema->createTable('tl_nc_gateway');
-            $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'autoincrement'=>true));
-            $table->addColumn('tstamp', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
+            $table = $this->createContaoTable('tl_nc_gateway', $schema);
             $table->addColumn('type', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>32));
             $table->addColumn('title', Type::STRING, array('notnull'=>true, 'default'=>''));
-            $table->setPrimaryKey(array('id'));
         }
 
         if (!$this->dbcheck->tableExists('tl_nc_notification')) {
-            $table = $schema->createTable('tl_nc_notification');
-            $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'autoincrement'=>true));
-            $table->addColumn('tstamp', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
+            $table = $this->createContaoTable('tl_nc_notification', $schema);
             $table->addColumn('type', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>32));
             $table->addColumn('title', Type::STRING, array('notnull'=>true, 'default'=>''));
-            $table->setPrimaryKey(array('id'));
         }
 
         if (!$this->dbcheck->tableExists('tl_nc_message')) {
-            $table = $schema->createTable('tl_nc_message');
-            $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'autoincrement'=>true));
-            $table->addColumn('pid', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
-            $table->addColumn('tstamp', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
+            $table = $this->createContaoTable('tl_nc_message', $schema, true);
             $table->addColumn('title', Type::STRING, array('notnull'=>true, 'default'=>''));
             $table->addColumn('gateway', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
             $table->addColumn('gateway_type', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>32));
             $table->addColumn('email_priority', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
             $table->addColumn('email_template', Type::STRING, array('notnull'=>true, 'default'=>''));
             $table->addColumn('published', Type::STRING, array('fixed'=>true, 'notnull'=>true, 'default'=>'', 'length'=>1));
-            $table->setPrimaryKey(array('id'));
         }
 
         if (!$this->dbcheck->tableExists('tl_nc_language')) {
-            $table = $schema->createTable('tl_nc_language');
-            $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'autoincrement'=>true));
-            $table->addColumn('pid', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
-            $table->addColumn('tstamp', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
+            $table = $this->createContaoTable('tl_nc_language', $schema, true);
             $table->addColumn('gateway_type', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>32));
             $table->addColumn('language', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>5));
             $table->addColumn('fallback', Type::STRING, array('fixed'=>true, 'notnull'=>true, 'default'=>'', 'length'=>1));
@@ -361,7 +348,6 @@ class MailTemplateMigrationService extends AbstractMigrationService
             $table->addColumn('email_text', Type::TEXT, array('length'=>65535));
             $table->addColumn('email_html', Type::TEXT, array('length'=>65535));
             $table->addColumn('email_mode', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>16));
-            $table->setPrimaryKey(array('id'));
         }
 
         return $schema->toSql($this->db->getDatabasePlatform());

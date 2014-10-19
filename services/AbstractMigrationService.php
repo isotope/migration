@@ -13,6 +13,8 @@ namespace Isotope\Migration\Service;
 
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\DBAL\Types\Type;
 use Silex\Translator;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
 
@@ -95,5 +97,30 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
     protected function trans($string, array $parameters = array())
     {
         return $this->translator->trans($string, $parameters);
+    }
+
+    /**
+     * Add a basic Contao table to given database schema
+     *
+     * @param string $name
+     * @param Schema $schema
+     * @param bool   $addPid
+     *
+     * @return \Doctrine\DBAL\Schema\Table
+     */
+    protected function createContaoTable($name, Schema $schema, $addPid = false)
+    {
+        $table = $schema->createTable($name);
+
+        $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'autoincrement'=>true));
+        $table->setPrimaryKey(array('id'));
+
+        if ($addPid) {
+            $table->addColumn('pid', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
+        }
+
+        $table->addColumn('tstamp', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
+
+        return $table;
     }
 }

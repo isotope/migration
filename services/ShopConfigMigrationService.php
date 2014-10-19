@@ -213,9 +213,8 @@ class ShopConfigMigrationService extends AbstractMigrationService
         $schemaConfig = new SchemaConfig();
         $schemaConfig->setDefaultTableOptions(array('engine'=>'MyISAM'));
         $schema = new Schema(array(), array(), $schemaConfig);
-        $table = $schema->createTable('tl_iso_gallery');
-        $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'autoincrement'=>true));
-        $table->addColumn('tstamp', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
+
+        $table = $this->createContaoTable('tl_iso_gallery', $schema);
         $table->addColumn('name', Type::STRING, array('notnull'=>true, 'default'=>''));
         $table->addColumn('type', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>64));
         $table->addColumn('anchor', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>8));
@@ -229,7 +228,6 @@ class ShopConfigMigrationService extends AbstractMigrationService
         $table->addColumn('gallery_watermark_position', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>16));
         $table->addColumn('lightbox_watermark_image', Type::BLOB, array('notnull'=>false, 'length'=>65535));
         $table->addColumn('lightbox_watermark_position', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>16));
-        $table->setPrimaryKey(array('id'));
 
         $sql = array_merge(
             $sql,
