@@ -175,13 +175,17 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
     private function migrateNonAdvancedPrices()
     {
         $time = time();
-        $where = array();
-        $params = array();
         $nonAdvancedTypes = $this->db->executeQuery("SELECT id, attributes, variants, variant_attributes FROM tl_iso_producttype WHERE prices=''");
 
         if ($nonAdvancedTypes->rowCount() == 0) {
             return;
         }
+
+        $p = 0;
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->select('id', 'tax_class', 'price')
+            ->from('tl_iso_product', 'p');
 
         while ($type = $nonAdvancedTypes->fetch()) {
             $attributes = unserialize($type['attributes']);
@@ -192,8 +196,8 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
                 && isset($attributes['price'])
                 && $attributes['price']['enabled']
             ) {
-                $params[] = $type['id'];
-                $where[] = "(type=? AND pid=0)";
+                $queryBuilder->orWhere('type=? AND pid=0');
+                $queryBuilder->setParameter($p++, $type['id']);
             }
 
             if ($type['variants']
@@ -202,14 +206,13 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
                 && isset($variantAttributes['price'])
                 && $variantAttributes['price']['enabled']
             ) {
-                $params[] = $type['id'];
-                $where[] = "(type=? AND pid>0 AND language='')";
+                $queryBuilder->orWhere("type=? AND pid>0 AND language=''");
+                $queryBuilder->setParameter($p++, $type['id']);
             }
         }
 
         $allProducts = $this->db->executeQuery(
-            "SELECT id, tax_class, price FROM tl_iso_product WHERE " . implode(' OR ', $where),
-            $params
+            $queryBuilder->getSQL()
         );
 
         while ($product = $allProducts->fetch()) {
