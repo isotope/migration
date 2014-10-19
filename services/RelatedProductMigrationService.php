@@ -45,15 +45,23 @@ class RelatedProductMigrationService extends AbstractConfigfreeMigrationService
     {
         $this->checkMigrationStatus();
 
-        $tableDiff = new TableDiff('tl_iso_related_categories');
-        $tableDiff->newName = 'tl_iso_related_category';
-        $categorySql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+        $sql = array();
+        $renamed = array(
+            'tl_iso_related_categories' => 'tl_iso_related_category',
+            'tl_iso_related_products' => 'tl_iso_related_product',
+        );
 
-        $tableDiff = new TableDiff('tl_iso_related_products');
-        $tableDiff->newName = 'tl_iso_related_product';
-        $productSql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+        foreach ($renamed as $old => $new) {
+            $tableDiff = new TableDiff($old);
+            $tableDiff->newName = $new;
 
-        return array_merge($categorySql, $productSql);
+            $sql = array_merge(
+                $sql,
+                $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff)
+            );
+        }
+
+        return $sql;
     }
 
     /**
