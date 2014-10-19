@@ -87,6 +87,22 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
     }
 
     /**
+     * Render the config-free twig template
+     */
+    protected function renderConfigFree()
+    {
+        return $this->twig->render(
+            'config_ready.twig',
+            array(
+                'title'        => $this->getName(),
+                'description'  => $this->getDescription(),
+                'message'      => $this->trans('confirm.configfree'),
+                'can_continue' => true
+            )
+        );
+    }
+
+    /**
      * Translate a string using the translator service
      *
      * @param string $string

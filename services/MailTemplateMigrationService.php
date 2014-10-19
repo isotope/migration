@@ -99,15 +99,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
         if (!$this->hasMails() || $gatewayCount === '0') {
             $this->config->set('mailGateway', 0);
 
-            return $this->twig->render(
-                'config_ready.twig',
-                array(
-                    'title' => $this->getName(),
-                    'description' => $this->getDescription(),
-                    'message' => $this->trans('confirm.configfree'),
-                    'can_continue' => true
-                )
-            );
+            return $this->renderConfigFree();
         }
 
         $request = $requestStack->getCurrentRequest();
