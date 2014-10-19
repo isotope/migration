@@ -57,7 +57,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
         }
 
         // Nothing to do
-        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") === '0') {
+        if (!$this->hasMails()) {
             return MigrationServiceInterface::STATUS_READY;
         }
 
@@ -90,14 +90,13 @@ class MailTemplateMigrationService extends AbstractMigrationService
             );
         }
 
-        $mailCount = $this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail");
         $gatewayCount = 0;
 
         if ($this->dbcheck->tableExists('tl_nc_gateway')) {
             $gatewayCount = $this->db->fetchColumn("SELECT COUNT(*) FROM tl_nc_gateway");
         }
 
-        if ($mailCount === '0' || $gatewayCount === '0') {
+        if (!$this->hasMails() || $gatewayCount === '0') {
             $this->config->set('mailGateway', 0);
 
             return $this->twig->render(
@@ -141,7 +140,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
         $this->checkMigrationStatus();
 
         // Nothing to do if there are no mail templates
-        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") === '0') {
+        if (!$this->hasMails()) {
             return array();
         }
 
@@ -162,7 +161,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
     public function postMigration()
     {
         // Nothing to do if there are no mail templates
-        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") === '0') {
+        if (!$this->hasMails()) {
             return;
         }
 
@@ -274,7 +273,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
     private function verifyGatewayConfig()
     {
         // Nothing to do if there are no mails
-        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") === '0') {
+        if (!$this->hasMails()) {
             return true;
         }
 
@@ -464,5 +463,11 @@ class MailTemplateMigrationService extends AbstractMigrationService
                 )
             );
         }
+    }
+
+
+    private function hasMails()
+    {
+        return $this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") !== '0';
     }
 }
