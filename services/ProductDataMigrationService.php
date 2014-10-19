@@ -11,8 +11,6 @@
 
 namespace Isotope\Migration\Service;
 
-
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;

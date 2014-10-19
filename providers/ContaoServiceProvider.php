@@ -11,8 +11,6 @@
 
 namespace Isotope\Migration\Provider;
 
-
-use Doctrine\DBAL\Connection;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -34,7 +32,7 @@ class ContaoServiceProvider implements ServiceProviderInterface
                 $dbError = false;
 
                 try {
-                    /** @type Connection $db */
+                    /** @type \Doctrine\DBAL\Connection $db */
                     $db = $app['db'];
 
                     if ((!$db->connect() && !$db->isConnected()) || $db->getDatabase() === null) {
