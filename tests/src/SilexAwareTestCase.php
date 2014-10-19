@@ -16,12 +16,12 @@ use Isotope\Migration\Provider\MigrationServiceProvider;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
-abstract class SilexAwareTestCase extends \PHPUnit_Extensions_Database_TestCase
+abstract class SilexAwareTestCase extends \PHPUnit_Framework_TestCase
 {
     /**
      * @return Application
      */
-    public function getApp()
+    public static function getApp()
     {
         if (!isset($GLOBALS['SILEX_APP'])) {
             $app = new Application();

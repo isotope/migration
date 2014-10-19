@@ -11,11 +11,20 @@
 
 namespace Isotope\Migration\Test;
 
-abstract class DbTestCase extends SilexAwareTestCase
+
+abstract class DbTestCase extends \PHPUnit_Extensions_Database_TestCase
 {
     static private $pdo = null;
 
     private $conn = null;
+
+    /**
+     * @return \Silex\Application
+     */
+    public function getApp()
+    {
+        return SilexAwareTestCase::getApp();
+    }
 
     protected function setUp()
     {
@@ -56,10 +65,5 @@ abstract class DbTestCase extends SilexAwareTestCase
         }
 
         return $this->conn;
-    }
-
-    public function getPathToFixture($fixtureFileName)
-    {
-        return __DIR__ . '/../fixtures/' . $fixtureFileName;
     }
 }

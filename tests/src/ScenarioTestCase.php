@@ -128,4 +128,9 @@ abstract class ScenarioTestCase extends DbTestCase
             }
         }
     }
+
+    private function getPathToFixture($fixtureFileName)
+    {
+        return __DIR__ . '/../fixtures/' . $fixtureFileName;
+    }
 }
