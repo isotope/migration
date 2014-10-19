@@ -61,19 +61,6 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
     }
 
     /**
-     * Translate a string using the translator service
-     *
-     * @param string $string
-     * @param array  $parameters
-     *
-     * @return string
-     */
-    protected function trans($string, array $parameters = array())
-    {
-        return $this->translator->trans($string, $parameters);
-    }
-
-    /**
      * Return a list of to do's or messages for the summary page
      *
      * @return array
@@ -95,5 +82,18 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
         $className = str_replace('MigrationService', '', $className);
 
         return strtolower(ltrim(preg_replace('/([A-Z])/', '_$1', $className), '_'));
+    }
+
+    /**
+     * Translate a string using the translator service
+     *
+     * @param string $string
+     * @param array  $parameters
+     *
+     * @return string
+     */
+    protected function trans($string, array $parameters = array())
+    {
+        return $this->translator->trans($string, $parameters);
     }
 }
