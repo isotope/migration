@@ -366,8 +366,8 @@ class ShopConfigMigrationService extends AbstractMigrationService
             $options[] = array(
                 'id'              => $row['id'],
                 'name'            => $row['name'],
-                'list_gallery'    => (string) @$config[$row['id']]['list_gallery'],
-                'reader_gallery'  => (string) @$config[$row['id']]['reader_gallery'],
+                'list_gallery'    => (string) ($config[$row['id']]['list_gallery'] ?: ''),
+                'reader_gallery'  => (string) ($config[$row['id']]['reader_gallery'] ?: ''),
             );
         }
 
