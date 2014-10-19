@@ -77,10 +77,12 @@ class MigrationServiceProvider implements ServiceProviderInterface
             '\\Isotope\\Migration\\Service\\FrontendModuleMigrationService',
             '\\Isotope\\Migration\\Service\\MailTemplateMigrationService',
 
+            '\\Isotope\\Migration\\Service\\ShopConfigMigrationService',
+            '\\Isotope\\Migration\\Service\\GalleryMigrationService',
+
             // here we don't know (yet) ;-)
 
             '\\Isotope\\Migration\\Service\\ProductCollectionMigrationService',
-            '\\Isotope\\Migration\\Service\\ShopConfigMigrationService',
             '\\Isotope\\Migration\\Service\\RelatedProductMigrationService',
             '\\Isotope\\Migration\\Service\\TranslationMigrationService',
             '\\Isotope\\Migration\\Service\\PaymentMethodMigrationService',

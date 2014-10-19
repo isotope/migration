@@ -2,22 +2,22 @@
 
 {% block content %}
     <div class="row">
-        <h3>{% trans %}service.shop_config.gallery_legend{% endtrans %}</h3>
-        <p>{% trans %}service.shop_config.gallery_intro{% endtrans %}</p>
+        <h3>{% trans %}service.gallery.gallery_legend{% endtrans %}</h3>
+        <p>{% trans %}service.gallery.gallery_intro{% endtrans %}</p>
 
         <table>
             <tr>
-                <th>{% trans %}service.shop_config.gallery_row_id{% endtrans %}</th>
-                <th>{% trans %}service.shop_config.gallery_row_name{% endtrans %}</th>
-                <th>{% trans %}service.shop_config.gallery_row_main{% endtrans %}</th>
-                <th>{% trans %}service.shop_config.gallery_row_gallery{% endtrans %}</th>
-                <th>{% trans %}service.shop_config.gallery_row_lightbox{% endtrans %}</th>
+                <th>{% trans %}service.gallery.gallery_row_id{% endtrans %}</th>
+                <th>{% trans %}service.gallery.gallery_row_name{% endtrans %}</th>
+                <th>{% trans %}service.gallery.gallery_row_main{% endtrans %}</th>
+                <th>{% trans %}service.gallery.gallery_row_gallery{% endtrans %}</th>
+                <th>{% trans %}service.gallery.gallery_row_lightbox{% endtrans %}</th>
                 <th>&nbsp;</th>
             </tr>
         {% for row, gallery in galleries %}
             <tr>
                 <td>#{{ row+1 }}</td>
-                <td><input type="text" class="text" name="galleries[{{ row }}][name]" value="{{ gallery.name|default('service.shop_config.gallery_default'|trans({':id':(row+1)})) }}"></td>
+                <td><input type="text" class="text" name="galleries[{{ row }}][name]" value="{{ gallery.name|default('service.gallery.gallery_default'|trans({':id':(row+1)})) }}"></td>
                 <td>
                     <select class="select" name="galleries[{{ row }}][main_config]">
                         <option value="">-</option>
@@ -44,7 +44,7 @@
                 </td>
                 <td>
                     <select class="select" name="galleries[{{ row }}][lightbox_config]">
-                        <option value="">{% trans %}service.shop_config.gallery_lightbox_blank{% endtrans %}</option>
+                        <option value="">{% trans %}service.gallery.gallery_lightbox_blank{% endtrans %}</option>
                         {% for config, sizes in imageSizes %}
                             <optgroup label="{{ config }}">
                                 {% for id, name in sizes %}
@@ -55,28 +55,28 @@
                     </select>
                 </td>
                 <td>
-                    <button type="submit" tabindex="50" name="delete_gallery" value="{{ row }}" title="{% trans %}service.shop_config.gallery_delete_title{% endtrans %}"><img src="{{ base_path }}/assets/delete.gif" alt="{% trans %}service.shop_config.gallery_delete_title{% endtrans %}"></button>
+                    <button type="submit" tabindex="50" name="delete_gallery" value="{{ row }}" title="{% trans %}service.gallery.gallery_delete_title{% endtrans %}"><img src="{{ base_path }}/assets/delete.gif" alt="{% trans %}service.gallery.gallery_delete_title{% endtrans %}"></button>
                 </td>
             </tr>
         {% endfor %}
         </table>
-        <button type="submit" name="add_gallery" value="1" title="{% trans %}service.shop_config.gallery_add_title{% endtrans %}"><img src="{{ base_path }}/assets/copy.gif" alt="{% trans %}service.shop_config.gallery_add_title{% endtrans %}"> {% trans %}service.shop_config.gallery_add_label{% endtrans %}</button>
+        <button type="submit" name="add_gallery" value="1" title="{% trans %}service.gallery.gallery_add_title{% endtrans %}"><img src="{{ base_path }}/assets/copy.gif" alt="{% trans %}service.gallery.gallery_add_title{% endtrans %}"> {% trans %}service.gallery.gallery_add_label{% endtrans %}</button>
 
-        {% trans %}service.shop_config.gallery_description{% endtrans %}
+        {% trans %}service.gallery.gallery_description{% endtrans %}
     </div>
 
 
     {% if productTypes %}
         <div class="row">
-            <h3>{% trans %}service.shop_config.productType_legend{% endtrans %}</h3>
-            <p>{% trans %}service.shop_config.productType_intro{% endtrans %}</p>
+            <h3>{% trans %}service.gallery.productType_legend{% endtrans %}</h3>
+            <p>{% trans %}service.gallery.productType_intro{% endtrans %}</p>
 
             <table>
                 <tr>
-                    <th>{% trans %}service.shop_config.productType_row_id{% endtrans %}</th>
-                    <th>{% trans %}service.shop_config.productType_row_name{% endtrans %}</th>
-                    <th>{% trans %}service.shop_config.productType_row_list{% endtrans %}</th>
-                    <th>{% trans %}service.shop_config.productType_row_reader{% endtrans %}</th>
+                    <th>{% trans %}service.gallery.productType_row_id{% endtrans %}</th>
+                    <th>{% trans %}service.gallery.productType_row_name{% endtrans %}</th>
+                    <th>{% trans %}service.gallery.productType_row_list{% endtrans %}</th>
+                    <th>{% trans %}service.gallery.productType_row_reader{% endtrans %}</th>
                 </tr>
                 {% for productType in productTypes %}
                     <tr>
@@ -86,7 +86,7 @@
                             <select class="select" name="productTypes[{{ productType.id }}][list_gallery]">
                                 <option value="">-</option>
                                 {% for id, gallery in galleries %}
-                                    <option value="{{ id }}"{% if productType.list_gallery|default == id~'' %} selected="selected"{% endif %}>{% trans with {':id':(id+1)} %}service.shop_config.gallery_default{% endtrans %} ({{ gallery.name|default }})</option>
+                                    <option value="{{ id }}"{% if productType.list_gallery|default == id~'' %} selected="selected"{% endif %}>{% trans with {':id':(id+1)} %}service.gallery.gallery_default{% endtrans %} ({{ gallery.name|default }})</option>
                                 {% endfor %}
                             </select>
                         </td>
@@ -94,7 +94,7 @@
                             <select class="select" name="productTypes[{{ productType.id }}][reader_gallery]">
                                 <option value="">-</option>
                                 {% for id, gallery in galleries %}
-                                    <option value="{{ id }}"{% if productType.reader_gallery|default == id~'' %} selected="selected"{% endif %}>{% trans with {':id':(id+1)} %}service.shop_config.gallery_default{% endtrans %} ({{ gallery.name|default }})</option>
+                                    <option value="{{ id }}"{% if productType.reader_gallery|default == id~'' %} selected="selected"{% endif %}>{% trans with {':id':(id+1)} %}service.gallery.gallery_default{% endtrans %} ({{ gallery.name|default }})</option>
                                 {% endfor %}
                             </select>
                         </td>
@@ -102,7 +102,7 @@
                 {% endfor %}
             </table>
 
-            {% trans %}service.shop_config.productType_description{% endtrans %}
+            {% trans %}service.gallery.productType_description{% endtrans %}
         </div>
     {% endif %}
 

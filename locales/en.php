@@ -68,12 +68,12 @@ return array(
         'frontend_module' => array(
             'templates'   => 'The migration tool migrated the templates "iso_cart_full" to "iso_collection_default" and "iso_cart_mini" to "iso_collection_mini". However, it cannot migrate logic you built into your templates. You will have to check and adjust every (!) single template!'
         ),
-        'shop_config' => array(
-            'gallery_empty' => 'Gallery configuration is empty.',
-            'gallery_missing_name' => 'You must enter a name for each gallery.',
-            'gallery_missing_config' => 'Every gallery must have a main and gallery image config.',
-            'gallery_list_name' => 'List',
-            'gallery_reader_name' => 'Reader',
+        'gallery' => array(
+            'empty' => 'Gallery configuration is empty.',
+            'missing_name' => 'You must enter a name for each gallery.',
+            'missing_config' => 'Every gallery must have a main and gallery image config.',
+            'list_name' => 'List',
+            'reader_name' => 'Reader',
             'gallery_legend' => 'Configure galleries',
             'gallery_intro' => 'Please setup your new galleries based on image sizes in shop configs of Isotope 1.x',
             'gallery_description' => <<<'HTML'
