@@ -15,7 +15,7 @@ namespace Isotope\Migration\Service;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
 class ShippingMethodMigrationService extends AbstractMigrationService
@@ -74,11 +74,11 @@ class ShippingMethodMigrationService extends AbstractMigrationService
     /**
      * Returns the view for step configuration or information
      *
-     * @param Request $request
+     * @param RequestStack $requestStack
      *
      * @return string|Response
      */
-    public function renderConfigView(Request $request)
+    public function renderConfigView(RequestStack $requestStack)
     {
         try {
             $this->verifyDatabase();
@@ -116,6 +116,8 @@ class ShippingMethodMigrationService extends AbstractMigrationService
                 )
             );
         }
+
+        $request = $requestStack->getCurrentRequest();
 
         if ($request->isMethod('POST') && $request->get('confirm') !== null) {
             $this->config->set('confirmed', (bool) $request->get('confirm'));

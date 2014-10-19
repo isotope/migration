@@ -15,7 +15,7 @@ namespace Isotope\Migration\Controller;
 use Doctrine\DBAL\Connection;
 use Isotope\Migration\Service\MigrationServiceInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MigrationController
@@ -23,15 +23,17 @@ class MigrationController
 
     protected $twig;
     protected $services;
-    protected $request;
+    protected $requestStack;
     protected $db;
 
-    public function __construct(\Twig_Environment $twig, \Pimple $migration_services, Request $request, Connection $db)
+    public function __construct(\Twig_Environment $twig, \Pimple $migration_services, RequestStack $request_stack, Connection $db)
     {
         $this->twig = $twig;
         $this->services = $migration_services;
-        $this->request = $request;
+        $this->requestStack = $request_stack;
         $this->db = $db;
+
+        $request = $request_stack->getCurrentRequest();
 
         $twig->addGlobal('base_path', $request->getBasePath());
         $twig->addGlobal('base_url', $request->getBaseUrl());
@@ -66,14 +68,18 @@ class MigrationController
 
         foreach ($this->getServices() as $service) {
             if ($forwardToNext) {
-                return new RedirectResponse($this->request->getBaseUrl() . '/config/'.$service->getSlug());
+                return new RedirectResponse($this->requestStack->getCurrentRequest()->getBaseUrl() . '/config/'.$service->getSlug());
 
             } elseif ($slug == $service->getSlug()) {
                 $this->twig->addGlobal('current_service', $service);
 
-                $view = $service->renderConfigView($this->request);
+                $view = $service->renderConfigView($this->requestStack);
+                $request = $this->requestStack->getCurrentRequest();
 
-                if ($this->request->isMethod('POST') && $this->request->request->get('continue') && $service->getStatus() == MigrationServiceInterface::STATUS_READY) {
+                if ($request->isMethod('POST')
+                    && $request->request->get('continue')
+                    && $service->getStatus() == MigrationServiceInterface::STATUS_READY
+                ) {
                     $forwardToNext = true;
                     continue;
                 }
@@ -83,7 +89,7 @@ class MigrationController
         }
 
         if ($forwardToNext) {
-            return new RedirectResponse($this->request->getBaseUrl() . '/execute');
+            return new RedirectResponse($this->requestStack->getCurrentRequest()->getBaseUrl() . '/execute');
         } else {
             throw new NotFoundHttpException();
         }
@@ -96,7 +102,7 @@ class MigrationController
 
         foreach ($services as $service) {
             if ($service->getStatus() != MigrationServiceInterface::STATUS_READY) {
-                return new RedirectResponse($this->request->getBaseUrl() . '/config/' . $service->getSlug(), 303);
+                return new RedirectResponse($this->requestStack->getCurrentRequest()->getBaseUrl() . '/config/' . $service->getSlug(), 303);
             }
 
             $sql = array_merge($sql, $service->getMigrationSQL());

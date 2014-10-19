@@ -17,7 +17,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Schema\SchemaConfig;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
 class ShopConfigMigrationService extends AbstractMigrationService
@@ -76,11 +76,11 @@ class ShopConfigMigrationService extends AbstractMigrationService
     /**
      * Returns the view for step configuration or information
      *
-     * @param Request $request
+     * @param RequestStack $requestStack
      *
      * @return string|Response
      */
-    public function renderConfigView(Request $request)
+    public function renderConfigView(RequestStack $requestStack)
     {
         try {
             $this->verifyDatabase();
@@ -110,6 +110,7 @@ class ShopConfigMigrationService extends AbstractMigrationService
         $error = '';
         $galleries = $this->config->get('galleries');
         $productTypes = $this->config->get('productTypes');
+        $request = $requestStack->getCurrentRequest();
 
         if ($request->isMethod('POST')) {
             $galleries = $request->get('galleries');

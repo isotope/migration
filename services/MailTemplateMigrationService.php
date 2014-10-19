@@ -18,7 +18,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Schema\SchemaConfig;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
 class MailTemplateMigrationService extends AbstractMigrationService
@@ -71,11 +71,11 @@ class MailTemplateMigrationService extends AbstractMigrationService
     /**
      * Returns the view for step configuration or information
      *
-     * @param Request $request
+     * @param RequestStack $requestStack
      *
      * @return string|Response
      */
-    public function renderConfigView(Request $request)
+    public function renderConfigView(RequestStack $requestStack)
     {
         try {
             $this->verifyDatabase();
@@ -110,6 +110,8 @@ class MailTemplateMigrationService extends AbstractMigrationService
                 )
             );
         }
+
+        $request = $requestStack->getCurrentRequest();
 
         if ($request->isMethod('POST') && $request->get('mailGateway') !== null) {
             $this->config->set('mailGateway', (int) $request->get('mailGateway'));
