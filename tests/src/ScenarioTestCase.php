@@ -19,10 +19,7 @@ abstract class ScenarioTestCase extends DbTestCase
 
     protected function prepareScenario($scenarioFile, array $serviceConfigs)
     {
-        // Insert scenario setup
-        $pdo = $this->getConnection()->getConnection();
-        $query = file_get_contents($this->getDataPath() . '/' . $scenarioFile);
-        $pdo->exec($query);
+        $this->loadScenario($scenarioFile);
 
         $migrationServices = array();
 
@@ -78,6 +75,18 @@ abstract class ScenarioTestCase extends DbTestCase
         $testName = preg_replace('/(.+)Test$/', '$1', $className);
 
         return $this->getPathToFixture(strtolower(ltrim(preg_replace('/([A-Z])/', '_$1', $testName), '_')));
+    }
+
+    /**
+     * Insert scenario SQL file into database
+     *
+     * @param string $scenarioFile
+     */
+    protected function loadScenario($scenarioFile)
+    {
+        $pdo = $this->getConnection()->getConnection();
+        $query = file_get_contents($this->getDataPath() . '/' . $scenarioFile);
+        $pdo->exec($query);
     }
 
     protected function getDefaultServiceConfigs()

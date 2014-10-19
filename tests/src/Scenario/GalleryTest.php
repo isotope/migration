@@ -11,7 +11,10 @@
 
 namespace Isotope\Migration\Test\Scenario;
 
+use Isotope\Migration\Service\GalleryMigrationService;
+use Isotope\Migration\Service\MigrationServiceInterface;
 use Isotope\Migration\Test\ScenarioTestCase;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
 class GalleryTest extends ScenarioTestCase
 {
@@ -88,5 +91,95 @@ class GalleryTest extends ScenarioTestCase
                               ->getTable("tl_iso_producttype");
 
         $this->assertTablesEqual($expectedTable, $queryTable);
+    }
+
+    /**
+     * @dataProvider configProvider
+     *
+     * @param array $config
+     * @param int   $expectedStatus
+     */
+    public function testConfigStatus(array $config, $expectedStatus)
+    {
+        $this->loadScenario('galleries.sql');
+
+        $app = $this->getApp();
+        $slug = GalleryMigrationService::getSlug();
+
+        $configBag = new AttributeBag('config_' . $slug);
+        $configBag->setName('config_' . $slug);
+        $configBag->initialize($config);
+        $summaryBag = new AttributeBag('summary_' . $slug);
+        $summaryBag->setName('summary_' . $slug);
+
+        /** @type GalleryMigrationService $service */
+        $service = $app['class_factory']->create('\Isotope\Migration\Service\GalleryMigrationService', array(
+                'summary'   => $summaryBag,
+                'config'    => $configBag,
+            )
+        );
+
+        $this->assertEquals($expectedStatus, $service->getStatus());
+    }
+
+
+    public function configProvider()
+    {
+        return array(
+            array(
+                array('galleries'=>array()),
+                MigrationServiceInterface::STATUS_CONFIG
+            ),
+            array(
+                array(
+                    'galleries' => array(
+                        array('name' => '')
+                    )
+                ),
+                MigrationServiceInterface::STATUS_CONFIG
+            ),
+            array(
+                array(
+                    'galleries' => array(
+                        array('name' => 'test')
+                    )
+                ),
+                MigrationServiceInterface::STATUS_CONFIG
+            ),
+            array(
+                array(
+                    'galleries' => array(
+                        array(
+                            'name' => 'test',
+                            'main_config' => 1,
+                            'gallery_config' => 1
+                        )
+                    )
+                ),
+                MigrationServiceInterface::STATUS_CONFIG
+            ),
+            array(
+                array(
+                    'galleries' => array(
+                        array(
+                            'name' => 'test',
+                            'main_config' => 1,
+                            'gallery_config' => 1
+                        )
+                    ),
+                    'productTypes' => array(
+                        1 => array(
+                            'list_gallery' => 1,
+                            'reader_gallery' => 1
+                        ),
+                        2 => array(
+                            'list_gallery' => 1,
+                            'reader_gallery' => 1
+                        )
+                    )
+                ),
+                MigrationServiceInterface::STATUS_READY
+            ),
+        );
     }
 }
