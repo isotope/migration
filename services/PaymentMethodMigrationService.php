@@ -16,7 +16,6 @@ use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 
 class PaymentMethodMigrationService extends AbstractMigrationService
 {
@@ -76,7 +75,7 @@ class PaymentMethodMigrationService extends AbstractMigrationService
      *
      * @param RequestStack $requestStack
      *
-     * @return string|Response
+     * @return string
      */
     public function renderConfigView(RequestStack $requestStack)
     {

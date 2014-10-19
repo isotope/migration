@@ -19,7 +19,6 @@ use Doctrine\DBAL\Schema\SchemaConfig;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 
 class MailTemplateMigrationService extends AbstractMigrationService
 {
@@ -73,7 +72,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
      *
      * @param RequestStack $requestStack
      *
-     * @return string|Response
+     * @return string
      */
     public function renderConfigView(RequestStack $requestStack)
     {
@@ -345,6 +344,11 @@ class MailTemplateMigrationService extends AbstractMigrationService
     }
 
 
+    /**
+     * @param int $gatewayId
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
     private function migrateOrderStatusMails($gatewayId)
     {
         $orderStatus = $this->db->fetchAll("
@@ -367,7 +371,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
     }
 
     /**
-     * @param array  $mailConfig
+     * @param array  $config
      * @param int    $gatewayId
      * @param string $notificationTitle
      *
@@ -409,6 +413,13 @@ class MailTemplateMigrationService extends AbstractMigrationService
     }
 
 
+    /**
+     * @param int    $mailId
+     * @param string $titleDraft
+     * @param string $recipient
+     * @param int    $notificationId
+     * @param int    $gatewayId
+     */
     private function createMessage($mailId, $titleDraft, $recipient, $notificationId, $gatewayId)
     {
         $mail = $this->db->fetchAssoc(
@@ -458,6 +469,9 @@ class MailTemplateMigrationService extends AbstractMigrationService
     }
 
 
+    /**
+     * @return bool
+     */
     private function hasMails()
     {
         return !$this->dbcheck->tableIsEmpty('tl_iso_mail');

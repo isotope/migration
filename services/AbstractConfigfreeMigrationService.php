@@ -13,7 +13,6 @@ namespace Isotope\Migration\Service;
 
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractConfigfreeMigrationService extends AbstractMigrationService
 {
@@ -34,7 +33,7 @@ abstract class AbstractConfigfreeMigrationService extends AbstractMigrationServi
      *
      * @param RequestStack $requestStack
      *
-     * @return string|Response
+     * @return string
      */
     public function renderConfigView(RequestStack $requestStack)
     {

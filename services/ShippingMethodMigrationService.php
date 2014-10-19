@@ -16,7 +16,6 @@ use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 
 class ShippingMethodMigrationService extends AbstractMigrationService
 {
@@ -76,7 +75,7 @@ class ShippingMethodMigrationService extends AbstractMigrationService
      *
      * @param RequestStack $requestStack
      *
-     * @return string|Response
+     * @return string
      */
     public function renderConfigView(RequestStack $requestStack)
     {
@@ -238,7 +237,7 @@ class ShippingMethodMigrationService extends AbstractMigrationService
      *
      * @param array    $options
      * @param array    $shipping
-     * @param callable $callback
+     * @param \Closure $callback
      */
     private function convertShippingOptions(array $options, array $shipping, \Closure $callback)
     {

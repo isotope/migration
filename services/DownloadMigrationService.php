@@ -140,7 +140,7 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
     /**
      * Return a list of to do's or messages for the summary page
      *
-     * @return array
+     * @return string[]
      */
     public function getSummaryMessages()
     {

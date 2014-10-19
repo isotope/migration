@@ -60,7 +60,7 @@ class ConstructorInjectionService
      * @param string $className
      * @param array  $arguments
      *
-     * @return callable
+     * @return \Closure
      */
     public function register($className, array $arguments = array())
     {
@@ -77,7 +77,7 @@ class ConstructorInjectionService
      * @param string $className
      * @param array  $arguments
      *
-     * @return callable
+     * @return \Closure
      */
     public function share($className, array $arguments = array())
     {

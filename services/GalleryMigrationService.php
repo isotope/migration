@@ -18,7 +18,6 @@ use Doctrine\DBAL\Schema\SchemaConfig;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 
 class GalleryMigrationService extends AbstractMigrationService
 {
@@ -78,7 +77,7 @@ class GalleryMigrationService extends AbstractMigrationService
      *
      * @param RequestStack $requestStack
      *
-     * @return string|Response
+     * @return string
      */
     public function renderConfigView(RequestStack $requestStack)
     {
@@ -417,6 +416,11 @@ class GalleryMigrationService extends AbstractMigrationService
     }
 
 
+    /**
+     * @param array  $config
+     * @param string $name
+     * @param array  $data
+     */
     private function convertGalleryConfig(array $config, $name, array &$data)
     {
         $data[$name.'_size'] = serialize(array($config['width'], $config['height'], $config['mode']));
@@ -425,6 +429,11 @@ class GalleryMigrationService extends AbstractMigrationService
     }
 
 
+    /**
+     * @param string $position
+     *
+     * @return string
+     */
     private function getWatermarkPosition($position)
     {
         static $map = array(
