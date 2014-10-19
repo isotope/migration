@@ -97,7 +97,7 @@ class ConstructorInjectionService
         $buildArgs = array();
 
         foreach ($methodReflection->getParameters() as $parameterReflection) {
-            $name = $parameterReflection->getName();
+            $name = $parameterReflection->name;
 
             if (isset($arguments[$name])) {
                 $buildArgs[$name] = $arguments[$name];
