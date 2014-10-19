@@ -59,15 +59,15 @@ class ContaoServiceProvider implements ServiceProviderInterface
         require_once $app['contao.root'] . '/system/config/localconfig.php';
 
         $app['contao.ready'] = true;
-        $app['contao.config'] = $GLOBALS['TL_CONFIG'];
+        $app['contao.config'] = (array) $GLOBALS['TL_CONFIG'];
 
         $app['db.options'] = array(
-            'dbname'   => @$app['contao.config']['dbDatabase'],
-            'host'     => @$app['contao.config']['dbHost'],
-            'user'     => @$app['contao.config']['dbUser'],
-            'password' => @$app['contao.config']['dbPass'],
-            'charset'  => @$app['contao.config']['dbCharset'],
-            'port'     => @$app['contao.config']['dbPort'],
+            'dbname'   => (isset($app['contao.config']['dbDatabase']) ? $app['contao.config']['dbDatabase'] : ''),
+            'host'     => (isset($app['contao.config']['dbHost']) ? $app['contao.config']['dbHost'] : ''),
+            'user'     => (isset($app['contao.config']['dbUser']) ? $app['contao.config']['dbUser'] : ''),
+            'password' => (isset($app['contao.config']['dbPass']) ? $app['contao.config']['dbPass'] : ''),
+            'charset'  => (isset($app['contao.config']['dbCharset']) ? $app['contao.config']['dbCharset'] : ''),
+            'port'     => (isset($app['contao.config']['dbPort']) ? $app['contao.config']['dbPort'] : ''),
         );
     }
 }
