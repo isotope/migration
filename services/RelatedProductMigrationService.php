@@ -43,9 +43,7 @@ class RelatedProductMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getMigrationSQL()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
+        $this->checkMigrationStatus();
 
         $tableDiff = new TableDiff('tl_iso_related_categories');
         $tableDiff->newName = 'tl_iso_related_category';

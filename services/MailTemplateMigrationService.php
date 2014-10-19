@@ -138,9 +138,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
      */
     public function getMigrationSQL()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
+        $this->checkMigrationStatus();
 
         // Nothing to do if there are no mail templates
         if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_mail") === '0') {

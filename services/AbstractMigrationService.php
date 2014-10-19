@@ -123,4 +123,16 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
 
         return $table;
     }
+
+
+    /**
+     * Throw exception if migration step is not ready
+     * @throws \BadMethodCallException
+     */
+    protected function checkMigrationStatus()
+    {
+        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
+            throw new \BadMethodCallException('Migration service is not ready');
+        }
+    }
 }

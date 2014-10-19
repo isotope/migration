@@ -43,9 +43,7 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getMigrationSQL()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
+        $this->checkMigrationStatus();
 
         $tableDiff = new TableDiff('tl_iso_producttypes');
         $tableDiff->newName = 'tl_iso_producttype';

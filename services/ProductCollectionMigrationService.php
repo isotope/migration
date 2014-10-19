@@ -45,9 +45,7 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
      */
     public function getMigrationSQL()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
+        $this->checkMigrationStatus();
 
         return array_merge(
             $this->getCollectionSQL(),
