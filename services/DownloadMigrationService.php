@@ -17,7 +17,7 @@ use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
-use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class DownloadMigrationService extends AbstractConfigfreeMigrationService
 {
@@ -36,7 +36,7 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
     public function __construct(
         AttributeBagInterface $config,
         \Twig_Environment $twig,
-        Translator $translator,
+        TranslatorInterface $translator,
         Connection $db,
         DatabaseVerificationService $migration_dbcheck,
         DbafsService $migration_dbafs

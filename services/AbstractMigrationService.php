@@ -15,8 +15,8 @@ namespace Isotope\Migration\Service;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Types\Type;
-use Silex\Translator;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 abstract class AbstractMigrationService implements MigrationServiceInterface
 {
@@ -37,7 +37,7 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
     protected $twig;
 
     /**
-     * @type Translator
+     * @type TranslatorInterface
      */
     protected $translator;
 
@@ -52,7 +52,7 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
     protected $dbcheck;
 
 
-    public function __construct(AttributeBagInterface $config, AttributeBagInterface $summary, \Twig_Environment $twig, Translator $translator, Connection $db, DatabaseVerificationService $migration_dbcheck)
+    public function __construct(AttributeBagInterface $config, AttributeBagInterface $summary, \Twig_Environment $twig, TranslatorInterface $translator, Connection $db, DatabaseVerificationService $migration_dbcheck)
     {
         $this->config = $config;
         $this->summary = $summary;
