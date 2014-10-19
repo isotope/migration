@@ -1,7 +1,9 @@
 # Isotope eCommerce Migration Tool
 
-develop: [![Build Status](https://travis-ci.org/isotope/migration.svg?branch=develop)](https://travis-ci.org/isotope/migration)
-master: [![Build Status](https://travis-ci.org/isotope/migration.svg?branch=master)](https://travis-ci.org/isotope/migration)
+[![Build Status](https://travis-ci.org/isotope/migration.svg)](https://travis-ci.org/isotope/migration)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/isotope/migration/badges/quality-score.png)](https://scrutinizer-ci.com/g/isotope/migration/)
+[![Code Coverage](https://scrutinizer-ci.com/g/isotope/migration/badges/coverage.png)](https://scrutinizer-ci.com/g/isotope/migration/)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/dd4887ef-b450-4154-8d88-d52b755aa767/mini.png)](https://insight.sensiolabs.com/projects/dd4887ef-b450-4154-8d88-d52b755aa767)
 
 This is the Isotope eCommerce Migration Tool. It migrates the data of your
 1.4 installations to 2.x.!
