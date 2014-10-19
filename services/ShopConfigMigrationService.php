@@ -57,7 +57,7 @@ class ShopConfigMigrationService extends AbstractMigrationService
         }
 
         // Nothing to do
-        if (!$this->hasConfigsAndProductTypes()) {
+        if (!$this->hasConfigsAndProductTypes(true)) {
             return MigrationServiceInterface::STATUS_READY;
         }
 
@@ -550,10 +550,10 @@ class ShopConfigMigrationService extends AbstractMigrationService
     }
 
 
-    private function hasConfigsAndProductTypes()
+    private function hasConfigsAndProductTypes($oldFormat = false)
     {
-        if ($this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_config") === '0'
-            || $this->db->fetchColumn("SELECT COUNT(*) FROM tl_iso_producttype") === '0'
+        if ($this->db->fetchColumn('SELECT COUNT(*) FROM tl_iso_config') === '0'
+            || $this->db->fetchColumn('SELECT COUNT(*) FROM tl_iso_producttype' . ($oldFormat ? 's' : '')) === '0'
         ) {
             return false;
         }
