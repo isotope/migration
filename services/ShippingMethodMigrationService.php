@@ -186,7 +186,7 @@ class ShippingMethodMigrationService extends AbstractMigrationService
                 $this->convertShippingOptions(
                     $options,
                     $shipping,
-                    function ($data, $option) use ($shipping) {
+                    function ($data, $option) {
                         $data['minimum_total'] = $option['minimum_total'];
                         $data['maximum_total'] = $option['maximum_total'];
 
