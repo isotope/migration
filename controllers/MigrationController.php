@@ -14,7 +14,6 @@ namespace Isotope\Migration\Controller;
 
 use Doctrine\DBAL\Connection;
 use Isotope\Migration\Service\MigrationServiceInterface;
-use Silex\Application;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

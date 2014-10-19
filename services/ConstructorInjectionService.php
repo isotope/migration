@@ -11,9 +11,6 @@
 
 namespace Isotope\Migration\Service;
 
-
-use Silex\Application;
-
 /**
  * Class ConstructorInjectionService
  *

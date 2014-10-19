@@ -15,7 +15,6 @@ namespace Isotope\Migration\Provider;
 use Isotope\Migration\Service\ConstructorInjectionService;
 use Isotope\Migration\Service\DatabaseVerificationService;
 use Isotope\Migration\Service\DbafsService;
-use Isotope\Migration\Service\MigrationServiceInterface;
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
@@ -67,7 +66,7 @@ class MigrationServiceProvider implements ServiceProviderInterface
 
         $app['migration.service.classes'] = new \Pimple();
 
-        /** @type MigrationServiceInterface[] $services */
+        /** @type \Isotope\Migration\Service\MigrationServiceInterface[] $services */
         $services = array(
             // this order DOES MATTER!!
             '\\Isotope\\Migration\\Service\\AddressBookMigrationService',
