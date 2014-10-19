@@ -96,4 +96,4 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
 
         return strtolower(ltrim(preg_replace('/([A-Z])/', '_$1', $className), '_'));
     }
-} 
+}

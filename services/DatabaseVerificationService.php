@@ -154,4 +154,4 @@ class DatabaseVerificationService
     {
         return $this->db->getSchemaManager();
     }
-} 
+}

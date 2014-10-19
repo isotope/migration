@@ -70,4 +70,4 @@ class ContaoServiceProvider implements ServiceProviderInterface
             'port'     => @$app['contao.config']['dbPort'],
         );
     }
-} 
+}
