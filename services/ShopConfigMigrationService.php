@@ -511,30 +511,17 @@ class ShopConfigMigrationService extends AbstractMigrationService
 
     private function getWatermarkPosition($position)
     {
-        switch ($position) {
-            case 'tl':
-                return 'left_top';
+        static $map = array(
+            'tl' => 'left_top',
+            'tc' => 'center_top',
+            'tr' => 'right_top',
+            'bl' => 'left_bottom',
+            'bc' => 'center_bottom',
+            'br' => 'right_bottom',
+            'cc' => 'center_center',
+        );
 
-            case 'tc':
-                return 'center_top';
-
-            case 'tr':
-                return 'right_top';
-
-            case 'bl':
-                return 'left_bottom';
-
-            case 'bc':
-                return 'center_bottom';
-
-            case 'br':
-                return 'right_bottom';
-
-            case 'cc':
-                return 'center_center';
-        }
-
-        return '';
+        return $map[$position] ?: '';
     }
 
 
