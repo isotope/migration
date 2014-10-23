@@ -120,8 +120,8 @@ class GalleryMigrationService extends AbstractMigrationService
         if (empty($galleries)) {
             $productTypes = array();
             $galleries = array(
-                array('name' => $this->trans('service.gallery.gallery_list_name')),
-                array('name' => $this->trans('service.gallery.gallery_reader_name'))
+                array('name' => $this->trans('service.gallery.list_name')),
+                array('name' => $this->trans('service.gallery.reader_name'))
             );
         }
 
