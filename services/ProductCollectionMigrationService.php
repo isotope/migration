@@ -83,7 +83,9 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
             ->columnMustExist('tl_iso_orders', 'shipping_address')
             ->columnMustNotExist('tl_iso_orders', 'shipping_address_id')
             ->columnMustExist('tl_iso_orders', 'subTotal')
-            ->columnMustNotExist('tl_iso_orders', 'type');
+            ->columnMustNotExist('tl_iso_orders', 'type')
+            ->columnMustExist('tl_iso_orders', 'cart_id')
+            ->columnMustNotExist('tl_iso_orders', 'source_collection_id');
 
         $this->dbcheck
             ->tableMustExist('tl_iso_order_items')
@@ -96,6 +98,10 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
             ->columnMustNotExist('tl_iso_order_items', 'quantity')
             ->columnMustExist('tl_iso_order_items', 'product_options')
             ->columnMustNotExist('tl_iso_order_items', 'options'); // TODO: rename to "configuration"
+
+        $this->dbcheck
+            ->tableMustNotExist('tl_iso_product_collection_surcharge')
+            ->columnMustExist('tl_iso_orders', 'surcharges');
     }
 
     /**
@@ -113,6 +119,10 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
         $column = new Column('subtotal', Type::getType(Type::DECIMAL));
         $column->setPrecision(12)->setScale(2)->setNotnull(true)->setDefault('0.00');
         $tableDiff->renamedColumns['subTotal'] = $column;
+
+        $column = new Column('source_collection_id', Type::getType(Type::INTEGER));
+        $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
+        $tableDiff->renamedColumns['cart_id'] = $column;
 
         $column = new Column('type', Type::getType(Type::STRING));
         $column->setLength(32)->setNotnull(true)->setDefault('');
