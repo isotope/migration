@@ -163,7 +163,11 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
 
     private function createPrivateAddresses()
     {
-        $allCollections = $this->db->fetchAll("SELECT id, billing_address, shipping_address FROM tl_iso_product_collection");
+        $allCollections = $this->db->fetchAll("
+            SELECT p.id, p.billing_address, p.shipping_address, IFNULL(c.store_id, 0) AS store_id
+            FROM tl_iso_product_collection p
+            LEFT JOIN tl_iso_config c ON c.id=p.config_id
+        ");
 
         foreach ($allCollections as $collection) {
             $billingAddress = @unserialize($collection['billing_address']);
@@ -173,14 +177,14 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
             $shippingAddressId = 0;
 
             if (is_array($billingAddress)) {
-                $billingAddressId = $this->addAddress($billingAddress, $collection['id']);
+                $billingAddressId = $this->addAddress($billingAddress, $collection['id'], $collection['store_id'], ($billingAddress['id'] === 0 || $billingAddress['id'] === '0'));
             }
 
             if (is_array($shippingAddress)) {
                 if ($shippingAddress['id'] == '-1' && $billingAddressId > 0) {
                     $shippingAddressId = $billingAddressId;
                 } else {
-                    $shippingAddressId = $this->addAddress($shippingAddress, $collection['id']);
+                    $shippingAddressId = $this->addAddress($shippingAddress, $collection['id'], $collection['store_id'], false, ($shippingAddress['id'] === 0 || $shippingAddress['id'] === '0'));
                 }
             }
 
@@ -196,7 +200,7 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
     }
 
 
-    private function addAddress(array $data, $collectionId)
+    private function addAddress(array $data, $collectionId, $storeId = 0, $isDefaultBilling = false , $isDefaultShipping = false)
     {
         // TODO: what do we do if the serialized data contains fields that are not in the table?
 
@@ -205,6 +209,9 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
         $data['tstamp'] = time();
         $data['ptable'] = 'tl_iso_product_collection';
         $data['pid'] = $collectionId;
+        $data['store_id'] = $storeId;
+        $data['isDefaultBilling'] = ($isDefaultBilling ? '1' : '');
+        $data['isDefaultShipping'] = ($isDefaultShipping ? '1' : '');
 
         $this->db->insert('tl_iso_address', $data);
 
