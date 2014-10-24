@@ -20,8 +20,14 @@ class MailTemplateTest extends ScenarioTestCase
     public function testOrderStatus()
     {
         $this->prepareScenario('orderstatus.sql', $this->getDefaultServiceConfigs());
-
         $this->validateExpectation($this->createFlatXmlDataSet($this->getDataPath() . '/orderstatus.xml'));
+    }
+
+
+    public function testCheckoutModule()
+    {
+        $this->prepareScenario('checkoutmodule.sql', $this->getDefaultServiceConfigs());
+        $this->validateExpectation($this->createFlatXmlDataSet($this->getDataPath() . '/checkoutmodule.xml'));
     }
 
 

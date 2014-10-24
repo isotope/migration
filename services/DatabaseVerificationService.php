@@ -44,6 +44,31 @@ class DatabaseVerificationService
     }
 
     /**
+     * Check if a table column exists
+     *
+     * @param string $tableName
+     * @param string $columnName
+     *
+     * @return bool
+     */
+    public function columnExists($tableName, $columnName)
+    {
+        if (!$this->tableExists($tableName)) {
+            return false;
+        }
+
+        $columns = $this->schemaManager()->listTableColumns($tableName);
+
+        foreach ($columns as $column) {
+            if ($column->getName() == $columnName) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Make sure a database table exists
      *
      * @param string $tableName

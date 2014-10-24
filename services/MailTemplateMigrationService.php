@@ -88,7 +88,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
             $gatewayCount = $this->db->fetchColumn("SELECT COUNT(*) FROM tl_nc_gateway");
         }
 
-        if (!$this->hasMails() || $gatewayCount === '0') {
+        if (!$this->hasMails() || $gatewayCount == 0) {
             $this->config->set('mailGateway', 0);
 
             return $this->renderConfigFree();
@@ -165,8 +165,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
         }
 
         $this->migrateOrderStatusMails($gatewayId);
-
-        // TODO: implement for checkout frontend modules
+        $this->migrateCheckoutModuleMails($gatewayId);
     }
 
 
@@ -249,6 +248,8 @@ class MailTemplateMigrationService extends AbstractMigrationService
             ->columnMustExist('tl_iso_orderstatus', 'mail_admin')
             ->columnMustExist('tl_iso_orderstatus', 'sales_email')
             ->columnMustNotExist('tl_iso_orderstatus', 'notification');
+
+        $this->dbcheck->tableMustExist('tl_module');
     }
 
     /**
@@ -333,7 +334,19 @@ class MailTemplateMigrationService extends AbstractMigrationService
             $table->addColumn('email_mode', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>16));
         }
 
-        return $schema->toSql($this->db->getDatabasePlatform());
+        $sql = $schema->toSql($this->db->getDatabasePlatform());
+
+        if (!$this->dbcheck->columnExists('tl_module', 'nc_notification')) {
+            $tableDiff = new TableDiff('tl_module');
+
+            $column = new Column('nc_notification', Type::getType(Type::INTEGER));
+            $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
+            $tableDiff->addedColumns['nc_notification'] = $column;
+
+            $sql = array_merge($sql, $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff));
+        }
+
+        return $sql;
     }
 
 
@@ -357,6 +370,38 @@ class MailTemplateMigrationService extends AbstractMigrationService
 
             $this->db->executeUpdate(
                 "UPDATE tl_iso_orderstatus SET notification=? WHERE id IN (?)",
+                array($notificationId, explode(',', $row['ids'])),
+                array(\PDO::PARAM_INT, Connection::PARAM_INT_ARRAY)
+            );
+        }
+    }
+
+
+    /**
+     * @param int $gatewayId
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    private function migrateCheckoutModuleMails($gatewayId)
+    {
+        $checkoutModules = $this->db->fetchAll("
+            SELECT
+                GROUP_CONCAT(id) AS ids,
+                GROUP_CONCAT(name SEPARATOR '\", \"') AS name,
+                iso_mail_customer AS mail_customer,
+                iso_mail_admin AS mail_admin,
+                iso_sales_email AS sales_email
+            FROM tl_module
+            WHERE type='iso_checkout' AND iso_mail_customer!=0 OR iso_mail_admin!=0
+            GROUP BY iso_mail_customer, iso_mail_admin, iso_sales_email
+        ");
+
+        foreach ($checkoutModules as $row) {
+            $notificationTitle = $this->trans('service.mail_template.checkoutmodule', array('%name%' => $row['name']));
+            $notificationId = $this->convertMailsToNotification($row, $gatewayId, $notificationTitle);
+
+            $this->db->executeUpdate(
+                "UPDATE tl_module SET nc_notification=? WHERE id IN (?)",
                 array($notificationId, explode(',', $row['ids'])),
                 array(\PDO::PARAM_INT, Connection::PARAM_INT_ARRAY)
             );
