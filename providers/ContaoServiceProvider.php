@@ -57,19 +57,20 @@ class ContaoServiceProvider implements ServiceProviderInterface
         }
 
         require_once $app['contao.root'] . '/system/config/localconfig.php';
+        $config = (array) $GLOBALS['TL_CONFIG'];
 
         $app['contao.ready'] = true;
-        $app['contao.config'] = (array) $GLOBALS['TL_CONFIG'];
+        $app['contao.config'] = $config;
 
-        $this->normalizeConfig($app['contao.config']);
+        $this->normalizeConfig($config);
 
         $app['db.options'] = array(
-            'dbname'   => $app['contao.config']['dbDatabase'],
-            'host'     => $app['contao.config']['dbHost'],
-            'user'     => $app['contao.config']['dbUser'],
-            'password' => $app['contao.config']['dbPass'],
-            'charset'  => $app['contao.config']['dbCharset'],
-            'port'     => $app['contao.config']['dbPort'],
+            'dbname'   => $config['dbDatabase'],
+            'host'     => $config['dbHost'],
+            'user'     => $config['dbUser'],
+            'password' => $config['dbPass'],
+            'charset'  => $config['dbCharset'],
+            'port'     => $config['dbPort'],
         );
     }
 
