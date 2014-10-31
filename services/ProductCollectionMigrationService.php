@@ -370,32 +370,58 @@ class ProductCollectionMigrationService extends AbstractMigrationService
 
     private function convertSurcharges()
     {
-        $time = time();
         $surchargeTypes = $this->config->get('surcharge_types');
 
         foreach ($this->getSurchargesByCollection(true) as $collection) {
             $sorting = 0;
 
             foreach ($collection['surcharges'] as $surcharge) {
-                $this->db->insert(
-                    'tl_iso_product_collection_surcharge',
-                    array(
-                        'pid'                  => $collection['id'],
-                        'sorting'              => ($sorting += 128),
-                        'tstamp'               => $time,
-                        'type'                 => $surchargeTypes[$surcharge['label']],
-                        'label'                => $surcharge['label'],
-                        'price'                => $surcharge['price'],
-                        'total_price'          => $surcharge['total_price'],
-                        'tax_free_total_price' => '',
-                        'tax_class'            => (isset($surcharge['tax_class']) ? $surcharge['tax_class'] : ''),
-                        'tax_id'               => (isset($surcharge['tax_id']) ? $surcharge['tax_id'] : ''),
-                        'before_tax'           => ((isset($surcharge['before_tax']) && $surcharge['before_tax']) ? '1' : ''),
-                        'addToTotal'           => ((isset($surcharge['add']) && $surcharge['add'] === false) ? '' : '1'),
-                        'products'             => (isset($surcharge['products']) ? serialize($surcharge['products']) : '')
-                    )
+                $this->addSurcharge(
+                    $surcharge,
+                    $collection,
+                    $surchargeTypes[$surcharge['label']],
+                    ($sorting += 128)
                 );
             }
+        }
+    }
+
+
+    private function addSurcharge($surcharge, $collection, $type, $sorting)
+    {
+        $this->normalizeSurcharge($surcharge);
+
+        $this->db->insert(
+            'tl_iso_product_collection_surcharge',
+            array(
+                'pid'                  => $collection['id'],
+                'sorting'              => $sorting,
+                'tstamp'               => time(),
+                'type'                 => $type,
+                'label'                => $surcharge['label'],
+                'price'                => $surcharge['price'],
+                'total_price'          => $surcharge['total_price'],
+                'tax_free_total_price' => '',
+                'tax_class'            => $surcharge['tax_class'],
+                'tax_id'               => $surcharge['tax_id'],
+                'before_tax'           => ($surcharge['before_tax'] ? '1' : ''),
+                'addToTotal'           => ($surcharge['add'] === false ? '' : '1'),
+                'products'             => $surcharge['products'],
+            )
+        );
+    }
+
+
+    private function normalizeSurcharge(&$surcharge)
+    {
+        foreach (array('tax_class', 'tax_id', 'before_tax', 'add', 'products') as $key) {
+            if (!isset($surcharge[$key])) {
+                $surcharge[$key] = '';
+            }
+        }
+
+        if ($surcharge['products'] != '') {
+            $surcharge['products'] = serialize($surcharge['products']);
         }
     }
 
