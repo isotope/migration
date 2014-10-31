@@ -13,10 +13,14 @@ namespace Isotope\Migration\Service;
 
 
 use Doctrine\DBAL\Schema\Column;
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\DBAL\Schema\SchemaConfig;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 
-class ProductCollectionMigrationService extends AbstractConfigfreeMigrationService
+class ProductCollectionMigrationService extends AbstractMigrationService
 {
     /**
      * Return a name for the migration step
@@ -39,6 +43,89 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
     }
 
     /**
+     * Returns status code of the migration step
+     *
+     * @return int
+     */
+    public function getStatus()
+    {
+        try {
+            $this->verifyDatabase();
+        } catch (\RuntimeException $e) {
+            return MigrationServiceInterface::STATUS_ERROR;
+        }
+
+        // Nothing to do
+        if ($this->dbcheck->tableIsEmpty('tl_iso_orders')) {
+            return MigrationServiceInterface::STATUS_READY;
+        }
+
+        try {
+            $this->verifySurchargesConfig($this->config->get('surcharge_types'));
+        } catch (\RuntimeException $e) {
+            return MigrationServiceInterface::STATUS_CONFIG;
+        }
+
+        return MigrationServiceInterface::STATUS_READY;
+    }
+
+    /**
+     * Returns the view for step configuration or information
+     *
+     * @param RequestStack $requestStack
+     *
+     * @return string|Response
+     */
+    public function renderConfigView(RequestStack $requestStack)
+    {
+        try {
+            $this->verifyDatabase();
+        } catch (\RuntimeException $e) {
+            return $this->renderConfigError($e->getMessage());
+        }
+
+        if ($this->dbcheck->tableIsEmpty('tl_iso_orders')) {
+            return $this->renderConfigFree();
+        }
+
+        $error = '';
+        $surchargeTypes = $this->config->get('surcharge_types');
+        $request = $requestStack->getCurrentRequest();
+
+        if ($request->isMethod('POST')) {
+            $surchargeTypes = $request->get('surcharge_types');
+
+            try {
+                $this->verifySurchargesConfig($surchargeTypes);
+
+                $this->config->set('surcharge_types', $surchargeTypes);
+            } catch (\RuntimeException $e) {
+                $error = $e->getMessage();
+            }
+        }
+
+        foreach ($this->getSurchargesByCollection() as $collection) {
+            foreach ($collection['surcharges'] as $surcharge) {
+                if (!isset($surchargeTypes[$surcharge['label']])) {
+                    $surchargeTypes[$surcharge['label']] = '';
+                }
+            }
+        }
+
+        return $this->twig->render(
+            'product_collection.twig',
+            array(
+                'title'          => $this->getName(),
+                'description'    => $this->getDescription(),
+                'can_save'       => true,
+                'surchargeTypes' => $surchargeTypes,
+                'error'          => $error,
+                'defaultTypes'   => array('rule', 'payment', 'shipping', 'tax'),
+            )
+        );
+    }
+
+    /**
      * Get SQL commands to migration the database
      *
      * @return array
@@ -49,7 +136,8 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
 
         return array_merge(
             $this->getCollectionSQL(),
-            $this->getItemSQL()
+            $this->getItemSQL(),
+            $this->getSurchargesSQL()
         );
     }
 
@@ -59,10 +147,10 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
     public function postMigration()
     {
         $this->createPrivateAddresses();
+        $this->convertSurcharges();
 
         // TODO: recreate tl_iso_product_collection_item.jumpTo
         // TODO: check if we need to convert product_options
-        // TODO: convert surcharges from serialized array to subtable
     }
 
     /**
@@ -102,6 +190,32 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
         $this->dbcheck
             ->tableMustNotExist('tl_iso_product_collection_surcharge')
             ->columnMustExist('tl_iso_orders', 'surcharges');
+    }
+
+    /**
+     * Validate surcharges config
+     *
+     * @param mixed $surchargeTypes
+     */
+    private function verifySurchargesConfig($surchargeTypes)
+    {
+        if (empty($surchargeTypes) || !is_array($surchargeTypes)) {
+            throw new \RuntimeException(
+                $this->trans('service.product_collection.surcharges_empty')
+            );
+        }
+
+        $surchargesByCollection = $this->getSurchargesByCollection();
+
+        foreach ($surchargesByCollection as $order) {
+            foreach ($order['surcharges'] as $surcharge) {
+                if (!isset($surchargeTypes[$surcharge['label']]) || $surchargeTypes[$surcharge['label']] === '') {
+                    throw new \RuntimeException(
+                        $this->trans('service.product_collection.surcharge_type_missing')
+                    );
+                }
+            }
+        }
     }
 
     /**
@@ -170,6 +284,32 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
         return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
     }
 
+    /**
+     * Create product collection surcharges table
+     *
+     * @return array
+     */
+    private function getSurchargesSQL()
+    {
+        $schemaConfig = new SchemaConfig();
+        $schemaConfig->setDefaultTableOptions(array('engine'=>'MyISAM'));
+        $schema = new Schema(array(), array(), $schemaConfig);
+
+        $table = $this->createContaoTable('tl_iso_product_collection_surcharge', $schema, true, true);
+        $table->addColumn('type', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>64));
+        $table->addColumn('label', Type::STRING, array('notnull'=>true, 'default'=>''));
+        $table->addColumn('price', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>32));
+        $table->addColumn('total_price', Type::DECIMAL, array('precision'=>12, 'scale'=>2, 'notnull'=>true, 'default'=>'0.00'));
+        $table->addColumn('tax_free_total_price', Type::DECIMAL, array('precision'=>12, 'scale'=>2, 'notnull'=>true, 'default'=>'0.00'));
+        $table->addColumn('tax_class', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
+        $table->addColumn('tax_id', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>32));
+        $table->addColumn('before_tax', Type::STRING, array('fixed'=>true, 'notnull'=>true, 'default'=>'', 'length'=>1));
+        $table->addColumn('addToTotal', Type::STRING, array('fixed'=>true, 'notnull'=>true, 'default'=>'', 'length'=>1));
+        $table->addColumn('products', Type::BLOB, array('length'=>65535));
+
+        return $schema->toSql($this->db->getDatabasePlatform());
+    }
+
 
     private function createPrivateAddresses()
     {
@@ -226,5 +366,66 @@ class ProductCollectionMigrationService extends AbstractConfigfreeMigrationServi
         $this->db->insert('tl_iso_address', $data);
 
         return $this->db->lastInsertId();
+    }
+
+
+    private function convertSurcharges()
+    {
+        $time = time();
+        $surchargeTypes = $this->config->get('surcharge_types');
+
+        foreach ($this->getSurchargesByCollection(true) as $collection) {
+            $sorting = 0;
+
+            foreach ($collection['surcharges'] as $surcharge) {
+                $this->db->insert(
+                    'tl_iso_product_collection_surcharge',
+                    array(
+                        'pid'                  => $collection['id'],
+                        'sorting'              => ($sorting += 128),
+                        'tstamp'               => $time,
+                        'type'                 => $surchargeTypes[$surcharge['label']],
+                        'label'                => $surcharge['label'],
+                        'price'                => $surcharge['price'],
+                        'total_price'          => $surcharge['total_price'],
+                        'tax_free_total_price' => '',
+                        'tax_class'            => (isset($surcharge['tax_class']) ? $surcharge['tax_class'] : ''),
+                        'tax_id'               => (isset($surcharge['tax_id']) ? $surcharge['tax_id'] : ''),
+                        'before_tax'           => ((isset($surcharge['before_tax']) && $surcharge['before_tax']) ? '1' : ''),
+                        'addToTotal'           => ((isset($surcharge['add']) && $surcharge['add'] === false) ? '' : '1'),
+                        'products'             => (isset($surcharge['products']) ? serialize($surcharge['products']) : '')
+                    )
+                );
+            }
+        }
+    }
+
+    /**
+     * Get all surcharges from all orders
+     *
+     * @param bool $afterMigration
+     *
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    private function getSurchargesByCollection($afterMigration = false)
+    {
+        $surchargesByCollection = array();
+        $tableName = $afterMigration ? 'tl_iso_product_collection' : 'tl_iso_orders';
+        $orders = $this->db->query("SELECT id, tstamp, surcharges FROM $tableName WHERE surcharges!=''");
+
+        foreach ($orders as $order) {
+            $surcharges = unserialize($order['surcharges']);
+
+            if (!empty($surcharges) && is_array($surcharges)) {
+                $surchargesByCollection[$order['id']] = array(
+                    'id' => $order['id'],
+                    'tstamp' => $order['tstamp'],
+                    'surcharges' => $surcharges,
+                );
+            }
+        }
+
+        return $surchargesByCollection;
     }
 }

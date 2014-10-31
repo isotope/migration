@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<dataset>
+    <tl_iso_product_collection_surcharge id="1" pid="1" sorting="128" type="payment" label="Bezahlung (Vorkasse)" price="-3%" total_price="-2.52" tax_free_total_price="0.00" tax_class="0" tax_id="" before_tax="1" addToTotal="1" products="a:3:{i:105;N;i:103;N;i:104;N;}" />
+    <tl_iso_product_collection_surcharge id="2" pid="1" sorting="256" type="rule" label="Weihnachtsaktion" price="-10%" total_price="-8.40" tax_free_total_price="0.00" tax_class="0" tax_id="" before_tax="1" addToTotal="1" products="a:3:{i:105;N;i:103;N;i:104;N;}" />
+    <tl_iso_product_collection_surcharge id="3" pid="1" sorting="384" type="tax" label="enthaltene MwSt." price="7%" total_price="4.78" tax_free_total_price="0.00" tax_class="0" tax_id="1" before_tax="" addToTotal="" products="" />
+    <tl_iso_product_collection_surcharge id="4" pid="2" sorting="128" type="payment" label="Bezahlung (Vorkasse)" price="-3%" total_price="-1.20" tax_free_total_price="0.00" tax_class="0" tax_id="" before_tax="1" addToTotal="1" products="a:1:{i:48;N;}" />
+    <tl_iso_product_collection_surcharge id="5" pid="2" sorting="256" type="tax" label="enthaltene MwSt." price="7%" total_price="2.54" tax_free_total_price="0.00" tax_class="0" tax_id="1" before_tax="" addToTotal="" products="" />
+</dataset>

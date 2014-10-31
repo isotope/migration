@@ -20,7 +20,21 @@ class ProductCollectionTest extends ScenarioTestCase
     {
         parent::setUp();
 
-        $this->prepareScenario('scenario1.sql', $this->getDefaultServiceConfigs());
+        $this->prepareScenario(
+            'scenario1.sql',
+            array_merge(
+                $this->getDefaultServiceConfigs(),
+                array(
+                    'product_collection' => array(
+                        'surcharge_types' => array(
+                            'Bezahlung (Vorkasse)' => 'payment',
+                            'enthaltene MwSt.' => 'tax',
+                            'Weihnachtsaktion' => 'rule',
+                        )
+                    )
+                )
+            )
+        );
     }
 
     public function testCollectionType()
@@ -72,6 +86,19 @@ class ProductCollectionTest extends ScenarioTestCase
         );
 
         $expectedTable = $this->createFlatXmlDataSet($this->getDataPath() . '/privateaddresses.xml')->getTable("tl_iso_product_collection");
+
+        $this->assertTablesEqual($expectedTable, $queryTable);
+    }
+
+
+    public function testSurcharges()
+    {
+        $queryTable = $this->getConnection()->createQueryTable(
+            'tl_iso_product_collection_surcharge',
+            "SELECT id, pid, sorting, type, label, price, total_price, tax_free_total_price, tax_class, tax_id, before_tax, addToTotal, products FROM tl_iso_product_collection_surcharge"
+        );
+
+        $expectedTable = $this->createFlatXmlDataSet($this->getDataPath() . '/surcharges.xml')->getTable("tl_iso_product_collection_surcharge");
 
         $this->assertTablesEqual($expectedTable, $queryTable);
     }

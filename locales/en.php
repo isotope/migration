@@ -111,6 +111,23 @@ HTML
             'productType_row_name' => 'Name',
             'productType_row_list' => 'List Gallery',
             'productType_row_reader' => 'Reader Gallery',
+        ),
+        'product_collection' => array(
+            'legend' => 'Surcharge types',
+            'intro' => 'Please tell us of what type the existing surcharges are.',
+            'description' => <<<'HTML'
+<p class="explain">Each order can have unlimited surcharges in Isotope. This can be a payment surcharge, a shipping surcharge or anything similar.
+Isotope 2 introduced surcharge types so developer can find out what each surcharge is.
+Unfortunately, it's not possible to tell automatically, so you will need to configure this.</p>
+<p class="explain">Most of the time you can simply check the label and it will become obvious to you what the surcharge is.
+If you used third party extensions that added their own surcharges, please aks the developer what type they need for Isotope 2.
+You can then use the "Custom" option and manually enter the value.</p>
+HTML
+,
+            'label' => 'Label',
+            'type' => 'Type',
+            'surcharges_empty' => 'Surcharges configuration is empty.',
+            'surcharge_type_missing' => 'You must select a type for each surcharge.',
         )
     )
 );

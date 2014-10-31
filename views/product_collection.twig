@@ -1,0 +1,49 @@
+{% extends "config.twig" %}
+
+{% block content %}
+    <div class="row">
+        <h3>{% trans %}service.product_collection.legend{% endtrans %}</h3>
+        <p>{% trans %}service.product_collection.intro{% endtrans %}</p>
+
+        <table>
+            <tr>
+                <th>{% trans %}service.product_collection.label{% endtrans %}</th>
+                <th>{% trans %}service.product_collection.type{% endtrans %}</th>
+            </tr>
+        {% for label, type in surchargeTypes %}
+            <tr>
+                <td>{{ label }}</td>
+                <td>
+                    <select class="select" name="surcharge_types[{{ label }}]" onchange="IsotopeMigration.custom(this)">
+                        <option value="">-</option>
+                        <option value="payment"{% if type == 'payment' %} selected="selected"{% endif %}>Payment</option>
+                        <option value="shipping"{% if type == 'shipping' %} selected="selected"{% endif %}>Shipping</option>
+                        <option value="tax"{% if type == 'tax' %} selected="selected"{% endif %}>Tax</option>
+                        <option value="rule"{% if type == 'rule' %} selected="selected"{% endif %}>Rule</option>
+                        <option value="custom">Custom</option>
+                        {% if type not in defaultTypes %}
+                        <option value="{{ type }}" selected="selected">{{ type }}</option>
+                        {% endif %}
+                    </select>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+        {% trans %}service.product_collection.description{% endtrans %}
+    </div>
+    <script>
+        IsotopeMigration = {
+            'custom': function(el) {
+                if (el.value == 'custom') {
+                    var custom = prompt('Please enter the custom value:', '');
+                    var option = document.createElement('option');
+                    option.value = custom;
+                    option.label = custom;
+                    el.insertBefore(option, el.lastChild);
+                    el.value = custom;
+                }
+            }
+        }
+    </script>
+
+{% endblock %}
