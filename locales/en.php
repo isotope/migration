@@ -12,11 +12,12 @@ return array(
         'continue'      => 'Continue',
         'save'          => 'Save',
         'saveContinue'  => 'Save & Continue',
+        'start'         => 'Start configuration',
     ),
     'index' => array(
         'headline'      => 'Isotope 2 Migration Tool',
         'intro'         => 'This tool will migrate your Isotope 1.4 data to Isotope 2. Please read carefully before continuing.',
-        'start'         => 'Start configuration',
+        'start'         => 'Start migration',
     ),
     'error' => array(
         'headline' => 'Application Error',

@@ -20,10 +20,7 @@ table {
 }
 
 caption, th, td {
-    /*noinspection CssOverwrittenProperties*/
     text-align: left;
-    /*noinspection CssOverwrittenProperties*/
-    text-align: start;
     vertical-align: middle;
 }
 
@@ -239,8 +236,13 @@ h1, h2, h3, h4, h5, h6, p, pre, blockquote, table, ol, ul, form, legend, button 
     background-position: 0 -30px !important
 }
 
-.button.main {
+.button.float_right {
     float: right;
+    margin-left: 10px;
+}
+
+.button.main {
+
     background-color: #f89406;
     background-image: -moz-linear-gradient(top, #fbb450, #f89406);
     background-image: -webkit-linear-gradient(top, #fbb450, #f89406);
