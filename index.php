@@ -9,6 +9,13 @@
  * @license    http://opensource.org/licenses/lgpl-3.0.html
  */
 
+use Isotope\Migration\Provider\ContaoServiceProvider;
+use Isotope\Migration\Provider\MigrationServiceProvider;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 $app = new Silex\Application();
@@ -21,10 +28,10 @@ if (\Phar::running()) {
     $app['kernel.root_dir'] = \Phar::running(false);
 }
 
-$app->register(new \Isotope\Migration\Provider\ContaoServiceProvider(), array(
+$app->register(new ContaoServiceProvider(), array(
     'contao.root' => dirname($app['kernel.root_dir'])
 ));
-$app->register(new \Isotope\Migration\Provider\MigrationServiceProvider());
+$app->register(new MigrationServiceProvider());
 
 // Display a nice error page in production mode
 if (!$app['debug']) {
@@ -40,7 +47,9 @@ if (!$app['debug']) {
             );
 
             // Try to handle issues with Contao or database connection
-            if ($e instanceof \Symfony\Component\HttpKernel\Exception\HttpException && $e->getStatusCode() == 501) {
+            if ($e instanceof NotFoundHttpException) {
+                return new RedirectResponse($app['request_stack']->getCurrentRequest()->getBaseUrl());
+            } else if ($e instanceof HttpException && $e->getStatusCode() == 501) {
                 switch ($e->getCode()) {
                     case 403:
                         $context['reason'] = 'database';
@@ -52,7 +61,7 @@ if (!$app['debug']) {
                 }
             }
 
-            return new Symfony\Component\HttpFoundation\Response(
+            return new Response(
                 $twig->render('error.twig', $context),
                 500
             );
