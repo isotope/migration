@@ -78,14 +78,7 @@ class DatabaseVerificationService
     public function tableMustExist($tableName)
     {
         if (!$this->schemaManager()->tablesExist(array($tableName))) {
-            throw new \RuntimeException(
-                $this->translator->trans(
-                    'error.tableNotFound',
-                    array(
-                        '%table%' => $tableName
-                    )
-                )
-            );
+            $this->exception('error.tableNotFound', $tableName);
         }
 
         return $this;
@@ -101,14 +94,7 @@ class DatabaseVerificationService
     public function tableMustNotExist($tableName)
     {
         if ($this->schemaManager()->tablesExist(array($tableName))) {
-            throw new \RuntimeException(
-                $this->translator->trans(
-                    'error.tableFound',
-                    array(
-                        '%table%' => $tableName
-                    )
-                )
-            );
+            $this->exception('error.tableFound', $tableName);
         }
 
         return $this;
@@ -132,15 +118,9 @@ class DatabaseVerificationService
             }
         }
 
-        throw new \RuntimeException(
-            $this->translator->trans(
-                'error.columnNotFound',
-                array(
-                    '%table%' => $tableName,
-                    '%column%' => $columnName
-                )
-            )
-        );
+        $this->exception('error.columnNotFound', $tableName, $columnName);
+
+        return $this;
     }
 
     /**
@@ -157,15 +137,7 @@ class DatabaseVerificationService
 
         foreach ($columns as $column) {
             if ($column->getName() == $columnName) {
-                throw new \RuntimeException(
-                    $this->translator->trans(
-                        'error.columnFound',
-                        array(
-                            '%table%'  => $tableName,
-                            '%column%' => $columnName
-                        )
-                    )
-                );
+                $this->exception('error.columnFound', $tableName, $columnName);
             }
         }
 
@@ -190,5 +162,19 @@ class DatabaseVerificationService
     private function schemaManager()
     {
         return $this->db->getSchemaManager();
+    }
+
+
+    private function exception($message, $table, $column = '')
+    {
+        throw new \RuntimeException(
+            $this->translator->trans(
+                $message,
+                array(
+                    '%table%'  => $table,
+                    '%column%' => $column
+                )
+            )
+        );
     }
 }
