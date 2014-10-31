@@ -48,10 +48,11 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
         $this->checkMigrationStatus();
 
         return array_merge(
-            $this->getGroupSQL(),
-            $this->getCategoriesSQL(),
+            $this->renameTable('tl_iso_groups', 'tl_iso_group'),
+            $this->renameTable('tl_iso_product_categories', 'tl_iso_product_category'),
             $this->getProductSQL(),
-            $this->getPriceSQL()
+            $this->renameTable('tl_iso_prices', 'tl_iso_product_price'),
+            $this->renameTable('tl_iso_price_tiers', 'tl_iso_product_pricetier')
         );
     }
 
@@ -113,28 +114,6 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
     /**
      * @return array
      */
-    private function getGroupSQL()
-    {
-        $tableDiff = new TableDiff('tl_iso_groups');
-        $tableDiff->newName = 'tl_iso_group';
-
-        return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
-    }
-
-    /**
-     * @return array
-     */
-    private function getCategoriesSQL()
-    {
-        $tableDiff = new TableDiff('tl_iso_product_categories');
-        $tableDiff->newName = 'tl_iso_product_category';
-
-        return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
-    }
-
-    /**
-     * @return array
-     */
     private function getProductSQL()
     {
         $tableDiff = new TableDiff('tl_iso_products');
@@ -151,22 +130,6 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
         $tableDiff->renamedColumns['keywords_meta'] = $column;
 
         return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
-    }
-
-    /**
-     * @return array
-     */
-    private function getPriceSQL()
-    {
-        $tableDiff = new TableDiff('tl_iso_prices');
-        $tableDiff->newName = 'tl_iso_product_price';
-        $priceSql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
-
-        $tableDiff = new TableDiff('tl_iso_price_tiers');
-        $tableDiff->newName = 'tl_iso_product_pricetier';
-        $tiersSql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
-
-        return array_merge($priceSql, $tiersSql);
     }
 
 

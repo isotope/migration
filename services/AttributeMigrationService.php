@@ -12,8 +12,6 @@
 namespace Isotope\Migration\Service;
 
 
-use Doctrine\DBAL\Schema\TableDiff;
-
 class AttributeMigrationService extends AbstractConfigfreeMigrationService
 {
     /**
@@ -45,14 +43,9 @@ class AttributeMigrationService extends AbstractConfigfreeMigrationService
     {
         $this->checkMigrationStatus();
 
-        $tableDiff = new TableDiff('tl_iso_attributes');
-        $tableDiff->newName = 'tl_iso_attribute';
+        return $this->renameTable('tl_iso_attributes', 'tl_iso_attribute');
 
         // TODO: gallery type for custom MediaManager attributes is no longer possible
-
-        $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
-
-        return $sql;
     }
 
     /**

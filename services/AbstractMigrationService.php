@@ -14,6 +14,7 @@ namespace Isotope\Migration\Service;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -162,6 +163,23 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
         $table->addColumn('tstamp', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
 
         return $table;
+    }
+
+    /**
+     * Short-hand method to get SQL for database table rename
+     *
+     * @param string $oldName
+     * @param string $newName
+     *
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    protected function renameTable($oldName, $newName)
+    {
+        $tableDiff = new TableDiff($oldName);
+        $tableDiff->newName = $newName;
+
+        return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
     }
 
 

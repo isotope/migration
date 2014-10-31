@@ -46,10 +46,7 @@ class TranslationMigrationService extends AbstractConfigfreeMigrationService
         $this->checkMigrationStatus();
 
         if ($this->dbcheck->tableExists('tl_iso_labels')) {
-            $tableDiff = new TableDiff('tl_iso_labels');
-            $tableDiff->newName = 'tl_iso_label';
-
-            return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+            return $this->renameTable('tl_iso_labels', 'tl_iso_label');
         }
 
         return array();

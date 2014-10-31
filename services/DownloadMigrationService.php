@@ -74,7 +74,7 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
         return array_merge(
             $this->dbafs->getMigrateFilePathForUuidSQL('tl_iso_downloads', 'singleSRC'),
             $this->getProductSQL(),
-            $this->getCollectionSQL()
+            $this->renameTable('tl_iso_order_downloads', 'tl_iso_product_collection_download')
         );
     }
 
@@ -124,17 +124,6 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
         $sql[] = "UPDATE tl_iso_download SET published='1'";
 
         return $sql;
-    }
-
-    /**
-     * @return array
-     */
-    private function getCollectionSQL()
-    {
-        $tableDiff = new TableDiff('tl_iso_order_downloads');
-        $tableDiff->newName = 'tl_iso_product_collection_download';
-
-        return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
     }
 
     /**

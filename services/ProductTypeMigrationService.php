@@ -12,8 +12,6 @@
 namespace Isotope\Migration\Service;
 
 
-use Doctrine\DBAL\Schema\TableDiff;
-
 class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
 {
     /**
@@ -45,11 +43,7 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
     {
         $this->checkMigrationStatus();
 
-        $tableDiff = new TableDiff('tl_iso_producttypes');
-        $tableDiff->newName = 'tl_iso_producttype';
-        $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
-
-        return $sql;
+        return $this->renameTable('tl_iso_producttypes', 'tl_iso_producttype');
     }
 
     /**
