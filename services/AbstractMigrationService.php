@@ -140,10 +140,11 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
      * @param string $name
      * @param Schema $schema
      * @param bool   $addPid
+     * @param bool   $addSorting
      *
      * @return \Doctrine\DBAL\Schema\Table
      */
-    protected function createContaoTable($name, Schema $schema, $addPid = false)
+    protected function createContaoTable($name, Schema $schema, $addPid = false, $addSorting = false)
     {
         $table = $schema->createTable($name);
 
@@ -152,6 +153,10 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
 
         if ($addPid) {
             $table->addColumn('pid', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
+        }
+
+        if ($addSorting) {
+            $table->addColumn('sorting', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
         }
 
         $table->addColumn('tstamp', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'default'=>0));
