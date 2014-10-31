@@ -72,7 +72,7 @@ return array(
             'templates'   => 'The migration tool migrated the templates "iso_cart_full" to "iso_collection_default" and "iso_cart_mini" to "iso_collection_mini". However, it cannot migrate logic you built into your templates. You will have to check and adjust every (!) single template!'
         ),
         'gallery' => array(
-            'empty' => 'Gallery configuration is empty.',
+            'gallery_empty' => 'Gallery configuration is empty.',
             'missing_name' => 'You must enter a name for each gallery.',
             'missing_config' => 'Every gallery must have a main and gallery image config.',
             'list_name' => 'List',
