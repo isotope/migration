@@ -164,7 +164,11 @@ class DatabaseVerificationService
         return $this->db->getSchemaManager();
     }
 
-
+    /**
+     * @param string $message
+     * @param string $table
+     * @param string $column
+     */
     private function exception($message, $table, $column = '')
     {
         throw new \RuntimeException(

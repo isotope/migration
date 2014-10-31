@@ -74,7 +74,10 @@ class ContaoServiceProvider implements ServiceProviderInterface
     }
 
 
-    private function normalizeConfig(&$config)
+    /**
+     * @param array $config
+     */
+    private function normalizeConfig(array &$config)
     {
         foreach (array('dbDatabase', 'dbHost', 'dbUser', 'dbPass', 'dbCharset', 'dbPort') as $key) {
             if (!isset($config[$key])) {
