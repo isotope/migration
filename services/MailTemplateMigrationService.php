@@ -82,22 +82,10 @@ class MailTemplateMigrationService extends AbstractMigrationService
             return $this->renderConfigError($e->getMessage());
         }
 
-        $gatewayCount = 0;
+        $gatewayId = $this->getGatewayId($requestStack);
 
-        if ($this->dbcheck->tableExists('tl_nc_gateway')) {
-            $gatewayCount = $this->db->fetchColumn("SELECT COUNT(*) FROM tl_nc_gateway");
-        }
-
-        if (!$this->hasMails() || $gatewayCount == 0) {
-            $this->config->set('mailGateway', 0);
-
+        if ($gatewayId === false) {
             return $this->renderConfigFree();
-        }
-
-        $request = $requestStack->getCurrentRequest();
-
-        if ($request->isMethod('POST') && $request->get('mailGateway') !== null) {
-            $this->config->set('mailGateway', (int) $request->get('mailGateway'));
         }
 
         $mailGateways = ($this->dbcheck->tableExists('tl_nc_gateway')) ? $this->db->fetchAll("SELECT * FROM tl_nc_gateway") : array();
@@ -109,7 +97,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
                 'description' => $this->getDescription(),
                 'can_save' => true,
                 'mailGateways' => $mailGateways,
-                'mailGateway' => $this->config->get('mailGateway')
+                'mailGateway' => $gatewayId
             )
         );
     }
@@ -477,7 +465,6 @@ class MailTemplateMigrationService extends AbstractMigrationService
         return $notificationId;
     }
 
-
     /**
      * @param int    $mailId
      * @param string $titleDraft
@@ -533,12 +520,41 @@ class MailTemplateMigrationService extends AbstractMigrationService
         }
     }
 
-
     /**
      * @return bool
      */
     private function hasMails()
     {
         return !$this->dbcheck->tableIsEmpty('tl_iso_mail');
+    }
+
+    /**
+     * Get gateway ID from config or false if none is necessary
+     *
+     * @param RequestStack $requestStack
+     *
+     * @return bool|int
+     */
+    private function getGatewayId(RequestStack $requestStack)
+    {
+        $gatewayCount = 0;
+
+        if ($this->dbcheck->tableExists('tl_nc_gateway')) {
+            $gatewayCount = $this->db->fetchColumn("SELECT COUNT(*) FROM tl_nc_gateway");
+        }
+
+        if (!$this->hasMails() || $gatewayCount == 0) {
+            $this->config->set('mailGateway', 0);
+
+            return false;
+        }
+
+        $request = $requestStack->getCurrentRequest();
+
+        if ($request->isMethod('POST') && $request->get('mailGateway') !== null) {
+            $this->config->set('mailGateway', (int) $request->get('mailGateway'));
+        }
+
+        return $this->config->get('mailGateway');
     }
 }
