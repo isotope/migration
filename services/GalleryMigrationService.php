@@ -250,7 +250,7 @@ class GalleryMigrationService extends AbstractMigrationService
 
             if (empty($gallery['main_config']) || empty($gallery['gallery_config'])) {
                 throw new \RuntimeException(
-                    $this->trans('service.gallery.gallery_missing_config')
+                    $this->trans('service.gallery.missing_config')
                 );
             }
         }
