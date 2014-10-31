@@ -11,6 +11,7 @@
 
 namespace Isotope\Migration\Service;
 
+use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
@@ -152,23 +153,10 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
             $attributes = unserialize($type['attributes']);
             $variantAttributes = unserialize($type['variant_attributes']);
 
-            if (!empty($attributes)
-                && is_array($attributes)
-                && isset($attributes['price'])
-                && $attributes['price']['enabled']
-            ) {
-                $queryBuilder->orWhere('type=? AND pid=0');
-                $queryBuilder->setParameter($p++, $type['id']);
-            }
+            $this->addConditions($queryBuilder, $attributes, $type, $p);
 
-            if ($type['variants']
-                && !empty($variantAttributes)
-                && is_array($variantAttributes)
-                && isset($variantAttributes['price'])
-                && $variantAttributes['price']['enabled']
-            ) {
-                $queryBuilder->orWhere("type=? AND pid>0 AND language=''");
-                $queryBuilder->setParameter($p++, $type['id']);
+            if ($type['variants']) {
+                $this->addConditions($queryBuilder, $variantAttributes, $type, $p, true);
             }
         }
 
@@ -196,6 +184,26 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
                     'price'  => $product['price']
                 )
             );
+        }
+    }
+
+
+    /**
+     * @param QueryBuilder $queryBuilder
+     * @param array        $attributes
+     * @param string       $type
+     * @param int          $position
+     * @param bool         $addLanguage
+     */
+    private function addConditions(QueryBuilder $queryBuilder, array $attributes, $type, &$position, $addLanguage = false)
+    {
+        if (!empty($attributes)
+            && is_array($attributes)
+            && isset($attributes['price'])
+            && $attributes['price']['enabled']
+        ) {
+            $queryBuilder->orWhere('type=? AND pid=0' . ($addLanguage ? " AND language=''" : ''));
+            $queryBuilder->setParameter($position++, $type['id']);
         }
     }
 }
