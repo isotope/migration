@@ -13,7 +13,6 @@ use Isotope\Migration\Provider\ContaoServiceProvider;
 use Isotope\Migration\Provider\MigrationServiceProvider;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -49,7 +48,7 @@ if (!$app['debug']) {
             // Try to handle issues with Contao or database connection
             if ($e instanceof NotFoundHttpException) {
                 return new RedirectResponse($app['request_stack']->getCurrentRequest()->getBaseUrl());
-            } else if ($e instanceof HttpException && $e->getStatusCode() == 501) {
+            } else if ($e instanceof Symfony\Component\HttpKernel\Exception\HttpException && $e->getStatusCode() == 501) {
                 switch ($e->getCode()) {
                     case 403:
                         $context['reason'] = 'database';
