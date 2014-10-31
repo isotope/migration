@@ -23,12 +23,17 @@ use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\ServiceProviderInterface;
 use Silex\Translator;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Twig_Environment;
 
 class MigrationServiceProvider implements ServiceProviderInterface
 {
 
-    function register(Application $app)
+    public function register(Application $app)
     {
 
         $app->register(new TranslationServiceProvider());
@@ -59,6 +64,41 @@ class MigrationServiceProvider implements ServiceProviderInterface
             return new ConstructorInjectionService($app);
         });
 
+        $this->registerServices($app);
+        $this->registerErrorHandler($app);
+    }
+
+    public function boot(Application $app)
+    {
+        $app['migration.controller'] = $app['class_factory']->share('\\Isotope\\Migration\\Controller\\MigrationController');
+        $app['migration.services'] = new \Pimple();
+
+        foreach ($app['migration.service.classes']->keys() as $slug) {
+            $class = $app['migration.service.classes'][$slug];
+
+            $configBag = new AttributeBag('config_' . $slug);
+            $configBag->setName('config_' . $slug);
+            $app['session']->registerBag($configBag);
+
+            $summaryBag = new AttributeBag('summary_' . $slug);
+            $summaryBag->setName('summary_' . $slug);
+            $app['session']->registerBag($summaryBag);
+
+            $app['migration.services'][$slug] = $app->share(
+                function() use ($app, $slug, $class) {
+                    $config = $app['session']->getBag('config_' . $slug);
+                    $summary = $app['session']->getBag('summary_' . $slug);
+                    return $app['class_factory']->create($class, array(
+                        'summary'   => $summary,
+                        'config'    => $config
+                    ));
+                }
+            );
+        }
+    }
+
+    private function registerServices(Application $app)
+    {
         $app['migration.service.classes'] = new \Pimple();
 
         /** @type \Isotope\Migration\Service\MigrationServiceInterface[] $services */
@@ -91,32 +131,39 @@ class MigrationServiceProvider implements ServiceProviderInterface
         }
     }
 
-    function boot(Application $app)
+    private function registerErrorHandler(Application $app)
     {
-        $app['migration.controller'] = $app['class_factory']->share('\\Isotope\\Migration\\Controller\\MigrationController');
-        $app['migration.services'] = new \Pimple();
+        $app->error(
+            function (\Exception $e) use ($app) {
 
-        foreach ($app['migration.service.classes']->keys() as $slug) {
-            $class = $app['migration.service.classes'][$slug];
+                /** @type Twig_Environment $twig */
+                $twig = $app['twig'];
+                $context = array(
+                    'base_path' => $app['request']->getBasePath(),
+                    'message'   => $e->getMessage(),
+                    'reason'    => 'unknown'
+                );
 
-            $configBag = new AttributeBag('config_' . $slug);
-            $configBag->setName('config_' . $slug);
-            $app['session']->registerBag($configBag);
+                // Try to handle issues with Contao or database connection
+                if ($e instanceof NotFoundHttpException) {
+                    return new RedirectResponse($app['request_stack']->getCurrentRequest()->getBaseUrl() . '/');
+                } else if ($e instanceof HttpException && $e->getStatusCode() == 501) {
+                    switch ($e->getCode()) {
+                        case 403:
+                            $context['reason'] = 'database';
+                            break;
 
-            $summaryBag = new AttributeBag('summary_' . $slug);
-            $summaryBag->setName('summary_' . $slug);
-            $app['session']->registerBag($summaryBag);
-
-            $app['migration.services'][$slug] = $app->share(
-                function() use ($app, $slug, $class) {
-                    $config = $app['session']->getBag('config_' . $slug);
-                    $summary = $app['session']->getBag('summary_' . $slug);
-                    return $app['class_factory']->create($class, array(
-                        'summary'   => $summary,
-                        'config'    => $config
-                    ));
+                        case 404:
+                            $context['reason'] = 'contao';
+                            break;
+                    }
                 }
-            );
-        }
+
+                return new Response(
+                    $twig->render('error.twig', $context),
+                    500
+                );
+            }
+        );
     }
 }
