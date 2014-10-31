@@ -64,35 +64,28 @@ class MigrationController
 
     public function configAction($slug)
     {
-        $forwardToNext = false;
-
         foreach ($this->getServices() as $service) {
-            if ($forwardToNext) {
-                return new RedirectResponse($this->requestStack->getCurrentRequest()->getBaseUrl() . '/config/'.$service->getSlug());
-
-            } elseif ($slug == $service->getSlug()) {
+            if ($slug == $service->getSlug()) {
                 $this->twig->addGlobal('current_service', $service);
 
                 $view = $service->renderConfigView($this->requestStack);
                 $request = $this->requestStack->getCurrentRequest();
 
-                if ($request->isMethod('POST')
-                    && $request->request->get('continue')
-                    && $service->getStatus() == MigrationServiceInterface::STATUS_READY
-                ) {
-                    $forwardToNext = true;
-                    continue;
+                if ($request->isMethod('POST')) {
+                    if ($request->request->get('continue')
+                        && $service->getStatus() == MigrationServiceInterface::STATUS_READY
+                    ) {
+                        return $this->goToNext($service->getSlug());
+                    } elseif ($request->request->get('back')) {
+                        return $this->goToPrevious($service->getSlug());
+                    }
                 }
 
                 return $view;
             }
         }
 
-        if ($forwardToNext) {
-            return new RedirectResponse($this->requestStack->getCurrentRequest()->getBaseUrl() . '/execute');
-        } else {
-            throw new NotFoundHttpException();
-        }
+        throw new NotFoundHttpException();
     }
 
     public function executeAction()
@@ -142,6 +135,7 @@ class MigrationController
 
     /**
      * Get an array of services from the storage container
+     *
      * @return MigrationServiceInterface[]
      */
     protected function getServices()
@@ -159,5 +153,44 @@ class MigrationController
         }
 
         return $services;
+    }
+
+    /**
+     * Redirect to next service or the execution step
+     *
+     * @param string $currentService
+     *
+     * @return RedirectResponse
+     */
+    private function goToNext($currentService)
+    {
+        $keys = $this->services->keys();
+        $pos = array_search($currentService, $keys);
+        $max = max(array_keys($keys));
+
+        if ($pos === false || $pos === $max) {
+            return new RedirectResponse($this->requestStack->getCurrentRequest()->getBaseUrl() . '/execute');
+        } else {
+            return new RedirectResponse($this->requestStack->getCurrentRequest()->getBaseUrl() . '/config/' . $this->services[$keys[$pos+1]]->getSlug());
+        }
+    }
+
+    /**
+     * Redirect to previous service or the config overview
+     *
+     * @param string $currentService
+     *
+     * @return RedirectResponse
+     */
+    private function goToPrevious($currentService)
+    {
+        $keys = $this->services->keys();
+        $pos = array_search($currentService, $keys);
+
+        if ($pos === false || $pos === 0) {
+            return new RedirectResponse($this->requestStack->getCurrentRequest()->getBaseUrl() . '/config');
+        } else {
+            return new RedirectResponse($this->requestStack->getCurrentRequest()->getBaseUrl() . '/config/' . $this->services[$keys[$pos-1]]->getSlug());
+        }
     }
 }

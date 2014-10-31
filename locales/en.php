@@ -9,6 +9,7 @@ return array(
         'summary'           => 'Summary',
     ),
     'config' => array(
+        'back'          => 'Back',
         'continue'      => 'Continue',
         'save'          => 'Save',
         'saveContinue'  => 'Save & Continue',

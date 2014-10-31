@@ -23,6 +23,7 @@
 
         <div class="row">
             <p class="mt">
+                <button type="submit" class="button" name="back" value="1">{% trans %}config.back{% endtrans %}</button>
                 {% if can_continue|default(false) %}
                     <button type="submit" class="button float_right main" name="continue" value="1">{% trans %}config.continue{% endtrans %}</button>
                 {% elseif can_save|default(false) %}
