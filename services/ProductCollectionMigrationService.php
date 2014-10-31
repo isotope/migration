@@ -367,7 +367,9 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         return $this->db->lastInsertId();
     }
 
-
+    /**
+     * Convert surcharges from all collections based on the current config
+     */
     private function convertSurcharges()
     {
         $surchargeTypes = $this->config->get('surcharge_types');
@@ -386,8 +388,15 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         }
     }
 
-
-    private function addSurcharge($surcharge, $collection, $type, $sorting)
+    /**
+     * Insert a surcharge into the database
+     *
+     * @param array $surcharge
+     * @param array $collection
+     * @param string $type
+     * @param int $sorting
+     */
+    private function addSurcharge(array $surcharge, array $collection, $type, $sorting)
     {
         $this->normalizeSurcharge($surcharge);
 
@@ -411,8 +420,12 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         );
     }
 
-
-    private function normalizeSurcharge(&$surcharge)
+    /**
+     * Initializes non-existing surcharge properties
+     *
+     * @param array $surcharge
+     */
+    private function normalizeSurcharge(array &$surcharge)
     {
         foreach (array('tax_class', 'tax_id', 'before_tax', 'add', 'products') as $key) {
             if (!isset($surcharge[$key])) {
