@@ -82,7 +82,7 @@ class PaymentMethodMigrationService extends AbstractMigrationService
         try {
             $this->verifyDatabase();
         } catch (\RuntimeException $e) {
-            $this->renderConfigError($e->getMessage());
+            return $this->renderConfigError($e->getMessage());
         }
 
         $oldMethods = $this->db->fetchAll("
