@@ -26,6 +26,7 @@ abstract class SilexAwareTestCase extends \PHPUnit_Framework_TestCase
         if (!isset($GLOBALS['SILEX_APP'])) {
             $app = new Application();
             $app['debug'] = true;
+            $app['exception_handler']->disable();
 
             $app['db.options'] = array(
                 'dbname'   => $GLOBALS['DB_DBNAME'],
@@ -43,6 +44,12 @@ abstract class SilexAwareTestCase extends \PHPUnit_Framework_TestCase
             $app['session.storage.test'] = $app->share(function () {
                 return new MockArraySessionStorage();
             });
+
+            $app->get('/', 'migration.controller:indexAction');
+            $app->get('/config/', 'migration.controller:configIntroAction');
+            $app->match('/config/{slug}', 'migration.controller:configAction');
+            $app->get('/execute', 'migration.controller:executeAction');
+            $app->get('/summary', 'migration.controller:summaryAction');
 
             $app->boot();
 
