@@ -358,22 +358,24 @@ class MailTemplateMigrationService extends AbstractMigrationService
     private function migrateOrderStatusMails($gatewayId)
     {
         $orderStatus = $this->db->fetchAll("
-            SELECT GROUP_CONCAT(id) AS ids, GROUP_CONCAT(name SEPARATOR '\", \"') AS name, mail_customer, mail_admin, sales_email
+            SELECT
+                GROUP_CONCAT(id) AS ids,
+                GROUP_CONCAT(name SEPARATOR '\", \"') AS name,
+                mail_customer,
+                mail_admin,
+                sales_email
             FROM tl_iso_orderstatus
             WHERE mail_customer!=0 OR mail_admin!=0
             GROUP BY mail_customer, mail_admin, sales_email
         ");
 
-        foreach ($orderStatus as $row) {
-            $notificationTitle = $this->trans('service.mail_template.orderstatus', array('%name%' => $row['name']));
-            $notificationId = $this->convertMailsToNotification($row, $gatewayId, $notificationTitle);
-
-            $this->db->executeUpdate(
-                "UPDATE tl_iso_orderstatus SET notification=? WHERE id IN (?)",
-                array($notificationId, explode(',', $row['ids'])),
-                array(\PDO::PARAM_INT, Connection::PARAM_INT_ARRAY)
-            );
-        }
+        $this->migrateMails(
+            $orderStatus,
+            $gatewayId,
+            'service.mail_template.orderstatus',
+            'tl_iso_orderstatus',
+            'notification'
+        );
     }
 
 
@@ -396,12 +398,37 @@ class MailTemplateMigrationService extends AbstractMigrationService
             GROUP BY iso_mail_customer, iso_mail_admin, iso_sales_email
         ");
 
-        foreach ($checkoutModules as $row) {
-            $notificationTitle = $this->trans('service.mail_template.checkoutmodule', array('%name%' => $row['name']));
-            $notificationId = $this->convertMailsToNotification($row, $gatewayId, $notificationTitle);
+        $this->migrateMails(
+            $checkoutModules,
+            $gatewayId,
+            'service.mail_template.checkoutmodule',
+            'tl_module',
+            'nc_notification'
+        );
+    }
+
+
+    /**
+     * @param array  $configs
+     * @param int    $gatewayId
+     * @param string $label
+     * @param string $table
+     * @param string $field
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    private function migrateMails(array $configs, $gatewayId, $label, $table, $field)
+    {
+        foreach ($configs as $row) {
+
+            $notificationId = $this->convertMailsToNotification(
+                $row,
+                $gatewayId,
+                $this->trans($label, array('%name%' => $row['name']))
+            );
 
             $this->db->executeUpdate(
-                "UPDATE tl_module SET nc_notification=? WHERE id IN (?)",
+                "UPDATE $table SET $field=? WHERE id IN (?)",
                 array($notificationId, explode(',', $row['ids'])),
                 array(\PDO::PARAM_INT, Connection::PARAM_INT_ARRAY)
             );
