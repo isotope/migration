@@ -12,8 +12,6 @@
 namespace Isotope\Migration\Service;
 
 
-use Doctrine\DBAL\Schema\TableDiff;
-
 class TranslationMigrationService extends AbstractConfigfreeMigrationService
 {
     /**
