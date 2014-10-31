@@ -61,13 +61,25 @@ class ContaoServiceProvider implements ServiceProviderInterface
         $app['contao.ready'] = true;
         $app['contao.config'] = (array) $GLOBALS['TL_CONFIG'];
 
+        $this->normalizeConfig($app['contao.config']);
+
         $app['db.options'] = array(
-            'dbname'   => (isset($app['contao.config']['dbDatabase']) ? $app['contao.config']['dbDatabase'] : ''),
-            'host'     => (isset($app['contao.config']['dbHost']) ? $app['contao.config']['dbHost'] : ''),
-            'user'     => (isset($app['contao.config']['dbUser']) ? $app['contao.config']['dbUser'] : ''),
-            'password' => (isset($app['contao.config']['dbPass']) ? $app['contao.config']['dbPass'] : ''),
-            'charset'  => (isset($app['contao.config']['dbCharset']) ? $app['contao.config']['dbCharset'] : ''),
-            'port'     => (isset($app['contao.config']['dbPort']) ? $app['contao.config']['dbPort'] : ''),
+            'dbname'   => $app['contao.config']['dbDatabase'],
+            'host'     => $app['contao.config']['dbHost'],
+            'user'     => $app['contao.config']['dbUser'],
+            'password' => $app['contao.config']['dbPass'],
+            'charset'  => $app['contao.config']['dbCharset'],
+            'port'     => $app['contao.config']['dbPort'],
         );
+    }
+
+
+    private function normalizeConfig(&$config)
+    {
+        foreach (array('dbDatabase', 'dbHost', 'dbUser', 'dbPass', 'dbCharset', 'dbPort') as $key) {
+            if (!isset($config[$key])) {
+                $config[$key] = '';
+            }
+        }
     }
 }
