@@ -106,6 +106,10 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
         $this->dbcheck
             ->tableMustExist('tl_iso_order_downloads')
             ->tableMustNotExist('tl_iso_product_collection_download');
+
+        $this->dbcheck
+            ->tableMustExist('tl_files')
+            ->columnMustExist('tl_files', 'uuid');
     }
 
     /**
