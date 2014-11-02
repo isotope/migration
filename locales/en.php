@@ -9,19 +9,24 @@ return array(
         'summary'           => 'Summary',
     ),
     'error' => array(
-        'headline' => 'Application Error',
-        'contao' => 'Your Contao installation was not found. To fix this problem, make sure you placed the migration tool in the root folder of your installation and there is localconfig.php in your system/config directory.',
-        'database' => 'Connecting to your database failed. This means Contao\'s localconfig.php was found, but there were either no credentials available or they were incorrect. Make sure your Contao installation works.',
-        'installTool' => 'Open Contao Install-Tool',
-        'tableFound'  => 'Table "%table%" must NOT exist in the database.',
-        'tableNotFound' => 'Table "%table%" not found in the database.',
-        'columnFound' => 'Column "%column%" must NOT exist in the table "%table%".',
+        'headline'       => 'Application Error',
+        'contao'         => 'Your Contao installation was not found. To fix this problem, make sure you placed the migration tool in the root folder of your installation and there is localconfig.php in your system/config directory.',
+        'database'       => 'Connecting to your database failed. This means Contao\'s localconfig.php was found, but there were either no credentials available or they were incorrect. Make sure your Contao installation works.',
+        'installTool'    => 'Open Contao Install-Tool',
+        'tableFound'     => 'Table "%table%" must NOT exist in the database.',
+        'tableNotFound'  => 'Table "%table%" not found in the database.',
+        'columnFound'    => 'Column "%column%" must NOT exist in the table "%table%".',
         'columnNotFound' => 'Column "%column%" not found in the table "%table%".',
     ),
     'confirm' => array(
         'configfree' => 'There is no configuration necessary for this migration step.',
-        'title' => 'Confirmation',
-        'checkbox' => 'I understand and agree'
+        'title'      => 'Confirmation',
+        'checkbox'   => 'I understand and agree'
+    ),
+    'help' => array(
+        'intro'        => 'Need help?',
+        'community'    => 'Contao Community Forum',
+        'professional' => 'Professional support',
     ),
     'index' => array(
         'headline'      => 'Welcome to the Isotope 2 Migration Tool',
