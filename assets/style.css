@@ -207,6 +207,7 @@ h1, h2, h3, h4, h5, h6, p, pre, blockquote, table, ol, ul, form, legend, button 
     text-align: center;
     vertical-align: middle;
     font-size: 11px;
+    line-height: 16px;
     color: #444;
     cursor: pointer;
     border: 1px solid #ccc;
@@ -275,7 +276,7 @@ body {
 
 #left .inside {
     margin-right:18px;
-    padding: 100px 18px 6px;
+    padding: 100px 6px 6px;
     background: #fff url("logo.png") center 18px no-repeat;
     border-radius: 3px;
     box-shadow: 0 3px 6px #ccc;
@@ -297,12 +298,11 @@ body {
 
 .row {
     overflow: hidden;
-    padding: 0 18px
+    margin: 0 18px
 }
 
 .row.headline {
-    margin: 0 18px 0;
-    padding: 22px 0 10px;
+    padding-bottom: 10px;
     border-bottom: 1px solid #ddd;
 }
 
@@ -324,7 +324,7 @@ h1 {
 }
 
 h2 {
-    margin-top: 0;
+    margin-top: 22px;
     font-size: 14px;
     color: #0098ac
 }
@@ -410,7 +410,11 @@ form {
     border-radius: 3px;
 }
 
-#left ul {
+#left ol {
+    margin: 0 12px;
+}
+
+#left .level_1 ul {
     padding-top:.5em;
 }
 
@@ -418,12 +422,19 @@ form {
     margin-bottom: 18px;
 }
 
-#left a.active {
+#left a.active,
+#left span.active{
     font-weight: bold;
 }
 
 #left .level_2 > li {
     margin-left: 18px;
+}
+
+#help {
+    margin-top: 50px;
+    padding: 12px 12px 1px;
+    background: #f0f0f0;
 }
 
 /* Error page */

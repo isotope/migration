@@ -24,7 +24,7 @@ return array(
         'checkbox' => 'I understand and agree'
     ),
     'index' => array(
-        'headline'      => 'Isotope 2 Migration Tool',
+        'headline'      => 'Welcome to the Isotope 2 Migration Tool',
         'intro'         => 'This tool will migrate your Isotope 1.4 data to Isotope 2. Please read carefully before continuing.',
         'start'         => 'Start migration',
     ),

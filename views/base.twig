@@ -13,7 +13,7 @@
             <ol class="level_1">
                 <li><a href="{{ base_url }}/"{% if navigation_index %} class="active"{% endif %}>{% trans %}base.welcome{% endtrans %}</a></li>
                 <li>
-                    <a href="{{ base_url }}/config"{% if navigation_config %} class="active"{% endif %}>{% trans %}base.configuration{% endtrans %}</a>
+                    <span{% if navigation_config %} class="active"{% endif %}>{% trans %}base.configuration{% endtrans %}</span>
                     {% if navigation_config %}
                     <ul class="level_2">
                         {% for service in services %}
@@ -22,8 +22,8 @@
                     </ul>
                     {% endif %}
                 </li>
-                <li><a href="{{ base_url }}/execute"{% if navigation_execute %} class="active"{% endif %}>{% trans %}base.execution{% endtrans %}</a></li>
-                <li><a href="{{ base_url }}/summary"{% if navigation_summary %} class="active"{% endif %}>{% trans %}base.summary{% endtrans %}</a></li>
+                <li><span{% if navigation_execute %} class="active"{% endif %}>{% trans %}base.execution{% endtrans %}</span></li>
+                <li><span{% if navigation_summary %} class="active"{% endif %}>{% trans %}base.summary{% endtrans %}</span></li>
             </ol>
         </div>
     </div>
