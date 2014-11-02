@@ -88,28 +88,52 @@ class MigrationController
         throw new NotFoundHttpException();
     }
 
+    /**
+     * Render the execution screen
+     *
+     * @return string
+     * @throws \Doctrine\DBAL\DBALException
+     */
     public function executeAction()
     {
         $sql = array();
+        $hasError = false;
         $services = $this->getServices();
+        $request = $this->requestStack->getCurrentRequest();
 
         foreach ($services as $service) {
             if ($service->getStatus() != MigrationServiceInterface::STATUS_READY) {
-                return new RedirectResponse($this->requestStack->getCurrentRequest()->getBaseUrl() . '/config/' . $service->getSlug(), 303);
+                $hasError = true;
+                break;
+                //return new RedirectResponse($this->requestStack->getCurrentRequest()->getBaseUrl() . '/config/' . $service->getSlug(), 303);
             }
 
             $sql = array_merge($sql, $service->getMigrationSQL());
         }
 
-        foreach ($sql as $query) {
-            $this->db->exec($query);
+        if (!$hasError && $request->isMethod('POST')) {
+            if ($request->get('cancel') !== null) {
+                // TODO: delete session data
+                return new RedirectResponse($request->getBaseUrl() . '/', 303);
+            }
+
+            foreach ($sql as $query) {
+                $this->db->exec($query);
+            }
+
+            foreach ($services as $service) {
+                $service->postMigration();
+            }
+
+            return new RedirectResponse($request->getBaseUrl() . '/summary', 303);
         }
 
-        foreach ($services as $service) {
-            $service->postMigration();
-        }
-
-        return $this->twig->render('execute.twig');
+        return $this->twig->render(
+            'execute.twig',
+            array(
+                'error' => $hasError
+            )
+        );
     }
 
     public function summaryAction()

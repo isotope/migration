@@ -40,6 +40,17 @@ return array(
         'saveContinue'  => 'Save & Continue',
         'start'         => 'Start configuration',
     ),
+    'execute' => array(
+        'headline'          => 'Ready, set, go!',
+        'intro'             => 'Hello World', // TODO: write a better intro
+        'back'              => 'Back',
+        'cancel'            => 'Cancel',
+        'cancel_confirm'    => 'Are you sure to cancel? This will delete all your configuration!',
+        'continue'          => 'Execute',
+        'error_headline'    => 'Slow down, young warrior …',
+        'error_description' => 'Looks like you\'re not yet ready for the migration. Please start by reading the welcome text and then configure all necessary steps.',
+        'error_button'      => 'Start over'
+    ),
     'service' => array(
         'mail_template' => array(
             'gateway_legend' => 'E-Mail Gateway',

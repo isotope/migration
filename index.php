@@ -30,7 +30,7 @@ $app->register(new MigrationServiceProvider());
 $app->get('/', 'migration.controller:indexAction');
 $app->get('/config/', 'migration.controller:configIntroAction');
 $app->match('/config/{slug}', 'migration.controller:configAction');
-$app->get('/execute', 'migration.controller:executeAction');
+$app->match('/execute', 'migration.controller:executeAction');
 $app->get('/summary', 'migration.controller:summaryAction');
 
 $app->run();
