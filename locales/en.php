@@ -8,18 +8,6 @@ return array(
         'execution'         => 'Execution',
         'summary'           => 'Summary',
     ),
-    'config' => array(
-        'back'          => 'Back',
-        'continue'      => 'Continue',
-        'save'          => 'Save',
-        'saveContinue'  => 'Save & Continue',
-        'start'         => 'Start configuration',
-    ),
-    'index' => array(
-        'headline'      => 'Isotope 2 Migration Tool',
-        'intro'         => 'This tool will migrate your Isotope 1.4 data to Isotope 2. Please read carefully before continuing.',
-        'start'         => 'Start migration',
-    ),
     'error' => array(
         'headline' => 'Application Error',
         'contao' => 'Your Contao installation was not found. To fix this problem, make sure you placed the migration tool in the root folder of your installation and there is localconfig.php in your system/config directory.',
@@ -34,6 +22,18 @@ return array(
         'configfree' => 'There is no configuration necessary for this migration step.',
         'title' => 'Confirmation',
         'checkbox' => 'I understand and agree'
+    ),
+    'index' => array(
+        'headline'      => 'Isotope 2 Migration Tool',
+        'intro'         => 'This tool will migrate your Isotope 1.4 data to Isotope 2. Please read carefully before continuing.',
+        'start'         => 'Start migration',
+    ),
+    'config' => array(
+        'back'          => 'Back',
+        'continue'      => 'Continue',
+        'save'          => 'Save',
+        'saveContinue'  => 'Save & Continue',
+        'start'         => 'Start configuration',
     ),
     'service' => array(
         'mail_template' => array(
@@ -128,6 +128,6 @@ HTML
             'type' => 'Type',
             'surcharges_empty' => 'Surcharges configuration is empty.',
             'surcharge_type_missing' => 'You must select a type for each surcharge.',
-        )
+        ),
     )
 );
