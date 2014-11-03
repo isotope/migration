@@ -434,7 +434,11 @@ form {
 #help {
     margin-top: 50px;
     padding: 12px 12px 1px;
-    background: #f0f0f0;
+    background: #e5f4f7 url("lifebuoy.png") 12px 11px no-repeat;
+}
+
+#help p {
+    padding-left: 22px;
 }
 
 /* Error page */

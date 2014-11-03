@@ -55,12 +55,12 @@
                     </select>
                 </td>
                 <td>
-                    <button type="submit" tabindex="50" name="delete_gallery" value="{{ row }}" title="{% trans %}service.gallery.gallery_delete_title{% endtrans %}"><img src="{{ base_path }}/assets/delete.gif" alt="{% trans %}service.gallery.gallery_delete_title{% endtrans %}"></button>
+                    <button type="submit" tabindex="50" name="delete_gallery" value="{{ row }}" title="{% trans %}service.gallery.gallery_delete_title{% endtrans %}"><img src="{{ base_path }}/assets/minus.png" alt="{% trans %}service.gallery.gallery_delete_title{% endtrans %}" width="16" height="16"></button>
                 </td>
             </tr>
         {% endfor %}
         </table>
-        <button type="submit" name="add_gallery" value="1" title="{% trans %}service.gallery.gallery_add_title{% endtrans %}"><img src="{{ base_path }}/assets/copy.gif" alt="{% trans %}service.gallery.gallery_add_title{% endtrans %}"> {% trans %}service.gallery.gallery_add_label{% endtrans %}</button>
+        <button type="submit" name="add_gallery" value="1" title="{% trans %}service.gallery.gallery_add_title{% endtrans %}"><img src="{{ base_path }}/assets/plus.png" alt="{% trans %}service.gallery.gallery_add_title{% endtrans %}" width="16" height="16"> {% trans %}service.gallery.gallery_add_label{% endtrans %}</button>
 
         {% trans %}service.gallery.gallery_description{% endtrans %}
     </div>
