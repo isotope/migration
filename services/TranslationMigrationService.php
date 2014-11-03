@@ -12,8 +12,28 @@
 namespace Isotope\Migration\Service;
 
 
+use Doctrine\DBAL\Connection;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
+use Symfony\Component\Translation\TranslatorInterface;
+
 class TranslationMigrationService extends AbstractConfigfreeMigrationService
 {
+    protected $contao_root;
+
+    public function __construct(
+        AttributeBagInterface $config,
+        AttributeBagInterface $summary,
+        \Twig_Environment $twig,
+        TranslatorInterface $translator,
+        Connection $db,
+        DatabaseVerificationService $migration_dbcheck,
+        $contao_root
+    ) {
+        parent::__construct($config, $summary, $twig, $translator, $db, $migration_dbcheck);
+
+        $this->contao_root = $contao_root;
+    }
+
     /**
      * Return a name for the migration step
      *
@@ -67,6 +87,17 @@ class TranslationMigrationService extends AbstractConfigfreeMigrationService
     {
         if ($this->dbcheck->tableExists('tl_iso_labels')) {
             $this->dbcheck->tableMustNotExist('tl_iso_label');
+        }
+
+        if (file_exists($this->contao_root . '/system/modules/isotope_multilingual')) {
+            throw new \RuntimeException(
+                $this->trans(
+                    'error.extensionFound',
+                    array(
+                        '%extension%' => 'isotope_multilingual'
+                    )
+                )
+            );
         }
     }
 }

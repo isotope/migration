@@ -53,8 +53,14 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
     protected $dbcheck;
 
 
-    public function __construct(AttributeBagInterface $config, AttributeBagInterface $summary, \Twig_Environment $twig, TranslatorInterface $translator, Connection $db, DatabaseVerificationService $migration_dbcheck)
-    {
+    public function __construct(
+        AttributeBagInterface $config,
+        AttributeBagInterface $summary,
+        \Twig_Environment $twig,
+        TranslatorInterface $translator,
+        Connection $db,
+        DatabaseVerificationService $migration_dbcheck
+    ) {
         $this->config = $config;
         $this->summary = $summary;
         $this->twig = $twig;
