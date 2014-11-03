@@ -150,6 +150,16 @@ class ProductCollectionMigrationService extends AbstractMigrationService
 
         // TODO: recreate tl_iso_product_collection_item.jumpTo
         // TODO: check if we need to convert product_options
+
+        // Rename tables, otherwise the Isotope Upgrade step will run into data loss protection
+        foreach (
+            array_merge(
+                $this->renameTable('tl_iso_cart', 'tl_iso_cart_backup'),
+                $this->renameTable('tl_iso_cart_items', 'tl_iso_cart_items_backup')
+            ) as $query
+        ) {
+            $this->db->exec($query);
+        }
     }
 
     /**

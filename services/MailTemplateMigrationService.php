@@ -154,6 +154,16 @@ class MailTemplateMigrationService extends AbstractMigrationService
 
         $this->migrateOrderStatusMails($gatewayId);
         $this->migrateCheckoutModuleMails($gatewayId);
+
+        // Rename tables, otherwise the Isotope Upgrade step will run into data loss protection
+        foreach (
+            array_merge(
+                $this->renameTable('tl_iso_mail', 'tl_iso_mail_backup'),
+                $this->renameTable('tl_iso_mail_content', 'tl_iso_mail_content_backup')
+            ) as $query
+        ) {
+            $this->db->exec($query);
+        }
     }
 
 

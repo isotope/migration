@@ -196,6 +196,11 @@ class ShippingMethodMigrationService extends AbstractMigrationService
                 );
             }
         }
+
+        // Rename table, otherwise the Isotope Upgrade step will run into data loss protection
+        foreach ($this->renameTable('tl_iso_shipping_options', 'tl_iso_shipping_options_backup') as $query) {
+            $this->db->exec($query);
+        }
     }
 
     /**
