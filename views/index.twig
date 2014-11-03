@@ -6,19 +6,27 @@
     <p>{% trans %}index.intro{% endtrans %}</p>
 </div>
 <div class="row">
-    {# TODO: make this translatable #}
-    <h3>How to use this tool</h3>
-    <p>Make sure to follow this procedure and your installation matches our expectations. The migration tool will not be able to run if you do not correctly prepare your database.</p>
+    <h3>Preparing your installation</h3>
+    <p>We will guide you step by step through the migration. But first, make sure your installation matches our expectations. The migration tool will not be able to run if you do not correctly prepare your database.</p>
     <ol>
         {# TODO: check if preparation steps are correct #}
-        <li>Your installation must be update to Isotope version v1.4.8. If you are using an older version, you must first upgrade to v1.4.8, this which will adjust existing v0.2/v1.3 databases.</li>
-        <li>Update Contao to version 3.3 (preferrably using <a href="http://www.inetrobots.com/shop/product_info.php?info=p12_contao-live-update-id.html&language=en" target="_blank">the Live-Update service</a>) and run the Contao install tool.</li>
-        <li>Update the database using the Contao install tool; do create or change existing fields, but DO NOT delete anything.</li>
+        <li>Your installation must be updated to Isotope version v1.4.8. If you are using an older version, you must first upgrade to v1.4.8. This will adjust existing v0.2/v1.3 databases.</li>
+        <li>If you have a multilingual shop, make sure to delete the <i>isotope_multilingual</i> extension. The functionality is already included in Isotope 2.</li>
+        <li>Update Contao to version 3.3. There are two ways:
+            <ul>
+                <li>Using <a href="http://www.inetrobots.com/shop/product_info.php?info=p12_contao-live-update-id.html&language=en" target="_blank">the Live-Update service</a>, which will take care of any necessary changes (recommended).</li>
+                <li>By hand, by following <a href="https://contao.org/en/manual/3.0/installation.html#manual-update" target="_blank">the manual update guide</a>.</li>
+            </ul>
+        </li>
+        <li>Update the database using the Contao install tool. If you are in core only mode (recommended), you can execute all recommended changes.</li>
+
+{#
+        <hr>
         <li>Now you can run this migration tool!</li>
         <li>Update Isotope to version 2.2 (either manually or using the extension repository).</li>
-        <li>Also update any other extensions necessary.</li>
+        <li>Also update any other extensions necessary.</li>#}
     </ol>
-    <p style="text-decoration: underline">If you do not follow this process, the database might not be ready and the migration steps will report errors.</p>
+    <p style="text-decoration: underline">If you do not follow this process, the database might not be ready and the migration config will report errors.</p>
 </div>
 <div class="row">
     <h3>What you must know</h3>

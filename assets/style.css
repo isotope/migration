@@ -414,7 +414,8 @@ form {
     margin: 0 12px;
 }
 
-#left .level_1 ul {
+#left .level_1 ul,
+#main ul {
     padding-top:.5em;
 }
 
