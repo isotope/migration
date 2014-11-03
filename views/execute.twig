@@ -16,15 +16,22 @@
         </p>
     </div>
 {% else %}
-    <form action="" method="post">
+    <form action="{# TODO: add action link #}" method="post">
         <div class="row">
             {# TODO: make this translatable #}
-            <h3>Click to action</h3>
-            <p>Click the button to execute the migration.</p>
+            <h3>Configuration successful</h3>
+            <p>You have successfully answered all questions and configured the migration tool.</p>
+        </div>
+        <div class="row">
+            <h3>Did you create a backup?</h3>
+            <p>Please be aware that we are not responsible for your data. Here's what the LGP license says:</p>
+            <p class="explain">This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+                without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+                See the <a href="https://www.gnu.org/licenses/lgpl.html" target="_blank">GNU Lesser General Public License</a> for more details.</p>
         </div>
         <div class="row">
             <p class="mt">
-                <a href="" class="button">{% trans %}execute.back{% endtrans %}</a>
+                <a href="{# TODO: add back link #}" class="button">{% trans %}execute.back{% endtrans %}</a>
                 <button type="submit" class="button float_right main" name="continue" value="1">{% trans %}execute.continue{% endtrans %}</button>
                 <button type="submit" class="button float_right" name="cancel" value="1" onclick="return confirm('{% trans %}execute.cancel_confirm{% endtrans %}')">{% trans %}execute.cancel{% endtrans %}</button>
             </p>

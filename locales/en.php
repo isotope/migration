@@ -42,11 +42,11 @@ return array(
     ),
     'execute' => array(
         'headline'          => 'Ready, set, go!',
-        'intro'             => 'Hello World', // TODO: write a better intro
+        'intro'             => 'This is the last step before migration. Please read carefully before executing.', // TODO: write a better intro
         'back'              => 'Back',
         'cancel'            => 'Cancel',
         'cancel_confirm'    => 'Are you sure to cancel? This will delete all your configuration!',
-        'continue'          => 'Execute',
+        'continue'          => 'Execute migration',
         'error_headline'    => 'Slow down, young warrior …',
         'error_description' => 'Looks like you\'re not yet ready for the migration. Please start by reading the welcome text and then configure all necessary steps.',
         'error_button'      => 'Start over'
