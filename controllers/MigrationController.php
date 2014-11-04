@@ -34,8 +34,9 @@ class MigrationController
         $this->db = $db;
 
         $request = $request_stack->getCurrentRequest();
+        $pharPath = \Phar::running() ? '/'.basename(\Phar::running()) : '';
 
-        $twig->addGlobal('base_path', $request->getBasePath());
+        $twig->addGlobal('base_path', $request->getBasePath() . $pharPath);
         $twig->addGlobal('base_url', $request->getBaseUrl());
         $twig->addGlobal('services', $this->getServices());
         $twig->addGlobal('current_service', false);
