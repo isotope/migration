@@ -92,7 +92,7 @@ class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
      *
      * @throws \RuntimeException
      */
-    protected function verifyDatabase()
+    protected function verifyIntegrity()
     {
         $this->dbcheck
             ->columnMustExist('tl_module', 'iso_cart_layout')

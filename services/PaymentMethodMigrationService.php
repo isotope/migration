@@ -47,7 +47,7 @@ class PaymentMethodMigrationService extends AbstractMigrationService
     public function getStatus()
     {
         try {
-            $this->verifyDatabase();
+            $this->verifyIntegrity();
         } catch (\RuntimeException $e) {
             return MigrationServiceInterface::STATUS_ERROR;
         }
@@ -80,7 +80,7 @@ class PaymentMethodMigrationService extends AbstractMigrationService
     public function renderConfigView(RequestStack $requestStack)
     {
         try {
-            $this->verifyDatabase();
+            $this->verifyIntegrity();
         } catch (\RuntimeException $e) {
             return $this->renderConfigError($e->getMessage());
         }
@@ -171,7 +171,7 @@ class PaymentMethodMigrationService extends AbstractMigrationService
      *
      * @throws \RuntimeException
      */
-    protected function verifyDatabase()
+    protected function verifyIntegrity()
     {
         $this->dbcheck
             ->tableMustExist('tl_iso_payment_modules')

@@ -50,7 +50,7 @@ class GalleryMigrationService extends AbstractMigrationService
     public function getStatus()
     {
         try {
-            $this->verifyDatabase();
+            $this->verifyIntegrity();
         } catch (\RuntimeException $e) {
             return MigrationServiceInterface::STATUS_ERROR;
         }
@@ -82,7 +82,7 @@ class GalleryMigrationService extends AbstractMigrationService
     public function renderConfigView(RequestStack $requestStack)
     {
         try {
-            $this->verifyDatabase();
+            $this->verifyIntegrity();
         } catch (\RuntimeException $e) {
             return $this->renderConfigError($e->getMessage());
         }
@@ -207,7 +207,7 @@ class GalleryMigrationService extends AbstractMigrationService
      *
      * @throws \RuntimeException
      */
-    private function verifyDatabase()
+    private function verifyIntegrity()
     {
         $this->dbcheck
             ->tableMustExist('tl_iso_config')

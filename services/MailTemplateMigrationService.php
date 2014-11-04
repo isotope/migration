@@ -50,7 +50,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
     public function getStatus()
     {
         try {
-            $this->verifyDatabase();
+            $this->verifyIntegrity();
         } catch (\RuntimeException $e) {
             return MigrationServiceInterface::STATUS_ERROR;
         }
@@ -77,7 +77,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
     public function renderConfigView(RequestStack $requestStack)
     {
         try {
-            $this->verifyDatabase();
+            $this->verifyIntegrity();
         } catch (\RuntimeException $e) {
             return $this->renderConfigError($e->getMessage());
         }
@@ -167,7 +167,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
     }
 
 
-    private function verifyDatabase()
+    private function verifyIntegrity()
     {
         $this->dbcheck
             ->tableMustExist('tl_iso_mail')

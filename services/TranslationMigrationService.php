@@ -83,7 +83,7 @@ class TranslationMigrationService extends AbstractConfigfreeMigrationService
      *
      * @throws \RuntimeException
      */
-    protected function verifyDatabase()
+    protected function verifyIntegrity()
     {
         if ($this->dbcheck->tableExists('tl_iso_labels')) {
             $this->dbcheck->tableMustNotExist('tl_iso_label');

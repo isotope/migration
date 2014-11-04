@@ -55,7 +55,7 @@ abstract class AbstractConfigfreeMigrationService extends AbstractMigrationServi
             $this->status = MigrationServiceInterface::STATUS_ERROR;
 
             try {
-                $this->verifyDatabase();
+                $this->verifyIntegrity();
                 $this->status = MigrationServiceInterface::STATUS_READY;
             } catch (\RuntimeException $e) {
                 $this->errorMessage = $e->getMessage();
@@ -84,5 +84,5 @@ abstract class AbstractConfigfreeMigrationService extends AbstractMigrationServi
      *
      * @throws \RuntimeException
      */
-    abstract protected function verifyDatabase();
+    abstract protected function verifyIntegrity();
 }

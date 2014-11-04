@@ -47,7 +47,7 @@ class ShippingMethodMigrationService extends AbstractMigrationService
     public function getStatus()
     {
         try {
-            $this->verifyDatabase();
+            $this->verifyIntegrity();
         } catch (\RuntimeException $e) {
             return MigrationServiceInterface::STATUS_ERROR;
         }
@@ -80,7 +80,7 @@ class ShippingMethodMigrationService extends AbstractMigrationService
     public function renderConfigView(RequestStack $requestStack)
     {
         try {
-            $this->verifyDatabase();
+            $this->verifyIntegrity();
         } catch (\RuntimeException $e) {
             return $this->renderConfigError($e->getMessage());
         }
@@ -208,7 +208,7 @@ class ShippingMethodMigrationService extends AbstractMigrationService
      *
      * @throws \RuntimeException
      */
-    private function verifyDatabase()
+    private function verifyIntegrity()
     {
         $this->dbcheck
             ->tableMustExist('tl_iso_shipping_modules')

@@ -77,7 +77,7 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
      *
      * @throws \RuntimeException
      */
-    protected function verifyDatabase()
+    protected function verifyIntegrity()
     {
         $this->dbcheck
             ->tableMustExist('tl_iso_producttypes')
