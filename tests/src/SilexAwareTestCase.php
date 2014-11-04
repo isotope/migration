@@ -28,6 +28,8 @@ abstract class SilexAwareTestCase extends \PHPUnit_Framework_TestCase
             $app['debug'] = true;
             $app['exception_handler']->disable();
 
+            $app['contao.root'] = dirname(dirname(__DIR__));
+
             $app['db.options'] = array(
                 'dbname'   => $GLOBALS['DB_DBNAME'],
                 'host'     => $GLOBALS['DB_HOST'],

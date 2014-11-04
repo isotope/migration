@@ -100,6 +100,9 @@ abstract class ScenarioTestCase extends DbTestCase
             ),
             'shipping_method' => array(
                 'confirmed' => 1
+            ),
+            'frontend_module' => array(
+                'confirmed' => 1
             )
         );
     }

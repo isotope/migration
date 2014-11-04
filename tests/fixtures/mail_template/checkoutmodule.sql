@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS `tl_user_group`;
 DROP TABLE IF EXISTS `tl_user`;
 DROP TABLE IF EXISTS `tl_page`;
 DROP TABLE IF EXISTS `tl_module`;
+DROP TABLE IF EXISTS `tl_files`;
 DROP TABLE IF EXISTS `tl_iso_tax_rate`;
 DROP TABLE IF EXISTS `tl_iso_tax_class`;
 DROP TABLE IF EXISTS `tl_iso_shipping_options`;
@@ -43,6 +44,24 @@ DROP TABLE IF EXISTS `tl_iso_cart`;
 DROP TABLE IF EXISTS `tl_iso_baseprice`;
 DROP TABLE IF EXISTS `tl_iso_attributes`;
 DROP TABLE IF EXISTS `tl_iso_addresses`;
+
+CREATE TABLE `tl_files` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `pid` binary(16) DEFAULT NULL,
+    `tstamp` int(10) unsigned NOT NULL DEFAULT '0',
+    `uuid` binary(16) DEFAULT NULL,
+    `type` varchar(16) NOT NULL DEFAULT '',
+    `path` varchar(1022) NOT NULL DEFAULT '',
+    `extension` varchar(16) NOT NULL DEFAULT '',
+    `hash` varchar(32) NOT NULL DEFAULT '',
+    `found` char(1) NOT NULL DEFAULT '1',
+    `name` varchar(255) NOT NULL DEFAULT '',
+    `meta` blob,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uuid` (`uuid`),
+    KEY `pid` (`pid`),
+    KEY `extension` (`extension`)
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `tl_iso_addresses` (

@@ -35,7 +35,7 @@ class FunctionalTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isOk());
 
         $crawler = $client->request('GET', '/execute');
-        $this->assertTrue($client->getResponse()->isRedirection());
+        $this->assertTrue($client->getResponse()->isOk());
 
         $crawler = $client->request('GET', '/summary');
         $this->assertTrue($client->getResponse()->isOk());
