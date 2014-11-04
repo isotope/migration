@@ -15,8 +15,9 @@ namespace Isotope\Migration\Service;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
+use Symfony\Component\HttpFoundation\RequestStack;
 
-class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
+class FrontendModuleMigrationService extends AbstractMigrationService
 {
     /**
      * Return a name for the migration step
@@ -37,6 +38,71 @@ class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
     {
         return $this->trans('Migrate front end module configuration.');
     }
+
+    /**
+     * Returns status code of the migration step
+     *
+     * @return int
+     */
+    public function getStatus()
+    {
+        try {
+            $this->verifyIntegrity();
+        } catch (\RuntimeException $e) {
+            return MigrationServiceInterface::STATUS_ERROR;
+        }
+
+        // Nothing to do
+        if (!$this->hasXhtmlLayout()) {
+            return MigrationServiceInterface::STATUS_READY;
+        }
+
+        if (!$this->config->get('confirmed')) {
+            return MigrationServiceInterface::STATUS_CONFIG;
+        }
+
+        return MigrationServiceInterface::STATUS_READY;
+    }
+
+    /**
+     * Returns the view for step configuration or information
+     *
+     * @param RequestStack $requestStack
+     *
+     * @return string
+     */
+    public function renderConfigView(RequestStack $requestStack)
+    {
+        try {
+            $this->verifyIntegrity();
+        } catch (\RuntimeException $e) {
+            return $this->renderConfigError($e->getMessage());
+        }
+
+        if (!$this->hasXhtmlLayout()) {
+            return $this->renderConfigFree();
+        }
+
+        $request = $requestStack->getCurrentRequest();
+
+        if ($request->isMethod('POST') && $request->get('confirm') !== null) {
+            $this->config->set('confirmed', (bool) $request->get('confirm'));
+        }
+
+        return $this->twig->render(
+            'frontend_module.twig',
+            array(
+                'title'           => $this->getName(),
+                'description'     => $this->getDescription(),
+                'can_save'        => true,
+                'confirmed'       => (bool) $this->config->get('confirmed')
+            )
+        );
+    }
+
+
+
+
 
     /**
      * Get SQL commands to migration the database
@@ -97,6 +163,8 @@ class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
         $this->dbcheck
             ->columnMustExist('tl_module', 'iso_cart_layout')
             ->columnMustExist('tl_module', 'iso_filterTpl');
+
+        // Must not use XHTML layout
     }
 
     /**
@@ -109,5 +177,23 @@ class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
         return array(
             $this->trans('service.frontend_module.templates')
         );
+    }
+
+    /**
+     * Check if there are XHTML layouts in the database
+     *
+     * @return bool
+     */
+    private function hasXhtmlLayout()
+    {
+        if ($this->dbcheck->tableExists('tl_layout')) {
+            $total = $this->db->fetchColumn("SELECT COUNT(*) AS total FROM tl_layout WHERE doctype!='html5'");
+
+            if ($total > 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

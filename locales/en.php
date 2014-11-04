@@ -86,7 +86,11 @@ return array(
             'titleAndDescription'   => 'The database columns tl_iso_download.title as well as tl_iso_download.description cannot be converted automatically. They contain the title as well as the description of a download (provided you entered them). In Contao 3+ you can manage meta data for files in the file system directly so there is no need for Isotope eCommerce to have yet another tilte or description field. Because the migration tool cannot automatically detect in what language you entered the data in Isotope 1.4 (and possibly how you translated them), it does not touch the data in any way at all! Make sure you do not (!!) delete tl_iso_download.description and tl_iso_download.title before you migrated the data manually!'
         ),
         'frontend_module' => array(
-            'templates'   => 'The migration tool migrated the templates "iso_cart_full" to "iso_collection_default" and "iso_cart_mini" to "iso_collection_mini". However, it cannot migrate logic you built into your templates. You will have to check and adjust every (!) single template!'
+            'xhtml_title'       => 'XHTML page template',
+            'xhtml_explain'     => 'We have found one or multiple layouts that use the XHTML page template. XHTML layouts are not supported by Isotope 2.',
+            'xhtml_description' => 'Either you need to change your page layouts to HTML5 and adjust all your templates (recommended), or you must copy all Isotope templates with renamed file extension.',
+            'confirmation'      => 'Please confirm that you have read the above. It is your responsibility to change the page layouts or create the XHTML templates.',
+            'templates'         => 'The migration tool migrated the templates "iso_cart_full" to "iso_collection_default" and "iso_cart_mini" to "iso_collection_mini". However, it cannot migrate logic you built into your templates. You will have to check and adjust every (!) single template!'
         ),
         'gallery' => array(
             'gallery_empty' => 'Gallery configuration is empty.',
