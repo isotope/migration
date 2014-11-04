@@ -123,6 +123,7 @@ class MigrationServiceProvider implements ServiceProviderInterface
             '\\Isotope\\Migration\\Service\\PaymentMethodMigrationService',
             '\\Isotope\\Migration\\Service\\ShippingMethodMigrationService',
             '\\Isotope\\Migration\\Service\\DownloadMigrationService',
+            '\\Isotope\\Migration\\Service\\RuleMigrationService',
         );
 
         foreach ($services as $class) {
