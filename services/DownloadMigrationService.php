@@ -21,12 +21,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class DownloadMigrationService extends AbstractConfigfreeMigrationService
 {
-
-    /**
-     * @type DbafsService
-     */
-    protected $dbafs;
-
+    private $dbafs;
 
     public function __construct(
         AttributeBagInterface $config,

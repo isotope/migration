@@ -72,8 +72,6 @@ class DbafsService
      */
     public function getMigrateFilePathForUuidSQL($tableName, $columnName)
     {
-
-        // Add tl_iso_config.address_fields
         $tableDiff = new TableDiff($tableName);
 
         $oldColumn = $this->db->getSchemaManager()->listTableDetails($tableName)->getColumn($columnName);
