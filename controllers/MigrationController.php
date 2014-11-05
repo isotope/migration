@@ -16,22 +16,25 @@ use Doctrine\DBAL\Connection;
 use Isotope\Migration\Service\MigrationServiceInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MigrationController
 {
 
-    protected $twig;
-    protected $services;
-    protected $requestStack;
-    protected $db;
+    private $twig;
+    private $services;
+    private $requestStack;
+    private $db;
+    private $session;
 
-    public function __construct(\Twig_Environment $twig, \Pimple $migration_services, RequestStack $request_stack, Connection $db)
+    public function __construct(\Twig_Environment $twig, \Pimple $migration_services, RequestStack $request_stack, Connection $db, Session $session)
     {
         $this->twig = $twig;
         $this->services = $migration_services;
         $this->requestStack = $request_stack;
         $this->db = $db;
+        $this->session = $session;
 
         $request = $request_stack->getCurrentRequest();
         $pharPath = \Phar::running() ? '/'.basename(\Phar::running()) : '';
@@ -114,7 +117,7 @@ class MigrationController
 
         if (!$hasError && $request->isMethod('POST')) {
             if ($request->get('cancel') !== null) {
-                // TODO: delete session data
+                $this->session->invalidate();
                 return new RedirectResponse($request->getBaseUrl() . '/', 303);
             }
 
