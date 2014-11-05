@@ -53,6 +53,13 @@ return array(
         'error_button'      => 'Start over'
     ),
     'service' => array(
+        'attribute' => array(
+            'mm_title'       => 'Custom media manager attributes',
+            'mm_explain'     => 'Your installation contains the following attributes of type "Media Manager".',
+            'mm_description' => 'In Isotope 1.4, it was possible to define a gallery class for each attribute. This is no longer possible in Isotope 2, as galleries have become their own backend configuration. Technically this is still possible by adjusting templates, but someone needs to <a href="https://github.com/isotope/docs/issues/14" target="_blank">write documentation about it</a>…',
+            'list'           => '%name% (database name "%field_name%")',
+            'confirmation'   => 'Please confirm that you have read the above. It is your responsibility to adjust the templates if you need gallery classes.',
+        ),
         'mail_template' => array(
             'gateway_legend' => 'E-Mail Gateway',
             'gateway_intro'  => 'Please select one of the available email gateways from notification center or select to create a new one for mail template migration.',

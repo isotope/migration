@@ -1,0 +1,22 @@
+{% extends "config.twig" %}
+
+{% block content %}
+    <div class="row">
+        <h3>{% trans %}service.attribute.mm_title{% endtrans %}</h3>
+        <p>{% trans %}service.attribute.mm_explain{% endtrans %}</p>
+        <ul>
+            {% for attribute in attributes %}
+            <li>{% trans with {'%name%':attribute.name, '%field_name%':attribute.field_name} %}service.attribute.list{% endtrans %}</li>
+            {% endfor %}
+        </ul>
+        <p class="explain">{% trans %}service.attribute.mm_description{% endtrans %}</p>
+    </div>
+
+    <div class="row">
+        <h3>{% trans %}confirm.title{% endtrans %}</h3>
+        <p>{% trans %}service.attribute.confirmation{% endtrans %}</p>
+        <input type="hidden" name="confirm" value="">
+        <input type="checkbox" id="ctrl_confirm" name="confirm" value="1"{% if confirmed %} checked{% endif %}>
+        <label for="ctrl_confirm">{% trans %}confirm.checkbox{% endtrans %}</label>
+    </div>
+{% endblock %}

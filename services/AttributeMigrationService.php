@@ -12,7 +12,9 @@
 namespace Isotope\Migration\Service;
 
 
-class AttributeMigrationService extends AbstractConfigfreeMigrationService
+use Symfony\Component\HttpFoundation\RequestStack;
+
+class AttributeMigrationService extends AbstractMigrationService
 {
     /**
      * Return a name for the migration step
@@ -35,6 +37,70 @@ class AttributeMigrationService extends AbstractConfigfreeMigrationService
     }
 
     /**
+     * Returns status code of the migration step
+     *
+     * @return int
+     */
+    public function getStatus()
+    {
+        try {
+            $this->verifyIntegrity();
+        } catch (\RuntimeException $e) {
+            return MigrationServiceInterface::STATUS_ERROR;
+        }
+
+        // Nothing to do
+        if (count($this->getMediaAttributes()) === 0) {
+            return MigrationServiceInterface::STATUS_READY;
+        }
+
+        if (!$this->config->get('confirmed')) {
+            return MigrationServiceInterface::STATUS_CONFIG;
+        }
+
+        return MigrationServiceInterface::STATUS_READY;
+    }
+
+    /**
+     * Returns the view for step configuration or information
+     *
+     * @param RequestStack $requestStack
+     *
+     * @return string
+     */
+    public function renderConfigView(RequestStack $requestStack)
+    {
+        try {
+            $this->verifyIntegrity();
+        } catch (\RuntimeException $e) {
+            return $this->renderConfigError($e->getMessage());
+        }
+
+        $attributes = $this->getMediaAttributes();
+
+        if (count($attributes) === 0) {
+            return $this->renderConfigFree();
+        }
+
+        $request = $requestStack->getCurrentRequest();
+
+        if ($request->isMethod('POST') && $request->get('confirm') !== null) {
+            $this->config->set('confirmed', (bool) $request->get('confirm'));
+        }
+
+        return $this->twig->render(
+            'attribute.twig',
+            array(
+                'title'           => $this->getName(),
+                'description'     => $this->getDescription(),
+                'can_save'        => true,
+                'confirmed'       => (bool) $this->config->get('confirmed'),
+                'attributes'      => $attributes
+            )
+        );
+    }
+
+    /**
      * Get SQL commands to migration the database
      *
      * @return array
@@ -44,8 +110,6 @@ class AttributeMigrationService extends AbstractConfigfreeMigrationService
         $this->checkMigrationStatus();
 
         return $this->renameTable('tl_iso_attributes', 'tl_iso_attribute');
-
-        // TODO: gallery type for custom MediaManager attributes is no longer possible
     }
 
     /**
@@ -64,6 +128,18 @@ class AttributeMigrationService extends AbstractConfigfreeMigrationService
     {
         $this->dbcheck
             ->tableMustExist('tl_iso_attributes')
-            ->tableMustNotExist('tl_iso_attribute');
+            ->tableMustNotExist('tl_iso_attribute')
+            ->columnMustExist('tl_iso_attributes', 'type')
+            ->columnMustExist('tl_iso_attributes', 'gallery');
+    }
+
+    /**
+     * Checks if there are media attributes with a custom gallery in tl_iso_attributes
+     *
+     * @return array
+     */
+    private function getMediaAttributes()
+    {
+        return $this->db->fetchAll("SELECT id, name, field_name FROM tl_iso_attributes WHERE type='mediaManager' AND gallery!=''");
     }
 }
