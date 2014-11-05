@@ -87,9 +87,9 @@ return array(
         ),
         'frontend_module' => array(
             'xhtml_title'       => 'XHTML page template',
-            'xhtml_explain'     => 'We have found one or multiple layouts that use the XHTML page template. XHTML layouts are not supported by Isotope 2.',
-            'xhtml_description' => 'Either you need to change your page layouts to HTML5 and adjust all your templates (recommended), or you must copy all Isotope templates with renamed file extension.',
-            'confirmation'      => 'Please confirm that you have read the above. It is your responsibility to change the page layouts or create the XHTML templates.',
+            'xhtml_explain'     => 'The following page layouts use the XHTML template. XHTML templates are not supported by Isotope 2 core.',
+            'xhtml_description' => 'Either you change your page layouts to HTML5 and adjust all your templates (recommended), or you must duplicate all Isotope templates and rename the file extension.',
+            'confirmation'      => 'Please confirm that you have read the above. It is your responsibility to adjust the page layouts or create the XHTML templates.',
             'templates'         => 'The migration tool migrated the templates "iso_cart_full" to "iso_collection_default" and "iso_cart_mini" to "iso_collection_mini". However, it cannot migrate logic you built into your templates. You will have to check and adjust every (!) single template!'
         ),
         'gallery' => array(

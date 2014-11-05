@@ -53,7 +53,7 @@ class FrontendModuleMigrationService extends AbstractMigrationService
         }
 
         // Nothing to do
-        if (!$this->hasXhtmlLayout()) {
+        if (count($this->getXhtmlTemplates()) === 0) {
             return MigrationServiceInterface::STATUS_READY;
         }
 
@@ -79,7 +79,9 @@ class FrontendModuleMigrationService extends AbstractMigrationService
             return $this->renderConfigError($e->getMessage());
         }
 
-        if (!$this->hasXhtmlLayout()) {
+        $xhtmlTemplates = $this->getXhtmlTemplates();
+
+        if (count($xhtmlTemplates) === 0) {
             return $this->renderConfigFree();
         }
 
@@ -95,7 +97,8 @@ class FrontendModuleMigrationService extends AbstractMigrationService
                 'title'           => $this->getName(),
                 'description'     => $this->getDescription(),
                 'can_save'        => true,
-                'confirmed'       => (bool) $this->config->get('confirmed')
+                'confirmed'       => (bool) $this->config->get('confirmed'),
+                'xhtmlTemplates'  => $xhtmlTemplates,
             )
         );
     }
@@ -180,16 +183,12 @@ class FrontendModuleMigrationService extends AbstractMigrationService
      *
      * @return bool
      */
-    private function hasXhtmlLayout()
+    private function getXhtmlTemplates()
     {
         if ($this->dbcheck->columnExists('tl_layout', 'doctype')) {
-            $total = $this->db->fetchColumn("SELECT COUNT(*) AS total FROM tl_layout WHERE doctype!='html5'");
-
-            if ($total > 0) {
-                return true;
-            }
+            return $this->db->fetchAll("SELECT id, name FROM tl_layout WHERE doctype!='html5'");
         }
 
-        return false;
+        return array();
     }
 }

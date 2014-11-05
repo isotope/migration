@@ -4,6 +4,11 @@
     <div class="row">
         <h3>{% trans %}service.frontend_module.xhtml_title{% endtrans %}</h3>
         <p>{% trans %}service.frontend_module.xhtml_explain{% endtrans %}</p>
+        <ul>
+            {% for layout in xhtmlTemplates %}
+            <li>{{ layout.name }}</li>
+            {% endfor %}
+        </ul>
         <p class="explain">{% trans %}service.frontend_module.xhtml_description{% endtrans %}</p>
     </div>
 
