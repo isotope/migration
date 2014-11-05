@@ -136,7 +136,9 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         return array_merge(
             $this->getCollectionSQL(),
             $this->getItemSQL(),
-            $this->getSurchargesSQL()
+            $this->getSurchargesSQL(),
+            $this->renameTable('tl_iso_cart', 'tl_iso_cart_backup'),
+            $this->renameTable('tl_iso_cart_items', 'tl_iso_cart_items_backup')
         );
     }
 
@@ -148,17 +150,29 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         $this->createPrivateAddresses();
         $this->convertSurcharges();
 
-        // TODO: recreate tl_iso_product_collection_item.jumpTo
-        // TODO: check if we need to convert product_options
+        $items = $this->db->fetchAll("SELECT id, href_reader FROM tl_iso_product_collection_item");
 
-        // Rename tables, otherwise the Isotope Upgrade step will run into data loss protection
-        foreach (
-            array_merge(
-                $this->renameTable('tl_iso_cart', 'tl_iso_cart_backup'),
-                $this->renameTable('tl_iso_cart_items', 'tl_iso_cart_items_backup')
-            ) as $query
-        ) {
-            $this->db->exec($query);
+        foreach ($items as $item) {
+            $alias = substr($item['href_reader'], 0, strpos($item['href_reader'], '/product/'));
+
+            $pageId = $this->db->fetchColumn(
+                "SELECT id FROM tl_page WHERE id=? OR alias=?",
+                array(
+                    (is_numeric($alias) ? $alias : 0),
+                    $alias
+                )
+            );
+
+            if (null !== $pageId) {
+                $this->db->prepare(
+                    "UPDATE tl_iso_product_collection_item SET jumpTo=? WHERE id=?"
+                )->execute(
+                    array(
+                        $pageId,
+                        $item['id']
+                    )
+                );
+            }
         }
     }
 
@@ -194,7 +208,9 @@ class ProductCollectionMigrationService extends AbstractMigrationService
             ->columnMustExist('tl_iso_order_items', 'product_quantity')
             ->columnMustNotExist('tl_iso_order_items', 'quantity')
             ->columnMustExist('tl_iso_order_items', 'product_options')
-            ->columnMustNotExist('tl_iso_order_items', 'options'); // TODO: rename to "configuration"
+            ->columnMustNotExist('tl_iso_order_items', 'configuration')
+            ->columnMustExist('tl_iso_order_items', 'href_reader')
+            ->columnMustNotExist('tl_iso_order_items', 'jumpTo');
 
         $this->dbcheck
             ->tableMustNotExist('tl_iso_product_collection_surcharge')
@@ -259,6 +275,10 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
         $tableDiff->addedColumns['shipping_address_id'] = $column;
 
+        $column = new Column('jumpTo', Type::getType(Type::INTEGER));
+        $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
+        $tableDiff->addedColumns['jumpTo'] = $column;
+
         $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
         $sql[] = "UPDATE tl_iso_product_collection SET type='order'";
 
@@ -285,8 +305,7 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
         $tableDiff->renamedColumns['product_quantity'] = $column;
 
-        // TODO: should use "configuration" once the prices feature branch is merged
-        $column = new Column('options', Type::getType(Type::BLOB));
+        $column = new Column('configuration', Type::getType(Type::BLOB));
         $column->setLength(65535);
         $tableDiff->renamedColumns['product_options'] = $column;
 
