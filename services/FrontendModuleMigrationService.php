@@ -111,6 +111,8 @@ class FrontendModuleMigrationService extends AbstractMigrationService
      */
     public function getMigrationSQL()
     {
+        $this->checkMigrationStatus();
+
         $tableDiff = new TableDiff('tl_module');
 
         $column = new Column('iso_collectionTpl', Type::getType(Type::STRING));
@@ -118,7 +120,6 @@ class FrontendModuleMigrationService extends AbstractMigrationService
         $tableDiff->addedColumns['iso_collectionTpl'] = $column;
 
         $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
-
 
         return $sql;
     }
@@ -128,8 +129,6 @@ class FrontendModuleMigrationService extends AbstractMigrationService
      */
     public function postMigration()
     {
-        $this->checkMigrationStatus();
-
         // Migrate default templates
 
         // iso_cart_full --> iso_collection_default
