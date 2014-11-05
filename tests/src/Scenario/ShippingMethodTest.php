@@ -33,7 +33,7 @@ class ShippingMethodTest extends ScenarioTestCase
             "SELECT id, name, type, label, minimum_total, maximum_total, price, enabled, group_methods, group_calculation FROM tl_iso_shipping"
         );
 
-        $expectedTable = $this->createFlatXmlDataSet($this->getDataPath() . '/order_total.xml')
+        $expectedTable = $this->createXmlDataSet($this->getDataPath() . '/order_total.xml')
                               ->getTable("tl_iso_shipping");
 
         $this->assertTablesEqual($expectedTable, $queryTable);
