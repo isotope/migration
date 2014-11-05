@@ -12,15 +12,33 @@
 namespace Isotope\Migration\Service;
 
 
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Schema\SchemaConfig;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class GalleryMigrationService extends AbstractMigrationService
 {
+    private $dbafs;
+
+    public function __construct(
+        AttributeBagInterface $config,
+        AttributeBagInterface $summary,
+        \Twig_Environment $twig,
+        TranslatorInterface $translator,
+        Connection $db,
+        DatabaseVerificationService $migration_dbcheck,
+        DbafsService $migration_dbafs
+    ) {
+        parent::__construct($config, $summary, $twig, $translator, $db, $migration_dbcheck);
+
+        $this->dbafs = $migration_dbafs;
+    }
 
     /**
      * Return a name for the migration step
@@ -408,7 +426,6 @@ class GalleryMigrationService extends AbstractMigrationService
         return $configs[$id]['imageSizes'][$name];
     }
 
-
     /**
      * @param array  $config
      * @param string $name
@@ -417,10 +434,9 @@ class GalleryMigrationService extends AbstractMigrationService
     private function convertGalleryConfig(array $config, $name, array &$data)
     {
         $data[$name.'_size'] = serialize(array($config['width'], $config['height'], $config['mode']));
-        $data[$name.'_watermark_image'] = ($config['watermark'] ?: null); // TODO: convert to UUID
+        $data[$name.'_watermark_image'] = $this->dbafs->findByPath($config['watermark']);
         $data[$name.'_watermark_position'] = $this->getWatermarkPosition($config['position']);
     }
-
 
     /**
      * @param string $position
