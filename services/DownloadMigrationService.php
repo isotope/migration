@@ -66,6 +66,8 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
     {
         $this->checkMigrationStatus();
 
+        // TODO: do we need to warn about title and description no longer available?
+
         return array_merge(
             $this->dbafs->getMigrateFilePathForUuidSQL('tl_iso_downloads', 'singleSRC'),
             $this->getProductSQL(),
@@ -79,9 +81,6 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
     public function postMigration()
     {
         $this->dbafs->migratePathToUuid('tl_iso_download', 'singleSRC');
-
-
-        // TODO: According to Andy there's a download type field now?
     }
 
     /**
