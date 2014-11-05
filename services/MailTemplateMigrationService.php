@@ -349,6 +349,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
             $table->addColumn('email_text', Type::TEXT, array('length'=>65535));
             $table->addColumn('email_html', Type::TEXT, array('length'=>65535));
             $table->addColumn('email_mode', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>16));
+            $table->addColumn('attachments', Type::BLOB, array('length'=>65535, 'notnull'=>false));
         }
 
         $sql = $schema->toSql($this->db->getDatabasePlatform());
