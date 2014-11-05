@@ -100,10 +100,6 @@ class FrontendModuleMigrationService extends AbstractMigrationService
         );
     }
 
-
-
-
-
     /**
      * Get SQL commands to migration the database
      *
@@ -186,7 +182,7 @@ class FrontendModuleMigrationService extends AbstractMigrationService
      */
     private function hasXhtmlLayout()
     {
-        if ($this->dbcheck->tableExists('tl_layout')) {
+        if ($this->dbcheck->columnExists('tl_layout', 'doctype')) {
             $total = $this->db->fetchColumn("SELECT COUNT(*) AS total FROM tl_layout WHERE doctype!='html5'");
 
             if ($total > 0) {
