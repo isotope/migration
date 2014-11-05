@@ -196,7 +196,7 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
     protected function checkMigrationStatus()
     {
         if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
+            throw new \BadMethodCallException('Migration service "' . $this->getSlug() . '" is not ready');
         }
     }
 }
