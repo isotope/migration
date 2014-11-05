@@ -163,7 +163,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
                 array(
                     'tstamp' => time(),
                     'type'   => 'email',
-                    'title'  => 'E-Mail Gateway (from Isotope Migration)' // TODO: do we need translation?
+                    'title'  => $this->trans('service.mail_template.gateway_label')
                 )
             );
 

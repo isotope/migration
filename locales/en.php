@@ -66,7 +66,8 @@ return array(
             'gateway_new'    => 'Create a new e-mail gateway',
             'gateway_db'     => 'Gateways from your database',
             'orderstatus'    => 'Order status "%name%"',
-            'checkoutmodule' => 'Checkout module "%name%"'
+            'checkoutmodule' => 'Checkout module "%name%"',
+            'gateway_label'  => 'E-Mail Gateway (from Isotope Migration)'
         ),
         'shipping_method' => array(
             'name'                => '%name% (Type "%type%")',
