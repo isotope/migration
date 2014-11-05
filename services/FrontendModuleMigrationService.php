@@ -162,7 +162,8 @@ class FrontendModuleMigrationService extends AbstractMigrationService
     {
         $this->dbcheck
             ->columnMustExist('tl_module', 'iso_cart_layout')
-            ->columnMustExist('tl_module', 'iso_filterTpl');
+            ->columnMustExist('tl_module', 'iso_filterTpl')
+            ->columnMustNotExist('tl_module', 'iso_collectionTpl');
 
         // Must not use XHTML layout
     }
