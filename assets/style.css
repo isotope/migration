@@ -244,18 +244,18 @@ h1, h2, h3, h4, h5, h6, p, pre, blockquote, table, ol, ul, form, legend, button 
 
 .button.main {
 
-    background-color: #f89406;
-    background-image: -moz-linear-gradient(top, #fbb450, #f89406);
-    background-image: -webkit-linear-gradient(top, #fbb450, #f89406);
-    background-image: -ms-linear-gradient(top, #fbb450, #f89406);
-    background-image: -o-linear-gradient(top, #fbb450, #f89406);
-    background-image: linear-gradient(to bottom, #fbb450, #f89406);
-    border-color: #f89406;
+    background-color: #3aaab9;
+    background-image: -moz-linear-gradient(top, #56c2e2, #3aaab9);
+    background-image: -webkit-linear-gradient(top, #56c2e2, #3aaab9);
+    background-image: -ms-linear-gradient(top, #56c2e2, #3aaab9);
+    background-image: -o-linear-gradient(top, #56c2e2, #3aaab9);
+    background-image: linear-gradient(to bottom, #56c2e2, #3aaab9);
+    border-color: #3aaab9;
     color: #fff
 }
 
 .button.main:active {
-    background-color: #f28f04
+    background-color: #016b79
 }
 
 /* Contao Check */
