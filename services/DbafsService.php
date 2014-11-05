@@ -98,6 +98,7 @@ class DbafsService
         $stmt = $this->db->prepare("SELECT uuid FROM tl_files WHERE path=:path");
         $stmt->bindParam(':path', $path);
         $stmt->execute();
-        return $stmt->fetch(\PDO::FETCH_COLUMN);
+
+        return $stmt->rowCount() ? $stmt->fetch(\PDO::FETCH_COLUMN) : null;
     }
 }
