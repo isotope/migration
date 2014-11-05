@@ -19,9 +19,27 @@ use Doctrine\DBAL\Schema\SchemaConfig;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class MailTemplateMigrationService extends AbstractMigrationService
 {
+    private $dbafs;
+
+    public function __construct(
+        AttributeBagInterface $config,
+        AttributeBagInterface $summary,
+        \Twig_Environment $twig,
+        TranslatorInterface $translator,
+        Connection $db,
+        DatabaseVerificationService $migration_dbcheck,
+        DbafsService $migration_dbafs
+    ) {
+        parent::__construct($config, $summary, $twig, $translator, $db, $migration_dbcheck);
+
+        $this->dbafs = $migration_dbafs;
+    }
+
     /**
      * Return a name for the migration step
      *
@@ -190,7 +208,8 @@ class MailTemplateMigrationService extends AbstractMigrationService
             ->columnMustExist('tl_iso_mail_content', 'subject')
             ->columnMustExist('tl_iso_mail_content', 'text')
             ->columnMustExist('tl_iso_mail_content', 'html')
-            ->columnMustExist('tl_iso_mail_content', 'textOnly');
+            ->columnMustExist('tl_iso_mail_content', 'textOnly')
+            ->columnMustExist('tl_iso_mail_content', 'attachments');
 
 
         // If notification center is installed, validate it's table structure. Otherwise we'll create it.
@@ -507,6 +526,17 @@ class MailTemplateMigrationService extends AbstractMigrationService
         $mailContents = $this->db->fetchAll("SELECT * FROM tl_iso_mail_content WHERE pid=?", array($mail['id']));
 
         foreach ($mailContents as $content) {
+
+            $attachments = null;
+            $files = @unserialize($content['attachments']);
+            if (!empty($files) && is_array($files)) {
+                foreach ($files as $path) {
+                    if (($uuid = $this->dbafs->findByPath($path)) !== null) {
+                        $attachments[] = $uuid;
+                    }
+                }
+            }
+
             $this->db->insert(
                 'tl_nc_language',
                 array(
@@ -524,7 +554,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
                     'email_text'           => $content['text'],
                     'email_html'           => $content['html'],
                     'email_mode'           => ($content['textOnly'] ? 'textOnly' : 'textAndHtml'),
-                    // TODO: add attachments from mail content
+                    'attachments'          => $attachments
                 )
             );
         }
