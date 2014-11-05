@@ -141,7 +141,7 @@ class ShippingMethodMigrationService extends AbstractMigrationService
         $tableDiff->addedColumns['maximum_weight'] = $column;
 
         $column = new Column('group_methods', Type::getType(Type::BLOB));
-        $column->setLength(65535);
+        $column->setLength(65535)->setNotnull(false);
         $tableDiff->addedColumns['group_methods'] = $column;
 
         $column = new Column('group_calculation', Type::getType(Type::STRING));

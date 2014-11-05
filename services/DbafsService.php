@@ -77,7 +77,7 @@ class DbafsService
         $oldColumn = $this->db->getSchemaManager()->listTableDetails($tableName)->getColumn($columnName);
 
         $newColumn = new Column($columnName, Type::getType(Type::BLOB));
-        $newColumn->setLength(65535);
+        $newColumn->setLength(65535)->setNotnull(false);
 
         $columnDiff = new ColumnDiff($columnName, $newColumn, array(), $oldColumn);
 

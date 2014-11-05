@@ -275,7 +275,7 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         $tableDiff->renamedColumns['product_quantity'] = $column;
 
         $column = new Column('configuration', Type::getType(Type::BLOB));
-        $column->setLength(65535);
+        $column->setLength(65535)->setNotnull(false);
         $tableDiff->renamedColumns['product_options'] = $column;
 
         return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
@@ -302,7 +302,7 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         $table->addColumn('tax_id', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>32));
         $table->addColumn('before_tax', Type::STRING, array('fixed'=>true, 'notnull'=>true, 'default'=>'', 'length'=>1));
         $table->addColumn('addToTotal', Type::STRING, array('fixed'=>true, 'notnull'=>true, 'default'=>'', 'length'=>1));
-        $table->addColumn('products', Type::BLOB, array('length'=>65535));
+        $table->addColumn('products', Type::BLOB, array('length'=>65535, 'notnull'=>false));
 
         return $schema->toSql($this->db->getDatabasePlatform());
     }

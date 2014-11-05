@@ -53,7 +53,7 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
         // Add tl_iso_config.address_fields
         $tableDiff = new TableDiff('tl_iso_config');
         $column = new Column('address_fields', Type::getType(Type::BLOB));
-        $column->setLength(65535);
+        $column->setLength(65535)->setNotnull(false);
         $tableDiff->addedColumns['address_fields'] = $column;
 
         $sql = array_merge(
