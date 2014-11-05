@@ -26,7 +26,7 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getName()
     {
-        return $this->trans('Shop Configuration');
+        return $this->trans('service.shop_config.service_name');
     }
 
     /**
@@ -36,7 +36,7 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates shop configuration.');
+        return $this->trans('service.shop_config.service_description');
     }
 
     /**

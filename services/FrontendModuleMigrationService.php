@@ -26,7 +26,7 @@ class FrontendModuleMigrationService extends AbstractMigrationService
      */
     public function getName()
     {
-        return $this->trans('Frontend modules');
+        return $this->trans('service.frontend_module.service_name');
     }
 
     /**
@@ -36,7 +36,7 @@ class FrontendModuleMigrationService extends AbstractMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrate front end module configuration.');
+        return $this->trans('service.frontend_module.service_description');
     }
 
     /**

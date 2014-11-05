@@ -21,7 +21,7 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getName()
     {
-        return $this->trans('Product type');
+        return $this->trans('service.product_type.service_name');
     }
 
     /**
@@ -31,7 +31,7 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates product types');
+        return $this->trans('service.product_type.service_description');
     }
 
     /**

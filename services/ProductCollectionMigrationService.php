@@ -28,7 +28,7 @@ class ProductCollectionMigrationService extends AbstractMigrationService
      */
     public function getName()
     {
-        return $this->trans('Product collections');
+        return $this->trans('service.product_collection.service_name');
     }
 
     /**
@@ -38,7 +38,7 @@ class ProductCollectionMigrationService extends AbstractMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates order information');
+        return $this->trans('service.product_collection.service_description');
     }
 
     /**

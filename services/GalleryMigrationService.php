@@ -47,7 +47,7 @@ class GalleryMigrationService extends AbstractMigrationService
      */
     public function getName()
     {
-        return $this->trans('Galleries');
+        return $this->trans('service.gallery.service_name');
     }
 
     /**
@@ -57,7 +57,7 @@ class GalleryMigrationService extends AbstractMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Create galleries from old shop configurations.');
+        return $this->trans('service.gallery.service_description');
     }
 
     /**

@@ -32,7 +32,7 @@ class AddressBookMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getName()
     {
-        return $this->trans('Address Book');
+        return $this->trans('service.address_book.service_name');
     }
 
     /**
@@ -42,7 +42,7 @@ class AddressBookMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates the member address book');
+        return $this->trans('service.address_book.service_description');
     }
 
     /**

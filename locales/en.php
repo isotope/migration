@@ -53,47 +53,27 @@ return array(
         'error_button'      => 'Start over'
     ),
     'service' => array(
+        'address_book' => array(
+            'service_name'        => 'Address Book',
+            'service_description' => 'Migrates the member address book'
+        ),
         'attribute' => array(
+            'service_name'        => 'Product attributes',
+            'service_description' => 'Migrates product attributes from shop configuration',
             'mm_title'       => 'Custom media manager attributes',
             'mm_explain'     => 'Your installation contains the following attributes of type "Media Manager".',
             'mm_description' => 'In Isotope 1.4, it was possible to define a gallery class for each attribute. This is no longer possible in Isotope 2, as galleries have become their own backend configuration. Technically this is still possible by adjusting templates, but someone needs to <a href="https://github.com/isotope/docs/issues/14" target="_blank">write documentation about it</a>…',
             'list'           => '%name% (database name "%field_name%")',
             'confirmation'   => 'Please confirm that you have read the above. It is your responsibility to adjust the templates if you need gallery classes.',
         ),
-        'mail_template' => array(
-            'gateway_legend' => 'E-Mail Gateway',
-            'gateway_intro'  => 'Please select one of the available email gateways from notification center or select to create a new one for mail template migration.',
-            'gateway_new'    => 'Create a new e-mail gateway',
-            'gateway_db'     => 'Gateways from your database',
-            'orderstatus'    => 'Order status "%name%"',
-            'checkoutmodule' => 'Checkout module "%name%"',
-            'gateway_label'  => 'E-Mail Gateway (from Isotope Migration)'
-        ),
-        'shipping_method' => array(
-            'name'                => '%name% (Type "%type%")',
-            'old_title'           => 'Old shipping methods',
-            'old_explain'         => 'The following shipping methods are no longer supported in Isotope 2 (core):',
-            'old_description'     => 'We won\'t touch the data, so maybe you will find a third-party extension or you can contact a developer to fix this for you.',
-            'unknown_title'       => 'Unknown shipping methods',
-            'unknown_explain'     => 'The following shipping methods appear to be from third-party extensions:',
-            'unknown_description' => 'We can\'t tell if they work in Isotope 2, nor are we able to migrate their data. We won\'t touch them though, so if you\'re lucky a third-party developer might provide an upgrade option.',
-            'confirmation'        => 'Please confirm that you have read the above. It is your responsibility to not delete any data of the
-            old/unsuppported shipping methods if you need them in the future.'
-        ),
-        'payment_method' => array(
-            'name'                => '%name% (Type "%type%")',
-            'old_title'           => 'Old payment methods',
-            'old_explain'         => 'The following payment methods are no longer supported in Isotope 2 (core):',
-            'old_description'     => 'We won\'t touch the data, so maybe you will find a third-party extension or you can contact a developer to fix this for you.',
-            'unknown_title'       => 'Unknown payment methods',
-            'unknown_explain'     => 'The following payment methods appear to be from third-party extensions:',
-            'unknown_description' => 'We can\'t tell if they work in Isotope 2, nor are we able to migrate their data. We won\'t touch them though, so if you\'re lucky a third-party developer might provide an upgrade option.',
-            'confirmation'        => 'Please confirm that you have read the above. It is your responsibility to not delete any data of the old/unsuppported payment methods if you need them in the future.'
-        ),
         'download' => array(
-            'titleAndDescription'   => 'The database columns tl_iso_download.title as well as tl_iso_download.description cannot be converted automatically. They contain the title as well as the description of a download (provided you entered them). In Contao 3+ you can manage meta data for files in the file system directly so there is no need for Isotope eCommerce to have yet another tilte or description field. Because the migration tool cannot automatically detect in what language you entered the data in Isotope 1.4 (and possibly how you translated them), it does not touch the data in any way at all! Make sure you do not (!!) delete tl_iso_download.description and tl_iso_download.title before you migrated the data manually!'
+            'service_name'        => 'Downloads',
+            'service_description' => 'Migrates product downloads and updates orders with downloads.',
+            'titleAndDescription' => 'The database columns tl_iso_download.title as well as tl_iso_download.description cannot be converted automatically. They contain the title as well as the description of a download (provided you entered them). In Contao 3+ you can manage meta data for files in the file system directly so there is no need for Isotope eCommerce to have yet another tilte or description field. Because the migration tool cannot automatically detect in what language you entered the data in Isotope 1.4 (and possibly how you translated them), it does not touch the data in any way at all! Make sure you do not (!!) delete tl_iso_download.description and tl_iso_download.title before you migrated the data manually!'
         ),
         'frontend_module' => array(
+            'service_name'        => 'Frontend modules',
+            'service_description' => 'Migrate front end module configuration.',
             'xhtml_title'       => 'XHTML page template',
             'xhtml_explain'     => 'The following page layouts use the XHTML template. XHTML templates are not supported by Isotope 2 core.',
             'xhtml_description' => 'Either you change your page layouts to HTML5 and adjust all your templates (recommended), or you must duplicate all Isotope templates and rename the file extension.',
@@ -101,6 +81,8 @@ return array(
             'templates'         => 'The migration tool migrated the templates "iso_cart_full" to "iso_collection_default" and "iso_cart_mini" to "iso_collection_mini". However, it cannot migrate logic you built into your templates. You will have to check and adjust every (!) single template!'
         ),
         'gallery' => array(
+            'service_name'        => 'Galleries',
+            'service_description' => 'Create galleries from old shop configurations.',
             'gallery_empty' => 'Gallery configuration is empty.',
             'missing_name' => 'You must enter a name for each gallery.',
             'missing_config' => 'Every gallery must have a main and gallery image config.',
@@ -116,7 +98,7 @@ If you followed these, you should choose <i>thumbnail</i> for both main and gall
 setup the reader gallery like this: Main Image Size = <i>medium</i>, Gallery Size = <i>gallery</i>, Lightbox Size = <i>large</i>.</p>
 </p>
 HTML
-,
+            ,
             'gallery_row_id' => 'ID',
             'gallery_row_name' => 'Name',
             'gallery_row_main' => 'Main Image Size',
@@ -135,13 +117,38 @@ HTML
 for the list and one for the reader view. They can be the same, but you probably want one with lightbox in the reader,
 but a link in the list. After migration, you can also override the gallery in each frontend module configuration.</p>
 HTML
-,
+            ,
             'productType_row_id' => 'ID',
             'productType_row_name' => 'Name',
             'productType_row_list' => 'List Gallery',
             'productType_row_reader' => 'Reader Gallery',
         ),
+        'mail_template' => array(
+            'service_name'        => 'Mail Templates',
+            'service_description' => 'Migrates mail templates to notification center.',
+            'gateway_legend' => 'E-Mail Gateway',
+            'gateway_intro'  => 'Please select one of the available email gateways from notification center or select to create a new one for mail template migration.',
+            'gateway_new'    => 'Create a new e-mail gateway',
+            'gateway_db'     => 'Gateways from your database',
+            'orderstatus'    => 'Order status "%name%"',
+            'checkoutmodule' => 'Checkout module "%name%"',
+            'gateway_label'  => 'E-Mail Gateway (from Isotope Migration)'
+        ),
+        'payment_method' => array(
+            'service_name'        => 'Payment Methods',
+            'service_description' => 'Migrates payment methods.',
+            'name'                => '%name% (Type "%type%")',
+            'old_title'           => 'Old payment methods',
+            'old_explain'         => 'The following payment methods are no longer supported in Isotope 2 (core):',
+            'old_description'     => 'We won\'t touch the data, so maybe you will find a third-party extension or you can contact a developer to fix this for you.',
+            'unknown_title'       => 'Unknown payment methods',
+            'unknown_explain'     => 'The following payment methods appear to be from third-party extensions:',
+            'unknown_description' => 'We can\'t tell if they work in Isotope 2, nor are we able to migrate their data. We won\'t touch them though, so if you\'re lucky a third-party developer might provide an upgrade option.',
+            'confirmation'        => 'Please confirm that you have read the above. It is your responsibility to not delete any data of the old/unsuppported payment methods if you need them in the future.'
+        ),
         'product_collection' => array(
+            'service_name'        => 'Product collections',
+            'service_description' => 'Migrates order information',
             'legend' => 'Surcharge types',
             'intro' => 'Please tell us of what type the existing surcharges are.',
             'description' => <<<'HTML'
@@ -152,11 +159,44 @@ Unfortunately, it's not possible to tell automatically, so you will need to conf
 If you used third party extensions that added their own surcharges, please aks the developer what type they need for Isotope 2.
 You can then use the "Custom" option and manually enter the value.</p>
 HTML
-,
+            ,
             'label' => 'Label',
             'type' => 'Type',
             'surcharges_empty' => 'Surcharges configuration is empty.',
             'surcharge_type_missing' => 'You must select a type for each surcharge.',
+        ),
+        'product_data' => array(
+            'service_name'        => 'Product data',
+            'service_description' => 'Migrates product data.'
+        ),
+        'product_type' => array(
+            'service_name'        => 'Product type',
+            'service_description' => 'Migrates product types'
+        ),
+        'related_product' => array(
+            'service_name'        => 'Related Products',
+            'service_description' => 'Migrates related products and their categories.'
+        ),
+        'shipping_method' => array(
+            'service_name'        => 'Shipping Methods',
+            'service_description' => 'Migrates shipping methods.',
+            'name'                => '%name% (Type "%type%")',
+            'old_title'           => 'Old shipping methods',
+            'old_explain'         => 'The following shipping methods are no longer supported in Isotope 2 (core):',
+            'old_description'     => 'We won\'t touch the data, so maybe you will find a third-party extension or you can contact a developer to fix this for you.',
+            'unknown_title'       => 'Unknown shipping methods',
+            'unknown_explain'     => 'The following shipping methods appear to be from third-party extensions:',
+            'unknown_description' => 'We can\'t tell if they work in Isotope 2, nor are we able to migrate their data. We won\'t touch them though, so if you\'re lucky a third-party developer might provide an upgrade option.',
+            'confirmation'        => 'Please confirm that you have read the above. It is your responsibility to not delete any data of the
+            old/unsuppported shipping methods if you need them in the future.'
+        ),
+        'shop_config' => array(
+            'service_name'        => 'Shop Configuration',
+            'service_description' => 'Migrates shop configuration.'
+        ),
+        'translation' => array(
+            'service_name'        => 'Translations',
+            'service_description' => 'Migrates translation labels.'
         ),
     )
 );

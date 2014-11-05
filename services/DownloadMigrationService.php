@@ -44,7 +44,7 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getName()
     {
-        return $this->trans('Downloads');
+        return $this->trans('service.download.service_name');
     }
 
     /**
@@ -54,7 +54,7 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates product downloads and updates orders with downloads.');
+        return $this->trans('service.download.service_description');
     }
 
     /**

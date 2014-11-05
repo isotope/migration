@@ -38,14 +38,14 @@ class MigrationStepInterfaceTest extends SilexAwareTestCase
     public function testNameNotEmpty()
     {
         foreach ($this->getServices() as $service) {
-            $this->assertNotEmpty($service->getName());
+            $this->assertNotEmpty($service->getName(), $service->getSlug());
         }
     }
 
     public function testDescriptionNotEmpty()
     {
         foreach ($this->getServices() as $service) {
-            $this->assertNotEmpty($service->getDescription());
+            $this->assertNotEmpty($service->getDescription(), $service->getSlug());
         }
     }
 

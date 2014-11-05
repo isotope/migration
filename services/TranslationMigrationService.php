@@ -41,7 +41,7 @@ class TranslationMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getName()
     {
-        return $this->trans('Translations');
+        return $this->trans('service.translation.service_name');
     }
 
     /**
@@ -51,7 +51,7 @@ class TranslationMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates translation labels.');
+        return $this->trans('service.translation.service_description');
     }
 
     /**

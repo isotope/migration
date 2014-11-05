@@ -21,7 +21,7 @@ class RelatedProductMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getName()
     {
-        return $this->trans('Related Products');
+        return $this->trans('service.related_product.service_name');
     }
 
     /**
@@ -31,7 +31,7 @@ class RelatedProductMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates related products and their categories.');
+        return $this->trans('service.related_product.service_description');
     }
 
     /**

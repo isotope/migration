@@ -47,7 +47,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
      */
     public function getName()
     {
-        return $this->trans('Mail Templates');
+        return $this->trans('service.mail_template.service_name');
     }
 
     /**
@@ -57,7 +57,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates mail templates to notification center.');
+        return $this->trans('service.mail_template.service_description');
     }
 
     /**

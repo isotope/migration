@@ -26,7 +26,7 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getName()
     {
-        return $this->trans('Product data');
+        return $this->trans('service.product_data.service_name');
     }
 
     /**
@@ -36,7 +36,7 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates product data.');
+        return $this->trans('service.product_data.service_description');
     }
 
     /**

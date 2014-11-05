@@ -23,7 +23,7 @@ class AttributeMigrationService extends AbstractMigrationService
      */
     public function getName()
     {
-        return $this->trans('Product attributes');
+        return $this->trans('service.attribute.service_name');
     }
 
     /**
@@ -33,7 +33,7 @@ class AttributeMigrationService extends AbstractMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates product attributes from shop configuration');
+        return $this->trans('service.attribute.service_description');
     }
 
     /**

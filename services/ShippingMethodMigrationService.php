@@ -26,7 +26,7 @@ class ShippingMethodMigrationService extends AbstractMigrationService
      */
     public function getName()
     {
-        return $this->trans('Shipping Methods');
+        return $this->trans('service.shipping_method.service_name');
     }
 
     /**
@@ -36,7 +36,7 @@ class ShippingMethodMigrationService extends AbstractMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates shipping methods.');
+        return $this->trans('service.shipping_method.service_description');
     }
 
     /**

@@ -26,7 +26,7 @@ class PaymentMethodMigrationService extends AbstractMigrationService
      */
     public function getName()
     {
-        return $this->trans('Payment Methods');
+        return $this->trans('service.payment_method.service_name');
     }
 
     /**
@@ -36,7 +36,7 @@ class PaymentMethodMigrationService extends AbstractMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates payment methods.');
+        return $this->trans('service.payment_method.service_description');
     }
 
     /**
