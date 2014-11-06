@@ -317,22 +317,11 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         ");
 
         foreach ($allCollections as $collection) {
-            $billingAddress = @unserialize($collection['billing_address']);
-            $shippingAddress = @unserialize($collection['shipping_address']);
+            $billingAddressId = $this->addAddress($collection['billing_address'], $collection['id'], $collection['store_id'], true);
+            $shippingAddressId = $this->addAddress($collection['shipping_address'], $collection['id'], $collection['store_id'], false, true);
 
-            $billingAddressId = 0;
-            $shippingAddressId = 0;
-
-            if (is_array($billingAddress)) {
-                $billingAddressId = $this->addAddress($billingAddress, $collection['id'], $collection['store_id'], ($billingAddress['id'] === 0 || $billingAddress['id'] === '0'));
-            }
-
-            if (is_array($shippingAddress)) {
-                if ($shippingAddress['id'] == '-1' && $billingAddressId > 0) {
-                    $shippingAddressId = $billingAddressId;
-                } else {
-                    $shippingAddressId = $this->addAddress($shippingAddress, $collection['id'], $collection['store_id'], false, ($shippingAddress['id'] === 0 || $shippingAddress['id'] === '0'));
-                }
+            if ($shippingAddressId === false) {
+                $shippingAddressId = $billingAddressId;
             }
 
             $this->db->update(
@@ -347,20 +336,31 @@ class ProductCollectionMigrationService extends AbstractMigrationService
     }
 
 
-    private function addAddress(array $data, $collectionId, $storeId = 0, $isDefaultBilling = false , $isDefaultShipping = false)
+    private function addAddress($data, $collectionId, $storeId = 0, $isDefaultBilling = false, $isDefaultShipping = false)
     {
+        $address = @unserialize($data);
+
+        if (!is_array($address)) {
+            return 0;
+        } elseif ($isDefaultShipping && $address['id'] == '-1') {
+            return false;
+        }
+
+        $isDefaultBilling = ($isDefaultBilling && $this->idIsZero($address['id'])) ? '1' : '';
+        $isDefaultShipping = ($isDefaultShipping && $this->idIsZero($address['id'])) ? '1' : '';
+
         // TODO: what do we do if the serialized data contains fields that are not in the table?
 
-        unset($data['id']);
+        unset($address['id']);
 
-        $data['tstamp'] = time();
-        $data['ptable'] = 'tl_iso_product_collection';
-        $data['pid'] = $collectionId;
-        $data['store_id'] = $storeId;
-        $data['isDefaultBilling'] = ($isDefaultBilling ? '1' : '');
-        $data['isDefaultShipping'] = ($isDefaultShipping ? '1' : '');
+        $address['tstamp'] = time();
+        $address['ptable'] = 'tl_iso_product_collection';
+        $address['pid'] = $collectionId;
+        $address['store_id'] = $storeId;
+        $address['isDefaultBilling'] = $isDefaultBilling;
+        $address['isDefaultShipping'] = $isDefaultShipping;
 
-        $this->db->insert('tl_iso_address', $data);
+        $this->db->insert('tl_iso_address', $address);
 
         return $this->db->lastInsertId();
     }
@@ -463,5 +463,15 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         }
 
         return $surchargesByCollection;
+    }
+
+    /**
+     * @param mixed $value
+     *
+     * @return bool
+     */
+    private function idIsZero($value)
+    {
+        return ($value === 0 || $value === '0');
     }
 }

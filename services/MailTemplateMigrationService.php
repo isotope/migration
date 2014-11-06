@@ -556,6 +556,20 @@ class MailTemplateMigrationService extends AbstractMigrationService
     }
 
     /**
+     * @return bool
+     */
+    private function hasGateways()
+    {
+        $gatewayCount = 0;
+
+        if ($this->dbcheck->tableExists('tl_nc_gateway')) {
+            $gatewayCount = $this->db->fetchColumn("SELECT COUNT(*) FROM tl_nc_gateway");
+        }
+
+        return $gatewayCount > 0;
+    }
+
+    /**
      * Get gateway ID from config or false if none is necessary
      *
      * @param RequestStack $requestStack
@@ -564,13 +578,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
      */
     private function getGatewayId(RequestStack $requestStack)
     {
-        $gatewayCount = 0;
-
-        if ($this->dbcheck->tableExists('tl_nc_gateway')) {
-            $gatewayCount = $this->db->fetchColumn("SELECT COUNT(*) FROM tl_nc_gateway");
-        }
-
-        if (!$this->hasMails() || $gatewayCount == 0) {
+        if (!$this->hasMails() || $this->hasGateways()) {
             $this->config->set('mailGateway', 0);
 
             return false;
