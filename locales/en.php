@@ -33,6 +33,20 @@ return array(
         'headline'      => 'Welcome to the Isotope 2 Migration Tool',
         'intro'         => 'This tool will migrate your Isotope 1.4 data to Isotope 2. Please read carefully before continuing.',
         'start'         => 'Start migration',
+        'prepare_headline' => 'Preparing your installation',
+        'prepare_description' => 'We will guide you step by step through the migration. But first, make sure your installation matches our expectations. The migration tool will not be able to run if you do not correctly prepare your database.',
+        'prepare_step1' => 'Your installation must be updated to Isotope version v1.4.8. If you are using an older version, you must first upgrade to v1.4.8. This will adjust existing v0.2/v1.3 databases.',
+        'prepare_step2' => 'If you have a multilingual shop, make sure to delete the <i>isotope_multilingual</i> extension. The functionality is already included in Isotope 2.',
+        'prepare_step3' => 'Update Contao to version 3.3. There are two ways:',
+        'prepare_step4' => 'Update the database using the Contao install tool. You should be in core only mode, so you can execute all recommended changes.',
+        'prepare_liveupdate' => 'Using <a href="http://www.inetrobots.com/shop/product_info.php?info=p12_contao-live-update-id.html&language=en" target="_blank">the Live-Update service</a>, which will take care of any necessary changes (recommended).',
+        'prepare_manual' => 'By hand, by following <a href="https://contao.org/en/manual/3.0/installation.html#manual-update" target="_blank">the manual update guide</a>.',
+        'prepare_warning' => 'If you do not follow this process, the database might not be ready and the migration config will report errors.',
+        'info_headline' => 'What you must know',
+        'info_part1' => 'The migration tool will convert the database from Isotope version 1.4.8 to version 2. It will NOT touch any of your files and it will NOT change any templates. A lot of templates have changed in Isotope 2 and your customizations will no longer work. It is very likely you will need to start from scratch with your template adjustments.',
+        'info_part2' => 'Due to the API changes, we assume ALL existing extensions for Isotope 1.4 will no longer work with version 2. If you have installed any Isotope-related extension, check for available updates or contact the developers if necessary. We will try not to destroy any third-party data, but we can\'t guarantee …',
+        'thanks_headline' => 'Many Thanks!',
+        'thanks_description' => 'The migration tool would not have been possible without our community. Thanks to the donators on our fundraising:<br>Kim Wormer, Monique Hahnefeld, Websache, Cyrill Weiss, Karlheinz Büscher, Holger Neuner, Mingel2k',  // TODO: Update list of supporters!
     ),
     'config' => array(
         'back'          => 'Back',
@@ -40,6 +54,18 @@ return array(
         'save'          => 'Save',
         'saveContinue'  => 'Save & Continue',
         'start'         => 'Start configuration',
+    ),
+    'config_intro' => array(
+        'headline'           => 'Set up migration',
+        'description'        => 'Tell us about your installation so we can migrate the database.',
+        'step_headline'      => 'Step by step',
+        'step_description'   => 'The migration tool is split into multiple steps. Each migration step will take care of a small part of the application. You can see the list of migration steps in the navigation to the left side.',
+        'step_list'          => 'Every step has three different states:',
+        'grey'               => 'Grey if your input is required',
+        'green'              => 'Green if everything is ready',
+        'red'                => 'Red if something is wrong',
+        'secure_headline'    => 'Don\'t worry',
+        'secure_description' => 'We\'re not changing your database during the configuration process. Your input is stored in the browser session. The migration can only be executed if all steps are green.',
     ),
     'execute' => array(
         'headline'          => 'Ready, set, go!',
@@ -50,7 +76,12 @@ return array(
         'continue'          => 'Execute migration',
         'error_headline'    => 'Slow down, young warrior …',
         'error_description' => 'Looks like you\'re not yet ready for the migration. Please start by reading the welcome text and then configure all necessary steps.',
-        'error_button'      => 'Start over'
+        'error_button'      => 'Start over',
+        'success_headline' => 'Configuration successful',
+        'success_description' => 'You have successfully answered all questions and configured the migration tool.',
+        'backup_headline' => 'Did you create a backup?',
+        'backup_description' => 'Please be aware that we are not responsible for your data. Here\'s what the LGP license says:',
+        'lgpl' => 'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the <a href="https://www.gnu.org/licenses/lgpl.html" target="_blank">GNU Lesser General Public License</a> for more details.',
     ),
     'service' => array(
         'address_book' => array(

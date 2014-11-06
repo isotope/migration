@@ -6,41 +6,37 @@
     <p>{% trans %}index.intro{% endtrans %}</p>
 </div>
 <div class="row">
-    <h3>Preparing your installation</h3>
-    <p>We will guide you step by step through the migration. But first, make sure your installation matches our expectations. The migration tool will not be able to run if you do not correctly prepare your database.</p>
+    <h3>{% trans %}index.prepare_headline{% endtrans %}</h3>
+    <p>{% trans %}index.prepare_description{% endtrans %}</p>
     <ol>
         {# TODO: check if preparation steps are correct #}
-        <li>Your installation must be updated to Isotope version v1.4.8. If you are using an older version, you must first upgrade to v1.4.8. This will adjust existing v0.2/v1.3 databases.</li>
-        <li>If you have a multilingual shop, make sure to delete the <i>isotope_multilingual</i> extension. The functionality is already included in Isotope 2.</li>
-        <li>Update Contao to version 3.3. There are two ways:
+        <li>{% trans %}index.prepare_step1{% endtrans %}</li>
+        <li>{% trans %}index.prepare_step2{% endtrans %}</li>
+        <li>{% trans %}index.prepare_step3{% endtrans %}
             <ul>
-                <li>Using <a href="http://www.inetrobots.com/shop/product_info.php?info=p12_contao-live-update-id.html&language=en" target="_blank">the Live-Update service</a>, which will take care of any necessary changes (recommended).</li>
-                <li>By hand, by following <a href="https://contao.org/en/manual/3.0/installation.html#manual-update" target="_blank">the manual update guide</a>.</li>
+                <li>{% trans %}index.prepare_liveupdate{% endtrans %}</li>
+                <li>{% trans %}index.prepare_manual{% endtrans %}</li>
             </ul>
         </li>
-        <li>Update the database using the Contao install tool. You should be in core only mode, so you can execute all recommended changes.</li>
+        <li>{% trans %}index.prepare_step4{% endtrans %}</li>
 
 {#
+TODO: what's up with this?
         <hr>
         <li>Now you can run this migration tool!</li>
         <li>Update Isotope to version 2.2 (either manually or using the extension repository).</li>
         <li>Also update any other extensions necessary.</li>#}
     </ol>
-    <p style="text-decoration: underline">If you do not follow this process, the database might not be ready and the migration config will report errors.</p>
+    <p style="text-decoration: underline">{% trans %}index.prepare_warning{% endtrans %}</p>
 </div>
 <div class="row">
-    <h3>What you must know</h3>
-    <p>The migration tool will convert the database from Isotope version 1.4.8 to version 2. It will NOT touch any of your files and it will NOT change any templates.
-        A lot of templates have changed in Isotope 2 and your customizations will no longer work. It is very likely you will need to start from scratch with your template adjustments.</p>
-    <p>Due to the API changes, we assume ALL existing extensions for Isotope 1.4 will no longer work with version 2. If you have installed any Isotope-related extension, check for available updates
-    or contact the developers if necessary. We will try not to destroy any third-party data, but we can't guarantee …</p>
+    <h3>{% trans %}index.info_headline{% endtrans %}</h3>
+    <p>{% trans %}index.info_part1{% endtrans %}</p>
+    <p>{% trans %}index.info_part2{% endtrans %}</p>
 </div>
 <div class="row">
-    <h3>Many Thanks!</h3>
-    <p>The migration tool would not have been possible without our community. Thanks to the donators on our fundraising:<br>
-        Kim Wormer, Monique Hahnefeld, Websache, Cyrill Weiss, Karlheinz Büscher, Holger Neuner, Mingel2k
-        <!-- TODO: Update this list! -->
-    </p>
+    <h3>{% trans %}index.thanks_headline{% endtrans %}</h3>
+    <p>{% trans %}index.thanks_description{% endtrans %}</p>
 </div>
 <div class="row">
     <p class="mt"><a href="{{ base_url }}/config" class="button float_right main">{% trans %}index.start{% endtrans %}</a></p>

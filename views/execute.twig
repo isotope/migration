@@ -19,15 +19,13 @@
     <form action="{# TODO: add action link #}" method="post">
         <div class="row">
             {# TODO: make this translatable #}
-            <h3>Configuration successful</h3>
-            <p>You have successfully answered all questions and configured the migration tool.</p>
+            <h3>{% trans %}execute.success_headline{% endtrans %}</h3>
+            <p>{% trans %}execute.success_description{% endtrans %}</p>
         </div>
         <div class="row">
-            <h3>Did you create a backup?</h3>
-            <p>Please be aware that we are not responsible for your data. Here's what the LGP license says:</p>
-            <p class="explain">This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-                without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-                See the <a href="https://www.gnu.org/licenses/lgpl.html" target="_blank">GNU Lesser General Public License</a> for more details.</p>
+            <h3>{% trans %}execute.backup_headline{% endtrans %}</h3>
+            <p>{% trans %}execute.backup_description{% endtrans %}</p>
+            <p class="explain">{% trans %}execute.lgpl{% endtrans %}</p>
         </div>
         <div class="row">
             <p class="mt">
