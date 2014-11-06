@@ -18,7 +18,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class TranslationMigrationService extends AbstractConfigfreeMigrationService
 {
-    protected $contao_root;
+    private $contao_root;
 
     public function __construct(
         AttributeBagInterface $config,
@@ -27,9 +27,10 @@ class TranslationMigrationService extends AbstractConfigfreeMigrationService
         TranslatorInterface $translator,
         Connection $db,
         DatabaseVerificationService $migration_dbcheck,
+        DbafsService $migration_dbafs,
         $contao_root
     ) {
-        parent::__construct($config, $summary, $twig, $translator, $db, $migration_dbcheck);
+        parent::__construct($config, $summary, $twig, $translator, $db, $migration_dbcheck, $migration_dbafs);
 
         $this->contao_root = $contao_root;
     }

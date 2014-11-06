@@ -52,6 +52,11 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
      */
     protected $dbcheck;
 
+    /**
+     * @type DbafsService
+     */
+    protected $dbafs;
+
 
     public function __construct(
         AttributeBagInterface $config,
@@ -59,7 +64,8 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
         \Twig_Environment $twig,
         TranslatorInterface $translator,
         Connection $db,
-        DatabaseVerificationService $migration_dbcheck
+        DatabaseVerificationService $migration_dbcheck,
+        DbafsService $migration_dbafs
     ) {
         $this->config = $config;
         $this->summary = $summary;
@@ -67,6 +73,7 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
         $this->translator = $translator;
         $this->db = $db;
         $this->dbcheck = $migration_dbcheck;
+        $this->dbafs = $migration_dbafs;
     }
 
     /**
