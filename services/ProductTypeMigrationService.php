@@ -43,7 +43,10 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
     {
         $this->checkMigrationStatus();
 
-        return $this->renameTable('tl_iso_producttypes', 'tl_iso_producttype');
+        $sql = $this->renameTable('tl_iso_producttypes', 'tl_iso_producttype');
+        $sql[] = "UPDATE tl_iso_producttype SET class='standard' WHERE class='regular'";
+
+        return $sql;
     }
 
     /**
@@ -64,7 +67,8 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
                 'tl_iso_producttype',
                 array(
                     'attributes'         => $attributes,
-                    'variant_attributes' => $variantAttributes),
+                    'variant_attributes' => $variantAttributes
+                ),
                 array(
                     'id' => $type['id']
                 )
