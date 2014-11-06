@@ -236,6 +236,10 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
         $tableDiff->renamedColumns['cart_id'] = $column;
 
+        $column = new Column('order_status', Type::getType(Type::INTEGER));
+        $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
+        $tableDiff->renamedColumns['status'] = $column;
+
         $column = new Column('type', Type::getType(Type::STRING));
         $column->setLength(32)->setNotnull(true)->setDefault('');
         $tableDiff->addedColumns['type'] = $column;
