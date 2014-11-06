@@ -523,21 +523,23 @@ class MailTemplateMigrationService extends AbstractMigrationService
             )
         );
 
-        $messageId = $this->db->lastInsertId();
+        $this->createLanguages(
+            $this->db->lastInsertId(),
+            $mail,
+            $recipient
+        );
+    }
+
+    /**
+     * @param int    $messageId
+     * @param array  $mail
+     * @param string $recipient
+     */
+    private function createLanguages($messageId, $mail, $recipient)
+    {
         $mailContents = $this->db->fetchAll("SELECT * FROM tl_iso_mail_content WHERE pid=?", array($mail['id']));
 
         foreach ($mailContents as $content) {
-
-            $attachments = null;
-            $files = @unserialize($content['attachments']);
-            if (!empty($files) && is_array($files)) {
-                foreach ($files as $path) {
-                    if (($uuid = $this->dbafs->findByPath($path)) !== null) {
-                        $attachments[] = $uuid;
-                    }
-                }
-            }
-
             $this->db->insert(
                 'tl_nc_language',
                 array(
@@ -555,7 +557,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
                     'email_text'           => $content['text'],
                     'email_html'           => $content['html'],
                     'email_mode'           => ($content['textOnly'] ? 'textOnly' : 'textAndHtml'),
-                    'attachments'          => $attachments
+                    'attachments'          => $this->convertAttachments($content['attachments'])
                 )
             );
         }
@@ -597,5 +599,26 @@ class MailTemplateMigrationService extends AbstractMigrationService
         }
 
         return $this->config->get('mailGateway');
+    }
+
+    /**
+     * @param string $mailData
+     *
+     * @return array|null
+     */
+    private function convertAttachments($mailData)
+    {
+        $attachments = null;
+        $files = @unserialize($mailData);
+
+        if (!empty($files) && is_array($files)) {
+            foreach ($files as $path) {
+                if (($uuid = $this->dbafs->findByPath($path)) !== null) {
+                    $attachments[] = $uuid;
+                }
+            }
+        }
+
+        return $attachments;
     }
 }
