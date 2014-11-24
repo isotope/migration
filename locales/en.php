@@ -103,7 +103,7 @@ return array(
             'titleAndDescription' => 'The database columns tl_iso_download.title as well as tl_iso_download.description cannot be converted automatically. They contain the title as well as the description of a download (provided you entered them). In Contao 3+ you can manage meta data for files in the file system directly so there is no need for Isotope eCommerce to have yet another tilte or description field. Because the migration tool cannot automatically detect in what language you entered the data in Isotope 1.4 (and possibly how you translated them), it does not touch the data in any way at all! Make sure you do not (!!) delete tl_iso_download.description and tl_iso_download.title before you migrated the data manually!'
         ),
         'frontend_module' => array(
-            'service_name'        => 'Frontend modules',
+            'service_name'        => 'Front end modules',
             'service_description' => 'Migrate front end module configuration.',
             'xhtml_title'       => 'XHTML page template',
             'xhtml_explain'     => 'The following page layouts use the XHTML template. XHTML templates are not supported by Isotope 2 core.',
@@ -146,7 +146,7 @@ HTML
             'productType_description' => <<<'HTML'
 <p class="explain">Here you need to assign your gallery configurations to the product types. Each product type has a gallery
 for the list and one for the reader view. They can be the same, but you probably want one with lightbox in the reader,
-but a link in the list. After migration, you can also override the gallery in each frontend module configuration.</p>
+but a link in the list. After migration, you can also override the gallery in each front end module configuration.</p>
 HTML
             ,
             'productType_row_id' => 'ID',

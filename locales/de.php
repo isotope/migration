@@ -90,41 +90,42 @@ return array(
             'service_description' => 'Migriert das Adressbuch'
         ),
         'attribute' => array(
-            'service_name'        => 'Product attributes',
-            'service_description' => 'Migrates product attributes from shop configuration',
-            'mm_title'       => 'Custom media manager attributes',
-            'mm_explain'     => 'Your installation contains the following attributes of type "Media Manager".',
-            'mm_description' => 'In Isotope 1.4, it was possible to define a gallery class for each attribute. This is no longer possible in Isotope 2, as galleries have become their own backend configuration. Technically this is still possible by adjusting templates, but someone needs to <a href="https://github.com/isotope/docs/issues/14" target="_blank">write documentation about it</a>…',
-            'list'           => '%name% (database name "%field_name%")',
-            'confirmation'   => 'Please confirm that you have read the above. It is your responsibility to adjust the templates if you need gallery classes.',
+            'service_name'        => 'Produktattribute',
+            'service_description' => 'Migriert die Produktattribute der Shopkonfiguration',
+            'mm_title'       => 'Medienmanager-Attribute',
+            'mm_explain'     => 'Deine Installation enthält die folgenden Attribute vom Typ "Medien-Manager".',
+            'mm_description' => 'In Isotope 1.4 war es möglich, eigene Galerie-Klassen für jedes Attribut zu definieren. Dies ist in Isotope 2 nicht mehr möglich, da Galerien neu im Backend konfiguriert werden. Technisch ist es durch Anpassungen an Templates immer noch möglich, aber jemand müsste <a href="https://github.com/isotope/docs/issues/14" target="_blank">es dokumentieren</a>…',
+            'list'           => '%name% (Datenbankname "%field_name%")',
+            'confirmation'   => 'Bitte bestätige, dass du das Obenstehende gelesen hast. Es liegt in deiner Verantwortung, die Templates anzupassen, wenn du Galerie-Klassen benötigst.',
         ),
         'download' => array(
             'service_name'        => 'Downloads',
-            'service_description' => 'Migrates product downloads and updates orders with downloads.',
-            'titleAndDescription' => 'The database columns tl_iso_download.title as well as tl_iso_download.description cannot be converted automatically. They contain the title as well as the description of a download (provided you entered them). In Contao 3+ you can manage meta data for files in the file system directly so there is no need for Isotope eCommerce to have yet another tilte or description field. Because the migration tool cannot automatically detect in what language you entered the data in Isotope 1.4 (and possibly how you translated them), it does not touch the data in any way at all! Make sure you do not (!!) delete tl_iso_download.description and tl_iso_download.title before you migrated the data manually!'
+            'service_description' => 'Migriert die Produktedownloads und aktualisiert Bestellungen mit Downloads.',
+            'titleAndDescription' => 'Die Datenbankspalten tl_iso_download.title und tl_iso_download.description können nicht automatisch migriert werden. Sie beinhalten den Titel und die Beschreibung eines Downloads (vorausgesetzt du hast diese erfasst). In Contao 3+ kannst du Metadaten von Dateien in der Dateiverwaltung direkt erfassen, folglich muss Isotope eCommerce nicht noch weitere Erfassungsmöglichkeiten dafür bieten. Da das Migrationstool nicht automatisch erkennen kann, in welcher Sprache du die Daten in Isotope 1.4 erfasst hattest (und möglicherweise übersetzt hattest), wird es die Daten nicht verändern! Stell sicher, dass du die Spalten tl_iso_download.description und tl_iso_download.title nicht (!!) löschst, bevor du die Daten manuell migriert hast!'
         ),
         'frontend_module' => array(
-            'service_name'        => 'Frontend modules',
-            'service_description' => 'Migrate front end module configuration.',
-            'xhtml_title'       => 'XHTML page template',
-            'xhtml_explain'     => 'The following page layouts use the XHTML template. XHTML templates are not supported by Isotope 2 core.',
-            'xhtml_description' => 'Either you change your page layouts to HTML5 and adjust all your templates (recommended), or you must duplicate all Isotope templates and rename the file extension.',
-            'confirmation'      => 'Please confirm that you have read the above. It is your responsibility to adjust the page layouts or create the XHTML templates.',
-            'templates'         => 'The migration tool migrated the templates "iso_cart_full" to "iso_collection_default" and "iso_cart_mini" to "iso_collection_mini". However, it cannot migrate logic you built into your templates. You will have to check and adjust every (!) single template!'
+            'service_name'        => 'Frontend-Module',
+            'service_description' => 'Migriert die Frontend-Module.',
+            'xhtml_title'       => 'XHTML Templates',
+            'xhtml_explain'     => 'Die folgenden Seitenlayouts nutzen XHTML Templates. XHTML Templates werden vom Isotope 2 Core nicht unterstützt.',
+            'xhtml_description' => 'Entweder du änderst deine Seitenlayouts auf HTML5 Templates und passt diese alle an (empfohlen) oder du kopierst alle Isotope Templates und passt die Dateiendungen an.',
+            'confirmation'      => 'Bitte bestätige, dass du das Obenstehende gelesen hast. Es liegt in deiner Verantwortung, die Seitenlayouts anzupassen oder die XHTML Templates anzulegen.',
+            'templates'         => 'Das Migrationstool hat die Templates "iso_cart_full" zu "iso_collection_default" und "iso_cart_mini" zu "iso_collection_mini" migriert. Allerdings kann es keine Logik migrieren, welche du in deine Templates eingebaut hast. Du wirst prüfen jedes einzelne (!) Template prüfen müssen!'
         ),
         'gallery' => array(
-            'service_name'        => 'Galleries',
-            'service_description' => 'Create galleries from old shop configurations.',
-            'gallery_empty' => 'Gallery configuration is empty.',
-            'missing_name' => 'You must enter a name for each gallery.',
-            'missing_config' => 'Every gallery must have a main and gallery image config.',
-            'list_name' => 'List',
-            'reader_name' => 'Reader',
-            'gallery_legend' => 'Configure galleries',
-            'gallery_intro' => 'Please setup your new galleries based on image sizes in shop configs of Isotope 1.x',
+            'service_name'        => 'Galerien',
+            'service_description' => 'Generiert Galerien auf Basis von alten Shopkonfigurationen.',
+            'gallery_empty' => 'Die Galerie-Konfiguration is leer.',
+            'missing_name' => 'Du musst für jede Galerie einen Namen eingeben.',
+            'missing_config' => 'Jede Galerie muss über eine Haupt- und eine Galeriebild-Konfiguration verfügen.',
+            'list_name' => 'Liste',
+            'reader_name' => 'Leser',
+            'gallery_legend' => 'Galerien konfigurieren',
+            'gallery_intro' => 'Bitte konfiguriere deine neuen Galerien basierend auf den Bildgrössen in der Shopkonfiguration von Isotope 1.x',
+            // @todo Andy has to translate this
             'gallery_description' => <<<'HTML'
-<p class="explain">In Isotope 2, the image sizes have been moved to gallery configurations. Every gallery configuration contains
-    information about image sizes and link action (e.g. link to product or open lightbox).</p>
+<p class="explain">In Isotope 2 wurde die Bildgrössen-Konfiguration in eigene Galerie-Konfigurationen ausgelagert. Jede Galerie-Konfiguration beinhaltet
+    Informationen über die Bildgrössen und Link-Aktionen (bspw. Link auf das Produkt oder Lightbox).</p>
 <p class="explain">The default configuration of Isotope 1.x contained four different image sizes: <i>gallery</i>, <i>thumbnail</i>, <i>medium</i> and <i>large</i>.<br>
 If you followed these, you should choose <i>thumbnail</i> for both main and gallery image of the list gallery, and
 setup the reader gallery like this: Main Image Size = <i>medium</i>, Gallery Size = <i>gallery</i>, Lightbox Size = <i>large</i>.</p>
@@ -133,27 +134,27 @@ HTML
             ,
             'gallery_row_id' => 'ID',
             'gallery_row_name' => 'Name',
-            'gallery_row_main' => 'Main Image Size',
-            'gallery_row_gallery' => 'Gallery Size',
-            'gallery_row_lightbox' => 'Lightbox Size',
-            'gallery_default' => 'Gallery #:id',
-            'gallery_lightbox_blank' => 'None (for list galleries)',
-            'gallery_delete_title' => 'Delete gallery',
-            'gallery_add_title' => 'Add one more gallery configuration',
-            'gallery_add_label' => 'Add another gallery',
-            'productType_missing_config' => 'Please assign a list and reader gallery to each product type',
-            'productType_legend' => 'Configure product types',
-            'productType_intro' => 'Every product type must have a gallery configuration assigned.',
+            'gallery_row_main' => 'Hauptbildgrösse',
+            'gallery_row_gallery' => 'Galerie-Grösse',
+            'gallery_row_lightbox' => 'Lightbox-Grösse',
+            'gallery_default' => 'Galerie #:id',
+            'gallery_lightbox_blank' => 'Nichts (für Listen-Galerien)',
+            'gallery_delete_title' => 'Galerie löschen',
+            'gallery_add_title' => 'Eine weitere Galerie-Konfiguration anlegen',
+            'gallery_add_label' => 'Galerie hinzufügen',
+            'productType_missing_config' => 'Bitte weise eine Listen- sowie eine Leser-Galerie zu jedem Produkttyp zu',
+            'productType_legend' => 'Produkttypen konfigurieren',
+            'productType_intro' => 'Jeder Produkttyp muss eine Galerie-Konfiguration zugewiesen haben.',
             'productType_description' => <<<'HTML'
-<p class="explain">Here you need to assign your gallery configurations to the product types. Each product type has a gallery
-for the list and one for the reader view. They can be the same, but you probably want one with lightbox in the reader,
-but a link in the list. After migration, you can also override the gallery in each frontend module configuration.</p>
+<p class="explain">Hier musst du den Produkttypen die Galerie-Konfigurationen zuweisen. Jeder Produkttyp hat eine Galerie
+für die Produktliste sowie den Produktleser. Sie können identisch sein, aber du möchtest möglicherweise eine Lightbox im Leser,
+aber einen Link auf die Detailansicht in der Produktliste. Nach der Migration kannst du übrigens in jedem Frontend-Modul die Galerie-Konfiguration noch einmal überschreiben.</p>
 HTML
             ,
             'productType_row_id' => 'ID',
             'productType_row_name' => 'Name',
-            'productType_row_list' => 'List Gallery',
-            'productType_row_reader' => 'Reader Gallery',
+            'productType_row_list' => 'Listen-Galerie',
+            'productType_row_reader' => 'Leser-Galerie',
         ),
         'mail_template' => array(
             'service_name'        => 'Mail Templates',
