@@ -158,78 +158,77 @@ HTML
         ),
         'mail_template' => array(
             'service_name'        => 'Mail Templates',
-            'service_description' => 'Migrates mail templates to notification center.',
+            'service_description' => 'Migriert die Mail Templates in das Notofication Center.',
             'gateway_legend' => 'E-Mail Gateway',
-            'gateway_intro'  => 'Please select one of the available email gateways from notification center or select to create a new one for mail template migration.',
-            'gateway_new'    => 'Create a new e-mail gateway',
-            'gateway_db'     => 'Gateways from your database',
-            'orderstatus'    => 'Order status "%name%"',
-            'checkoutmodule' => 'Checkout module "%name%"',
-            'gateway_label'  => 'E-Mail Gateway (from Isotope Migration)'
+            'gateway_intro'  => 'Wähle eines der verfügbaren E-Mail Gateways aus dem Notification Center oder erstelle ein neues Gateway für die Mail Template Migration.',
+            'gateway_new'    => 'Erstelle ein neues E-Mail Gateway',
+            'gateway_db'     => 'Gateways deiner Datenbank',
+            'orderstatus'    => 'Bestellstatus "%name%"',
+            'checkoutmodule' => 'Checkout Modul "%name%"',
+            'gateway_label'  => 'E-Mail Gateway (von der Isotope Migration)'
         ),
         'payment_method' => array(
-            'service_name'        => 'Payment Methods',
-            'service_description' => 'Migrates payment methods.',
-            'name'                => '%name% (Type "%type%")',
-            'old_title'           => 'Old payment methods',
-            'old_explain'         => 'The following payment methods are no longer supported in Isotope 2 (core):',
-            'old_description'     => 'We won\'t touch the data, so maybe you will find a third-party extension or you can contact a developer to fix this for you.',
-            'unknown_title'       => 'Unknown payment methods',
-            'unknown_explain'     => 'The following payment methods appear to be from third-party extensions:',
-            'unknown_description' => 'We can\'t tell if they work in Isotope 2, nor are we able to migrate their data. We won\'t touch them though, so if you\'re lucky a third-party developer might provide an upgrade option.',
-            'confirmation'        => 'Please confirm that you have read the above. It is your responsibility to not delete any data of the old/unsuppported payment methods if you need them in the future.'
+            'service_name'        => 'Zahlungsarten',
+            'service_description' => 'Migriert die Zahlungsarten',
+            'name'                => '%name% (Typ "%type%")',
+            'old_title'           => 'Alte Zahlungsarten',
+            'old_explain'         => 'Die folgenden Zahlungsarten werden in Isotope 2 (Core) nicht mehr unterstützt:',
+            'old_description'     => 'Wir werden diese Daten nicht verändern. Eventuell findest du eine Third-Party Extension oder fragst einen Entwickler, dies für dich zu beheben.',
+            'unknown_title'       => 'Unbekannte Zahlungsarten',
+            'unknown_explain'     => 'Folgende Zahlungsarten scheinen aus einer Third-Party-Extension zu stammen:',
+            'unknown_description' => 'Wir können weder sagen, ob sie in Isotope 2 funktionieren, noch deren Daten migrieren. Daher verändern wir diese Daten nicht, damit dir ein Third-Party-Entwickler eine Update-Möglichkeit bieten kann.',
+            'confirmation'        => 'Bitte bestätige, dass du alles Obenstehende gelesen hast. Es liegt in deiner Verantwortlichkeit, keine der alten/nicht mehr unterstützen Zahlungsmethoden zu verändern, wenn du sie in Zukunft weiterhin nutzen möchtest.'
         ),
         'product_collection' => array(
             'service_name'        => 'Product collections',
-            'service_description' => 'Migrates order information',
-            'legend' => 'Surcharge types',
-            'intro' => 'Please tell us of what type the existing surcharges are.',
+            'service_description' => 'Migriert die Bestellinformationen',
+            'legend' => 'Aufpreise',
+            'intro' => 'Bitte nenne uns, welche Arten von Aufpreisen existieren.',
             'description' => <<<'HTML'
-<p class="explain">Each order can have unlimited surcharges in Isotope. This can be a payment surcharge, a shipping surcharge or anything similar.
-Isotope 2 introduced surcharge types so developer can find out what each surcharge is.
-Unfortunately, it's not possible to tell automatically, so you will need to configure this.</p>
-<p class="explain">Most of the time you can simply check the label and it will become obvious to you what the surcharge is.
-If you used third party extensions that added their own surcharges, please aks the developer what type they need for Isotope 2.
-You can then use the "Custom" option and manually enter the value.</p>
+<p class="explain">Jede Bestellung kann in Isotope eine unbeschränkte Anzahl an Aufpreisen haben. Das kann ein Aufpreis für Zahlungs-, Versandarten oder ähnliches sein.
+Isotope 2 hat Aufpreis-Typen eingeführt, damit Entwickler herausfinden können, zu was der Aufpreis zugeordnet werden soll.
+Leider ist es nicht möglich dies automatisiert einzustellen, sodass du die Aufpreis-Typen konfigurieren musst.</p>
+<p class="explain">In den meisten Fällen kannst du einfach das Label anwählen und du wirst sehen, wohin der Aufpreis zugeordnet werden sollte.
+Falls du Third-Party-Extensions genutzt hast, die eigene Aufpreise hinzufügen, frag bitte den Entwickler welchen Typ diese Aufschläge benötigen.
+Dann kannst du die "Custom"-Option nutzen um diesen Wert manuell einzutragen.</p>
 HTML
             ,
             'label' => 'Label',
-            'type' => 'Type',
-            'surcharges_empty' => 'Surcharges configuration is empty.',
-            'surcharge_type_missing' => 'You must select a type for each surcharge.',
+            'type' => 'Typ',
+            'surcharges_empty' => 'Aufpreis-Konfiguration ist leer.',
+            'surcharge_type_missing' => 'Du musst für jeden Aufpreis einen Typ angeben.',
         ),
         'product_data' => array(
-            'service_name'        => 'Product data',
-            'service_description' => 'Migrates product data.'
+            'service_name'        => 'Produktinformationen',
+            'service_description' => 'Migriert die Produktinformationen.'
         ),
         'product_type' => array(
-            'service_name'        => 'Product type',
-            'service_description' => 'Migrates product types'
+            'service_name'        => 'Produkttypen',
+            'service_description' => 'Migriert die Produkttypen'
         ),
         'related_product' => array(
-            'service_name'        => 'Related Products',
-            'service_description' => 'Migrates related products and their categories.'
+            'service_name'        => 'Ähnliche Produkte',
+            'service_description' => 'Migriert die ähnlichen Produkte und deren Kategorien.'
         ),
         'shipping_method' => array(
-            'service_name'        => 'Shipping Methods',
-            'service_description' => 'Migrates shipping methods.',
-            'name'                => '%name% (Type "%type%")',
-            'old_title'           => 'Old shipping methods',
-            'old_explain'         => 'The following shipping methods are no longer supported in Isotope 2 (core):',
-            'old_description'     => 'We won\'t touch the data, so maybe you will find a third-party extension or you can contact a developer to fix this for you.',
-            'unknown_title'       => 'Unknown shipping methods',
-            'unknown_explain'     => 'The following shipping methods appear to be from third-party extensions:',
-            'unknown_description' => 'We can\'t tell if they work in Isotope 2, nor are we able to migrate their data. We won\'t touch them though, so if you\'re lucky a third-party developer might provide an upgrade option.',
-            'confirmation'        => 'Please confirm that you have read the above. It is your responsibility to not delete any data of the
-            old/unsuppported shipping methods if you need them in the future.'
+            'service_name'        => 'Versandarten',
+            'service_description' => 'Migriert die Versandarten.',
+            'name'                => '%name% (Typ "%type%")',
+            'old_title'           => 'Alte Versandarten',
+            'old_explain'         => 'Die folgenden Versandarten werden in Isotope 2 (Core) nicht mehr unterstützt:',
+            'old_description'     => 'Wir werden diese Daten nicht verändern. Eventuell findest du eine Third-Party Extension oder fragst einen Entwickler, dies für dich zu beheben',
+            'unknown_title'       => 'Unbekannte Versandarten',
+            'unknown_explain'     => 'Die folgenden Versandarten scheinen aus einer Third-Party-Extension zu stammen:',
+            'unknown_description' => 'Wir können weder sagen, ob sie in Isotope 2 funktionieren, noch deren Daten migrieren. Daher verändern wir diese Daten nicht, damit dir ein Third-Party-Entwickler eine Update-Möglichkeit bieten kann.',
+            'confirmation'        => 'Bitte bestätige, dass du alles Obenstehende gelesen hast. Es liegt in deiner Verantwortlichkeit, keine der alten/nicht mehr unterstützen Zahlungsmethoden zu verändern, wenn du sie in Zukunft weiterhin nutzen möchtest'
         ),
         'shop_config' => array(
-            'service_name'        => 'Shop Configuration',
-            'service_description' => 'Migrates shop configuration.'
+            'service_name'        => 'Shop-Konfiguration',
+            'service_description' => 'Migriert die Shop-Konfiguration.'
         ),
         'translation' => array(
-            'service_name'        => 'Translations',
-            'service_description' => 'Migrates translation labels.'
+            'service_name'        => 'Übersetzungen',
+            'service_description' => 'Migriert die Übersetzungs-Labels.'
         ),
     )
 );
