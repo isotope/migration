@@ -35,11 +35,11 @@ class MigrationServiceProvider implements ServiceProviderInterface
 
     public function register(Application $app)
     {
-
         $app->register(new TranslationServiceProvider());
-        $app['translator'] = $app->share($app->extend('translator', function(Translator $translator) {
+        $app['translator'] = $app->share($app->extend('translator', function(Translator $translator) use ($app) {
             $translator->addResource('array', include(__DIR__.'/../locales/en.php'), 'en');
             $translator->addResource('array', include(__DIR__.'/../locales/de.php'), 'de');
+            $translator->setLocale($app['request']->getPreferredLanguage(array('en', 'de')));
 
             return $translator;
         }));
