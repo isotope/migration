@@ -180,8 +180,8 @@ HTML
         'product_collection' => array(
             'service_name'        => 'Product collections',
             'service_description' => 'Migrates order information',
-            'legend' => 'Surcharge types',
-            'intro' => 'Please tell us of what type the existing surcharges are.',
+            'legend'              => 'Surcharge types',
+            'intro'               => 'Please tell us of what type the existing surcharges are.',
             'description' => <<<'HTML'
 <p class="explain">Each order can have unlimited surcharges in Isotope. This can be a payment surcharge, a shipping surcharge or anything similar.
 Isotope 2 introduced surcharge types so developer can find out what each surcharge is.
@@ -191,10 +191,10 @@ If you used third party extensions that added their own surcharges, please aks t
 You can then use the "Custom" option and manually enter the value.</p>
 HTML
             ,
-            'label' => 'Label',
-            'type' => 'Type',
-            'surcharges_empty' => 'Surcharges configuration is empty.',
-            'surcharge_type_missing' => 'You must select a type for each surcharge.',
+            'label'                     => 'Label',
+            'type'                      => 'Type',
+            'surcharges_empty'          => 'Surcharges configuration is empty.',
+            'surcharge_type_missing'    => 'You must select a type for each surcharge.',
         ),
         'product_data' => array(
             'service_name'        => 'Product data',
