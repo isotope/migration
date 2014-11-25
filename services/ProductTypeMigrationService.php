@@ -54,11 +54,21 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
+        $variantNames = array_map('current', $this->db->fetchAll("SELECT field_name FROM tl_iso_attribute WHERE variant_option='1'"));
         $productTypes = $this->db->fetchAll("SELECT id, attributes, variant_attributes FROM tl_iso_producttype");
 
         foreach ($productTypes as $type) {
             $attributes = @unserialize($type['attributes']);
             $variantAttributes = @unserialize($type['variant_attributes']);
+
+            if (is_array($attributes) && is_array($variantAttributes)) {
+                foreach ($variantNames as $name) {
+                    if (isset($attributes[$name]) && $attributes[$name]['enabled']) {
+                        $variantAttributes[$name] = $attributes[$name];
+                        unset($attributes[$name]);
+                    }
+                }
+            }
 
             $attributes = is_array($attributes) ? serialize($this->convertAttributes($attributes)) : '';
             $variantAttributes = is_array($variantAttributes) ? serialize($this->convertAttributes($variantAttributes)) : '';
