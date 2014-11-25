@@ -109,14 +109,10 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
     }
 
     /**
-     * Return a list of to do's or messages for the summary page
-     *
-     * @return string[]
+     * {@inheritdoc}
      */
-    public function getSummaryMessages()
+    public function getSummary()
     {
-        return array(
-            $this->trans('service.download.titleAndDescription')
-        );
+        return $this->trans('service.download.summary');
     }
 }

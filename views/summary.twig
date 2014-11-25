@@ -7,11 +7,7 @@
     <div class="row">
         {% for service in messages %}
             <h3>{{ service.title }}</h3>
-            <ul>
-                {% for message in service.messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
+            {{ service.message|raw }}
         {% endfor %}
     </div>
 {% endblock %}

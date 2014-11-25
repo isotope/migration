@@ -100,7 +100,14 @@ return array(
         'download' => array(
             'service_name'        => 'Downloads',
             'service_description' => 'Migrates product downloads and updates orders with downloads.',
-            'titleAndDescription' => 'The database columns tl_iso_download.title as well as tl_iso_download.description cannot be converted automatically. They contain the title as well as the description of a download (provided you entered them). In Contao 3+ you can manage meta data for files in the file system directly so there is no need for Isotope eCommerce to have yet another tilte or description field. Because the migration tool cannot automatically detect in what language you entered the data in Isotope 1.4 (and possibly how you translated them), it does not touch the data in any way at all! Make sure you do not (!!) delete tl_iso_download.description and tl_iso_download.title before you migrated the data manually!'
+            'summary'             => <<<'HTML'
+<p>The database columns tl_iso_download.title as well as tl_iso_download.description cannot be converted automatically.
+They contain the title as well as the description of a download (provided you entered them).
+In Contao 3+ you can manage meta data for files in the file system directly so there is no need for Isotope eCommerce to have yet another tilte or description field.
+Because the migration tool cannot automatically detect in what language you entered the data in Isotope 1.4 (and possibly how you translated them),
+it does not touch the data in any way at all! Make sure you do not (!!) delete tl_iso_download.description and tl_iso_download.title before you migrated the data manually!</p>
+HTML
+
         ),
         'frontend_module' => array(
             'service_name'        => 'Front end modules',
@@ -109,7 +116,11 @@ return array(
             'xhtml_explain'     => 'The following page layouts use the XHTML template. XHTML templates are not supported by Isotope 2 core.',
             'xhtml_description' => 'Either you change your page layouts to HTML5 and adjust all your templates (recommended), or you must duplicate all Isotope templates and rename the file extension.',
             'confirmation'      => 'Please confirm that you have read the above. It is your responsibility to adjust the page layouts or create the XHTML templates.',
-            'templates'         => 'The migration tool migrated the templates "iso_cart_full" to "iso_collection_default" and "iso_cart_mini" to "iso_collection_mini". However, it cannot migrate logic you built into your templates. You will have to check and adjust every (!) single template!'
+            'summary'           => <<<'HTML'
+<p>The migration tool migrated the templates "iso_cart_full" to "iso_collection_default" and "iso_cart_mini" to "iso_collection_mini".
+However, it cannot migrate logic you built into your templates. You will have to check and adjust every (!) single template!</p>
+HTML
+
         ),
         'gallery' => array(
             'service_name'        => 'Galleries',

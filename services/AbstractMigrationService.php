@@ -77,13 +77,11 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
     }
 
     /**
-     * Return a list of to do's or messages for the summary page
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function getSummaryMessages()
+    public function getSummary()
     {
-        return array();
+        return '';
     }
 
     /**

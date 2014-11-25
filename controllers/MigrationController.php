@@ -146,12 +146,12 @@ class MigrationController
         $services = $this->getServices();
 
         foreach ($services as $service) {
-            $serviceMessages = $service->getSummaryMessages();
+            $summary = $service->getSummary();
 
-            if (!empty($serviceMessages)) {
+            if ($summary != '') {
                 $allMessages[] = array(
-                    'title'    => $service->getName(),
-                    'messages' => $serviceMessages
+                    'title'   => $service->getName(),
+                    'message' => $summary
                 );
             }
         }

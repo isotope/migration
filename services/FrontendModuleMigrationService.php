@@ -167,15 +167,11 @@ class FrontendModuleMigrationService extends AbstractMigrationService
     }
 
     /**
-     * Return a list of to do's or messages for the summary page
-     *
-     * @return string[]
+     * {@inheritdoc}
      */
-    public function getSummaryMessages()
+    public function getSummary()
     {
-        return array(
-            $this->trans('service.frontend_module.templates')
-        );
+        return $this->trans('service.frontend_module.summary');
     }
 
     /**

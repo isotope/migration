@@ -46,11 +46,11 @@ interface MigrationServiceInterface
     public function getDescription();
 
     /**
-     * Return a list of to do's or messages for the summary page
+     * Return to do's or messages for the summary page
      *
-     * @return array
+     * @return string
      */
-    public function getSummaryMessages();
+    public function getSummary();
 
     /**
      * Returns status code of the migration step

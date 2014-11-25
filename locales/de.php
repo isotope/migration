@@ -100,7 +100,14 @@ return array(
         'download' => array(
             'service_name'        => 'Downloads',
             'service_description' => 'Migriert die Produktedownloads und aktualisiert Bestellungen mit Downloads.',
-            'titleAndDescription' => 'Die Datenbankspalten tl_iso_download.title und tl_iso_download.description können nicht automatisch migriert werden. Sie beinhalten den Titel und die Beschreibung eines Downloads (vorausgesetzt du hast diese erfasst). In Contao 3+ kannst du Metadaten von Dateien in der Dateiverwaltung direkt erfassen, folglich muss Isotope eCommerce nicht noch weitere Erfassungsmöglichkeiten dafür bieten. Da das Migrationstool nicht automatisch erkennen kann, in welcher Sprache du die Daten in Isotope 1.4 erfasst hattest (und möglicherweise übersetzt hattest), wird es die Daten nicht verändern! Stell sicher, dass du die Spalten tl_iso_download.description und tl_iso_download.title nicht (!!) löschst, bevor du die Daten manuell migriert hast!'
+            'summary'             => <<<'HTML'
+<p>Die Datenbankspalten tl_iso_download.title und tl_iso_download.description können nicht automatisch migriert werden.
+Sie beinhalten den Titel und die Beschreibung eines Downloads (vorausgesetzt du hast diese erfasst).
+In Contao 3+ kannst du Metadaten von Dateien in der Dateiverwaltung direkt erfassen, folglich muss Isotope eCommerce nicht noch weitere Erfassungsmöglichkeiten dafür bieten.
+Da das Migrationstool nicht automatisch erkennen kann, in welcher Sprache du die Daten in Isotope 1.4 erfasst hattest (und möglicherweise übersetzt hattest), wird es die Daten nicht verändern!
+Stell sicher, dass du die Spalten tl_iso_download.description und tl_iso_download.title nicht (!!) löschst, bevor du die Daten manuell migriert hast!</p>
+HTML
+
         ),
         'frontend_module' => array(
             'service_name'        => 'Frontend-Module',
@@ -109,7 +116,11 @@ return array(
             'xhtml_explain'     => 'Die folgenden Seitenlayouts nutzen XHTML Templates. XHTML Templates werden vom Isotope 2 Core nicht unterstützt.',
             'xhtml_description' => 'Entweder du änderst deine Seitenlayouts auf HTML5 Templates und passt diese alle an (empfohlen) oder du kopierst alle Isotope Templates und passt die Dateiendungen an.',
             'confirmation'      => 'Bitte bestätige, dass du das Obenstehende gelesen hast. Es liegt in deiner Verantwortung, die Seitenlayouts anzupassen oder die XHTML Templates anzulegen.',
-            'templates'         => 'Das Migrationstool hat die Templates "iso_cart_full" zu "iso_collection_default" und "iso_cart_mini" zu "iso_collection_mini" migriert. Allerdings kann es keine Logik migrieren, welche du in deine Templates eingebaut hast. Du wirst prüfen jedes einzelne (!) Template prüfen müssen!'
+            'summary'           => <<<'HTML'
+<p>Das Migrationstool hat die Templates "iso_cart_full" zu "iso_collection_default" und "iso_cart_mini" zu "iso_collection_mini" migriert.
+Allerdings kann es keine Logik migrieren, welche du in deine Templates eingebaut hast. Du wirst prüfen jedes einzelne (!) Template prüfen müssen!</p>
+HTML
+
         ),
         'gallery' => array(
             'service_name'        => 'Galerien',
