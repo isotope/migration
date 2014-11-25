@@ -5,15 +5,13 @@
         <h2>{% trans %}base.summary{% endtrans %}</h2>
     </div>
     <div class="row">
-        <ul>
         {% for service in messages %}
-            <li>{{ service.title }}</li>
+            <h3>{{ service.title }}</h3>
             <ul>
                 {% for message in service.messages %}
                     <li>{{ message }}</li>
                 {% endfor %}
             </ul>
         {% endfor %}
-        </ul>
     </div>
 {% endblock %}

@@ -148,7 +148,7 @@ class MigrationController
         foreach ($services as $service) {
             $serviceMessages = $service->getSummaryMessages();
 
-            if (!empty($messages)) {
+            if (!empty($serviceMessages)) {
                 $allMessages[] = array(
                     'title'    => $service->getName(),
                     'messages' => $serviceMessages
