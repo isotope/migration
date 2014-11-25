@@ -21,7 +21,7 @@ class RuleMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getName()
     {
-        return $this->trans('Rules');
+        return $this->trans('service.rule.service_name');
     }
 
     /**
@@ -31,7 +31,7 @@ class RuleMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates rules.');
+        return $this->trans('service.rule.service_description');
     }
 
     /**

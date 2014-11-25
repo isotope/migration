@@ -229,5 +229,9 @@ HTML
             'service_name'        => 'Translations',
             'service_description' => 'Migrates translation labels.'
         ),
+        'rule' => array(
+            'service_name'        => 'Rules',
+            'service_description' => 'Migrates rules.',
+        ),
     )
 );
