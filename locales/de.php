@@ -64,7 +64,6 @@ return array(
         'grey'               => 'Grau, wenn Angaben deinerseits benötigt werden',
         'green'              => 'Grün, wenn alles in Ordnung ist',
         'red'                => 'Rot, wenn etwas nicht in Ordnung ist',
-        'red'                => 'Rot, wenn etwas nicht in Ordnung ist',
         'secure_headline'    => 'Mach dir keine Sorgen',
         'secure_description' => 'Wir ändern während der Konfigurations nichts an deiner Datenbank. Deine Angaben werden in der Browser-Session gespeichert. Die Migration selbst wird erst ausgeführt, wenn alle Schritte grün sind.',
     ),
