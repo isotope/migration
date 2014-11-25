@@ -294,6 +294,7 @@ body {
     box-shadow: 0 3px 6px #ccc;
     border: 1px solid #bbb;
     border-radius: 3px;
+    line-height: 1.5;
 }
 
 .row {
