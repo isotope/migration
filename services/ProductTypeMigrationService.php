@@ -54,21 +54,13 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
-        $variantNames = array_map('current', $this->db->fetchAll("SELECT field_name FROM tl_iso_attribute WHERE variant_option='1'"));
         $productTypes = $this->db->fetchAll("SELECT id, attributes, variant_attributes FROM tl_iso_producttype");
 
         foreach ($productTypes as $type) {
             $attributes = @unserialize($type['attributes']);
             $variantAttributes = @unserialize($type['variant_attributes']);
 
-            if (is_array($attributes) && is_array($variantAttributes)) {
-                foreach ($variantNames as $name) {
-                    if (isset($attributes[$name]) && $attributes[$name]['enabled']) {
-                        $variantAttributes[$name] = $attributes[$name];
-                        unset($attributes[$name]);
-                    }
-                }
-            }
+            $this->transferVariantAttributes($attributes, $variantAttributes);
 
             $attributes = is_array($attributes) ? serialize($this->convertAttributes($attributes)) : '';
             $variantAttributes = is_array($variantAttributes) ? serialize($this->convertAttributes($variantAttributes)) : '';
@@ -101,7 +93,6 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
             ->columnMustExist('tl_iso_producttypes', 'variant_attributes');
     }
 
-
     private function convertAttributes(array $oldData)
     {
         $newData = array();
@@ -118,5 +109,19 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
         }
 
         return $newData;
+    }
+
+    private function transferVariantAttributes(&$attributes, &$variantAttributes)
+    {
+        $variantNames = array_map('current', $this->db->fetchAll("SELECT field_name FROM tl_iso_attribute WHERE variant_option='1'"));
+
+        if (is_array($attributes) && is_array($variantAttributes)) {
+            foreach ($variantNames as $name) {
+                if (isset($attributes[$name]) && $attributes[$name]['enabled']) {
+                    $variantAttributes[$name] = $attributes[$name];
+                    unset($attributes[$name]);
+                }
+            }
+        }
     }
 }

@@ -12,6 +12,7 @@
 namespace Isotope\Migration\Service;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Driver\Statement;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\TableDiff;
@@ -137,16 +138,15 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
 
     private function migrateNonAdvancedPrices()
     {
-        $time = time();
         $nonAdvancedTypes = $this->db->executeQuery("SELECT id, attributes, variants, variant_attributes FROM tl_iso_producttype WHERE prices=''");
 
         if ($nonAdvancedTypes->rowCount() == 0) {
             return;
         }
 
-        $p = 0;
-        $queryBuilder = $this->db->createQueryBuilder();
-        $queryBuilder
+        $position = 0;
+        $queryBuilder = $this->db
+            ->createQueryBuilder()
             ->select('id', 'tax_class', 'price')
             ->from('tl_iso_product', 'p');
 
@@ -154,32 +154,66 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
             $attributes = unserialize($type['attributes']);
             $variantAttributes = unserialize($type['variant_attributes']);
 
-            if ($this->hasPrice($attributes)) {
-                $queryBuilder->orWhere('type=? AND pid=0');
-                $queryBuilder->setParameter($p++, $type['id'], \PDO::PARAM_INT);
-            }
-
-            if ($type['variants'] && $this->hasPrice($variantAttributes)) {
-                $productIds = array_map(
-                    'current',
-                    $this->db->fetchAll(
-                        "SELECT id FROM tl_iso_product WHERE type=?",
-                        array(
-                            $type['id']
-                        )
-                    )
-                );
-
-                if (!empty($productIds)) {
-                    $queryBuilder->orWhere("pid IN (?) AND language=''");
-                    $queryBuilder->setParameter($p++, $productIds, Connection::PARAM_INT_ARRAY);
-                }
-            }
+            $this->addAttributeCondition($queryBuilder, $attributes, $type, $position);
+            $this->addVariantAttributeCondition($queryBuilder, $variantAttributes, $type, $position);
         }
 
         $allProducts = $queryBuilder->execute();
 
-        while ($product = $allProducts->fetch()) {
+        $this->createPrices($allProducts);
+    }
+
+    /**
+     * @param array $attributes
+     *
+     * @return bool
+     */
+    private function hasPrice(array $attributes)
+    {
+        if (!empty($attributes)
+            && is_array($attributes)
+            && isset($attributes['price'])
+            && $attributes['price']['enabled']
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function addAttributeCondition(QueryBuilder $queryBuilder, array $attributes, array $type, &$position)
+    {
+        if ($this->hasPrice($attributes)) {
+            $queryBuilder->orWhere('type=? AND pid=0');
+            $queryBuilder->setParameter($position++, $type['id'], \PDO::PARAM_INT);
+        }
+    }
+
+    private function addVariantAttributeCondition(QueryBuilder $queryBuilder, array $attributes, array $type, &$position)
+    {
+        if ($type['variants'] && $this->hasPrice($attributes)) {
+            $productIds = array_map(
+                'current',
+                $this->db->fetchAll(
+                    "SELECT id FROM tl_iso_product WHERE type=?",
+                    array(
+                        $type['id']
+                    )
+                )
+            );
+
+            if (!empty($productIds)) {
+                $queryBuilder->orWhere("pid IN (?) AND language=''");
+                $queryBuilder->setParameter($position++, $productIds, Connection::PARAM_INT_ARRAY);
+            }
+        }
+    }
+
+    private function createPrices(Statement $products)
+    {
+        $time = time();
+
+        while ($product = $products->fetch()) {
 
             $this->db->insert(
                 'tl_iso_product_price',
@@ -202,23 +236,5 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
                 )
             );
         }
-    }
-
-    /**
-     * @param array $attributes
-     *
-     * @return bool
-     */
-    private function hasPrice(array $attributes)
-    {
-        if (!empty($attributes)
-            && is_array($attributes)
-            && isset($attributes['price'])
-            && $attributes['price']['enabled']
-        ) {
-            return true;
-        }
-
-        return false;
     }
 }
