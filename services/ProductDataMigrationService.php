@@ -181,7 +181,7 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
         return false;
     }
 
-    private function addAttributeCondition(QueryBuilder $queryBuilder, array $attributes, array $type, &$position)
+    private function addAttributeCondition(QueryBuilder $queryBuilder, $attributes, array $type, &$position)
     {
         if ($this->hasPrice($attributes)) {
             $queryBuilder->orWhere('type=? AND pid=0');
@@ -189,7 +189,7 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
         }
     }
 
-    private function addVariantAttributeCondition(QueryBuilder $queryBuilder, array $attributes, array $type, &$position)
+    private function addVariantAttributeCondition(QueryBuilder $queryBuilder, $attributes, array $type, &$position)
     {
         if ($type['variants'] && $this->hasPrice($attributes)) {
             $productIds = array_map(
