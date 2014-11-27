@@ -109,12 +109,9 @@ class GalleryTest extends ScenarioTestCase
         $configBag = new AttributeBag('config_' . $slug);
         $configBag->setName('config_' . $slug);
         $configBag->initialize($config);
-        $summaryBag = new AttributeBag('summary_' . $slug);
-        $summaryBag->setName('summary_' . $slug);
 
         /** @type GalleryMigrationService $service */
         $service = $app['class_factory']->create('\Isotope\Migration\Service\GalleryMigrationService', array(
-                'summary'   => $summaryBag,
                 'config'    => $configBag,
             )
         );

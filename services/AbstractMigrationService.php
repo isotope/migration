@@ -28,11 +28,6 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
     protected $config;
 
     /**
-     * @type AttributeBagInterface
-     */
-    protected $summary;
-
-    /**
      * @type \Twig_Environment
      */
     protected $twig;
@@ -60,7 +55,6 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
 
     public function __construct(
         AttributeBagInterface $config,
-        AttributeBagInterface $summary,
         \Twig_Environment $twig,
         TranslatorInterface $translator,
         Connection $db,
@@ -68,7 +62,6 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
         DbafsService $migration_dbafs
     ) {
         $this->config = $config;
-        $this->summary = $summary;
         $this->twig = $twig;
         $this->translator = $translator;
         $this->db = $db;

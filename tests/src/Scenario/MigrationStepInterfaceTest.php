@@ -71,14 +71,9 @@ class MigrationStepInterfaceTest extends SilexAwareTestCase
                 $configBag->initialize($serviceConfigs[$slug]);
             }
 
-            // summary
-            $summaryBag = new AttributeBag('summary_' . $slug);
-            $summaryBag->setName('summary_' . $slug);
-
             $services[] = $app['class_factory']->create(
                 $class,
                 array(
-                    'summary'   => $summaryBag,
                     'config'    => $configBag,
                 )
             );

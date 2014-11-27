@@ -22,7 +22,6 @@ class TranslationMigrationService extends AbstractConfigfreeMigrationService
 
     public function __construct(
         AttributeBagInterface $config,
-        AttributeBagInterface $summary,
         \Twig_Environment $twig,
         TranslatorInterface $translator,
         Connection $db,
@@ -30,7 +29,7 @@ class TranslationMigrationService extends AbstractConfigfreeMigrationService
         DbafsService $migration_dbafs,
         $contao_root
     ) {
-        parent::__construct($config, $summary, $twig, $translator, $db, $migration_dbcheck, $migration_dbafs);
+        parent::__construct($config, $twig, $translator, $db, $migration_dbcheck, $migration_dbafs);
 
         $this->contao_root = $contao_root;
     }

@@ -79,16 +79,10 @@ class MigrationServiceProvider implements ServiceProviderInterface
             $configBag->setName('config_' . $slug);
             $app['session']->registerBag($configBag);
 
-            $summaryBag = new AttributeBag('summary_' . $slug);
-            $summaryBag->setName('summary_' . $slug);
-            $app['session']->registerBag($summaryBag);
-
             $app['migration.services'][$slug] = $app->share(
                 function() use ($app, $slug, $class) {
                     $config = $app['session']->getBag('config_' . $slug);
-                    $summary = $app['session']->getBag('summary_' . $slug);
                     return $app['class_factory']->create($class, array(
-                        'summary'   => $summary,
                         'config'    => $config
                     ));
                 }
