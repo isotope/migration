@@ -114,10 +114,6 @@ h2 {
     font-size: 20px
 }
 
-h3 {
-    font-size: 18px
-}
-
 table {
     font-size: inherit
 }
@@ -335,6 +331,10 @@ h3, legend {
     font-size: 12px;
 }
 
+h4 {
+    text-decoration: underline;
+}
+
 ul {
     list-style: circle outside
 }
@@ -342,6 +342,10 @@ ul {
 li {
     margin-left: 2em;
     margin-bottom: .5em
+}
+
+li p {
+    margin-bottom: 5px;
 }
 
 .validate li {

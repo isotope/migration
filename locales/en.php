@@ -83,6 +83,23 @@ return array(
         'backup_description'  => 'Please be aware that we are not responsible for your data. Here\'s what the LGP license says:',
         'lgpl'                => 'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the <a href="https://www.gnu.org/licenses/lgpl.html" target="_blank">GNU Lesser General Public License</a> for more details.',
     ),
+    'summary' => array(
+        'headline'            => 'Congratulations!',
+        'intro'               => 'The migration has been completed successfully.',
+        'next_headline'       => 'Next steps',
+        'next1'               => 'Log in to the backend and disable the Contao safe mode.',
+        'next2'               => <<<'HTML'
+<p>Update Isotope to version 2.2 (either manually, using the extension repository or the composer client).</p>
+<p class="explain">On manual update, make sure you run the update script by renaming <strong>system/modules/isotope/update.php</strong> to <strong>runonce.php</strong>.</p>
+HTML
+        ,
+        'next3'               => 'Run the database update. You might get asked for other migration info.',
+        'next4'               => 'Update any other extensions necessary.',
+        'next5'               => 'Edit and save ever product type in the shop configuration. Adjust the attribute position and configuration if desired.',
+        'next_summary'        => 'Now your database structure should be up-to-date. Start verifying your product data and update all templates.',
+        'details_headline'    => 'Detailed information',
+        'details_description' => 'Some migration steps report more information regarding your installation. Please follow them to make sure you don\'t loose any data.',
+    ),
     'service' => array(
         'address_book' => array(
             'service_name'        => 'Address Book',

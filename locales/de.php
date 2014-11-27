@@ -83,6 +83,23 @@ return array(
         'backup_description'  => 'Beachte, dass wir nicht für deine Daten verantwortlich sind. Das ist der Wortlaut der LGP Lizenz:',
         'lgpl'                => 'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the <a href="https://www.gnu.org/licenses/lgpl.html" target="_blank">GNU Lesser General Public License</a> for more details.',
     ),
+    'summary' => array(
+        'headline'            => 'Gratulation!',
+        'intro'               => 'Die Migration wurde erfolgreich durchgeführt.',
+        'next_headline'       => 'Nächste Schritte',
+        'next1'               => 'Melde dich im Contao Backend an und deaktiviere den Safe-Mode.',
+        'next2'               => <<<'HTML'
+<p>Aktualisiere Isotope auf Version 2.2 (entweder manuell, über die Erweiterungsverwaltung oder den Composer Client).</p>
+<p class="explain">Bei manuellem Update benenne das Update-Script von <strong>system/modules/isotope/update.php</strong> in <strong>runonce.php</strong> um.</p>
+HTML
+        ,
+        'next3'               => 'Führe das Datenbank-Update aus. Dabei werden möglicherweise weitere Fragen gestellt.',
+        'next4'               => 'Aktualisiere alle anderen Erweiterungen deiner Installation.',
+        'next5'               => 'Bearbeite und speichere alle Produkttypen in der Shop-Konfiguration. Passe die Position und Konfiguration der Attribute falls nötig an.',
+        'next_summary'        => 'Nun müsste deine Datenbank-Struktur aktuell sein. Überprüfe alle Produktdaten und aktualisiere alle Templates.',
+        'details_headline'    => 'Weitere Details',
+        'details_description' => 'Einige Migrationsschritte bieten zusätzliche Informationen zur Installation. Befolge diese damit du keine Daten verlierst.',
+    ),
     'service' => array(
         'address_book' => array(
             'service_name'        => 'Adressbuch',
