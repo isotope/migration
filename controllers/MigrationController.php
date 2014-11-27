@@ -142,23 +142,32 @@ class MigrationController
 
     public function summaryAction()
     {
+        $hasError    = false;
         $allMessages = array();
-        $services = $this->getServices();
 
-        foreach ($services as $service) {
-            $summary = $service->getSummary();
+        try {
+            $services = $this->getServices();
 
-            if ($summary != '') {
-                $allMessages[] = array(
-                    'title'   => $service->getName(),
-                    'message' => $summary
-                );
+            foreach ($services as $service) {
+                $summary = $service->getSummary();
+
+                if ($summary != '') {
+                    $allMessages[] = array(
+                        'title'   => $service->getName(),
+                        'message' => $summary
+                    );
+                }
             }
+        } catch (\Exception $e) {
+            $hasError = true;
         }
 
-        return $this->twig->render('summary.twig', array(
-            'messages' => $allMessages
-        ));
+        return $this->twig->render(
+            'summary.twig', array(
+                'messages' => $allMessages,
+                'error' => $hasError
+            )
+        );
     }
 
     /**

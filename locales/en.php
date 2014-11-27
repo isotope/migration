@@ -86,6 +86,9 @@ return array(
     'summary' => array(
         'headline'            => 'Congratulations!',
         'intro'               => 'The migration has been completed successfully.',
+        'error_headline'      => 'Slow down, young warrior …',
+        'error_description'   => 'Looks like you tried to skip the migration. Please start by reading the welcome text and then configure all necessary steps.',
+        'error_button'        => 'Start over',
         'next_headline'       => 'Next steps',
         'next1'               => 'Log in to the backend and disable the Contao safe mode.',
         'next2'               => <<<'HTML'

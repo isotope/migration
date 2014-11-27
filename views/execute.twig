@@ -1,11 +1,6 @@
 {% extends "base.twig" %}
 
 {% block main %}
-<div class="row headline">
-    <h2>{% trans %}execute.headline{% endtrans %}</h2>
-    <p>{% trans %}execute.intro{% endtrans %}</p>
-</div>
-
 {% if error %}
     <div class="row error">
         <h3>{% trans %}execute.error_headline{% endtrans %}</h3>
@@ -15,6 +10,10 @@
         </p>
     </div>
 {% else %}
+    <div class="row headline">
+        <h2>{% trans %}execute.headline{% endtrans %}</h2>
+        <p>{% trans %}execute.intro{% endtrans %}</p>
+    </div>
     <form action="{{ base_url }}/execute" method="post">
         <div class="row">
             <h3>{% trans %}execute.success_headline{% endtrans %}</h3>

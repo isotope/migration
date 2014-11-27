@@ -1,6 +1,15 @@
 {% extends "base.twig" %}
 
 {% block main %}
+{% if error %}
+    <div class="row error">
+        <h3>{% trans %}summary.error_headline{% endtrans %}</h3>
+        <p>{% trans %}summary.error_description{% endtrans %}</p>
+        <p class="mt">
+            <a href="{{ base_url }}/" class="button main">{% trans %}summary.error_button{% endtrans %}</a>
+        </p>
+    </div>
+{% else %}
     <div class="row headline">
         <h2>{% trans %}summary.headline{% endtrans %}</h2>
         <p>{% trans %}summary.intro{% endtrans %}</p>
@@ -24,4 +33,5 @@
             {{ service.message|raw }}
         {% endfor %}
     </div>
+{% endif %}
 {% endblock %}

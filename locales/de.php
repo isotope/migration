@@ -86,6 +86,9 @@ return array(
     'summary' => array(
         'headline'            => 'Gratulation!',
         'intro'               => 'Die Migration wurde erfolgreich durchgeführt.',
+        'error_headline'      => 'Immer mit der Ruhe!',
+        'error_description'   => 'Scheint als hättest du die Migration noch nicht durchgeführt. Bitte lies das Intro und konfiguriere alle notwendigen Schritte.',
+        'error_button'        => 'Erneut starten',
         'next_headline'       => 'Nächste Schritte',
         'next1'               => 'Melde dich im Contao Backend an und deaktiviere den Safe-Mode.',
         'next2'               => <<<'HTML'
