@@ -12,9 +12,12 @@
 namespace Isotope\Migration\Service;
 
 
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class DownloadMigrationService extends AbstractConfigfreeMigrationService
 {
@@ -25,7 +28,7 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getName()
     {
-        return $this->trans('Downloads');
+        return $this->trans('service.download.service_name');
     }
 
     /**
@@ -35,7 +38,7 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates product downloads and updates orders with downloads.');
+        return $this->trans('service.download.service_description');
     }
 
     /**
@@ -45,16 +48,12 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getMigrationSQL()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
-
-        // TODO: migrate tl_iso_download.singleSRC from path to UUID
-        // TODO: title and description fields are now in the file manager
+        $this->checkMigrationStatus();
 
         return array_merge(
+            $this->dbafs->getMigrateFilePathForUuidSQL('tl_iso_downloads', 'singleSRC'),
             $this->getProductSQL(),
-            $this->getCollectionSQL()
+            $this->renameTable('tl_iso_order_downloads', 'tl_iso_product_collection_download')
         );
     }
 
@@ -63,11 +62,7 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
-
-        // TODO: finish implementation
+        $this->dbafs->migratePathToUuid('tl_iso_download', 'singleSRC');
     }
 
     /**
@@ -75,18 +70,24 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
      *
      * @throws \RuntimeException
      */
-    protected function verifyDatabase()
+    protected function verifyIntegrity()
     {
         $this->dbcheck
             ->tableMustExist('tl_iso_downloads')
             ->tableMustNotExist('tl_iso_download')
+            ->columnMustExist('tl_iso_downloads', 'title')
+            ->columnMustExist('tl_iso_downloads', 'description')
+            ->columnMustExist('tl_iso_downloads', 'singleSRC')
             ->columnMustNotExist('tl_iso_downloads', 'published');
 
         $this->dbcheck
             ->tableMustExist('tl_iso_order_downloads')
             ->tableMustNotExist('tl_iso_product_collection_download');
 
-        // TODO: finish implementation
+        $this->dbcheck
+            ->tableMustExist('tl_files')
+            ->columnMustExist('tl_files', 'uuid')
+            ->columnMustExist('tl_files', 'path');
     }
 
     /**
@@ -104,21 +105,20 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
         $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
         $sql[] = "UPDATE tl_iso_download SET published='1'";
 
-        // TODO: finish implementation
-
         return $sql;
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
-    private function getCollectionSQL()
+    public function getSummary()
     {
-        $tableDiff = new TableDiff('tl_iso_order_downloads');
-        $tableDiff->newName = 'tl_iso_product_collection_download';
+        $total = $this->db->fetchColumn("
+            SELECT COUNT(*) AS total
+            FROM tl_iso_download
+            WHERE title!='' OR description!=''
+        ");
 
-        // TODO: finish implementation
-
-        return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+        return $total > 0 ? $this->trans('service.download.summary') : '';
     }
 }

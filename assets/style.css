@@ -20,11 +20,17 @@ table {
 }
 
 caption, th, td {
-    /*noinspection CssOverwrittenProperties*/
     text-align: left;
-    /*noinspection CssOverwrittenProperties*/
-    text-align: start;
-    vertical-align: top
+    vertical-align: middle;
+}
+
+th, td {
+    padding-right: 8px;
+    padding-bottom: 4px;
+}
+
+td button {
+    margin-bottom: 0;
 }
 
 abbr, acronym {
@@ -72,6 +78,25 @@ input, button, textarea, select {
     font-weight: inherit
 }
 
+button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    line-height: 16px;
+    margin: 0;
+    padding: 0;
+
+}
+
+button:hover {
+    text-decoration: underline;
+}
+
+button img {
+    float: left;
+    margin-right: 5px;
+}
+
 pre, code {
     font: 12px Monaco, monospace
 }
@@ -87,10 +112,6 @@ h1 {
 
 h2 {
     font-size: 20px
-}
-
-h3 {
-    font-size: 18px
 }
 
 table {
@@ -110,8 +131,18 @@ h1, h2, h3, h4, h5, h6, legend {
     font-weight: bold;
 }
 
-h1, h2, h3, h4, h5, h6, p, pre, blockquote, table, ol, ul, form, legend {
+h1, h2, h3, h4, h5, h6, p, pre, blockquote, table, ol, ul, form, legend, button {
     margin-bottom: 11px
+}
+
+.invisible {
+    width: 0;
+    height: 0;
+    left: -1000px;
+    top: -1000px;
+    position: absolute;
+    overflow: hidden;
+    display: inline;
 }
 
 /* Contao stylect */
@@ -171,8 +202,8 @@ h1, h2, h3, h4, h5, h6, p, pre, blockquote, table, ol, ul, form, legend {
     margin-bottom: 0;
     text-align: center;
     vertical-align: middle;
-    line-height: 16px;
     font-size: 11px;
+    line-height: 16px;
     color: #444;
     cursor: pointer;
     border: 1px solid #ccc;
@@ -202,20 +233,25 @@ h1, h2, h3, h4, h5, h6, p, pre, blockquote, table, ol, ul, form, legend {
     background-position: 0 -30px !important
 }
 
-.button.main {
+.button.float_right {
     float: right;
-    background-color: #f89406;
-    background-image: -moz-linear-gradient(top, #fbb450, #f89406);
-    background-image: -webkit-linear-gradient(top, #fbb450, #f89406);
-    background-image: -ms-linear-gradient(top, #fbb450, #f89406);
-    background-image: -o-linear-gradient(top, #fbb450, #f89406);
-    background-image: linear-gradient(to bottom, #fbb450, #f89406);
-    border-color: #f89406;
+    margin-left: 10px;
+}
+
+.button.main {
+
+    background-color: #3aaab9;
+    background-image: -moz-linear-gradient(top, #56c2e2, #3aaab9);
+    background-image: -webkit-linear-gradient(top, #56c2e2, #3aaab9);
+    background-image: -ms-linear-gradient(top, #56c2e2, #3aaab9);
+    background-image: -o-linear-gradient(top, #56c2e2, #3aaab9);
+    background-image: linear-gradient(to bottom, #56c2e2, #3aaab9);
+    border-color: #3aaab9;
     color: #fff
 }
 
 .button.main:active {
-    background-color: #f28f04
+    background-color: #016b79
 }
 
 /* Contao Check */
@@ -236,7 +272,7 @@ body {
 
 #left .inside {
     margin-right:18px;
-    padding: 100px 18px 6px;
+    padding: 100px 6px 6px;
     background: #fff url("logo.png") center 18px no-repeat;
     border-radius: 3px;
     box-shadow: 0 3px 6px #ccc;
@@ -254,16 +290,21 @@ body {
     box-shadow: 0 3px 6px #ccc;
     border: 1px solid #bbb;
     border-radius: 3px;
+    line-height: 1.5;
 }
 
 .row {
-    padding: 0 18px
+    overflow: hidden;
+    margin: 0 18px
 }
 
 .row.headline {
-    margin: 0 18px 24px;
-    padding: 22px 0 10px;
+    padding-bottom: 10px;
     border-bottom: 1px solid #ddd;
+}
+
+.paragraph {
+    padding-top: 24px;
 }
 
 .clear {
@@ -280,7 +321,7 @@ h1 {
 }
 
 h2 {
-    margin-top: 0;
+    margin-top: 22px;
     font-size: 14px;
     color: #0098ac
 }
@@ -290,6 +331,10 @@ h3, legend {
     font-size: 12px;
 }
 
+h4 {
+    text-decoration: underline;
+}
+
 ul {
     list-style: circle outside
 }
@@ -297,6 +342,10 @@ ul {
 li {
     margin-left: 2em;
     margin-bottom: .5em
+}
+
+li p {
+    margin-bottom: 5px;
 }
 
 .validate li {
@@ -314,6 +363,11 @@ a:hover {
 
 .error {
     color: #c00
+}
+
+.headline .error {
+    background-color: #faeeee;
+    padding: 5px 10px;
 }
 
 .confirm {
@@ -351,10 +405,22 @@ form {
 }
 
 .select {
-    width: 200px
+    width: 140px;
+    margin-right: 8px;
 }
 
-#left ul {
+.text {
+    border: 1px solid #aaa;
+    padding: 3px;
+    border-radius: 3px;
+}
+
+#left ol {
+    margin: 0 12px;
+}
+
+#left .level_1 ul,
+#main ul {
     padding-top:.5em;
 }
 
@@ -362,7 +428,8 @@ form {
     margin-bottom: 18px;
 }
 
-#left a.active {
+#left a.active,
+#left span.active{
     font-weight: bold;
 }
 
@@ -370,15 +437,18 @@ form {
     margin-left: 18px;
 }
 
-/* Error page */
-body.error_page #main {
-    width: 100%;
+#help {
+    margin-top: 50px;
+    padding: 12px 12px 1px;
+    background: #e5f4f7 url("lifebuoy.png") 12px 11px no-repeat;
 }
 
-body.error_page #main .error {
-    margin-top: 18px;
-    margin-left: 18px;
-    margin-right: 18px;
-    font-size: 14px;
-    color: #c00;
+#help p {
+    padding-left: 22px;
+}
+
+/* Error page */
+body.error_page #main {
+    float: none;
+    margin: 0 auto;
 }

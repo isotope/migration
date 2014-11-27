@@ -12,8 +12,7 @@
 namespace Isotope\Migration\Service;
 
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 abstract class AbstractConfigfreeMigrationService extends AbstractMigrationService
 {
@@ -32,26 +31,16 @@ abstract class AbstractConfigfreeMigrationService extends AbstractMigrationServi
     /**
      * Returns the view for error or config message
      *
-     * @param Request $request
+     * @param RequestStack $requestStack
      *
-     * @return string|Response
+     * @return string
      */
-    public function renderConfigView(Request $request)
+    public function renderConfigView(RequestStack $requestStack)
     {
         if ($this->getStatus() == MigrationServiceInterface::STATUS_ERROR) {
-            return $this->twig->render('config_error.twig', array(
-                'title'       => $this->getName(),
-                'description' => $this->getDescription(),
-                'error'       => $this->errorMessage
-            ));
-
+            return $this->renderConfigError($this->errorMessage);
         } else {
-            return $this->twig->render('config_ready.twig', array(
-                'title'       => $this->getName(),
-                'description' => $this->getDescription(),
-                'message'     => $this->trans('confirm.configfree'),
-                'no_save'     => true
-            ));
+            return $this->renderConfigFree();
         }
     }
 
@@ -66,7 +55,7 @@ abstract class AbstractConfigfreeMigrationService extends AbstractMigrationServi
             $this->status = MigrationServiceInterface::STATUS_ERROR;
 
             try {
-                $this->verifyDatabase();
+                $this->verifyIntegrity();
                 $this->status = MigrationServiceInterface::STATUS_READY;
             } catch (\RuntimeException $e) {
                 $this->errorMessage = $e->getMessage();
@@ -95,5 +84,5 @@ abstract class AbstractConfigfreeMigrationService extends AbstractMigrationServi
      *
      * @throws \RuntimeException
      */
-    abstract protected function verifyDatabase();
+    abstract protected function verifyIntegrity();
 }

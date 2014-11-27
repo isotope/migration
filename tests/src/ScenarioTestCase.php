@@ -16,65 +16,103 @@ use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
 abstract class ScenarioTestCase extends DbTestCase
 {
-    abstract protected function getConfiguration();
 
-    protected function setUp()
+    protected function prepareScenario($scenarioFile, array $serviceConfigs)
     {
-        // Empty table
-        $pdo = $this->getConnection()->getConnection();
-        $stmt = $pdo->prepare('SELECT table_name FROM information_schema.tables WHERE table_schema=:db');
-        $stmt->bindParam(':db', $GLOBALS['DB_DBNAME']);
+        $this->loadScenario($scenarioFile);
 
-        $stmt->execute();
-        $tables = $stmt->fetchAll(\PDO::FETCH_COLUMN);
-
-        foreach ((array) $tables as $table) {
-            $pdo->query('DROP TABLE IF EXISTS ' . $table);
-        }
-
-        // Insert scenario setup
-        return $pdo->query(
-            file_get_contents($this->getScenarioPath() . '/initial.sql')
-        );
-    }
-
-    public function testScenario()
-    {
-        $config = $this->getConfiguration();
-        $queries = array();
         $migrationServices = array();
 
         $app = $this->getApp();
 
         // Register config and then boot app
         foreach ($app['migration.service.classes']->keys() as $key) {
+
+            /** @type MigrationServiceInterface $class */
             $class = $app['migration.service.classes'][$key];
             $slug = $class::getSlug();
 
             // register config
-            $configBag = new AttributeBag($slug);
-            $configBag->setName($slug);
+            $configBag = new AttributeBag('config_' . $slug);
+            $configBag->setName('config_' . $slug);
 
-            if (isset($config[$slug])) {
-                $configBag->initialize($config[$slug]);
+            if (isset($serviceConfigs[$slug])) {
+                $configBag->initialize($serviceConfigs[$slug]);
             }
 
-            $migrationServices[$slug] = $app['class_factory']->create($class, array('config' => $configBag));
+            $migrationServices[$slug] = $app['class_factory']->create($class, array(
+                'config'    => $configBag,
+            ));
         }
 
-        // Boot app
-        $app->boot();
+        // Run migration queries
+        $this->runMigrationQueries($migrationServices);
 
-        // Collect SQL queries
+        // Run post migration queries
+        $this->runPostMigration($migrationServices);
+    }
+
+    /**
+     * Tell the unit test to use our actual DB for testing
+     * Data is imported in the setUp() method
+     *
+     * @return \PHPUnit_Extensions_Database_DataSet_DefaultDataSet|void
+     */
+    protected function getDataSet()
+    {
+        return new \PHPUnit_Extensions_Database_DataSet_DefaultDataSet();
+    }
+
+    protected function getDataPath()
+    {
+        $className = get_called_class();
+        $className = substr($className, strrpos($className, '\\')+1);
+        $testName = preg_replace('/(.+)Test$/', '$1', $className);
+
+        return $this->getPathToFixture(strtolower(ltrim(preg_replace('/([A-Z])/', '_$1', $testName), '_')));
+    }
+
+    /**
+     * Insert scenario SQL file into database
+     *
+     * @param string $scenarioFile
+     */
+    protected function loadScenario($scenarioFile)
+    {
+        $pdo = $this->getConnection()->getConnection();
+        $query = file_get_contents($this->getDataPath() . '/' . $scenarioFile);
+        $pdo->exec($query);
+    }
+
+    protected function getDefaultServiceConfigs()
+    {
+        return array(
+            'mail_template' => array(
+                'mailGateway' => 0
+            ),
+            'payment_method' => array(
+                'confirmed' => 1
+            ),
+            'shipping_method' => array(
+                'confirmed' => 1
+            ),
+            'frontend_module' => array(
+                'confirmed' => 1
+            )
+        );
+    }
+
+    private function runMigrationQueries($migrationServices)
+    {
+        $queries = array();
+
         /** @var $service \Isotope\Migration\Service\MigrationServiceInterface*/
-        foreach ($migrationServices as $service) {
+        foreach ($migrationServices as $key => $service) {
 
             if ($service->getStatus() !== MigrationServiceInterface::STATUS_READY) {
                 $this->fail('Migration service "' . $key . '" is not ready. Scenario cannot be completed!');
             }
-
-            // @todo getMigrationSQL() should always return an array and not throw any exception?
-            $queries = array_merge($queries, $service->getMigrationSQL() ?: array());
+            $queries = array_merge($queries, $service->getMigrationSQL());
         }
 
         foreach ($queries as $query) {
@@ -84,32 +122,22 @@ abstract class ScenarioTestCase extends DbTestCase
                 $this->fail('Query could not be executed! Error message: ' . $e->getMessage() . '. Query: ' . $query);
             }
         }
-
-        $expectedDataset = $this->getExpectedMySQLXMLDataSet();
-        $currentDataset = $this->getConnection()->createDataSet();
-
-        $this->assertDataSetsEqual($expectedDataset, $currentDataset);
     }
 
-    protected function getDataSet()
+    private function runPostMigration($migrationServices)
     {
-        return new \PHPUnit_Extensions_Database_DataSet_DefaultDataSet();
-        /*return $this->createMySQLXMLDataSet(
-            $this->getScenarioPath() . '/initial.xml'
-        );*/
+        /** @var $service \Isotope\Migration\Service\MigrationServiceInterface*/
+        foreach ($migrationServices as $key => $service) {
+            try {
+                $service->postMigration();
+            } catch (\PDOException $e) {
+                $this->fail('Post migration could not be executed! Error message: ' . $e->getMessage() . '. Service: ' . $key);
+            }
+        }
     }
 
-    protected function getExpectedMySQLXMLDataSet()
+    private function getPathToFixture($fixtureFileName)
     {
-        return $this->createMySQLXMLDataSet(
-            $this->getScenarioPath() . '/expected.xml'
-        );
-    }
-
-    protected function getScenarioPath()
-    {
-        $ref = new \ReflectionClass($this);
-        $scenario = preg_replace('/Scenario(.+)Test/', '$1', $ref->getShortName());
-        return $this->getPathToFixture('scenario' . $scenario);
+        return __DIR__ . '/../fixtures/' . $fixtureFileName;
     }
 }

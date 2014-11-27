@@ -44,6 +44,31 @@ class DatabaseVerificationService
     }
 
     /**
+     * Check if a table column exists
+     *
+     * @param string $tableName
+     * @param string $columnName
+     *
+     * @return bool
+     */
+    public function columnExists($tableName, $columnName)
+    {
+        if (!$this->tableExists($tableName)) {
+            return false;
+        }
+
+        $columns = $this->schemaManager()->listTableColumns($tableName);
+
+        foreach ($columns as $column) {
+            if ($column->getName() == $columnName) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Make sure a database table exists
      *
      * @param string $tableName
@@ -53,14 +78,7 @@ class DatabaseVerificationService
     public function tableMustExist($tableName)
     {
         if (!$this->schemaManager()->tablesExist(array($tableName))) {
-            throw new \RuntimeException(
-                $this->translator->trans(
-                    'error.tableNotFound',
-                    array(
-                        '%table%' => $tableName
-                    )
-                )
-            );
+            $this->exception('error.tableNotFound', $tableName);
         }
 
         return $this;
@@ -76,14 +94,7 @@ class DatabaseVerificationService
     public function tableMustNotExist($tableName)
     {
         if ($this->schemaManager()->tablesExist(array($tableName))) {
-            throw new \RuntimeException(
-                $this->translator->trans(
-                    'error.tableFound',
-                    array(
-                        '%table%' => $tableName
-                    )
-                )
-            );
+            $this->exception('error.tableFound', $tableName);
         }
 
         return $this;
@@ -107,15 +118,9 @@ class DatabaseVerificationService
             }
         }
 
-        throw new \RuntimeException(
-            $this->translator->trans(
-                'error.columnNotFound',
-                array(
-                    '%table%' => $tableName,
-                    '%column%' => $columnName
-                )
-            )
-        );
+        $this->exception('error.columnNotFound', $tableName, $columnName);
+
+        return $this;
     }
 
     /**
@@ -132,19 +137,23 @@ class DatabaseVerificationService
 
         foreach ($columns as $column) {
             if ($column->getName() == $columnName) {
-                throw new \RuntimeException(
-                    $this->translator->trans(
-                        'error.columnFound',
-                        array(
-                            '%table%'  => $tableName,
-                            '%column%' => $columnName
-                        )
-                    )
-                );
+                $this->exception('error.columnFound', $tableName, $columnName);
             }
         }
 
         return $this;
+    }
+
+    /**
+     * Check if a table is empty (contains no records)
+     *
+     * @param string $tableName
+     *
+     * @return bool
+     */
+    public function tableIsEmpty($tableName)
+    {
+        return $this->db->fetchColumn("SELECT COUNT(*) FROM $tableName") === '0';
     }
 
     /**
@@ -154,4 +163,22 @@ class DatabaseVerificationService
     {
         return $this->db->getSchemaManager();
     }
-} 
+
+    /**
+     * @param string $message
+     * @param string $table
+     * @param string $column
+     */
+    private function exception($message, $table, $column = '')
+    {
+        throw new \RuntimeException(
+            $this->translator->trans(
+                $message,
+                array(
+                    '%table%'  => $table,
+                    '%column%' => $column
+                )
+            )
+        );
+    }
+}

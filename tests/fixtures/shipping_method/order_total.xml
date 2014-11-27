@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<dataset>
+<table name="tl_iso_shipping">
+    <column>id</column>
+    <column>name</column>
+    <column>type</column>
+    <column>label</column>
+    <column>minimum_total</column>
+    <column>maximum_total</column>
+    <column>price</column>
+    <column>enabled</column>
+    <column>group_methods</column>
+    <column>group_calculation</column>
+    <row>
+        <value>1</value>
+        <value>Basic Shipping</value>
+        <value>group</value>
+        <value>Basic Shipping</value>
+        <value>0.00</value>
+        <value>0.00</value>
+        <value>10.00</value>
+        <value>1</value>
+        <value>a:4:{i:0;s:1:&quot;2&quot;;i:1;s:1:&quot;3&quot;;i:2;s:1:&quot;4&quot;;i:3;s:1:&quot;5&quot;;}</value>
+        <value>first</value>
+    </row>
+    <row>
+        <value>2</value>
+        <value>Basic Shipping (0-50)</value>
+        <value>flat</value>
+        <value />
+        <value>0.00</value>
+        <value>50.00</value>
+        <value />
+        <value>1</value>
+        <null />
+        <value />
+    </row>
+    <row>
+        <value>3</value>
+        <value>Basic Shipping (50.01 - 100)</value>
+        <value>flat</value>
+        <value />
+        <value>50.00</value>
+        <value>100.00</value>
+        <value />
+        <value>1</value>
+        <null />
+        <value />
+    </row>
+    <row>
+        <value>4</value>
+        <value>Basic Shipping (100.01-200)</value>
+        <value>flat</value>
+        <value />
+        <value>100.00</value>
+        <value>200.00</value>
+        <value />
+        <value>1</value>
+        <null />
+        <value />
+    </row>
+    <row>
+        <value>5</value>
+        <value>Basic Shipping (200.01-99999999999)</value>
+        <value>flat</value>
+        <value />
+        <value>200.00</value>
+        <value>2147483647.00</value>
+        <value />
+        <value>1</value>
+        <null />
+        <value />
+    </row>
+</table>
+</dataset>

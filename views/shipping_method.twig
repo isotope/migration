@@ -1,0 +1,37 @@
+{% extends "config.twig" %}
+
+{% block content %}
+    {% if old_methods %}
+        <div class="row">
+            <h3>{% trans %}service.shipping_method.old_title{% endtrans %}</h3>
+            <p>{% trans %}service.shipping_method.old_explain{% endtrans %}</p>
+            <ul>
+                {% for shipping in old_methods %}
+                    <li>{% trans with {'%name%': shipping.name, '%type%':shipping.type} %}service.shipping_method.name{% endtrans %}</li>
+                {% endfor %}
+            </ul>
+            <p class="explain">{% trans %}service.shipping_method.old_description{% endtrans %}</p>
+        </div>
+    {% endif %}
+
+    {% if unknown_methods %}
+        <div class="row">
+            <h3>{% trans %}service.shipping_method.unknown_title{% endtrans %}</h3>
+            <p>{% trans %}service.shipping_method.unknown_explain{% endtrans %}</p>
+            <ul>
+                {% for shipping in unknown_methods %}
+                    <li>{% trans with {'%name%': shipping.name, '%type%':shipping.type} %}service.shipping_method.name{% endtrans %}</li>
+                {% endfor %}
+            </ul>
+            <p class="explain">{% trans %}service.shipping_method.unknown_description{% endtrans %}</p>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <h3>{% trans %}confirm.title{% endtrans %}</h3>
+        <p>{% trans %}service.shipping_method.confirmation{% endtrans %}</p>
+        <input type="hidden" name="confirm" value="">
+        <input type="checkbox" id="ctrl_confirm" name="confirm" value="1"{% if confirmed %} checked{% endif %}>
+        <label for="ctrl_confirm">{% trans %}confirm.checkbox{% endtrans %}</label>
+    </div>
+{% endblock %}

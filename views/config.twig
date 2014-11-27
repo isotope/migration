@@ -2,11 +2,20 @@
 
 {% block main %}
     <form action="" method="post">
+        <!-- default button for HTML form, fix issues with the enter key -->
+        <div class="invisible">
+            {% if can_continue|default(false) %}
+                <input type="submit" name="continue" value="1">
+            {% elseif can_save|default(false) %}
+                <input type="submit" name="save" value="1">
+            {% endif %}
+        </div>
 
         {% block headline %}
             <div class="row headline">
                 <h2>{{ title }}</h2>
                 <p>{{ description }}</p>
+                {% if error|default %}<p class="error">Error: {{ error }}</p>{% endif %}
             </div>
         {% endblock %}
 
@@ -14,11 +23,12 @@
 
         <div class="row">
             <p class="mt">
+                <button type="submit" class="button" name="back" value="1">{% trans %}config.back{% endtrans %}</button>
                 {% if can_continue|default(false) %}
-                    <button class="button main" name="continue" value="1">{% trans %}Continue{% endtrans %}</button>
+                    <button type="submit" class="button float_right main" name="continue" value="1">{% trans %}config.continue{% endtrans %}</button>
                 {% elseif can_save|default(false) %}
-                    <button class="button" name="save" value="1">{% trans %}Save{% endtrans %}</button>
-                    <button class="button main" name="continue" value="1">{% trans %}Save &amp; Continue{% endtrans %}</button>
+                    <button type="submit" class="button float_right main" name="continue" value="1">{% trans %}config.saveContinue{% endtrans %}</button>
+                    <button type="submit" class="button float_right" name="save" value="1">{% trans %}config.save{% endtrans %}</button>
                 {% endif %}
             </p>
         </div>

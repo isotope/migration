@@ -32,7 +32,7 @@ class AddressBookMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getName()
     {
-        return $this->trans('Address Book');
+        return $this->trans('service.address_book.service_name');
     }
 
     /**
@@ -42,7 +42,7 @@ class AddressBookMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates the member address book');
+        return $this->trans('service.address_book.service_description');
     }
 
     /**
@@ -52,10 +52,6 @@ class AddressBookMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getMigrationSQL()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
-
         $tableDiff = new TableDiff('tl_iso_addresses');
         $tableDiff->newName = 'tl_iso_address';
 
@@ -82,7 +78,7 @@ class AddressBookMigrationService extends AbstractConfigfreeMigrationService
      *
      * @throws \RuntimeException
      */
-    protected function verifyDatabase()
+    protected function verifyIntegrity()
     {
         $this->dbcheck
             ->tableMustExist('tl_iso_addresses')

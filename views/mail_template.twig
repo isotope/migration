@@ -1,18 +1,18 @@
 {% extends "config.twig" %}
 
 {% block content %}
-    <fieldset class="row">
-        <legend>{% trans %}mailtemplate.gateway_legend{% endtrans %}</legend>
-        <p>{% trans %}mailtemplate.gateway_intro{% endtrans %}</p>
+    <div class="row">
+        <h3>{% trans %}service.mail_template.gateway_legend{% endtrans %}</h3>
+        <p>{% trans %}service.mail_template.gateway_intro{% endtrans %}</p>
         <select name="mailGateway" class="select">
-            <option value="0">{% trans %}mailtemplate.gateway_new{% endtrans %}</option>
+            <option value="0">{% trans %}service.mail_template.gateway_new{% endtrans %}</option>
             {% if mailGateways %}
-                <optgroup label="{% trans %}mailtemplate.gateway_db{% endtrans %}">
+                <optgroup label="{% trans %}service.mail_template.gateway_db{% endtrans %}">
                     {% for gateway in mailGateways %}
                         <option value="{{ gateway.id }}"{% if mailGateway == gateway.id %} selected{% endif %}>{{ gateway.title }}</option>
                     {% endfor %}
                 </optgroup>
             {% endif %}
         </select>
-    </fieldset>
+    </div>
 {% endblock %}

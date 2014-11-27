@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<dataset>
+    <tl_nc_gateway id="1" title="E-Mail Gateway (from Isotope Migration)" type="email" />
+    <tl_nc_notification id="1" type="iso_order_status_change" title="Order status &quot;Ausgedruckt&quot;" />
+    <tl_nc_notification id="2" type="iso_order_status_change" title="Order status &quot;Erledigt&quot;" />
+    <tl_nc_message id="1" pid="1" title="Bestellung intern (Admin)" gateway="1" gateway_type="email" email_priority="3" email_template="mail_default" published="1"  />
+    <tl_nc_message id="2" pid="2" title="Bestellung (Customer)" gateway="1" gateway_type="email" email_priority="3" email_template="mail_default" published="1" />
+    <tl_nc_message id="3" pid="2" title="Bestellung (Admin)" gateway="1" gateway_type="email" email_priority="3" email_template="mail_default" published="1" />
+    <tl_nc_language id="1" pid="1" gateway_type="email" language="de" fallback="1" recipients="##admin_email##" email_sender_name="Demo Title" email_sender_address="info@example.com" email_recipient_cc="info@xample.org" email_recipient_bcc="" email_subject="Neue Bestellung" email_text="Text 2" email_html="HTML 2" email_mode="textAndHtml" />
+    <tl_nc_language id="2" pid="2" gateway_type="email" language="de" fallback="1" recipients="##recipient_email##" email_sender_name="Demo Title" email_sender_address="info@example.com" email_recipient_cc="" email_recipient_bcc="" email_subject="Ihre Bestellung" email_text="Text 3" email_html="HTML 3" email_mode="textAndHtml" />
+    <tl_nc_language id="3" pid="3" gateway_type="email" language="de" fallback="1" recipients="##admin_email##" email_sender_name="Demo Title" email_sender_address="info@example.com" email_recipient_cc="" email_recipient_bcc="" email_subject="Ihre Bestellung" email_text="Text 3" email_html="HTML 3" email_mode="textAndHtml" />
+</dataset>

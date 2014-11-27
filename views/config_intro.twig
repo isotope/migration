@@ -1,0 +1,25 @@
+{% extends "base.twig" %}
+
+{% block main %}
+<div class="row headline">
+    <h2>{% trans %}config_intro.headline{% endtrans %}</h2>
+    <p>{% trans %}config_intro.description{% endtrans %}</p>
+</div>
+<div class="row">
+    <h3>{% trans %}config_intro.step_headline{% endtrans %}</h3>
+    <p>{% trans %}config_intro.step_description{% endtrans %}</p>
+    <p>{% trans %}config_intro.step_list{% endtrans %}</p>
+    <ul>
+        <li>{% trans %}config_intro.grey{% endtrans %}</li>
+        <li class="confirm">{% trans %}config_intro.green{% endtrans %}</li>
+        <li class="error">{% trans %}config_intro.red{% endtrans %}</li>
+    </ul>
+</div>
+<div class="row">
+    <h3>{% trans %}config_intro.secure_headline{% endtrans %}</h3>
+    <p>{% trans %}config_intro.secure_description{% endtrans %}</p>
+</div>
+<div class="row">
+    <p class="mt"><a href="{{ base_url }}/config/{{ continue }}" class="button float_right main">{% trans %}config.start{% endtrans %}</a></p>
+</div>
+{% endblock %}

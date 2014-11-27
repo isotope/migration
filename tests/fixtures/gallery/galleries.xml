@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<dataset>
+    <table name="tl_iso_gallery">
+        <column>id</column>
+        <column>name</column>
+        <column>type</column>
+        <column>anchor</column>
+        <column>placeholder</column>
+        <column>main_size</column>
+        <column>gallery_size</column>
+        <column>lightbox_size</column>
+        <column>main_watermark_image</column>
+        <column>main_watermark_position</column>
+        <column>gallery_watermark_image</column>
+        <column>gallery_watermark_position</column>
+        <column>lightbox_watermark_image</column>
+        <column>lightbox_watermark_position</column>
+        <row>
+            <value>1</value>
+            <value>List</value>
+            <value>standard</value>
+            <value>reader</value>
+            <value></value>
+            <value>a:3:{i:0;s:3:"100";i:1;s:3:"100";i:2;s:3:"box";}</value>
+            <value>a:3:{i:0;s:3:"100";i:1;s:3:"100";i:2;s:3:"box";}</value>
+            <value></value>
+            <null />
+            <value>left_top</value>
+            <null />
+            <value>left_top</value>
+            <null />
+            <value></value>
+        </row>
+        <row>
+            <value>2</value>
+            <value>Reader</value>
+            <value>standard</value>
+            <value>lightbox</value>
+            <value></value>
+            <value>a:3:{i:0;s:3:"200";i:1;s:3:"200";i:2;s:3:"box";}</value>
+            <value>a:3:{i:0;s:2:"50";i:1;s:2:"50";i:2;s:4:"crop";}</value>
+            <value>a:3:{i:0;s:3:"800";i:1;s:3:"800";i:2;s:3:"box";}</value>
+            <null />
+            <value>left_top</value>
+            <null />
+            <value>left_top</value>
+            <null />
+            <value>left_top</value>
+        </row>
+    </table>
+    <table name="tl_iso_producttype">
+        <column>id</column>
+        <column>list_gallery</column>
+        <column>reader_gallery</column>
+        <row>
+            <value>1</value>
+            <value>1</value>
+            <value>2</value>
+        </row>
+        <row>
+            <value>2</value>
+            <value>1</value>
+            <value>2</value>
+        </row>
+    </table>
+</dataset>

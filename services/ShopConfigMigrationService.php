@@ -26,7 +26,7 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getName()
     {
-        return $this->trans('Shop Configuration');
+        return $this->trans('service.shop_config.service_name');
     }
 
     /**
@@ -36,7 +36,7 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates shop configuration.');
+        return $this->trans('service.shop_config.service_description');
     }
 
     /**
@@ -46,22 +46,35 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getMigrationSQL()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
+        $this->checkMigrationStatus();
 
+        $sql = array();
+
+        // Add tl_iso_config.address_fields
         $tableDiff = new TableDiff('tl_iso_config');
-
         $column = new Column('address_fields', Type::getType(Type::BLOB));
-        $column->setLength(65535);
+        $column->setLength(65535)->setNotnull(false);
         $tableDiff->addedColumns['address_fields'] = $column;
 
-        // TODO: new tl_iso_gallery instead of tl_iso_config.gallery
-        // TODO: convert tl_iso_config.imageSizes to galleries
-        // TODO: tl_iso_config.missing_image_placeholder is now in the gallery
-        // TODO: store_id is now a root page setting
+        $sql = array_merge(
+            $sql,
+            $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff)
+        );
 
-        $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+        // Add tl_page.iso_store_id
+        $tableDiff = new TableDiff('tl_page');
+        $column = new Column('iso_store_id', Type::getType(Type::INTEGER));
+        $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
+        $tableDiff->addedColumns['iso_store_id'] = $column;
+
+        $sql = array_merge(
+            $sql,
+            $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff),
+            array(
+                "UPDATE tl_page SET iso_store_id=(SELECT store_id FROM tl_iso_config WHERE fallback='1') WHERE type='root'",
+                "UPDATE tl_page p SET iso_store_id=(SELECT store_id FROM tl_iso_config c WHERE c.id=p.iso_config) WHERE type='root'"
+            )
+        );
 
         return $sql;
     }
@@ -71,10 +84,6 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
-
         $this->convertAddressFields();
     }
 
@@ -83,15 +92,19 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
      *
      * @throws \RuntimeException
      */
-    protected function verifyDatabase()
+    protected function verifyIntegrity()
     {
         $this->dbcheck
+            ->tableMustExist('tl_iso_config')
             ->columnMustExist('tl_iso_config', 'id')
             ->columnMustExist('tl_iso_config', 'billing_fields')
             ->columnMustExist('tl_iso_config', 'shipping_fields')
-            ->columnMustNotExist('tl_iso_config', 'address_fields');
+            ->columnMustNotExist('tl_iso_config', 'address_fields')
+            ->columnMustExist('tl_iso_config', 'store_id');
 
-        // TODO: finish implementation
+        $this->dbcheck
+            ->tableMustExist('tl_page')
+            ->columnMustNotExist('tl_page', 'iso_store_id');
     }
 
     /**
@@ -112,17 +125,9 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
                 foreach ($billingFields as $position => $field) {
                     $name = $field['value'];
 
-                    if (!$field['enabled']) {
-                        $state = 'disabled';
-                    } elseif ($field['mandatory']) {
-                        $state = 'mandatory';
-                    } else {
-                        $state = 'enabled';
-                    }
-
                     $addressFields[$name] = array(
                         'name' => $name,
-                        'billing' => $state,
+                        'billing' => $this->getFieldState($field),
                         'shipping' => 'disabled',
                         'position' => ($position * 10)
                     );
@@ -133,21 +138,13 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
                 foreach ($shippingFields as $position => $field) {
                     $name = $field['value'];
 
-                    if (!$field['enabled']) {
-                        $state = 'disabled';
-                    } elseif ($field['mandatory']) {
-                        $state = 'mandatory';
-                    } else {
-                        $state = 'enabled';
-                    }
-
                     if (isset($addressFields[$name])) {
-                        $addressFields[$name]['shipping'] = $state;
+                        $addressFields[$name]['shipping'] = $this->getFieldState($field);
                     } else {
                         $addressFields[$name] = array(
                             'name' => $name,
                             'billing' => 'disabled',
-                            'shipping' => $state,
+                            'shipping' => $this->getFieldState($field),
                             'position' => ($position * 10 + 5)
                         );
                     }
@@ -155,6 +152,17 @@ class ShopConfigMigrationService extends AbstractConfigfreeMigrationService
             }
 
             $this->db->update('tl_iso_config', array('address_fields' => serialize($addressFields)), array('id' => $configData['id']));
+        }
+    }
+
+    private function getFieldState(array $field)
+    {
+        if (!$field['enabled']) {
+            return 'disabled';
+        } elseif ($field['mandatory']) {
+            return 'mandatory';
+        } else {
+            return 'enabled';
         }
     }
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<dataset>
+    <tl_iso_address id="1" ptable="tl_iso_product_collection" pid="1" store_id="0" salutation="" company="Musterfirma" firstname="Max" lastname="Muster" street_1="Musterstrasse 1" street_2="" street_3="" postal="00000" city="Musterhausen" subdivision="" country="de" phone="" email="" isDefaultShipping="" isDefaultBilling="1" />
+    <tl_iso_address id="2" ptable="tl_iso_product_collection" pid="2" store_id="1" salutation="" company="Musterfirma" firstname="Max" lastname="Muster" street_1="Musterstrasse 1" street_2="" street_3="" postal="00000" city="Musterhausen" subdivision="" country="de" phone="" email="" isDefaultShipping="" isDefaultBilling="1" />
+    <tl_iso_address id="3" ptable="tl_iso_product_collection" pid="2" store_id="1" salutation="" company="Musterfirma" firstname="Max" lastname="Muster" street_1="Musterstrasse 1" street_2="" street_3="" postal="00000" city="Musterhausen" subdivision="" country="de" phone="" email="" isDefaultShipping="1" isDefaultBilling="" />
+    <tl_iso_product_collection id="1" billing_address_id="1" shipping_address_id="1" />
+    <tl_iso_product_collection id="2" billing_address_id="2" shipping_address_id="3" />
+</dataset>

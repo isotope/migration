@@ -11,8 +11,9 @@
 
 namespace Isotope\Migration\Service;
 
-
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Driver\Statement;
+use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
@@ -27,7 +28,7 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getName()
     {
-        return $this->trans('Product data');
+        return $this->trans('service.product_data.service_name');
     }
 
     /**
@@ -37,7 +38,7 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrates product data.');
+        return $this->trans('service.product_data.service_description');
     }
 
     /**
@@ -47,15 +48,14 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getMigrationSQL()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
+        $this->checkMigrationStatus();
 
         return array_merge(
-            $this->getGroupSQL(),
-            $this->getCategoriesSQL(),
+            $this->renameTable('tl_iso_groups', 'tl_iso_group'),
+            $this->renameTable('tl_iso_product_categories', 'tl_iso_product_category'),
             $this->getProductSQL(),
-            $this->getPriceSQL()
+            $this->renameTable('tl_iso_prices', 'tl_iso_product_price'),
+            $this->renameTable('tl_iso_price_tiers', 'tl_iso_product_pricetier')
         );
     }
 
@@ -64,10 +64,6 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
-
         $this->migrateNonAdvancedPrices();
     }
 
@@ -76,7 +72,7 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
      *
      * @throws \RuntimeException
      */
-    protected function verifyDatabase()
+    protected function verifyIntegrity()
     {
         $this->dbcheck
             ->tableMustExist('tl_iso_groups')
@@ -121,30 +117,6 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
     /**
      * @return array
      */
-    private function getGroupSQL()
-    {
-        $tableDiff = new TableDiff('tl_iso_groups');
-        $tableDiff->newName = 'tl_iso_group';
-
-        return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
-    }
-
-    /**
-     * @return array
-     */
-    private function getCategoriesSQL()
-    {
-        $tableDiff = new TableDiff('tl_iso_product_categories');
-        $tableDiff->newName = 'tl_iso_product_category';
-
-        // TODO: finish implementation
-
-        return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
-    }
-
-    /**
-     * @return array
-     */
     private function getProductSQL()
     {
         $tableDiff = new TableDiff('tl_iso_products');
@@ -160,42 +132,88 @@ class ProductDataMigrationService extends AbstractConfigfreeMigrationService
         $column->setNotnull(false);
         $tableDiff->renamedColumns['keywords_meta'] = $column;
 
-        // TODO: finish implementation
-
         return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
-    }
-
-    /**
-     * @return array
-     */
-    private function getPriceSQL()
-    {
-        $tableDiff = new TableDiff('tl_iso_prices');
-        $tableDiff->newName = 'tl_iso_product_price';
-        $priceSql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
-
-        $tableDiff = new TableDiff('tl_iso_price_tiers');
-        $tableDiff->newName = 'tl_iso_product_pricetier';
-        $tiersSql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
-
-        // TODO: finish implementation
-
-        return array_merge($priceSql, $tiersSql);
     }
 
 
     private function migrateNonAdvancedPrices()
     {
+        $nonAdvancedTypes = $this->db->executeQuery("SELECT id, attributes, variants, variant_attributes FROM tl_iso_producttype WHERE prices=''");
+
+        if ($nonAdvancedTypes->rowCount() == 0) {
+            return;
+        }
+
+        $position = 0;
+        $queryBuilder = $this->db
+            ->createQueryBuilder()
+            ->select('id', 'tax_class', 'price')
+            ->from('tl_iso_product', 'p');
+
+        while ($type = $nonAdvancedTypes->fetch()) {
+            $attributes = unserialize($type['attributes']);
+            $variantAttributes = unserialize($type['variant_attributes']);
+
+            $this->addAttributeCondition($queryBuilder, $attributes, $type, $position);
+            $this->addVariantAttributeCondition($queryBuilder, $variantAttributes, $type, $position);
+        }
+
+        $allProducts = $queryBuilder->execute();
+
+        $this->createPrices($allProducts);
+    }
+
+    /**
+     * @param array $attributes
+     *
+     * @return bool
+     */
+    private function hasPrice(array $attributes)
+    {
+        if (!empty($attributes)
+            && is_array($attributes)
+            && isset($attributes['price'])
+            && $attributes['price']['enabled']
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function addAttributeCondition(QueryBuilder $queryBuilder, $attributes, array $type, &$position)
+    {
+        if ($this->hasPrice($attributes)) {
+            $queryBuilder->orWhere('type=? AND pid=0');
+            $queryBuilder->setParameter($position++, $type['id'], \PDO::PARAM_INT);
+        }
+    }
+
+    private function addVariantAttributeCondition(QueryBuilder $queryBuilder, $attributes, array $type, &$position)
+    {
+        if ($type['variants'] && $this->hasPrice($attributes)) {
+            $productIds = array_map(
+                'current',
+                $this->db->fetchAll(
+                    "SELECT id FROM tl_iso_product WHERE type=?",
+                    array(
+                        $type['id']
+                    )
+                )
+            );
+
+            if (!empty($productIds)) {
+                $queryBuilder->orWhere("pid IN (?) AND language=''");
+                $queryBuilder->setParameter($position++, $productIds, Connection::PARAM_INT_ARRAY);
+            }
+        }
+    }
+
+    private function createPrices(Statement $products)
+    {
         $time = time();
-        $nonAdvancedTypes = $this->db->fetchColumn("SELECT id FROM tl_iso_producttype WHERE prices=''");
 
-        $allProducts = $this->db->fetchAll(
-            "SELECT id, tax_class, price FROM tl_iso_product WHERE id IN (?)",
-            array($nonAdvancedTypes),
-            array(Connection::PARAM_INT_ARRAY)
-        );
-
-        foreach ($allProducts as $product) {
+        while ($product = $products->fetch()) {
 
             $this->db->insert(
                 'tl_iso_product_price',

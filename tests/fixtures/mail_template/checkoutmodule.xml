@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<dataset>
+    <tl_nc_gateway id="1" title="E-Mail Gateway (from Isotope Migration)" type="email" />
+    <tl_nc_notification id="1" type="iso_order_status_change" title="Checkout module &quot;SHOP - Checkout&quot;" />
+    <tl_nc_message id="1" pid="1" title="Customer EMail (Customer)" gateway="1" gateway_type="email" email_priority="3" email_template="mail_default" published="1" />
+    <tl_nc_message id="2" pid="1" title="Admin Email (Admin)" gateway="1" gateway_type="email" email_priority="3" email_template="mail_default" published="1"  />
+    <tl_nc_language id="1" pid="1" gateway_type="email" language="en" fallback="1" recipients="##recipient_email##" email_sender_name="Isotope Demo Store" email_sender_address="info@isotopeecommerce.com" email_recipient_cc="" email_recipient_bcc="" email_subject="Thank You For Your Order!" email_text="Text 2" email_html="HTML 2" email_mode="textAndHtml" />
+    <tl_nc_language id="2" pid="2" gateway_type="email" language="en" fallback="1" recipients="sales@isotopeecommerce.com" email_sender_name="Isotope Demo Store" email_sender_address="info@isotopeecommerce.com" email_recipient_cc="" email_recipient_bcc="" email_subject="A New Order Has Been Placed" email_text="Text 1" email_html="HTML 1" email_mode="textAndHtml" />
+</dataset>

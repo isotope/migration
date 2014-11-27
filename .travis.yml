@@ -8,4 +8,8 @@ before_script:
   - mysql -e 'create database isotope_migration_testsuite;'
   - composer install --prefer-source --dev
 
-script: phpunit --configuration phpunit.travis.xml
+script: phpunit --configuration phpunit.travis.xml --coverage-clover=coverage.clover
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover

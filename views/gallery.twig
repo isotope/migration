@@ -1,0 +1,109 @@
+{% extends "config.twig" %}
+
+{% block content %}
+    <div class="row">
+        <h3>{% trans %}service.gallery.gallery_legend{% endtrans %}</h3>
+        <p>{% trans %}service.gallery.gallery_intro{% endtrans %}</p>
+
+        <table>
+            <tr>
+                <th>{% trans %}service.gallery.gallery_row_id{% endtrans %}</th>
+                <th>{% trans %}service.gallery.gallery_row_name{% endtrans %}</th>
+                <th>{% trans %}service.gallery.gallery_row_main{% endtrans %}</th>
+                <th>{% trans %}service.gallery.gallery_row_gallery{% endtrans %}</th>
+                <th>{% trans %}service.gallery.gallery_row_lightbox{% endtrans %}</th>
+                <th>&nbsp;</th>
+            </tr>
+        {% for row, gallery in galleries %}
+            <tr>
+                <td>#{{ row+1 }}</td>
+                <td><input type="text" class="text" name="galleries[{{ row }}][name]" value="{{ gallery.name|default('service.gallery.gallery_default'|trans({':id':(row+1)})) }}"></td>
+                <td>
+                    <select class="select" name="galleries[{{ row }}][main_config]">
+                        <option value="">-</option>
+                        {% for config, sizes in imageSizes %}
+                            <optgroup label="{{ config }}">
+                                {% for id, name in sizes %}
+                                    <option value="{{ id }}"{% if gallery.main_config|default == id~'' %} selected="selected"{% endif %}>{{ name }}</option>
+                                {% endfor %}
+                            </optgroup>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select class="select" name="galleries[{{ row }}][gallery_config]">
+                        <option value="">-</option>
+                        {% for config, sizes in imageSizes %}
+                            <optgroup label="{{ config }}">
+                                {% for id, name in sizes %}
+                                    <option value="{{ id }}"{% if gallery.gallery_config|default == id~'' %} selected="selected"{% endif %}>{{ name }}</option>
+                                {% endfor %}
+                            </optgroup>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select class="select" name="galleries[{{ row }}][lightbox_config]">
+                        <option value="">{% trans %}service.gallery.gallery_lightbox_blank{% endtrans %}</option>
+                        {% for config, sizes in imageSizes %}
+                            <optgroup label="{{ config }}">
+                                {% for id, name in sizes %}
+                                    <option value="{{ id }}"{% if gallery.lightbox_config|default == id~'' %} selected="selected"{% endif %}>{{ name }}</option>
+                                {% endfor %}
+                            </optgroup>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <button type="submit" tabindex="50" name="delete_gallery" value="{{ row }}" title="{% trans %}service.gallery.gallery_delete_title{% endtrans %}"><img src="{{ base_path }}/assets/minus.png" alt="{% trans %}service.gallery.gallery_delete_title{% endtrans %}" width="16" height="16"></button>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+        <button type="submit" name="add_gallery" value="1" title="{% trans %}service.gallery.gallery_add_title{% endtrans %}"><img src="{{ base_path }}/assets/plus.png" alt="{% trans %}service.gallery.gallery_add_title{% endtrans %}" width="16" height="16"> {% trans %}service.gallery.gallery_add_label{% endtrans %}</button>
+
+        {% trans %}service.gallery.gallery_description{% endtrans %}
+    </div>
+
+
+    {% if productTypes %}
+        <div class="row">
+            <h3>{% trans %}service.gallery.productType_legend{% endtrans %}</h3>
+            <p>{% trans %}service.gallery.productType_intro{% endtrans %}</p>
+
+            <table>
+                <tr>
+                    <th>{% trans %}service.gallery.productType_row_id{% endtrans %}</th>
+                    <th>{% trans %}service.gallery.productType_row_name{% endtrans %}</th>
+                    <th>{% trans %}service.gallery.productType_row_list{% endtrans %}</th>
+                    <th>{% trans %}service.gallery.productType_row_reader{% endtrans %}</th>
+                </tr>
+                {% for productType in productTypes %}
+                    <tr>
+                        <td>#{{ productType.id }}</td>
+                        <td>{{ productType.name }}</td>
+                        <td>
+                            <select class="select" name="productTypes[{{ productType.id }}][list_gallery]">
+                                <option value="">-</option>
+                                {% for id, gallery in galleries %}
+                                    <option value="{{ id }}"{% if productType.list_gallery|default == id~'' %} selected="selected"{% endif %}>{% trans with {':id':(id+1)} %}service.gallery.gallery_default{% endtrans %} ({{ gallery.name|default }})</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <select class="select" name="productTypes[{{ productType.id }}][reader_gallery]">
+                                <option value="">-</option>
+                                {% for id, gallery in galleries %}
+                                    <option value="{{ id }}"{% if productType.reader_gallery|default == id~'' %} selected="selected"{% endif %}>{% trans with {':id':(id+1)} %}service.gallery.gallery_default{% endtrans %} ({{ gallery.name|default }})</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            {% trans %}service.gallery.productType_description{% endtrans %}
+        </div>
+    {% endif %}
+
+{% endblock %}

@@ -11,9 +11,6 @@
 
 namespace Isotope\Migration\Service;
 
-
-use Silex\Application;
-
 /**
  * Class ConstructorInjectionService
  *
@@ -63,7 +60,7 @@ class ConstructorInjectionService
      * @param string $className
      * @param array  $arguments
      *
-     * @return callable
+     * @return \Closure
      */
     public function register($className, array $arguments = array())
     {
@@ -80,7 +77,7 @@ class ConstructorInjectionService
      * @param string $className
      * @param array  $arguments
      *
-     * @return callable
+     * @return \Closure
      */
     public function share($className, array $arguments = array())
     {
@@ -100,7 +97,7 @@ class ConstructorInjectionService
         $buildArgs = array();
 
         foreach ($methodReflection->getParameters() as $parameterReflection) {
-            $name = $parameterReflection->getName();
+            $name = $parameterReflection->name;
 
             if (isset($arguments[$name])) {
                 $buildArgs[$name] = $arguments[$name];
@@ -119,4 +116,4 @@ class ConstructorInjectionService
 
         return $buildArgs;
     }
-} 
+}

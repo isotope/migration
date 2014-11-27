@@ -1,0 +1,37 @@
+{% extends "base.twig" %}
+
+{% block main %}
+{% if error %}
+    <div class="row error">
+        <h3>{% trans %}summary.error_headline{% endtrans %}</h3>
+        <p>{% trans %}summary.error_description{% endtrans %}</p>
+        <p class="mt">
+            <a href="{{ base_url }}/" class="button main">{% trans %}summary.error_button{% endtrans %}</a>
+        </p>
+    </div>
+{% else %}
+    <div class="row headline">
+        <h2>{% trans %}summary.headline{% endtrans %}</h2>
+        <p>{% trans %}summary.intro{% endtrans %}</p>
+    </div>
+    <div class="row">
+        <h3>{% trans %}summary.next_headline{% endtrans %}</h3>
+        <ol>
+            <li>{% trans %}summary.next1{% endtrans %}</li>
+            <li>{% trans %}summary.next2{% endtrans %}</li>
+            <li>{% trans %}summary.next3{% endtrans %}</li>
+            <li>{% trans %}summary.next4{% endtrans %}</li>
+            <li>{% trans %}summary.next5{% endtrans %}</li>
+        </ol>
+        <p>{% trans %}summary.next_summary{% endtrans %}</p>
+    </div>
+    <div class="row">
+        <h3>{% trans %}summary.details_headline{% endtrans %}</h3>
+        <p>{% trans %}summary.details_description{% endtrans %}</p>
+        {% for service in messages %}
+            <h4>{{ service.title }}</h4>
+            {{ service.message|raw }}
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}

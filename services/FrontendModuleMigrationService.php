@@ -12,7 +12,12 @@
 namespace Isotope\Migration\Service;
 
 
-class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
+use Doctrine\DBAL\Schema\Column;
+use Doctrine\DBAL\Schema\TableDiff;
+use Doctrine\DBAL\Types\Type;
+use Symfony\Component\HttpFoundation\RequestStack;
+
+class FrontendModuleMigrationService extends AbstractMigrationService
 {
     /**
      * Return a name for the migration step
@@ -21,7 +26,7 @@ class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getName()
     {
-        return $this->trans('Frontend modules');
+        return $this->trans('service.frontend_module.service_name');
     }
 
     /**
@@ -31,7 +36,71 @@ class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getDescription()
     {
-        return $this->trans('Migrate front end module configuration.');
+        return $this->trans('service.frontend_module.service_description');
+    }
+
+    /**
+     * Returns status code of the migration step
+     *
+     * @return int
+     */
+    public function getStatus()
+    {
+        try {
+            $this->verifyIntegrity();
+        } catch (\RuntimeException $e) {
+            return MigrationServiceInterface::STATUS_ERROR;
+        }
+
+        // Nothing to do
+        if (count($this->getXhtmlTemplates()) === 0) {
+            return MigrationServiceInterface::STATUS_READY;
+        }
+
+        if (!$this->config->get('confirmed')) {
+            return MigrationServiceInterface::STATUS_CONFIG;
+        }
+
+        return MigrationServiceInterface::STATUS_READY;
+    }
+
+    /**
+     * Returns the view for step configuration or information
+     *
+     * @param RequestStack $requestStack
+     *
+     * @return string
+     */
+    public function renderConfigView(RequestStack $requestStack)
+    {
+        try {
+            $this->verifyIntegrity();
+        } catch (\RuntimeException $e) {
+            return $this->renderConfigError($e->getMessage());
+        }
+
+        $xhtmlTemplates = $this->getXhtmlTemplates();
+
+        if (count($xhtmlTemplates) === 0) {
+            return $this->renderConfigFree();
+        }
+
+        $request = $requestStack->getCurrentRequest();
+
+        if ($request->isMethod('POST') && $request->get('confirm') !== null) {
+            $this->config->set('confirmed', (bool) $request->get('confirm'));
+        }
+
+        return $this->twig->render(
+            'frontend_module.twig',
+            array(
+                'title'           => $this->getName(),
+                'description'     => $this->getDescription(),
+                'can_save'        => true,
+                'confirmed'       => (bool) $this->config->get('confirmed'),
+                'xhtmlTemplates'  => $xhtmlTemplates,
+            )
+        );
     }
 
     /**
@@ -41,12 +110,17 @@ class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getMigrationSQL()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
+        $this->checkMigrationStatus();
 
-        // TODO: tl_module.iso_collectionTpl = tl_module.iso_cart_layout
-        // TODO: tl_module.iso_filterTpl = tl_module.iso_filter_layout
+        $tableDiff = new TableDiff('tl_module');
+
+        $column = new Column('iso_collectionTpl', Type::getType(Type::STRING));
+        $column->setLength(64)->setNotnull(true)->setDefault('');
+        $tableDiff->addedColumns['iso_collectionTpl'] = $column;
+
+        $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+
+        return $sql;
     }
 
     /**
@@ -54,11 +128,27 @@ class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
      */
     public function postMigration()
     {
-        if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
-            throw new \BadMethodCallException('Migration service is not ready');
-        }
+        // Migrate default templates
 
-        // TODO: finish implementation
+        // iso_cart_full --> iso_collection_default
+        $qb = $this->db->createQueryBuilder();
+        $qb->update('tl_module', 'm')
+            ->set('m.iso_collectionTpl', ':collectionTpl')
+            ->where('m.iso_cart_layout = :cartLayout');
+        $qb->setParameter(':collectionTpl', 'iso_collection_default');
+        $qb->setParameter(':cartLayout', 'iso_cart_full');
+        $qb->execute();
+
+        // iso_cart_mini --> iso_collection_mini
+        $qb = $this->db->createQueryBuilder();
+        $qb->update('tl_module', 'm')
+            ->set('m.iso_collectionTpl', ':collectionTpl')
+            ->where('m.iso_cart_layout = :cartLayout');
+        $qb->setParameter(':collectionTpl', 'iso_collection_mini');
+        $qb->setParameter(':cartLayout', 'iso_cart_mini');
+        $qb->execute();
+
+        // iso_filter_default is already correct!
     }
 
     /**
@@ -66,8 +156,35 @@ class FrontendModuleMigrationService extends AbstractConfigfreeMigrationService
      *
      * @throws \RuntimeException
      */
-    protected function verifyDatabase()
+    protected function verifyIntegrity()
     {
-        // TODO: finish implementation
+        $this->dbcheck
+            ->columnMustExist('tl_module', 'iso_cart_layout')
+            ->columnMustExist('tl_module', 'iso_filterTpl')
+            ->columnMustNotExist('tl_module', 'iso_collectionTpl');
+
+        // Must not use XHTML layout
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSummary()
+    {
+        return $this->trans('service.frontend_module.summary');
+    }
+
+    /**
+     * Check if there are XHTML layouts in the database
+     *
+     * @return bool
+     */
+    private function getXhtmlTemplates()
+    {
+        if ($this->dbcheck->columnExists('tl_layout', 'doctype')) {
+            return $this->db->fetchAll("SELECT id, name FROM tl_layout WHERE doctype!='html5'");
+        }
+
+        return array();
     }
 }

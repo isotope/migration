@@ -2,29 +2,35 @@
 
 {% block main %}
 <div class="row headline">
-    <h2>{% trans %}Overview{% endtrans %}</h2>
+    <h2>{% trans %}index.headline{% endtrans %}</h2>
+    <p>{% trans %}index.intro{% endtrans %}</p>
 </div>
 <div class="row">
-    <h3>PHP <?php echo phpversion() ?></h3>
-    <ul>
-        <?php if ($this->supportsContao2()): ?>
-        <li class="confirm">{% trans %}You can install Contao 2.x{% endtrans %}</li>
-        <?php else: ?>
-        <li class="error"><?php printf(_('You cannot install Contao 2.x (requires PHP %s+)'), $this->getContao2Version()) ?></li>
-        <?php endif; ?>
-        <?php if ($this->supportsContao3()): ?>
-        <li class="confirm">{% trans %}You can install Contao 3.x{% endtrans %}</li>
-        <?php else: ?>
-        <li class="error"><?php printf(_('You cannot install Contao 3.x (requires PHP %s+)'), $this->getContao3Version()) ?></li>
-        <?php endif; ?>
-        <?php if ($this->supportsContao4()): ?>
-        <li class="confirm">{% trans %}You can install Contao 4.x{% endtrans %}</li>
-        <?php else: ?>
-        <li class="error"><?php printf(_('You cannot install Contao 4.x (requires PHP %s+)'), $this->getContao4Version()) ?></li>
-        <?php endif; ?>
-    </ul>
+    <h3>{% trans %}index.prepare_headline{% endtrans %}</h3>
+    <p>{% trans %}index.prepare_description{% endtrans %}</p>
+    <ol>
+        <li>{% trans %}index.prepare_step1{% endtrans %}</li>
+        <li>{% trans %}index.prepare_step2{% endtrans %}</li>
+        <li>{% trans %}index.prepare_step3{% endtrans %}
+            <ul>
+                <li>{% trans %}index.prepare_liveupdate{% endtrans %}</li>
+                <li>{% trans %}index.prepare_manual{% endtrans %}</li>
+            </ul>
+        </li>
+        <li>{% trans %}index.prepare_step4{% endtrans %}</li>
+    </ol>
+    <p style="text-decoration: underline">{% trans %}index.prepare_warning{% endtrans %}</p>
 </div>
 <div class="row">
-    <p class="mt"><a href="{{ base_url }}/config" class="button main">{% trans %}Start configuration{% endtrans %}</a></p>
+    <h3>{% trans %}index.info_headline{% endtrans %}</h3>
+    <p>{% trans %}index.info_part1{% endtrans %}</p>
+    <p>{% trans %}index.info_part2{% endtrans %}</p>
+</div>
+<div class="row">
+    <h3>{% trans %}index.thanks_headline{% endtrans %}</h3>
+    <p>{% trans %}index.thanks_description{% endtrans %}</p>
+</div>
+<div class="row">
+    <p class="mt"><a href="{{ base_url }}/config" class="button float_right main">{% trans %}index.start{% endtrans %}</a></p>
 </div>
 {% endblock %}

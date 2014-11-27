@@ -9,28 +9,33 @@
  * @license    http://opensource.org/licenses/lgpl-3.0.html
  */
 
+use Isotope\Migration\Provider\ContaoServiceProvider;
+use Isotope\Migration\Provider\MigrationServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 $app = new Silex\Application();
+$app['kernel.root_dir'] = __DIR__;
 
-//ini_set('error_reporting', E_ALL & ~E_NOTICE);
-$app['debug'] = true;
-
-$app->register(new \Isotope\Migration\Provider\MigrationServiceProvider());
-
-// Display a nice error page in production mode
-if (!$app['debug']) {
-    $app->error(function (\Exception $e, $code) use ($app) {
-        return new Symfony\Component\HttpFoundation\Response($app['twig']->render('error.twig', array(
-            'base_path' => $app['request']->getBasePath(),
-            'error' => $e->getMessage()
-        )));
-    });
+// Support PHAR
+if (\Phar::running()) {
+    $app['kernel.root_dir'] = \Phar::running(false);
 }
 
+$app->register(new ContaoServiceProvider(), array(
+    'contao.root' => dirname($app['kernel.root_dir'])
+));
+$app->register(new MigrationServiceProvider());
+
+$app->before(function (Request $request) use ($app) {
+    $app['translator']->setLocale($request->getPreferredLanguage(array('en', 'de')));
+});
+
 $app->get('/', 'migration.controller:indexAction');
-$app->get('/config/', 'migration.controller:configAction');
+$app->get('/config/', 'migration.controller:configIntroAction');
 $app->match('/config/{slug}', 'migration.controller:configAction');
-$app->get('/execute', 'migration.controller:executeAction');
+$app->match('/execute', 'migration.controller:executeAction');
+$app->get('/summary', 'migration.controller:summaryAction');
 
 $app->run();

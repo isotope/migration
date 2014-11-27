@@ -14,7 +14,7 @@ namespace Isotope\Migration\Provider;
 
 use Isotope\Migration\Service\ConstructorInjectionService;
 use Isotope\Migration\Service\DatabaseVerificationService;
-use Isotope\Migration\Service\MigrationServiceInterface;
+use Isotope\Migration\Service\DbafsService;
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
@@ -23,21 +23,20 @@ use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\ServiceProviderInterface;
 use Silex\Translator;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Twig_Environment;
 
 class MigrationServiceProvider implements ServiceProviderInterface
 {
-    /**
-     * Version constant for the migration tool
-     */
-    const VERSION = '1.0-0-dev';
 
-
-    function register(Application $app)
+    public function register(Application $app)
     {
-
         $app->register(new TranslationServiceProvider());
-        $app['translator'] = $app->share($app->extend('translator', function(Translator $translator) {
+        $app['translator'] = $app->share($app->extend('translator', function(Translator $translator) use ($app) {
             $translator->addResource('array', include(__DIR__.'/../locales/en.php'), 'en');
             $translator->addResource('array', include(__DIR__.'/../locales/de.php'), 'de');
 
@@ -52,21 +51,50 @@ class MigrationServiceProvider implements ServiceProviderInterface
         $app->register(new ServiceControllerServiceProvider());
         $app->register(new SessionServiceProvider());
 
-        $app->register(new ContaoServiceProvider(), array(
-            'contao.root' => dirname(dirname(__DIR__))
-        ));
-
         $app['migration.dbcheck'] = $app->share(function() use ($app) {
             return new DatabaseVerificationService($app['db'], $app['translator']);
+        });
+
+        $app['migration.dbafs'] = $app->share(function() use ($app) {
+            return new DbafsService($app['db']);
         });
 
         $app['class_factory'] = $app->share(function() use ($app) {
             return new ConstructorInjectionService($app);
         });
 
+        $this->registerServices($app);
+        $this->registerErrorHandler($app);
+    }
+
+    public function boot(Application $app)
+    {
+        $app['migration.controller'] = $app['class_factory']->share('\\Isotope\\Migration\\Controller\\MigrationController');
+        $app['migration.services'] = new \Pimple();
+
+        foreach ($app['migration.service.classes']->keys() as $slug) {
+            $class = $app['migration.service.classes'][$slug];
+
+            $configBag = new AttributeBag('config_' . $slug);
+            $configBag->setName('config_' . $slug);
+            $app['session']->registerBag($configBag);
+
+            $app['migration.services'][$slug] = $app->share(
+                function() use ($app, $slug, $class) {
+                    $config = $app['session']->getBag('config_' . $slug);
+                    return $app['class_factory']->create($class, array(
+                        'config'    => $config
+                    ));
+                }
+            );
+        }
+    }
+
+    private function registerServices(Application $app)
+    {
         $app['migration.service.classes'] = new \Pimple();
 
-        /** @type MigrationServiceInterface[] $services */
+        /** @type \Isotope\Migration\Service\MigrationServiceInterface[] $services */
         $services = array(
             // this order DOES MATTER!!
             '\\Isotope\\Migration\\Service\\AddressBookMigrationService',
@@ -77,15 +105,18 @@ class MigrationServiceProvider implements ServiceProviderInterface
             '\\Isotope\\Migration\\Service\\FrontendModuleMigrationService',
             '\\Isotope\\Migration\\Service\\MailTemplateMigrationService',
 
+            '\\Isotope\\Migration\\Service\\ShopConfigMigrationService',
+            '\\Isotope\\Migration\\Service\\GalleryMigrationService',
+
             // here we don't know (yet) ;-)
 
             '\\Isotope\\Migration\\Service\\ProductCollectionMigrationService',
-            '\\Isotope\\Migration\\Service\\ShopConfigMigrationService',
             '\\Isotope\\Migration\\Service\\RelatedProductMigrationService',
             '\\Isotope\\Migration\\Service\\TranslationMigrationService',
             '\\Isotope\\Migration\\Service\\PaymentMethodMigrationService',
             '\\Isotope\\Migration\\Service\\ShippingMethodMigrationService',
             '\\Isotope\\Migration\\Service\\DownloadMigrationService',
+            '\\Isotope\\Migration\\Service\\RuleMigrationService',
         );
 
         foreach ($services as $class) {
@@ -94,24 +125,39 @@ class MigrationServiceProvider implements ServiceProviderInterface
         }
     }
 
-    function boot(Application $app)
+    private function registerErrorHandler(Application $app)
     {
-        $app['migration.controller'] = $app['class_factory']->share('\\Isotope\\Migration\\Controller\\MigrationController');
-        $app['migration.services'] = new \Pimple();
+        $app->error(
+            function (\Exception $e) use ($app) {
 
-        foreach ($app['migration.service.classes']->keys() as $slug) {
-            $class = $app['migration.service.classes'][$slug];
+                /** @type Twig_Environment $twig */
+                $twig = $app['twig'];
+                $context = array(
+                    'base_path' => $app['request']->getBasePath(),
+                    'message'   => $e->getMessage(),
+                    'reason'    => 'unknown'
+                );
 
-            $sessionBag = new AttributeBag($slug);
-            $sessionBag->setName($slug);
-            $app['session']->registerBag($sessionBag);
+                // Try to handle issues with Contao or database connection
+                if ($e instanceof NotFoundHttpException) {
+                    return new RedirectResponse($app['request_stack']->getCurrentRequest()->getBaseUrl() . '/');
+                } else if ($e instanceof HttpException && $e->getStatusCode() == 501) {
+                    switch ($e->getCode()) {
+                        case 403:
+                            $context['reason'] = 'database';
+                            break;
 
-            $app['migration.services'][$slug] = $app->share(
-                function() use ($app, $slug, $class) {
-                    $config = $app['session']->getBag($slug);
-                    return $app['class_factory']->create($class, array('config' => $config));
+                        case 404:
+                            $context['reason'] = 'contao';
+                            break;
+                    }
                 }
-            );
-        }
+
+                return new Response(
+                    $twig->render('error.twig', $context),
+                    500
+                );
+            }
+        );
     }
 }
