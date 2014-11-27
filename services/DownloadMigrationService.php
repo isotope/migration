@@ -77,6 +77,7 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
             ->tableMustNotExist('tl_iso_download')
             ->columnMustExist('tl_iso_downloads', 'title')
             ->columnMustExist('tl_iso_downloads', 'description')
+            ->columnMustExist('tl_iso_downloads', 'singleSRC')
             ->columnMustNotExist('tl_iso_downloads', 'published');
 
         $this->dbcheck
@@ -85,7 +86,8 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
 
         $this->dbcheck
             ->tableMustExist('tl_files')
-            ->columnMustExist('tl_files', 'uuid');
+            ->columnMustExist('tl_files', 'uuid')
+            ->columnMustExist('tl_files', 'path');
     }
 
     /**
@@ -111,6 +113,12 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
      */
     public function getSummary()
     {
-        return $this->trans('service.download.summary');
+        $total = $this->db->fetchColumn("
+            SELECT COUNT(*) AS total
+            FROM tl_iso_download
+            WHERE title!='' OR description!=''
+        ");
+
+        return $total > 0 ? $this->trans('service.download.summary') : '';
     }
 }
