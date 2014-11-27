@@ -46,7 +46,7 @@ return array(
         'info_part1' => 'The migration tool will convert the database from Isotope version 1.4.8 to version 2. It will NOT touch any of your files and it will NOT change any templates. A lot of templates have changed in Isotope 2 and your customizations will no longer work. It is very likely you will need to start from scratch with your template adjustments.',
         'info_part2' => 'Due to the API changes, we assume ALL existing extensions for Isotope 1.4 will no longer work with version 2. If you have installed any Isotope-related extension, check for available updates or contact the developers if necessary. We will try not to destroy any third-party data.',
         'thanks_headline' => 'Many Thanks!',
-        'thanks_description' => 'The development of this migration tool would not have been possible without our community. Thanks to the donators on our fundraising:<br>Kim Wormer, Monique Hahnefeld, Websache, Cyrill Weiss, Karlheinz Büscher, Holger Neuner, Mingel2k',  // TODO: Update list of supporters!
+        'thanks_description' => 'The development of this migration tool would not have been possible without our community. Thanks to the donators on our fundraising:<br>Kim Wormer, Monique Hahnefeld, Veronika Sattler, Cyrill Weiss, Karlheinz Büscher, Holger Neuner',
     ),
     'config' => array(
         'back'          => 'Back',

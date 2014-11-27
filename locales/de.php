@@ -46,7 +46,7 @@ return array(
         'info_part1' => 'Das Migrationstool wird die Daten in der Datenbank von Isotope Version 1.4.8 auf Version 2 aktualisieren. Es wird KEINE Dateien verändern oder Templates anpassen. Viele Templates haben in Isotope 2 Veränderungen erfahren und deine Anpassungen werden nicht mehr funktionieren. Es ist naheliegend, dass du bei deinen Template-Anpassungen bei Null anfangen musst.',
         'info_part2' => 'Aufrund von API-Änderungen gehen wir davon aus, dass ALLE existierenden Erweiterungen zu Isotope 1.4 nicht mehr mit der Version 2 funktionieren werden. Solltest du irgendwelche Erweiterungen zu Isotope installiert haben, prüfe die Verfügbarkeit von Updates oder kontaktiere die Entwickler falls notwendig. Wir werden versuchen keine Drittanbieter-Daten zu zerstören.',
         'thanks_headline' => 'Vielen Dank!',
-        'thanks_description' => 'Die Entwicklung dieses Migrationstools wäre nicht möglich gewesen ohne die Community. Vielen Dank unseren Fundraising-Spendern:<br>Kim Wormer, Monique Hahnefeld, Websache, Cyrill Weiss, Karlheinz Büscher, Holger Neuner, Mingel2k',  // TODO: Update list of supporters!
+        'thanks_description' => 'Die Entwicklung dieses Migrationstools wäre nicht möglich gewesen ohne die Community. Vielen Dank unseren Fundraising-Spendern:<br>Kim Wormer, Monique Hahnefeld, Veronika Sattler, Cyrill Weiss, Karlheinz Büscher, Holger Neuner',
     ),
     'config' => array(
         'back'          => 'Zurück',
