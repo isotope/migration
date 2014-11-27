@@ -39,7 +39,6 @@ class MigrationServiceProvider implements ServiceProviderInterface
         $app['translator'] = $app->share($app->extend('translator', function(Translator $translator) use ($app) {
             $translator->addResource('array', include(__DIR__.'/../locales/en.php'), 'en');
             $translator->addResource('array', include(__DIR__.'/../locales/de.php'), 'de');
-            $translator->setLocale($app['request']->getPreferredLanguage(array('en', 'de')));
 
             return $translator;
         }));

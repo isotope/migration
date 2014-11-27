@@ -59,6 +59,7 @@ class FunctionalTest extends WebTestCase
     {
         $client = $this->createClient();
         $crawler = $client->request('GET', $url);
+
         $this->assertTrue($client->getResponse()->isOk());
     }
 
