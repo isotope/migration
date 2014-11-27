@@ -50,8 +50,6 @@ class DownloadMigrationService extends AbstractConfigfreeMigrationService
     {
         $this->checkMigrationStatus();
 
-        // TODO: do we need to warn about title and description no longer available?
-
         return array_merge(
             $this->dbafs->getMigrateFilePathForUuidSQL('tl_iso_downloads', 'singleSRC'),
             $this->getProductSQL(),
