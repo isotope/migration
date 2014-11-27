@@ -118,8 +118,7 @@ HTML
             'service_name'        => 'Downloads',
             'service_description' => 'Migriert die Produktedownloads und aktualisiert Bestellungen mit Downloads.',
             'summary'             => <<<'HTML'
-<p>Die Datenbankspalten tl_iso_download.title und tl_iso_download.description können nicht automatisch migriert werden.
-Sie beinhalten den Titel und die Beschreibung eines Downloads (vorausgesetzt du hast diese erfasst).
+<p>Die Titel und Beschreibung für Downloads sind in Isotope 2 nicht mehr verfügbar.
 In Contao 3+ kannst du Metadaten von Dateien in der Dateiverwaltung direkt erfassen, folglich muss Isotope eCommerce nicht noch weitere Erfassungsmöglichkeiten dafür bieten.
 Da das Migrationstool nicht automatisch erkennen kann, in welcher Sprache du die Daten in Isotope 1.4 erfasst hattest (und möglicherweise übersetzt hattest), wird es die Daten nicht verändern!
 Stell sicher, dass du die Spalten tl_iso_download.description und tl_iso_download.title nicht (!!) löschst, bevor du die Daten manuell migriert hast!</p>
@@ -135,7 +134,7 @@ HTML
             'confirmation'        => 'Bitte bestätige, dass du das Obenstehende gelesen hast. Es liegt in deiner Verantwortung, die Seitenlayouts anzupassen oder die XHTML Templates anzulegen.',
             'summary'             => <<<'HTML'
 <p>Die Templates "iso_cart_full" und "iso_cart_mini" wurden zu "iso_collection_default" und "iso_collection_mini" migriert.
-Allerdings kann es keine Logik migrieren, welche du in deine Templates eingebaut hast. Du wirst jedes einzelne (!) Template prüfen müssen!</p>
+Allerdings kann die Logik nicht automatisch migriert werden, welche du in deine Templates eingebaut hast. Du wirst jedes einzelne (!) Template prüfen müssen!</p>
 HTML
 
         ),
