@@ -232,6 +232,10 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         $column->setPrecision(12)->setScale(2)->setNotnull(true)->setDefault('0.00');
         $tableDiff->renamedColumns['subTotal'] = $column;
 
+        $column = new Column('total', Type::getType(Type::DECIMAL));
+        $column->setPrecision(12)->setScale(2)->setNotnull(true)->setDefault('0.00');
+        $tableDiff->renamedColumns['grandTotal'] = $column;
+
         $column = new Column('source_collection_id', Type::getType(Type::INTEGER));
         $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
         $tableDiff->renamedColumns['cart_id'] = $column;
@@ -239,6 +243,14 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         $column = new Column('order_status', Type::getType(Type::INTEGER));
         $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
         $tableDiff->renamedColumns['status'] = $column;
+
+        $column = new Column('locked', Type::getType(Type::STRING));
+        $column->setLength(10)->setNotnull(true)->setDefault('');
+        $tableDiff->renamedColumns['locked'] = $column;
+
+        $column = new Column('document_number', Type::getType(Type::STRING));
+        $column->setLength(64)->setNotnull(true)->setDefault('');
+        $tableDiff->renamedColumns['order_id'] = $column;
 
         $column = new Column('type', Type::getType(Type::STRING));
         $column->setLength(32)->setNotnull(true)->setDefault('');
