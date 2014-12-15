@@ -101,6 +101,7 @@ class MigrationServiceProvider implements ServiceProviderInterface
             '\\Isotope\\Migration\\Service\\AttributeMigrationService',
             '\\Isotope\\Migration\\Service\\ProductTypeMigrationService',
             '\\Isotope\\Migration\\Service\\ProductDataMigrationService',
+            '\\Isotope\\Migration\\Service\\ProductCollectionMigrationService',
 
             '\\Isotope\\Migration\\Service\\FrontendModuleMigrationService',
             '\\Isotope\\Migration\\Service\\MailTemplateMigrationService',
@@ -110,7 +111,6 @@ class MigrationServiceProvider implements ServiceProviderInterface
 
             // here we don't know (yet) ;-)
 
-            '\\Isotope\\Migration\\Service\\ProductCollectionMigrationService',
             '\\Isotope\\Migration\\Service\\RelatedProductMigrationService',
             '\\Isotope\\Migration\\Service\\TranslationMigrationService',
             '\\Isotope\\Migration\\Service\\PaymentMethodMigrationService',

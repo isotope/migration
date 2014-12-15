@@ -294,7 +294,20 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         $column->setLength(65535)->setNotnull(false);
         $tableDiff->renamedColumns['product_options'] = $column;
 
-        return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+        $column = new Column('type', Type::getType(Type::STRING));
+        $column->setLength(32)->setNotnull(true)->setDefault('');
+        $tableDiff->addedColumns['type'] = $column;
+
+        $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+
+        $sql[] = "UPDATE tl_iso_product_collection_item SET type=IFNULL(
+            (SELECT class FROM tl_iso_producttype WHERE id=(
+                SELECT type FROM tl_iso_product WHERE id=product_id
+            )),
+            'standard'
+        )";
+
+        return $sql;
     }
 
     /**
