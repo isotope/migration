@@ -52,6 +52,12 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
      */
     protected $dbafs;
 
+    /**
+     * Default collation for active DB charset
+     * @var string
+     */
+    private static $collation;
+
 
     public function __construct(
         AttributeBagInterface $config,
@@ -153,6 +159,9 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
     {
         $table = $schema->createTable($name);
 
+        // Set collation to the server default because Doctrine sets it to "utf8_unicode_ci" by default
+        $table->addOption('collate', $this->getCollation());
+
         $table->addColumn('id', Type::INTEGER, array('unsigned'=>true, 'notnull'=>true, 'autoincrement'=>true));
         $table->setPrimaryKey(array('id'));
 
@@ -196,5 +205,28 @@ abstract class AbstractMigrationService implements MigrationServiceInterface
         if ($this->getStatus() != MigrationServiceInterface::STATUS_READY) {
             throw new \BadMethodCallException('Migration service "' . $this->getSlug() . '" is not ready');
         }
+    }
+
+    /**
+     * Get the server default collation for the server and charset
+     *
+     * @return string
+     */
+    private function getCollation()
+    {
+        if (null === self::$collation) {
+            $params = $this->db->getParams();
+
+            $result = $this->db->fetchAssoc(
+                "SHOW COLLATION WHERE `Default` = 'Yes' AND Charset = ?",
+                array(
+                    $params['charset']
+                )
+            );
+
+            self::$collation = $result['Collation'];
+        }
+
+        return self::$collation;
     }
 }
