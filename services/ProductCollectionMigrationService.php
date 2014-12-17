@@ -164,14 +164,22 @@ class ProductCollectionMigrationService extends AbstractMigrationService
             ->columnMustExist('tl_iso_orders', 'id')
             ->columnMustExist('tl_iso_orders', 'pid')
             ->columnMustNotExist('tl_iso_orders', 'member')
+            ->columnMustExist('tl_iso_orders', 'subTotal')
+            ->columnMustExist('tl_iso_orders', 'grandTotal')
+            ->columnMustNotExist('tl_iso_orders', 'total')
+            ->columnMustExist('tl_iso_orders', 'cart_id')
+            ->columnMustNotExist('tl_iso_orders', 'source_collection_id')
+            ->columnMustExist('tl_iso_orders', 'status')
+            ->columnMustNotExist('tl_iso_orders', 'order_status')
+            ->columnMustExist('tl_iso_orders', 'date')
+            ->columnMustNotExist('tl_iso_orders', 'locked')
+            ->columnMustExist('tl_iso_orders', 'order_id')
+            ->columnMustNotExist('tl_iso_orders', 'document_number')
+            ->columnMustNotExist('tl_iso_orders', 'type')
             ->columnMustExist('tl_iso_orders', 'billing_address')
             ->columnMustNotExist('tl_iso_orders', 'billing_address_id')
             ->columnMustExist('tl_iso_orders', 'shipping_address')
-            ->columnMustNotExist('tl_iso_orders', 'shipping_address_id')
-            ->columnMustExist('tl_iso_orders', 'subTotal')
-            ->columnMustNotExist('tl_iso_orders', 'type')
-            ->columnMustExist('tl_iso_orders', 'cart_id')
-            ->columnMustNotExist('tl_iso_orders', 'source_collection_id');
+            ->columnMustNotExist('tl_iso_orders', 'shipping_address_id');
 
         $this->dbcheck
             ->tableMustExist('tl_iso_order_items')
@@ -232,6 +240,10 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         $column->setPrecision(12)->setScale(2)->setNotnull(true)->setDefault('0.00');
         $tableDiff->renamedColumns['subTotal'] = $column;
 
+        $column = new Column('total', Type::getType(Type::DECIMAL));
+        $column->setPrecision(12)->setScale(2)->setNotnull(true)->setDefault('0.00');
+        $tableDiff->renamedColumns['grandTotal'] = $column;
+
         $column = new Column('source_collection_id', Type::getType(Type::INTEGER));
         $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
         $tableDiff->renamedColumns['cart_id'] = $column;
@@ -239,6 +251,14 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         $column = new Column('order_status', Type::getType(Type::INTEGER));
         $column->setUnsigned(true)->setNotnull(true)->setDefault(0);
         $tableDiff->renamedColumns['status'] = $column;
+
+        $column = new Column('locked', Type::getType(Type::STRING));
+        $column->setLength(10)->setNotnull(true)->setDefault('');
+        $tableDiff->renamedColumns['date'] = $column;
+
+        $column = new Column('document_number', Type::getType(Type::STRING));
+        $column->setLength(64)->setNotnull(true)->setDefault('');
+        $tableDiff->renamedColumns['order_id'] = $column;
 
         $column = new Column('type', Type::getType(Type::STRING));
         $column->setLength(32)->setNotnull(true)->setDefault('');
@@ -282,7 +302,20 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         $column->setLength(65535)->setNotnull(false);
         $tableDiff->renamedColumns['product_options'] = $column;
 
-        return $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+        $column = new Column('type', Type::getType(Type::STRING));
+        $column->setLength(32)->setNotnull(true)->setDefault('');
+        $tableDiff->addedColumns['type'] = $column;
+
+        $sql = $this->db->getDatabasePlatform()->getAlterTableSQL($tableDiff);
+
+        $sql[] = "UPDATE tl_iso_product_collection_item SET type=IFNULL(
+            (SELECT class FROM tl_iso_producttype WHERE id=(
+                SELECT type FROM tl_iso_product WHERE id=product_id
+            )),
+            'standard'
+        )";
+
+        return $sql;
     }
 
     /**

@@ -109,7 +109,6 @@ class MigrationController
             if ($service->getStatus() != MigrationServiceInterface::STATUS_READY) {
                 $hasError = true;
                 break;
-                //return new RedirectResponse($this->requestStack->getCurrentRequest()->getBaseUrl() . '/config/' . $service->getSlug(), 303);
             }
 
             $sql = array_merge($sql, $service->getMigrationSQL());

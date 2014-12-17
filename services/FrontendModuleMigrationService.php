@@ -128,15 +128,11 @@ class FrontendModuleMigrationService extends AbstractMigrationService
      */
     public function postMigration()
     {
-        // Migrate default templates
-
-        // iso_cart_full --> iso_collection_default
+        // Set default templates
         $qb = $this->db->createQueryBuilder();
         $qb->update('tl_module', 'm')
-            ->set('m.iso_collectionTpl', ':collectionTpl')
-            ->where('m.iso_cart_layout = :cartLayout');
+           ->set('m.iso_collectionTpl', ':collectionTpl');
         $qb->setParameter(':collectionTpl', 'iso_collection_default');
-        $qb->setParameter(':cartLayout', 'iso_cart_full');
         $qb->execute();
 
         // iso_cart_mini --> iso_collection_mini

@@ -31,6 +31,32 @@ class ProductCollectionTest extends ScenarioTestCase
                             'enthaltene MwSt.' => 'tax',
                             'Weihnachtsaktion' => 'rule',
                         )
+                    ),
+                    'gallery' => array(
+                        'galleries' => array(
+                            array(
+                                'name'            => 'List',
+                                'main_config'     => '1-thumbnail',
+                                'gallery_config'  => '1-thumbnail',
+                                'lightbox_config' => '',
+                            ),
+                            array(
+                                'name'            => 'Reader',
+                                'main_config'     => '1-medium',
+                                'gallery_config'  => '1-gallery',
+                                'lightbox_config' => '1-large',
+                            )
+                        ),
+                        'productTypes' => array(
+                            1 => array(
+                                'list_gallery'   => '0',
+                                'reader_gallery' => '1',
+                            ),
+                            2 => array(
+                                'list_gallery'   => '0',
+                                'reader_gallery' => '1',
+                            )
+                        )
                     )
                 )
             )
@@ -55,14 +81,27 @@ class ProductCollectionTest extends ScenarioTestCase
     }
 
 
-    public function testOrderConversion()
+    public function testOrders()
     {
         $queryTable = $this->getConnection()->createQueryTable(
             'tl_iso_product_collection',
-            "SELECT id, member, source_collection_id FROM tl_iso_product_collection"
+            "SELECT id, member, source_collection_id, locked, order_status, subtotal, total, document_number FROM tl_iso_product_collection"
         );
 
-        $expectedTable = $this->createFlatXmlDataSet($this->getDataPath() . '/order_conversion.xml')->getTable("tl_iso_product_collection");
+        $expectedTable = $this->createFlatXmlDataSet($this->getDataPath() . '/orders.xml')->getTable("tl_iso_product_collection");
+
+        $this->assertTablesEqual($expectedTable, $queryTable);
+    }
+
+
+    public function testOrderItems()
+    {
+        $queryTable = $this->getConnection()->createQueryTable(
+            'tl_iso_product_collection_item',
+            "SELECT id, name, sku, quantity, configuration, type FROM tl_iso_product_collection_item"
+        );
+
+        $expectedTable = $this->createFlatXmlDataSet($this->getDataPath() . '/orders.xml')->getTable("tl_iso_product_collection_item");
 
         $this->assertTablesEqual($expectedTable, $queryTable);
     }
@@ -98,7 +137,7 @@ class ProductCollectionTest extends ScenarioTestCase
             "SELECT id, pid, sorting, type, label, price, total_price, tax_free_total_price, tax_class, tax_id, before_tax, addToTotal, products FROM tl_iso_product_collection_surcharge"
         );
 
-        $expectedTable = $this->createFlatXmlDataSet($this->getDataPath() . '/surcharges.xml')->getTable("tl_iso_product_collection_surcharge");
+        $expectedTable = $this->createFlatXmlDataSet($this->getDataPath() . '/orders.xml')->getTable("tl_iso_product_collection_surcharge");
 
         $this->assertTablesEqual($expectedTable, $queryTable);
     }
