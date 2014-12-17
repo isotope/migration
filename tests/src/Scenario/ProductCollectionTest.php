@@ -59,7 +59,7 @@ class ProductCollectionTest extends ScenarioTestCase
     {
         $queryTable = $this->getConnection()->createQueryTable(
             'tl_iso_product_collection',
-            "SELECT id, member, source_collection_id FROM tl_iso_product_collection"
+            "SELECT id, member, source_collection_id, locked, order_status, subtotal, total, document_number FROM tl_iso_product_collection"
         );
 
         $expectedTable = $this->createFlatXmlDataSet($this->getDataPath() . '/order_conversion.xml')->getTable("tl_iso_product_collection");

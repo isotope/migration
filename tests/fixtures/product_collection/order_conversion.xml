@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
 <dataset>
-    <tl_iso_product_collection id="1" member="1" source_collection_id="27" />
-    <tl_iso_product_collection id="2" member="2" source_collection_id="30" />
+    <tl_iso_product_collection id="1" member="1" source_collection_id="27" locked="1368454510" order_status="3" subtotal="27.00" total="26.19" document_number="20130001" />
+    <tl_iso_product_collection id="2" member="2" source_collection_id="30" locked="1368454510" order_status="3" subtotal="27.00" total="26.19" document_number="20130002" />
 </dataset>
