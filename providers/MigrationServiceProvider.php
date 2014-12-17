@@ -28,7 +28,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Twig_Environment;
 
 class MigrationServiceProvider implements ServiceProviderInterface
 {
@@ -130,7 +129,7 @@ class MigrationServiceProvider implements ServiceProviderInterface
         $app->error(
             function (\Exception $e) use ($app) {
 
-                /** @type Twig_Environment $twig */
+                /** @type \Twig_Environment $twig */
                 $twig = $app['twig'];
                 $context = array(
                     'base_path' => $app['request']->getBasePath(),

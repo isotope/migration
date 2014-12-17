@@ -101,9 +101,9 @@ class ProductTypeMigrationService extends AbstractConfigfreeMigrationService
             $newData[$name] = array(
                 'enabled'   => $config['enabled'],
                 'name'      => $name,
-                'legend'    => '', // TODO: load legend from DCA/attributes table
-                'tl_class'  => '', // TODO: load tl_class from DCA/attributes table
-                'mandatory' => '', // TODO: load mandatory-ness from DCA/attributes table
+                'legend'    => '', // we can't load legend from DCA/attributes table
+                'tl_class'  => '', // we can't load tl_class from DCA/attributes table
+                'mandatory' => '', // we can't load mandatory-ness from DCA/attributes table
                 'position'  => $config['position']
             );
         }
