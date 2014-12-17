@@ -164,14 +164,22 @@ class ProductCollectionMigrationService extends AbstractMigrationService
             ->columnMustExist('tl_iso_orders', 'id')
             ->columnMustExist('tl_iso_orders', 'pid')
             ->columnMustNotExist('tl_iso_orders', 'member')
+            ->columnMustExist('tl_iso_orders', 'subTotal')
+            ->columnMustExist('tl_iso_orders', 'grandTotal')
+            ->columnMustNotExist('tl_iso_orders', 'total')
+            ->columnMustExist('tl_iso_orders', 'cart_id')
+            ->columnMustNotExist('tl_iso_orders', 'source_collection_id')
+            ->columnMustExist('tl_iso_orders', 'status')
+            ->columnMustNotExist('tl_iso_orders', 'order_status')
+            ->columnMustExist('tl_iso_orders', 'date')
+            ->columnMustNotExist('tl_iso_orders', 'locked')
+            ->columnMustExist('tl_iso_orders', 'order_id')
+            ->columnMustNotExist('tl_iso_orders', 'document_number')
+            ->columnMustNotExist('tl_iso_orders', 'type')
             ->columnMustExist('tl_iso_orders', 'billing_address')
             ->columnMustNotExist('tl_iso_orders', 'billing_address_id')
             ->columnMustExist('tl_iso_orders', 'shipping_address')
-            ->columnMustNotExist('tl_iso_orders', 'shipping_address_id')
-            ->columnMustExist('tl_iso_orders', 'subTotal')
-            ->columnMustNotExist('tl_iso_orders', 'type')
-            ->columnMustExist('tl_iso_orders', 'cart_id')
-            ->columnMustNotExist('tl_iso_orders', 'source_collection_id');
+            ->columnMustNotExist('tl_iso_orders', 'shipping_address_id');
 
         $this->dbcheck
             ->tableMustExist('tl_iso_order_items')
@@ -246,7 +254,7 @@ class ProductCollectionMigrationService extends AbstractMigrationService
 
         $column = new Column('locked', Type::getType(Type::STRING));
         $column->setLength(10)->setNotnull(true)->setDefault('');
-        $tableDiff->renamedColumns['locked'] = $column;
+        $tableDiff->renamedColumns['date'] = $column;
 
         $column = new Column('document_number', Type::getType(Type::STRING));
         $column->setLength(64)->setNotnull(true)->setDefault('');
