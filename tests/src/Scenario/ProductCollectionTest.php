@@ -55,14 +55,14 @@ class ProductCollectionTest extends ScenarioTestCase
     }
 
 
-    public function testOrderConversion()
+    public function testOrders()
     {
         $queryTable = $this->getConnection()->createQueryTable(
             'tl_iso_product_collection',
             "SELECT id, member, source_collection_id, locked, order_status, subtotal, total, document_number FROM tl_iso_product_collection"
         );
 
-        $expectedTable = $this->createFlatXmlDataSet($this->getDataPath() . '/order_conversion.xml')->getTable("tl_iso_product_collection");
+        $expectedTable = $this->createFlatXmlDataSet($this->getDataPath() . '/orders.xml')->getTable("tl_iso_product_collection");
 
         $this->assertTablesEqual($expectedTable, $queryTable);
     }
@@ -98,7 +98,7 @@ class ProductCollectionTest extends ScenarioTestCase
             "SELECT id, pid, sorting, type, label, price, total_price, tax_free_total_price, tax_class, tax_id, before_tax, addToTotal, products FROM tl_iso_product_collection_surcharge"
         );
 
-        $expectedTable = $this->createFlatXmlDataSet($this->getDataPath() . '/surcharges.xml')->getTable("tl_iso_product_collection_surcharge");
+        $expectedTable = $this->createFlatXmlDataSet($this->getDataPath() . '/orders.xml')->getTable("tl_iso_product_collection_surcharge");
 
         $this->assertTablesEqual($expectedTable, $queryTable);
     }
