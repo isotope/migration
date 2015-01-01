@@ -64,13 +64,16 @@ class ContaoServiceProvider implements ServiceProviderInterface
 
         $this->normalizeConfig($config);
 
+        list($dbHost, $dbSocket) = explode(':', $config['dbHost'], 2);
+
         $app['db.options'] = array(
-            'dbname'   => $config['dbDatabase'],
-            'host'     => $config['dbHost'],
-            'user'     => $config['dbUser'],
-            'password' => $config['dbPass'],
-            'charset'  => $config['dbCharset'],
-            'port'     => $config['dbPort'],
+            'dbname'      => $config['dbDatabase'],
+            'host'        => $dbHost,
+            'user'        => $config['dbUser'],
+            'password'    => $config['dbPass'],
+            'charset'     => $config['dbCharset'],
+            'port'        => $config['dbPort'],
+            'unix_socket' => $dbSocket,
         );
     }
 
