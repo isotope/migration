@@ -56,6 +56,11 @@ class ContaoServiceProvider implements ServiceProviderInterface
             return;
         }
 
+        // localconfig.php could contain check for TL_ROOT (see #6)
+        if (!defined('TL_ROOT')) {
+            define('TL_ROOT', $app['contao.root']);
+        }
+
         require_once $app['contao.root'] . '/system/config/localconfig.php';
         $config = (array) $GLOBALS['TL_CONFIG'];
 
