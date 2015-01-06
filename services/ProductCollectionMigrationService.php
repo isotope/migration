@@ -386,7 +386,7 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         $isDefaultBilling = ($isDefaultBilling && $this->idIsZero($address['id'])) ? '1' : '';
         $isDefaultShipping = ($isDefaultShipping && $this->idIsZero($address['id'])) ? '1' : '';
 
-        // TODO: what do we do if the serialized data contains fields that are not in the table?
+        // FIXME: what do we do if the serialized data contains fields that are not in the table?
 
         unset($address['id']);
 

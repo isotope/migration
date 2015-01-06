@@ -69,7 +69,7 @@ return array(
     ),
     'execute' => array(
         'headline'            => 'Achtung, fertig, los!',
-        'intro'               => 'Das ist der letzte Schritt vor der Migration. Bitte lese vorsichtig, bevor du sie durchführst.', // TODO: write a better intro
+        'intro'               => 'Das ist der letzte Schritt vor der Migration. Bitte lese vorsichtig, bevor du sie durchführst.',
         'back'                => 'Zurück',
         'cancel'              => 'Abbrechen',
         'cancel_confirm'      => 'Bist du dir sicher, dass du abbrechen willst? Deine Konfiguration wird gelöscht!',
@@ -151,13 +151,12 @@ HTML
             'reader_name'                => 'Leser',
             'gallery_legend'             => 'Galerien konfigurieren',
             'gallery_intro'              => 'Bitte konfiguriere deine neuen Galerien basierend auf den Bildgrössen in der Shopkonfiguration von Isotope 1.x',
-            // @todo Andy has to translate this
             'gallery_description'        => <<<'HTML'
 <p class="explain">In Isotope 2 wurde die Bildgrössen-Konfiguration in eigene Galerie-Konfigurationen ausgelagert. Jede Galerie-Konfiguration beinhaltet
     Informationen über die Bildgrössen und Link-Aktionen (bspw. Link auf das Produkt oder Lightbox).</p>
-<p class="explain">The default configuration of Isotope 1.x contained four different image sizes: <i>gallery</i>, <i>thumbnail</i>, <i>medium</i> and <i>large</i>.<br>
-If you followed these, you should choose <i>thumbnail</i> for both main and gallery image of the list gallery, and
-setup the reader gallery like this: Main Image Size = <i>medium</i>, Gallery Size = <i>gallery</i>, Lightbox Size = <i>large</i>.</p>
+<p class="explain">Standardmässig waren in Isotope 1.x vier Bildgrössen konfiguriert: <i>gallery</i>, <i>thumbnail</i>, <i>medium</i> and <i>large</i>.<br>
+Wenn du den Standard verwendet hast, dann kannst du <i>thumbnail</i> für Haupt- und Galeriebild der Listengalerie verwenden, und die Leser-Galerie wie folgt konfigurieren:
+Hauptbildgrösse = <i>medium</i>, Galerie-Grösse = <i>gallery</i>, Lightbox-Grösse = <i>large</i>.
 </p>
 HTML
             ,

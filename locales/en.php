@@ -69,7 +69,7 @@ return array(
     ),
     'execute' => array(
         'headline'            => 'Ready, set, go!',
-        'intro'               => 'This is the last step before migration. Please read carefully before executing.', // TODO: write a better intro
+        'intro'               => 'This is the last step before migration. Please read carefully before executing.',
         'back'                => 'Back',
         'cancel'              => 'Cancel',
         'cancel_confirm'      => 'Are you sure to cancel? This will delete all your configuration!',
@@ -156,7 +156,7 @@ HTML
     information about image sizes and link action (e.g. link to product or open lightbox).</p>
 <p class="explain">The default configuration of Isotope 1.x contained four different image sizes: <i>gallery</i>, <i>thumbnail</i>, <i>medium</i> and <i>large</i>.<br>
 If you followed these, you should choose <i>thumbnail</i> for both main and gallery image of the list gallery, and
-setup the reader gallery like this: Main Image Size = <i>medium</i>, Gallery Size = <i>gallery</i>, Lightbox Size = <i>large</i>.</p>
+setup the reader gallery like this: Main Image Size = <i>medium</i>, Gallery Size = <i>gallery</i>, Lightbox Size = <i>large</i>.
 </p>
 HTML
             ,
