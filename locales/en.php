@@ -225,6 +225,7 @@ HTML
             'type'                   => 'Type',
             'surcharges_empty'       => 'Surcharges configuration is empty.',
             'surcharge_type_missing' => 'You must select a type for each surcharge.',
+            'address_field_missing'  => 'The order data contains an address field called "%field%" which is not known to Isotope and not available in tl_iso_address table. Make sure to install necessary extension and updates before migration.',
         ),
         'product_data' => array(
             'service_name'        => 'Product data',

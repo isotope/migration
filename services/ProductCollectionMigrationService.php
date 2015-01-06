@@ -50,6 +50,7 @@ class ProductCollectionMigrationService extends AbstractMigrationService
     {
         try {
             $this->verifyIntegrity();
+            $this->verifyAddressFields();
         } catch (\RuntimeException $e) {
             return MigrationServiceInterface::STATUS_ERROR;
         }
@@ -79,6 +80,7 @@ class ProductCollectionMigrationService extends AbstractMigrationService
     {
         try {
             $this->verifyIntegrity();
+            $this->verifyAddressFields();
         } catch (\RuntimeException $e) {
             return $this->renderConfigError($e->getMessage());
         }
@@ -96,7 +98,6 @@ class ProductCollectionMigrationService extends AbstractMigrationService
 
             try {
                 $this->verifySurchargesConfig($surchargeTypes);
-
                 $this->config->set('surcharge_types', $surchargeTypes);
             } catch (\RuntimeException $e) {
                 $error = $e->getMessage();
@@ -196,6 +197,45 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         $this->dbcheck
             ->tableMustNotExist('tl_iso_product_collection_surcharge')
             ->columnMustExist('tl_iso_orders', 'surcharges');
+    }
+
+    /**
+     * Verify all necessary fields of serialized addresses are present in the database table
+     *
+     * @throws \RuntimeException
+     */
+    private function verifyAddressFields()
+    {
+        $fields = array();
+        $orders = $this->db->fetchAll("SELECT billing_address, shipping_address FROM tl_iso_orders");
+
+        foreach ($orders as $row) {
+            foreach (array('billing_address', 'shipping_address') as $type) {
+                $address = @unserialize($row[$type]);
+
+                $fields = array_merge($fields, array_keys($address));
+            }
+        }
+
+        $fields  = array_unique($fields);
+        $columns = array();
+
+        foreach ($this->db->getSchemaManager()->listTableColumns('tl_iso_addresses') as $column) {
+            $columns[] = $column->getName();
+        }
+
+        $missing = array_diff($fields, $columns);
+
+        if (count($missing) > 0) {
+            throw new \RuntimeException(
+                $this->trans(
+                    'service.product_collection.address_field_missing',
+                    array(
+                        '%field%' =>  $missing[0],
+                    )
+                )
+            );
+        }
     }
 
     /**
@@ -385,9 +425,7 @@ class ProductCollectionMigrationService extends AbstractMigrationService
 
         $isDefaultBilling = ($isDefaultBilling && $this->idIsZero($address['id'])) ? '1' : '';
         $isDefaultShipping = ($isDefaultShipping && $this->idIsZero($address['id'])) ? '1' : '';
-
-        // FIXME: what do we do if the serialized data contains fields that are not in the table?
-
+        
         unset($address['id']);
 
         $address['tstamp'] = time();

@@ -225,6 +225,7 @@ HTML
             'type'                      => 'Typ',
             'surcharges_empty'          => 'Aufpreis-Konfiguration ist leer.',
             'surcharge_type_missing'    => 'Du musst für jeden Aufpreis einen Typ angeben.',
+            'address_field_missing'     => 'Die Bestelldaten enthalten ein Adressfeld namens "%field%" welches Isotope nicht kennt und in der Tabelle tl_iso_address nicht vorhanden ist. Das Feld könnte aus einer Erweiterung kommen.',
         ),
         'product_data' => array(
             'service_name'        => 'Produktinformationen',
