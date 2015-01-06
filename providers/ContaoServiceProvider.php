@@ -61,6 +61,7 @@ class ContaoServiceProvider implements ServiceProviderInterface
             define('TL_ROOT', $app['contao.root']);
         }
 
+        /** @noinspection PhpIncludeInspection */
         require_once $app['contao.root'] . '/system/config/localconfig.php';
         $config = (array) $GLOBALS['TL_CONFIG'];
 
