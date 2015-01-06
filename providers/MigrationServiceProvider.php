@@ -123,7 +123,7 @@ class MigrationServiceProvider implements ServiceProviderInterface
             $services[$slug] = $class;
         }
 
-        $app['migration.service.classes'] = $services;
+        $app->offsetSet('migration.service.classes', $services);
     }
 
     private function registerErrorHandler(Application $app)
