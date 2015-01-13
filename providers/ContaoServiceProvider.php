@@ -71,7 +71,7 @@ class ContaoServiceProvider implements ServiceProviderInterface
         $this->normalizeConfig($config);
 
         $dbHost   = $config['dbHost'];
-        $dbSocket = '';
+        $dbSocket = null;
 
         if (false !== strpos($dbHost, ':')) {
             list($dbHost, $dbSocket) = explode(':', $config['dbHost'], 2);

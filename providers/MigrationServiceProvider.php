@@ -132,9 +132,10 @@ class MigrationServiceProvider implements ServiceProviderInterface
             function (\Exception $e) use ($app) {
 
                 /** @type \Twig_Environment $twig */
-                $twig = $app['twig'];
-                $context = array(
-                    'base_path' => $app['request']->getBasePath(),
+                $twig     = $app['twig'];
+                $pharPath = \Phar::running() ? '/'.basename(\Phar::running()) : '';
+                $context  = array(
+                    'base_path' => ($app['request']->getBasePath() . $pharPath),
                     'message'   => $e->getMessage(),
                     'reason'    => 'unknown'
                 );
