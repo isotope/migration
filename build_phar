@@ -8,9 +8,14 @@ $directories = array(
     'controllers',
     'locales',
     'providers',
-    'providers',
     'services',
-    'vendor',
+    'vendor/composer',
+    'vendor/doctrine',
+    'vendor/pimple',
+    'vendor/psr',
+    'vendor/silex',
+    'vendor/symfony',
+    'vendor/twig',
     'views'
 );
 
