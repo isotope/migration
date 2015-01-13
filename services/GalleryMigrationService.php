@@ -178,11 +178,11 @@ class GalleryMigrationService extends AbstractMigrationService
         $table->addColumn('main_size', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>64));
         $table->addColumn('gallery_size', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>64));
         $table->addColumn('lightbox_size', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>64));
-        $table->addColumn('main_watermark_image', Type::BLOB, array('notnull'=>false, 'length'=>65535, 'notnull'=>false));
+        $table->addColumn('main_watermark_image', Type::BLOB, array('notnull'=>false, 'length'=>65535));
         $table->addColumn('main_watermark_position', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>16));
-        $table->addColumn('gallery_watermark_image', Type::BLOB, array('notnull'=>false, 'length'=>65535, 'notnull'=>false));
+        $table->addColumn('gallery_watermark_image', Type::BLOB, array('notnull'=>false, 'length'=>65535));
         $table->addColumn('gallery_watermark_position', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>16));
-        $table->addColumn('lightbox_watermark_image', Type::BLOB, array('notnull'=>false, 'length'=>65535, 'notnull'=>false));
+        $table->addColumn('lightbox_watermark_image', Type::BLOB, array('notnull'=>false, 'length'=>65535));
         $table->addColumn('lightbox_watermark_position', Type::STRING, array('notnull'=>true, 'default'=>'', 'length'=>16));
 
         $sql = array_merge(

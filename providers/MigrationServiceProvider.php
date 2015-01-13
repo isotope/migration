@@ -91,10 +91,10 @@ class MigrationServiceProvider implements ServiceProviderInterface
 
     private function registerServices(Application $app)
     {
-        $app['migration.service.classes'] = new \Pimple();
+        $services = new \Pimple();
 
-        /** @type \Isotope\Migration\Service\MigrationServiceInterface[] $services */
-        $services = array(
+        /** @type \Isotope\Migration\Service\MigrationServiceInterface[] $serviceClasses */
+        $serviceClasses = array(
             // this order DOES MATTER!!
             '\\Isotope\\Migration\\Service\\AddressBookMigrationService',
             '\\Isotope\\Migration\\Service\\AttributeMigrationService',
@@ -118,10 +118,12 @@ class MigrationServiceProvider implements ServiceProviderInterface
             '\\Isotope\\Migration\\Service\\RuleMigrationService',
         );
 
-        foreach ($services as $class) {
+        foreach ($serviceClasses as $class) {
             $slug = $class::getSlug();
-            $app['migration.service.classes'][$slug] = $class;
+            $services[$slug] = $class;
         }
+
+        $app->offsetSet('migration.service.classes', $services);
     }
 
     private function registerErrorHandler(Application $app)
@@ -130,9 +132,10 @@ class MigrationServiceProvider implements ServiceProviderInterface
             function (\Exception $e) use ($app) {
 
                 /** @type \Twig_Environment $twig */
-                $twig = $app['twig'];
-                $context = array(
-                    'base_path' => $app['request']->getBasePath(),
+                $twig     = $app['twig'];
+                $pharPath = \Phar::running() ? '/'.basename(\Phar::running()) : '';
+                $context  = array(
+                    'base_path' => ($app['request']->getBasePath() . $pharPath),
                     'message'   => $e->getMessage(),
                     'reason'    => 'unknown'
                 );

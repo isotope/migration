@@ -173,7 +173,7 @@ class FrontendModuleMigrationService extends AbstractMigrationService
     /**
      * Check if there are XHTML layouts in the database
      *
-     * @return bool
+     * @return array
      */
     private function getXhtmlTemplates()
     {

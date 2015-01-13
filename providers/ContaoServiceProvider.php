@@ -56,6 +56,12 @@ class ContaoServiceProvider implements ServiceProviderInterface
             return;
         }
 
+        // localconfig.php could contain check for TL_ROOT (see #6)
+        if (!defined('TL_ROOT')) {
+            define('TL_ROOT', $app['contao.root']);
+        }
+
+        /** @noinspection PhpIncludeInspection */
         require_once $app['contao.root'] . '/system/config/localconfig.php';
         $config = (array) $GLOBALS['TL_CONFIG'];
 
@@ -64,13 +70,21 @@ class ContaoServiceProvider implements ServiceProviderInterface
 
         $this->normalizeConfig($config);
 
+        $dbHost   = $config['dbHost'];
+        $dbSocket = null;
+
+        if (false !== strpos($dbHost, ':')) {
+            list($dbHost, $dbSocket) = explode(':', $config['dbHost'], 2);
+        }
+
         $app['db.options'] = array(
-            'dbname'   => $config['dbDatabase'],
-            'host'     => $config['dbHost'],
-            'user'     => $config['dbUser'],
-            'password' => $config['dbPass'],
-            'charset'  => $config['dbCharset'],
-            'port'     => $config['dbPort'],
+            'dbname'      => $config['dbDatabase'],
+            'host'        => $dbHost,
+            'user'        => $config['dbUser'],
+            'password'    => $config['dbPass'],
+            'charset'     => $config['dbCharset'],
+            'port'        => $config['dbPort'],
+            'unix_socket' => $dbSocket,
         );
     }
 

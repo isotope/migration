@@ -8,16 +8,21 @@ $directories = array(
     'controllers',
     'locales',
     'providers',
-    'providers',
     'services',
-    'vendor',
+    'vendor/composer',
+    'vendor/doctrine',
+    'vendor/pimple',
+    'vendor/psr',
+    'vendor/silex',
+    'vendor/symfony',
+    'vendor/twig',
     'views'
 );
 
 $banner = <<<BANNER
 This is the Isotope eCommerce migration tool.
 
-Copyright (c) 2014 terminal42 gmbh
+Copyright (c) 2014-2015 terminal42 gmbh
 BANNER
 ;
 
@@ -48,5 +53,6 @@ $stub = preg_replace('/(\*\/)/', '$1' . "\n\n" . $rewrite_function, $stub, 1);
 
 $builder = Phine\Phar\Builder::create('isotope-migration.phar.php');
 $builder->addFile('index.php');
+$builder->addFile('vendor/autoload.php');
 $builder->setStub($stub);
 $builder->buildFromIterator($finder->getIterator(), '.');
