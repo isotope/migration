@@ -93,7 +93,7 @@ return array(
         'next1'               => 'Melde dich im Contao Backend an und deaktiviere den Safe-Mode (System -> Einstellungen -> Globale Einstellungen -> Abgesicherter Modus).',
         'next2'               => <<<'HTML'
 <p>Aktualisiere Isotope auf Version 2.2 (entweder manuell, über die Erweiterungsverwaltung oder den Composer Client).</p>
-<p class="explain">Bei manuellem Update benenne das Update-Script von <strong>system/modules/isotope/update.php</strong> in <strong>runonce.php</strong> um.</p>
+<p class="explain">Bei manuellem Update benenne das Update-Script von <strong>system/modules/isotope/config/update.php</strong> in <strong>runonce.php</strong> um.</p>
 HTML
         ,
         'next3'               => 'Führe das Datenbank-Update aus. Dabei werden möglicherweise weitere Fragen gestellt.',

@@ -93,7 +93,7 @@ return array(
         'next1'               => 'Log in to the backend and disable the Contao safe mode (System -> Settings -> Global configuration -> Run in safe mode).',
         'next2'               => <<<'HTML'
 <p>Update Isotope to version 2.2 (either manually, using the extension repository or the composer client).</p>
-<p class="explain">On manual update, make sure you run the update script by renaming <strong>system/modules/isotope/update.php</strong> to <strong>runonce.php</strong>.</p>
+<p class="explain">On manual update, make sure you run the update script by renaming <strong>system/modules/isotope/config/update.php</strong> to <strong>runonce.php</strong>.</p>
 HTML
         ,
         'next3'               => 'Run the database update. You might get asked for other migration info.',
