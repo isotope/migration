@@ -90,7 +90,11 @@ return array(
         'error_description'   => 'Looks like you tried to skip the migration. Please start by reading the welcome text and then configure all necessary steps.',
         'error_button'        => 'Start over',
         'next_headline'       => 'Next steps',
-        'next1'               => 'Log in to the backend and disable the Contao safe mode (System -> Settings -> Global configuration -> Run in safe mode).',
+        'next1'               => <<<'HTML'
+<p>Log in to the backend and go to the extension repository. Then disable the Contao safe mode in the red bar at the top (or in System -> Settings -> Global configuration -> Run in safe mode).</p>
+<p class="explain">Make sure <strong>not</strong> to stay on the backend homepage, as it will not work before Isotope is updated!</p>
+HTML
+        ,
         'next2'               => <<<'HTML'
 <p>Update Isotope to version 2.2 (either manually, using the extension repository or the composer client).</p>
 <p class="explain">On manual update, make sure you run the update script by renaming <strong>system/modules/isotope/config/update.php</strong> to <strong>runonce.php</strong>.</p>

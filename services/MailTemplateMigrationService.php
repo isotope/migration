@@ -134,6 +134,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
     {
         // Nothing to do if there are no mail templates
         if (!$this->hasMails()) {
+            $this->renameOldTables();
             return;
         }
 
@@ -155,15 +156,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
         $this->migrateOrderStatusMails($gatewayId);
         $this->migrateCheckoutModuleMails($gatewayId);
 
-        // Rename tables, otherwise the Isotope Upgrade step will run into data loss protection
-        foreach (
-            array_merge(
-                $this->renameTable('tl_iso_mail', 'tl_iso_mail_backup'),
-                $this->renameTable('tl_iso_mail_content', 'tl_iso_mail_content_backup')
-            ) as $query
-        ) {
-            $this->db->exec($query);
-        }
+        $this->renameOldTables();
     }
 
 
@@ -451,7 +444,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
         );
 
         // Mail templates no longer exist, we won't create notifications
-        if (empty($mailTemplates)) {
+        if (0 === count($mailTemplates)) {
             return 0;
         }
 
@@ -546,6 +539,21 @@ class MailTemplateMigrationService extends AbstractMigrationService
     }
 
     /**
+     * Rename tables, otherwise the Isotope Upgrade step will run into data loss protection
+     */
+    private function renameOldTables()
+    {
+        foreach (
+            array_merge(
+                $this->renameTable('tl_iso_mail', 'tl_iso_mail_backup'),
+                $this->renameTable('tl_iso_mail_content', 'tl_iso_mail_content_backup')
+            ) as $query
+        ) {
+            $this->db->exec($query);
+        }
+    }
+
+    /**
      * @return bool
      */
     private function hasMails()
@@ -598,7 +606,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
      */
     private function convertAttachments($mailData)
     {
-        $attachments = null;
+        $attachments = array();
         $files = @unserialize($mailData);
 
         if (!empty($files) && is_array($files)) {
@@ -609,6 +617,6 @@ class MailTemplateMigrationService extends AbstractMigrationService
             }
         }
 
-        return $attachments;
+        return 0 === count($attachments) ? null : $attachments;
     }
 }

@@ -22,7 +22,7 @@ $directories = array(
 $banner = <<<BANNER
 This is the Isotope eCommerce migration tool.
 
-Copyright (c) 2014-2015 terminal42 gmbh
+Copyright (c) 2014-2016 terminal42 gmbh
 BANNER
 ;
 

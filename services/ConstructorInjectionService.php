@@ -81,7 +81,7 @@ class ConstructorInjectionService
      */
     public function share($className, array $arguments = array())
     {
-        return $this->container->share($this->register($className, $arguments));
+        return \Pimple::share($this->register($className, $arguments));
     }
 
     /**
@@ -105,12 +105,12 @@ class ConstructorInjectionService
                 $buildArgs[$name] = $this->container[$name];
             } elseif (isset($this->container[str_replace('_', '.', $name)])) {
                 $buildArgs[$name] = $this->container[str_replace('_', '.', $name)];
-            } elseif ($name == 'app' || $name == 'container') {
+            } elseif ('app' === $name || 'container' === $name) {
                 $buildArgs[$name] = $this->container;
             } elseif ($parameterReflection->isOptional()) {
                 $buildArgs[$name] = $parameterReflection->getDefaultValue();
             } else {
-                throw new \RuntimeException(sprintf('Cannot resolve parameter "%s" for class "%s"', $name, $methodReflection->getDeclaringClass()->getName()));
+                throw new \RuntimeException(sprintf('Cannot resolve parameter "%s" for class "%s"', $name, $methodReflection->class));
             }
         }
 
