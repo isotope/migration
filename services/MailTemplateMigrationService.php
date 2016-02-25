@@ -444,7 +444,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
         );
 
         // Mail templates no longer exist, we won't create notifications
-        if (empty($mailTemplates)) {
+        if (0 === count($mailTemplates)) {
             return 0;
         }
 
@@ -606,7 +606,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
      */
     private function convertAttachments($mailData)
     {
-        $attachments = null;
+        $attachments = array();
         $files = @unserialize($mailData);
 
         if (!empty($files) && is_array($files)) {
@@ -617,6 +617,6 @@ class MailTemplateMigrationService extends AbstractMigrationService
             }
         }
 
-        return $attachments;
+        return 0 === count($attachments) ? null : $attachments;
     }
 }
