@@ -134,6 +134,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
     {
         // Nothing to do if there are no mail templates
         if (!$this->hasMails()) {
+            $this->renameOldTables();
             return;
         }
 
@@ -155,15 +156,7 @@ class MailTemplateMigrationService extends AbstractMigrationService
         $this->migrateOrderStatusMails($gatewayId);
         $this->migrateCheckoutModuleMails($gatewayId);
 
-        // Rename tables, otherwise the Isotope Upgrade step will run into data loss protection
-        foreach (
-            array_merge(
-                $this->renameTable('tl_iso_mail', 'tl_iso_mail_backup'),
-                $this->renameTable('tl_iso_mail_content', 'tl_iso_mail_content_backup')
-            ) as $query
-        ) {
-            $this->db->exec($query);
-        }
+        $this->renameOldTables();
     }
 
 
@@ -542,6 +535,21 @@ class MailTemplateMigrationService extends AbstractMigrationService
                     'attachments'          => $this->convertAttachments($content['attachments'])
                 )
             );
+        }
+    }
+
+    /**
+     * Rename tables, otherwise the Isotope Upgrade step will run into data loss protection
+     */
+    private function renameOldTables()
+    {
+        foreach (
+            array_merge(
+                $this->renameTable('tl_iso_mail', 'tl_iso_mail_backup'),
+                $this->renameTable('tl_iso_mail_content', 'tl_iso_mail_content_backup')
+            ) as $query
+        ) {
+            $this->db->exec($query);
         }
     }
 
