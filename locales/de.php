@@ -90,7 +90,11 @@ return array(
         'error_description'   => 'Scheint als hättest du die Migration noch nicht durchgeführt. Bitte lies das Intro und konfiguriere alle notwendigen Schritte.',
         'error_button'        => 'Erneut starten',
         'next_headline'       => 'Nächste Schritte',
-        'next1'               => 'Melde dich im Contao Backend an und deaktiviere den Safe-Mode (System -> Einstellungen -> Globale Einstellungen -> Abgesicherter Modus).',
+        'next1'               => <<<'HTML'
+<p>Melde dich im Contao Backend an und gehe zur Erweiterungsverwaltung. Danach deaktiviere den Safe-Mode über die rote Leiste im Header (oder über System -> Einstellungen -> Globale Einstellungen -> Abgesicherter Modus).</p>
+<p class="explain">Bleibe <strong>nicht</strong> auf der Backend-Startseite, diese funktioniert nicht solange Isotope nicht aktualisiert ist!</p>
+HTML
+        ,
         'next2'               => <<<'HTML'
 <p>Aktualisiere Isotope auf Version 2.2 (entweder manuell, über die Erweiterungsverwaltung oder den Composer Client).</p>
 <p class="explain">Bei manuellem Update benenne das Update-Script von <strong>system/modules/isotope/config/update.php</strong> in <strong>runonce.php</strong> um.</p>
