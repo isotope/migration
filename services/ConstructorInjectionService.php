@@ -110,7 +110,7 @@ class ConstructorInjectionService
             } elseif ($parameterReflection->isOptional()) {
                 $buildArgs[$name] = $parameterReflection->getDefaultValue();
             } else {
-                throw new \RuntimeException(sprintf('Cannot resolve parameter "%s" for class "%s"', $name, $methodReflection->getDeclaringClass()->getName()));
+                throw new \RuntimeException(sprintf('Cannot resolve parameter "%s" for class "%s"', $name, $methodReflection->class));
             }
         }
 
