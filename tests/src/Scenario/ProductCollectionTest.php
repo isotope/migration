@@ -12,7 +12,9 @@
 namespace Isotope\Migration\Test\Scenario;
 
 use Isotope\Migration\Service\MigrationServiceInterface;
+use Isotope\Migration\Service\ProductCollectionMigrationService;
 use Isotope\Migration\Test\ScenarioTestCase;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
 class ProductCollectionTest extends ScenarioTestCase
 {
@@ -126,19 +128,58 @@ class ProductCollectionTest extends ScenarioTestCase
         $this->assertTablesEqual($expectedTable, $queryTable);
     }
 
-
-    protected function getDefaultServiceConfigs()
+    /**
+     * @dataProvider emptySurchargesProvider
+     */
+    public function testEmptySurcharges($scenario, array $config, $expectedStatus)
     {
+        $this->loadScenario($scenario);
+
+        $app = $this->getApp();
+        $slug = ProductCollectionMigrationService::getSlug();
+
+        $configBag = new AttributeBag('config_' . $slug);
+        $configBag->setName('config_' . $slug);
+        $configBag->initialize($config['product_collection']);
+
+        /** @type ProductCollectionMigrationService $service */
+        $service = $app['class_factory']->create(
+            '\Isotope\Migration\Service\ProductCollectionMigrationService',
+            array('config' => $configBag)
+        );
+
+        $this->assertEquals($expectedStatus, $service->getStatus());
+    }
+
+    public function emptySurchargesProvider()
+    {
+        return array(
+            array('scenario1.sql', $this->getDefaultServiceConfigs(), MigrationServiceInterface::STATUS_READY),
+            array('scenario1.sql', $this->getDefaultServiceConfigs(false), MigrationServiceInterface::STATUS_CONFIG),
+            array('empty_orders.sql', $this->getDefaultServiceConfigs(false), MigrationServiceInterface::STATUS_READY),
+            array('empty_surcharges.sql', $this->getDefaultServiceConfigs(false), MigrationServiceInterface::STATUS_READY),
+        );
+    }
+
+
+    protected function getDefaultServiceConfigs($includeSurcharges = true)
+    {
+        $surcharges = array();
+
+        if ($includeSurcharges) {
+            $surcharges = array(
+                'surcharge_types' => array(
+                    'Bezahlung (Vorkasse)' => 'payment',
+                    'enthaltene MwSt.' => 'tax',
+                    'Weihnachtsaktion' => 'rule',
+                )
+            );
+        }
+
         return array_merge(
             parent::getDefaultServiceConfigs(),
             array(
-                'product_collection' => array(
-                    'surcharge_types' => array(
-                        'Bezahlung (Vorkasse)' => 'payment',
-                        'enthaltene MwSt.' => 'tax',
-                        'Weihnachtsaktion' => 'rule',
-                    )
-                ),
+                'product_collection' => $surcharges,
                 'gallery' => array(
                     'galleries' => array(
                         array(
