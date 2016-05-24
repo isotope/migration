@@ -111,9 +111,9 @@ class GalleryTest extends ScenarioTestCase
         $configBag->initialize($config);
 
         /** @type GalleryMigrationService $service */
-        $service = $app['class_factory']->create('\Isotope\Migration\Service\GalleryMigrationService', array(
-                'config'    => $configBag,
-            )
+        $service = $app['class_factory']->create(
+            '\Isotope\Migration\Service\GalleryMigrationService',
+            array('config' => $configBag)
         );
 
         $this->assertEquals($expectedStatus, $service->getStatus());

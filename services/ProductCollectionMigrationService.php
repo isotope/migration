@@ -56,7 +56,7 @@ class ProductCollectionMigrationService extends AbstractMigrationService
         }
 
         // Nothing to do
-        if ($this->dbcheck->tableIsEmpty('tl_iso_orders')) {
+        if ($this->dbcheck->tableIsEmpty('tl_iso_orders') || 0 === count($this->getSurchargesByCollection())) {
             return MigrationServiceInterface::STATUS_READY;
         }
 
